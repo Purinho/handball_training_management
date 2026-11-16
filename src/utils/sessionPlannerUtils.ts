@@ -1,0 +1,226 @@
+import type {
+  Exercise,
+  HandballFocusTag,
+  SessionBlock,
+  SessionPhase,
+  SessionTemplate,
+  TrainingSession
+} from '../types/domain';
+import { calculateMinutesBetweenTimes } from './trainingCalculations';
+import { buildTacticBoardPreset } from './tacticPresets';
+
+export interface SessionBundle {
+  session: TrainingSession;
+  phases: SessionPhase[];
+  blocks: SessionBlock[];
+}
+
+/**
+ * Creates a new TrainingSession + Phases + Default Blocks from a SessionTemplate.
+ */
+export function buildSessionFromTemplate(params: {
+  teamId: string;
+  sessionDate: string;
+  startTime: string;
+  endTime: string;
+  title: string;
+  planWeekId?: string;
+  template?: SessionTemplate;
+  defaultCoachMemberId?: string;
+}): SessionBundle {
+  const now = new Date().toISOString();
+  const sessionId = `session-${crypto.randomUUID().slice(0, 8)}`;
+  const plannedMin = calculateMinutesBetweenTimes(params.startTime, params.endTime);
+
+  const session: TrainingSession = {
+    id: sessionId,
+    team_id: params.teamId,
+    plan_week_id: params.planWeekId,
+    session_date: params.sessionDate,
+    start_time: params.startTime,
+    end_time: params.endTime,
+    planned_duration_min: plannedMin,
+    title: params.title.trim() || 'Hallentraining',
+    custom_materials_override: [],
+    status: 'PLANNED',
+    updated_at: now
+  };
+
+  const templatePhases =
+    params.template && params.template.phases_template.length > 0
+      ? params.template.phases_template
+      : [
+          { name: '1. Aufwärmen & Einstimmung', target_duration_min: 15 },
+          { name: '2. Torwart-Einwerfen & Auftakt', target_duration_min: 15 },
+          { name: '3. Hauptteil 1: Technik / Kleingruppe', target_duration_min: 25 },
+          { name: '4. Hauptteil 2: Mannschaftstaktik / Zielspiel', target_duration_min: 25 },
+          { name: '5. Abschlussspiel & Cool-Down', target_duration_min: 10 }
+        ];
+
+  const phases: SessionPhase[] = [];
+  const blocks: SessionBlock[] = [];
+
+  templatePhases.forEach((tp, index) => {
+    const phaseId = `phase-${crypto.randomUUID().slice(0, 8)}`;
+    phases.push({
+      id: phaseId,
+      training_session_id: sessionId,
+      name: tp.name,
+      sort_order: index + 1,
+      target_duration_min: tp.target_duration_min,
+      updated_at: now
+    });
+
+    if (tp.default_exercise_id) {
+      blocks.push({
+        id: `block-${crypto.randomUUID().slice(0, 8)}`,
+        session_phase_id: phaseId,
+        exercise_id: tp.default_exercise_id,
+        time_slot_index: 0,
+        track_label: tp.default_track_label ?? 'Alle Spieler',
+        assigned_member_id: params.defaultCoachMemberId,
+        custom_duration_min: tp.target_duration_min,
+        updated_at: now
+      });
+    }
+  });
+
+  return { session, phases, blocks };
+}
+
+/**
+ * Clones an existing TrainingSession (including all phases and sequential/parallel blocks)
+ * onto a new date.
+ */
+export function cloneTrainingSessionBundle(params: {
+  sourceSession: TrainingSession;
+  sourcePhases: SessionPhase[];
+  sourceBlocks: SessionBlock[];
+  newDate: string;
+  newTitle?: string;
+}): SessionBundle {
+  const now = new Date().toISOString();
+  const newSessionId = `session-${crypto.randomUUID().slice(0, 8)}`;
+
+  const session: TrainingSession = {
+    ...params.sourceSession,
+    id: newSessionId,
+    session_date: params.newDate,
+    title: params.newTitle?.trim() || `${params.sourceSession.title} (Kopie)`,
+    status: 'PLANNED',
+    updated_at: now
+  };
+
+  const phaseIdMap = new Map<string, string>();
+  const phases: SessionPhase[] = params.sourcePhases
+    .slice()
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map((p) => {
+      const nextPhaseId = `phase-${crypto.randomUUID().slice(0, 8)}`;
+      phaseIdMap.set(p.id, nextPhaseId);
+      return {
+        ...p,
+        id: nextPhaseId,
+        training_session_id: newSessionId,
+        updated_at: now
+      };
+    });
+
+  const blocks: SessionBlock[] = params.sourceBlocks
+    .filter((b) => phaseIdMap.has(b.session_phase_id))
+    .map((b) => ({
+      ...b,
+      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      session_phase_id: phaseIdMap.get(b.session_phase_id)!,
+      updated_at: now
+    }));
+
+  return { session, phases, blocks };
+}
+
+/**
+ * Converts a free-text Quick-Block into a reusable Exercise entity for the club catalog,
+ * and returns both the new Exercise and the updated SessionBlock referencing it.
+ */
+export function convertQuickBlockToCatalogExercise(params: {
+  block: SessionBlock;
+  clubId: string;
+  teamId: string;
+  focusTags?: HandballFocusTag[];
+}): { exercise: Exercise; updatedBlock: SessionBlock } {
+  const now = new Date().toISOString();
+  const exerciseId = `ex-${crypto.randomUUID().slice(0, 8)}`;
+
+  const exercise: Exercise = {
+    id: exerciseId,
+    club_id: params.clubId,
+    visibility: 'CLUB',
+    owner_team_id: params.teamId,
+    title: params.block.quick_block_title?.trim() || 'Neue Trainingsübung aus Quick-Block',
+    default_duration_min: params.block.custom_duration_min || 15,
+    min_players: 6,
+    max_players: 14,
+    goalkeepers: 1,
+    categories: {
+      phases: ['GROUND_EXERCISE'],
+      focus:
+        params.focusTags && params.focusTags.length > 0
+          ? params.focusTags
+          : ['OFFENSE_GROUP'],
+      level: 'BASIC'
+    },
+    materials: [{ type: 'BALL', quantity: 6 }],
+    setup_description: 'Aus freiem Trainingsblock übernommen.',
+    flow_description: params.block.quick_block_description?.trim() || '',
+    coaching_points: '',
+    variations_text: '',
+    external_links: [],
+    tactic_board_data: buildTacticBoardPreset('OFFENSE_BACKCOURT_TRIANGLE'),
+    is_deleted: false,
+    created_at: now,
+    updated_at: now
+  };
+
+  const updatedBlock: SessionBlock = {
+    ...params.block,
+    exercise_id: exerciseId,
+    quick_block_title: undefined,
+    quick_block_description: undefined,
+    updated_at: now
+  };
+
+  return { exercise, updatedBlock };
+}
+
+/**
+ * Extracts a reusable SessionTemplate from an existing session's phases and blocks.
+ */
+export function buildTemplateFromSession(params: {
+  clubId: string;
+  title: string;
+  description: string;
+  session: TrainingSession;
+  phases: SessionPhase[];
+  blocks: SessionBlock[];
+}): SessionTemplate {
+  const now = new Date().toISOString();
+  const sortedPhases = params.phases.slice().sort((a, b) => a.sort_order - b.sort_order);
+
+  return {
+    id: `tpl-${crypto.randomUUID().slice(0, 8)}`,
+    club_id: params.clubId,
+    title: params.title.trim() || `Vorlage: ${params.session.title}`,
+    description: params.description.trim() || 'Aus bestehender Trainingseinheit gespeichert',
+    default_duration_min: params.session.planned_duration_min,
+    phases_template: sortedPhases.map((p) => {
+      const firstBlock = params.blocks.find((b) => b.session_phase_id === p.id);
+      return {
+        name: p.name,
+        target_duration_min: p.target_duration_min,
+        default_exercise_id: firstBlock?.exercise_id,
+        default_track_label: firstBlock?.track_label
+      };
+    }),
+    updated_at: now
+  };
+}

@@ -1,0 +1,1275 @@
+import { useMemo, useState } from 'react';
+import {
+  AlertTriangle,
+  BookmarkPlus,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  Copy,
+  Edit3,
+  History,
+  Layers,
+  MessageSquarePlus,
+  Package,
+  Plus,
+  Search,
+  Sparkles,
+  Trash2,
+  Zap
+} from 'lucide-react';
+import { db, queueSyncOperation } from '../db/database';
+import type {
+  ClubMember,
+  Exercise,
+  HandballFocusTag,
+  PlanWeek,
+  SessionBlock,
+  SessionNote,
+  SessionPhase,
+  SessionStatus,
+  SessionTemplate,
+  Team,
+  TrainingSession
+} from '../types/domain';
+import { FOCUS_TAG_LABELS, MATERIAL_LABELS } from '../constants/handballLabels';
+import {
+  aggregateSessionMaterials,
+  calculateMinutesBetweenTimes,
+  calculatePhaseEffectiveDuration,
+  calculateSessionTotalDuration
+} from '../utils/trainingCalculations';
+import {
+  buildSessionFromTemplate,
+  buildTemplateFromSession,
+  cloneTrainingSessionBundle,
+  convertQuickBlockToCatalogExercise
+} from '../utils/sessionPlannerUtils';
+import { TacticBoardPreview } from './TacticBoardPreview';
+
+interface TrainingSessionPlannerProps {
+  clubId: string;
+  activeTeam: Team;
+  members: ClubMember[];
+  exercises: Exercise[];
+  templates: SessionTemplate[];
+  sessions: TrainingSession[];
+  phases: SessionPhase[];
+  blocks: SessionBlock[];
+  notes: SessionNote[];
+  activePlanWeeks: PlanWeek[];
+  onEditExercise: (exercise: Exercise) => void;
+}
+
+const SESSION_STATUS_LABELS: Record<SessionStatus, string> = {
+  PLANNED: 'In Planung',
+  READY: 'Vorbereitet (Bereit für Halle)',
+  COMPLETED: 'Durchgeführt',
+  CANCELLED: 'Ausgefallen'
+};
+
+export function TrainingSessionPlanner({
+  clubId,
+  activeTeam,
+  members,
+  exercises,
+  templates,
+  sessions,
+  phases,
+  blocks,
+  notes,
+  activePlanWeeks,
+  onEditExercise
+}: TrainingSessionPlannerProps) {
+  const teamSessions = useMemo(
+    () =>
+      sessions
+        .filter((s) => s.team_id === activeTeam.id)
+        .sort((a, b) => a.session_date.localeCompare(b.session_date)),
+    [sessions, activeTeam.id]
+  );
+
+  const [selectedSessionId, setSelectedSessionId] = useState<string>('');
+  const currentSession = useMemo(() => {
+    if (selectedSessionId) {
+      const found = teamSessions.find((s) => s.id === selectedSessionId);
+      if (found) return found;
+    }
+    return teamSessions[0] ?? null;
+  }, [teamSessions, selectedSessionId]);
+
+  const currentPhases = useMemo(
+    () =>
+      currentSession
+        ? phases
+            .filter((p) => p.training_session_id === currentSession.id)
+            .sort((a, b) => a.sort_order - b.sort_order)
+        : [],
+    [phases, currentSession]
+  );
+
+  const [activePhaseId, setActivePhaseId] = useState<string>('');
+  const targetPhase = useMemo(() => {
+    if (activePhaseId) {
+      const found = currentPhases.find((p) => p.id === activePhaseId);
+      if (found) return found;
+    }
+    return currentPhases[0] ?? null;
+  }, [currentPhases, activePhaseId]);
+
+  const currentBlocks = useMemo(() => {
+    const phaseIds = new Set(currentPhases.map((p) => p.id));
+    return blocks.filter((b) => phaseIds.has(b.session_phase_id));
+  }, [blocks, currentPhases]);
+
+  const exercisesById = useMemo(
+    () => new Map(exercises.map((ex) => [ex.id, ex])),
+    [exercises]
+  );
+
+  // Linked PlanWeek for Smart-Suggestions
+  const linkedPlanWeek = useMemo(() => {
+    if (!currentSession) return activePlanWeeks[1] ?? activePlanWeeks[0];
+    if (currentSession.plan_week_id) {
+      const found = activePlanWeeks.find((pw) => pw.id === currentSession.plan_week_id);
+      if (found) return found;
+    }
+    return activePlanWeeks[1] ?? activePlanWeeks[0];
+  }, [currentSession, activePlanWeeks]);
+
+  // Right catalog panel state
+  const [catalogTab, setCatalogTab] = useState<'SMART_FOCUS' | 'ALL' | 'RECENT'>('SMART_FOCUS');
+  const [catalogSearch, setCatalogSearch] = useState('');
+  const [previewExerciseId, setPreviewExerciseId] = useState<string | null>(null);
+
+  // Quick-Block input state
+  const [quickTitle, setQuickTitle] = useState('');
+  const [quickDesc, setQuickDesc] = useState('');
+  const [quickDuration, setQuickDuration] = useState(15);
+  const [quickTrackLabel, setQuickTrackLabel] = useState('Alle Spieler');
+  const [quickIsParallel, setQuickIsParallel] = useState(false);
+
+  // New session / Template / Clone panels
+  const [showNewSessionForm, setShowNewSessionForm] = useState(false);
+  const [newSessionDate, setNewSessionDate] = useState('2026-11-19');
+  const [newSessionStart, setNewSessionStart] = useState(
+    activeTeam.default_schedule[0]?.startTime ?? '18:30'
+  );
+  const [newSessionEnd, setNewSessionEnd] = useState(
+    activeTeam.default_schedule[0]?.endTime ?? '20:00'
+  );
+  const [newSessionTitle, setNewSessionTitle] = useState('Donnerstagstraining');
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string>(
+    templates[0]?.id ?? ''
+  );
+
+  // New Phase form
+  const [newPhaseName, setNewPhaseName] = useState('');
+  const [newPhaseDuration, setNewPhaseDuration] = useState(15);
+
+  // Note input per block
+  const [noteBlockId, setNoteBlockId] = useState<string | null>(null);
+  const [noteContent, setNoteContent] = useState('');
+  const [noteAuthorId, setNoteAuthorId] = useState<string>(members[0]?.id ?? '');
+
+  // Template save feedback
+  const [savedTemplateBanner, setSavedTemplateBanner] = useState<string | null>(null);
+
+  const totalSessionDuration = useMemo(
+    () => calculateSessionTotalDuration(currentPhases, currentBlocks),
+    [currentPhases, currentBlocks]
+  );
+
+  const sessionPackingList = useMemo(
+    () =>
+      aggregateSessionMaterials(
+        currentBlocks,
+        exercisesById,
+        currentSession?.custom_materials_override ?? []
+      ),
+    [currentBlocks, exercisesById, currentSession]
+  );
+
+  // Smart-filtered exercises for right column
+  const smartCatalogExercises = useMemo(() => {
+    const focusSet = new Set<HandballFocusTag>(linkedPlanWeek?.focus_tags ?? []);
+    const recentExerciseIds = new Set<string>(
+      blocks
+        .filter((b) => Boolean(b.exercise_id))
+        .map((b) => b.exercise_id!)
+    );
+
+    return exercises.filter((ex) => {
+      if (
+        ex.visibility === 'TEAM' &&
+        ex.owner_team_id &&
+        ex.owner_team_id !== activeTeam.id
+      ) {
+        return false;
+      }
+
+      if (catalogSearch.trim()) {
+        const q = catalogSearch.toLowerCase();
+        const matchesText =
+          ex.title.toLowerCase().includes(q) ||
+          ex.flow_description.toLowerCase().includes(q) ||
+          ex.coaching_points.toLowerCase().includes(q);
+        if (!matchesText) return false;
+      }
+
+      if (catalogTab === 'SMART_FOCUS' && focusSet.size > 0) {
+        return ex.categories.focus.some((tag) => focusSet.has(tag));
+      }
+      if (catalogTab === 'RECENT') {
+        return recentExerciseIds.has(ex.id);
+      }
+      return true;
+    });
+  }, [exercises, linkedPlanWeek, blocks, activeTeam.id, catalogSearch, catalogTab]);
+
+  async function saveSessionBundleToDb(bundle: {
+    session: TrainingSession;
+    phases: SessionPhase[];
+    blocks: SessionBlock[];
+  }) {
+    await db.transaction(
+      'rw',
+      [db.trainingSessions, db.sessionPhases, db.sessionBlocks, db.syncOutbox],
+      async () => {
+        await db.trainingSessions.put(bundle.session);
+        await queueSyncOperation('training_sessions', bundle.session.id, 'UPSERT', bundle.session);
+        if (bundle.phases.length > 0) {
+          await db.sessionPhases.bulkPut(bundle.phases);
+          for (const p of bundle.phases) {
+            await queueSyncOperation('session_phases', p.id, 'UPSERT', p);
+          }
+        }
+        if (bundle.blocks.length > 0) {
+          await db.sessionBlocks.bulkPut(bundle.blocks);
+          for (const b of bundle.blocks) {
+            await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+          }
+        }
+      }
+    );
+    setSelectedSessionId(bundle.session.id);
+    if (bundle.phases[0]) {
+      setActivePhaseId(bundle.phases[0].id);
+    }
+  }
+
+  async function handleCreateSessionFromTemplate(e: React.FormEvent) {
+    e.preventDefault();
+    const tpl = templates.find((t) => t.id === selectedTemplateId);
+    const bundle = buildSessionFromTemplate({
+      teamId: activeTeam.id,
+      sessionDate: newSessionDate,
+      startTime: newSessionStart,
+      endTime: newSessionEnd,
+      title: newSessionTitle,
+      planWeekId: linkedPlanWeek?.id,
+      template: tpl,
+      defaultCoachMemberId: members[0]?.id
+    });
+    await saveSessionBundleToDb(bundle);
+    setShowNewSessionForm(false);
+  }
+
+  async function handleCloneCurrentSession() {
+    if (!currentSession) return;
+    // Default next date: +2 days
+    const baseDate = new Date(currentSession.session_date);
+    baseDate.setDate(baseDate.getDate() + 2);
+    const nextDateStr = baseDate.toISOString().slice(0, 10);
+
+    const cloned = cloneTrainingSessionBundle({
+      sourceSession: currentSession,
+      sourcePhases: currentPhases,
+      sourceBlocks: currentBlocks,
+      newDate: nextDateStr,
+      newTitle: `${currentSession.title} (Folgeeinheit)`
+    });
+    await saveSessionBundleToDb(cloned);
+  }
+
+  async function handleSaveCurrentAsTemplate() {
+    if (!currentSession) return;
+    const tpl = buildTemplateFromSession({
+      clubId,
+      title: `Vorlage: ${currentSession.title}`,
+      description: `Gespeichert aus ${activeTeam.name} (${currentPhases.length} Phasen)`,
+      session: currentSession,
+      phases: currentPhases,
+      blocks: currentBlocks
+    });
+    await db.sessionTemplates.put(tpl);
+    await queueSyncOperation('session_templates', tpl.id, 'UPSERT', tpl);
+    setSavedTemplateBanner(`Vorlage „${tpl.title}" gespeichert!`);
+    setTimeout(() => setSavedTemplateBanner(null), 3500);
+  }
+
+  async function handleUpdateSessionHeader(patch: Partial<TrainingSession>) {
+    if (!currentSession) return;
+    const nextStart = patch.start_time ?? currentSession.start_time;
+    const nextEnd = patch.end_time ?? currentSession.end_time;
+    const plannedMin = calculateMinutesBetweenTimes(nextStart, nextEnd);
+
+    const updated: TrainingSession = {
+      ...currentSession,
+      ...patch,
+      planned_duration_min: plannedMin,
+      updated_at: new Date().toISOString()
+    };
+    await db.trainingSessions.put(updated);
+    await queueSyncOperation('training_sessions', updated.id, 'UPSERT', updated);
+  }
+
+  async function handleAddPhase(e: React.FormEvent) {
+    e.preventDefault();
+    if (!currentSession || !newPhaseName.trim()) return;
+    const now = new Date().toISOString();
+    const newPhase: SessionPhase = {
+      id: `phase-${crypto.randomUUID().slice(0, 8)}`,
+      training_session_id: currentSession.id,
+      name: newPhaseName.trim(),
+      sort_order: currentPhases.length + 1,
+      target_duration_min: newPhaseDuration,
+      updated_at: now
+    };
+    await db.sessionPhases.put(newPhase);
+    await queueSyncOperation('session_phases', newPhase.id, 'UPSERT', newPhase);
+    setActivePhaseId(newPhase.id);
+    setNewPhaseName('');
+  }
+
+  async function handleDeletePhase(phaseId: string) {
+    const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phaseId);
+    await db.transaction('rw', [db.sessionPhases, db.sessionBlocks], async () => {
+      await db.sessionPhases.delete(phaseId);
+      for (const b of phaseBlocks) {
+        await db.sessionBlocks.delete(b.id);
+      }
+    });
+    await queueSyncOperation('session_phases', phaseId, 'DELETE', { id: phaseId });
+  }
+
+  async function handleAddExerciseToPhase(exercise: Exercise, asParallelTrack: boolean) {
+    if (!targetPhase) return;
+    const blocksInTarget = currentBlocks.filter((b) => b.session_phase_id === targetPhase.id);
+    const maxSlot =
+      blocksInTarget.length > 0
+        ? Math.max(...blocksInTarget.map((b) => b.time_slot_index))
+        : 0;
+
+    const slotIndex =
+      blocksInTarget.length === 0 ? 0 : asParallelTrack ? maxSlot : maxSlot + 1;
+
+    const now = new Date().toISOString();
+    const newBlock: SessionBlock = {
+      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      session_phase_id: targetPhase.id,
+      exercise_id: exercise.id,
+      time_slot_index: slotIndex,
+      track_label: asParallelTrack ? 'Spur B: Parallel-Gruppe' : 'Alle Spieler',
+      assigned_member_id: members[0]?.id,
+      custom_duration_min: exercise.default_duration_min,
+      updated_at: now
+    };
+
+    await db.sessionBlocks.put(newBlock);
+    await queueSyncOperation('session_blocks', newBlock.id, 'UPSERT', newBlock);
+  }
+
+  async function handleAddQuickBlock(e: React.FormEvent) {
+    e.preventDefault();
+    if (!targetPhase || !quickTitle.trim()) return;
+    const blocksInTarget = currentBlocks.filter((b) => b.session_phase_id === targetPhase.id);
+    const maxSlot =
+      blocksInTarget.length > 0
+        ? Math.max(...blocksInTarget.map((b) => b.time_slot_index))
+        : 0;
+
+    const slotIndex =
+      blocksInTarget.length === 0 ? 0 : quickIsParallel ? maxSlot : maxSlot + 1;
+
+    const now = new Date().toISOString();
+    const newBlock: SessionBlock = {
+      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      session_phase_id: targetPhase.id,
+      quick_block_title: quickTitle.trim(),
+      quick_block_description: quickDesc.trim() || undefined,
+      time_slot_index: slotIndex,
+      track_label: quickTrackLabel.trim() || (quickIsParallel ? 'Spur B' : 'Alle Spieler'),
+      assigned_member_id: members[0]?.id,
+      custom_duration_min: quickDuration,
+      updated_at: now
+    };
+
+    await db.sessionBlocks.put(newBlock);
+    await queueSyncOperation('session_blocks', newBlock.id, 'UPSERT', newBlock);
+    setQuickTitle('');
+    setQuickDesc('');
+    setQuickIsParallel(false);
+  }
+
+  async function handleUpdateBlock(block: SessionBlock, patch: Partial<SessionBlock>) {
+    const updated: SessionBlock = {
+      ...block,
+      ...patch,
+      updated_at: new Date().toISOString()
+    };
+    await db.sessionBlocks.put(updated);
+    await queueSyncOperation('session_blocks', updated.id, 'UPSERT', updated);
+  }
+
+  async function handleDeleteBlock(blockId: string) {
+    await db.sessionBlocks.delete(blockId);
+    await queueSyncOperation('session_blocks', blockId, 'DELETE', { id: blockId });
+  }
+
+  async function handlePromoteQuickBlockToCatalog(block: SessionBlock) {
+    const { exercise, updatedBlock } = convertQuickBlockToCatalogExercise({
+      block,
+      clubId,
+      teamId: activeTeam.id,
+      focusTags: linkedPlanWeek?.focus_tags
+    });
+    await db.transaction('rw', [db.exercises, db.sessionBlocks], async () => {
+      await db.exercises.put(exercise);
+      await db.sessionBlocks.put(updatedBlock);
+    });
+    await queueSyncOperation('exercises', exercise.id, 'UPSERT', exercise);
+    await queueSyncOperation('session_blocks', updatedBlock.id, 'UPSERT', updatedBlock);
+  }
+
+  async function handleAddBlockNote(e: React.FormEvent, blockId: string) {
+    e.preventDefault();
+    if (!currentSession || !noteContent.trim()) return;
+    const author = members.find((m) => m.id === noteAuthorId) ?? members[0];
+    const now = new Date().toISOString();
+    const newNote: SessionNote = {
+      id: `note-${crypto.randomUUID().slice(0, 8)}`,
+      training_session_id: currentSession.id,
+      session_block_id: blockId,
+      author_member_id: author?.id,
+      author_name: author ? author.display_name.split(' (')[0] : 'Trainer',
+      content: noteContent.trim(),
+      created_at: now,
+      updated_at: now
+    };
+    await db.sessionNotes.put(newNote);
+    await queueSyncOperation('session_notes', newNote.id, 'UPSERT', newNote);
+    setNoteContent('');
+    setNoteBlockId(null);
+  }
+
+  const timeExceedsBudget =
+    currentSession && totalSessionDuration > currentSession.planned_duration_min;
+
+  return (
+    <div className="space-y-6">
+      {/* Top Action & Session Selector Bar */}
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-lg">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <label className="text-xs font-bold tracking-wider text-blue-400 uppercase">
+              Trainingseinheit:
+            </label>
+            <select
+              value={currentSession?.id ?? ''}
+              onChange={(e) => setSelectedSessionId(e.target.value)}
+              className="rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm font-bold text-white focus:border-blue-500 focus:outline-none"
+            >
+              {teamSessions.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.session_date} ({s.start_time}–{s.end_time}) · {s.title}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowNewSessionForm((prev) => !prev)}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-500"
+            >
+              <Plus className="h-4 w-4" />
+              Neues Training (aus Vorlage)
+            </button>
+
+            {currentSession && (
+              <>
+                <button
+                  type="button"
+                  onClick={handleCloneCurrentSession}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                  title="Gesamtes Training inkl. Phasen & Spuren auf neuen Tag kopieren"
+                >
+                  <Copy className="h-3.5 w-3.5 text-blue-400" />
+                  Training kopieren
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleSaveCurrentAsTemplate}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                  title="Phasen-Ablauf als wiederverwendbare Vereins-Vorlage speichern"
+                >
+                  <BookmarkPlus className="h-3.5 w-3.5 text-emerald-400" />
+                  Als Vorlage speichern
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {savedTemplateBanner && (
+          <div className="mt-3 rounded-xl border border-emerald-500/40 bg-emerald-950/50 px-4 py-2 text-xs font-semibold text-emerald-300">
+            ✓ {savedTemplateBanner}
+          </div>
+        )}
+
+        {/* Inline Form: Neues Training aus Vorlage anlegen */}
+        {showNewSessionForm && (
+          <form
+            onSubmit={handleCreateSessionFromTemplate}
+            className="mt-4 rounded-xl border border-blue-500/40 bg-blue-950/20 p-4 space-y-3"
+          >
+            <div className="text-xs font-bold text-blue-300 uppercase">
+              Neue Trainingseinheit für {activeTeam.name} erstellen
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
+              <div className="sm:col-span-2">
+                <label className="mb-1 block text-[11px] text-slate-300">Titel / Schwerpunkt</label>
+                <input
+                  type="text"
+                  required
+                  value={newSessionTitle}
+                  onChange={(e) => setNewSessionTitle(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-[11px] text-slate-300">Datum</label>
+                <input
+                  type="date"
+                  required
+                  value={newSessionDate}
+                  onChange={(e) => setNewSessionDate(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-[11px] text-slate-300">Startzeit</label>
+                <input
+                  type="time"
+                  value={newSessionStart}
+                  onChange={(e) => setNewSessionStart(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-[11px] text-slate-300">Endzeit</label>
+                <input
+                  type="time"
+                  value={newSessionEnd}
+                  onChange={(e) => setNewSessionEnd(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <div className="flex items-center gap-2">
+                <label className="text-xs text-slate-300">Trainings-Vorlage:</label>
+                <select
+                  value={selectedTemplateId}
+                  onChange={(e) => setSelectedTemplateId(e.target.value)}
+                  className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-white"
+                >
+                  <option value="">Standard 5-Phasen-Struktur (Leer)</option>
+                  {templates.map((tpl) => (
+                    <option key={tpl.id} value={tpl.id}>
+                      {tpl.title} ({tpl.default_duration_min} Min)
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowNewSessionForm(false)}
+                  className="rounded-lg bg-slate-800 px-3 py-1.5 text-xs text-slate-300"
+                >
+                  Abbrechen
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-lg bg-blue-600 px-4 py-1.5 text-xs font-semibold text-white hover:bg-blue-500"
+                >
+                  Trainingseinheit anlegen
+                </button>
+              </div>
+            </div>
+          </form>
+        )}
+
+        {/* Current Session Metadata & Live Time-Budget Bar */}
+        {currentSession && (
+          <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12 items-center">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-4 lg:col-span-8">
+              <div className="sm:col-span-2">
+                <label className="mb-1 block text-[11px] text-slate-400">
+                  Tagesschwerpunkt / Titel
+                </label>
+                <input
+                  type="text"
+                  value={currentSession.title}
+                  onChange={(e) => handleUpdateSessionHeader({ title: e.target.value })}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-xs font-bold text-white"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-[11px] text-slate-400">Datum & Uhrzeit</label>
+                <div className="flex items-center gap-1">
+                  <input
+                    type="date"
+                    value={currentSession.session_date}
+                    onChange={(e) => handleUpdateSessionHeader({ session_date: e.target.value })}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1 block text-[11px] text-slate-400">Status</label>
+                <select
+                  value={currentSession.status}
+                  onChange={(e) =>
+                    handleUpdateSessionHeader({ status: e.target.value as SessionStatus })
+                  }
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs font-semibold text-emerald-300"
+                >
+                  {(Object.keys(SESSION_STATUS_LABELS) as SessionStatus[]).map((st) => (
+                    <option key={st} value={st}>
+                      {SESSION_STATUS_LABELS[st]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Time Budget Progress */}
+            <div
+              className={`rounded-xl border p-3 lg:col-span-4 ${
+                timeExceedsBudget
+                  ? 'border-rose-500/60 bg-rose-950/30'
+                  : 'border-slate-800 bg-slate-950'
+              }`}
+            >
+              <div className="flex items-center justify-between text-xs">
+                <span className="flex items-center gap-1.5 font-semibold text-slate-300">
+                  {timeExceedsBudget ? (
+                    <AlertTriangle className="h-4 w-4 text-rose-400" />
+                  ) : (
+                    <Clock className="h-4 w-4 text-emerald-400" />
+                  )}
+                  Hallen-Zeitbudget ({currentSession.start_time}–{currentSession.end_time})
+                </span>
+                <span
+                  className={`font-bold ${
+                    timeExceedsBudget ? 'text-rose-400' : 'text-white'
+                  }`}
+                >
+                  {totalSessionDuration} / {currentSession.planned_duration_min} Min
+                </span>
+              </div>
+              <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                <div
+                  className={`h-full transition-all ${
+                    timeExceedsBudget
+                      ? 'bg-rose-500'
+                      : totalSessionDuration === currentSession.planned_duration_min
+                        ? 'bg-emerald-500'
+                        : 'bg-blue-500'
+                  }`}
+                  style={{
+                    width: `${Math.min(
+                      100,
+                      Math.round(
+                        (totalSessionDuration /
+                          Math.max(1, currentSession.planned_duration_min)) *
+                          100
+                      )
+                    )}%`
+                  }}
+                />
+              </div>
+              {timeExceedsBudget && (
+                <div className="mt-1 text-[11px] text-rose-300">
+                  Achtung: Hallenzeit um {totalSessionDuration - currentSession.planned_duration_min} Min überschritten!
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 2-Column Speed-Planning Cockpit */}
+      {currentSession && (
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* LEFT COLUMN (7 Cols): Phases, Parallel Tracks & Quick-Block Input */}
+          <div className="space-y-4 lg:col-span-7">
+            {currentPhases.map((phase) => {
+              const isTargetPhase = targetPhase?.id === phase.id;
+              const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phase.id);
+              const effectiveMin = calculatePhaseEffectiveDuration(phase, phaseBlocks);
+
+              // Group blocks by time_slot_index so parallel tracks render side-by-side
+              const slotsMap = new Map<number, SessionBlock[]>();
+              for (const b of phaseBlocks) {
+                const list = slotsMap.get(b.time_slot_index) ?? [];
+                slotsMap.set(b.time_slot_index, [...list, b]);
+              }
+              const sortedSlots = Array.from(slotsMap.entries()).sort((a, b) => a[0] - b[0]);
+
+              return (
+                <div
+                  key={phase.id}
+                  onClick={() => setActivePhaseId(phase.id)}
+                  className={`cursor-pointer rounded-2xl border p-5 transition ${
+                    isTargetPhase
+                      ? 'border-blue-500 bg-slate-900 shadow-lg shadow-blue-950/30'
+                      : 'border-slate-800 bg-slate-900/75 hover:border-slate-700'
+                  }`}
+                >
+                  {/* Phase Header */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                    <div className="flex items-center gap-2">
+                      {isTargetPhase && (
+                        <span className="rounded bg-blue-600 px-2 py-0.5 text-[10px] font-bold text-white uppercase">
+                          Aktive Phase
+                        </span>
+                      )}
+                      <input
+                        type="text"
+                        value={phase.name}
+                        onChange={(e) => {
+                          const updated: SessionPhase = {
+                            ...phase,
+                            name: e.target.value,
+                            updated_at: new Date().toISOString()
+                          };
+                          void db.sessionPhases.put(updated);
+                        }}
+                        className="bg-transparent font-bold text-white text-sm focus:border-b focus:border-blue-400 focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-blue-300">
+                        Effektiv: {effectiveMin} Min
+                      </span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          void handleDeletePhase(phase.id);
+                        }}
+                        className="rounded-lg p-1 text-slate-500 hover:bg-rose-950/50 hover:text-rose-400"
+                        title="Phase löschen"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Time Slots & Parallel Tracks inside Phase */}
+                  <div className="mt-4 space-y-3">
+                    {sortedSlots.length === 0 ? (
+                      <div className="rounded-xl border border-dashed border-slate-800 bg-slate-950/50 p-4 text-center text-xs text-slate-400">
+                        Noch keine Übung in dieser Phase – wähle rechts im Katalog eine Übung oder tippe unten einen Quick-Block ein.
+                      </div>
+                    ) : (
+                      sortedSlots.map(([slotIdx, slotBlocks]) => {
+                        const isParallelSlot = slotBlocks.length > 1;
+                        return (
+                          <div key={slotIdx} className="space-y-1.5">
+                            {isParallelSlot && (
+                              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-300">
+                                <Layers className="h-3.5 w-3.5" />
+                                Paralleler Zeitblock (Haupt- & Co-Trainer parallel – längste Spur zählt)
+                              </div>
+                            )}
+
+                            <div
+                              className={`grid gap-3 ${
+                                isParallelSlot ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'
+                              }`}
+                            >
+                              {slotBlocks.map((block) => {
+                                const linkedEx = block.exercise_id
+                                  ? exercisesById.get(block.exercise_id)
+                                  : undefined;
+                                const blockNotes = notes.filter(
+                                  (n) => n.session_block_id === block.id
+                                );
+
+                                return (
+                                  <div
+                                    key={block.id}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="rounded-xl border border-slate-800 bg-slate-950/90 p-3.5 space-y-2.5"
+                                  >
+                                    {/* Track label, duration & coach selector */}
+                                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                                      <input
+                                        type="text"
+                                        value={block.track_label}
+                                        onChange={(e) =>
+                                          void handleUpdateBlock(block, {
+                                            track_label: e.target.value
+                                          })
+                                        }
+                                        className="w-40 rounded bg-blue-950/80 px-2 py-0.5 text-[11px] font-semibold text-blue-300 focus:outline-none"
+                                        title="Spur / Gruppe umbenennen"
+                                      />
+
+                                      <div className="flex items-center gap-1.5">
+                                        <input
+                                          type="number"
+                                          min={3}
+                                          max={60}
+                                          value={block.custom_duration_min}
+                                          onChange={(e) =>
+                                            void handleUpdateBlock(block, {
+                                              custom_duration_min: Number(e.target.value)
+                                            })
+                                          }
+                                          className="w-14 rounded border border-slate-700 bg-slate-900 px-1.5 py-0.5 text-center text-xs font-bold text-white"
+                                        />
+                                        <span className="text-[11px] text-slate-400">Min</span>
+
+                                        <select
+                                          value={block.assigned_member_id ?? ''}
+                                          onChange={(e) =>
+                                            void handleUpdateBlock(block, {
+                                              assigned_member_id: e.target.value || undefined
+                                            })
+                                          }
+                                          className="rounded border border-slate-700 bg-slate-900 px-1.5 py-0.5 text-[11px] text-slate-300"
+                                        >
+                                          <option value="">Trainer...</option>
+                                          {members.map((m) => (
+                                            <option key={m.id} value={m.id}>
+                                              {m.display_name.split(' (')[0]}
+                                            </option>
+                                          ))}
+                                        </select>
+
+                                        <button
+                                          type="button"
+                                          onClick={() => void handleDeleteBlock(block.id)}
+                                          className="text-slate-500 hover:text-rose-400"
+                                          title="Block aus Phase entfernen"
+                                        >
+                                          <Trash2 className="h-3.5 w-3.5" />
+                                        </button>
+                                      </div>
+                                    </div>
+
+                                    {/* Exercise or Quick-Block Content */}
+                                    {linkedEx ? (
+                                      <div>
+                                        <div className="flex items-start justify-between gap-2">
+                                          <div className="font-bold text-white text-sm">
+                                            {linkedEx.title}
+                                          </div>
+                                          <button
+                                            type="button"
+                                            onClick={() => onEditExercise(linkedEx)}
+                                            className="inline-flex shrink-0 items-center gap-1 rounded bg-slate-800 px-2 py-0.5 text-[11px] text-blue-300 hover:bg-slate-700"
+                                          >
+                                            <Edit3 className="h-3 w-3" />
+                                            Skizze
+                                          </button>
+                                        </div>
+                                        <p className="mt-1 text-xs text-slate-300 line-clamp-2">
+                                          {linkedEx.flow_description}
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <div className="space-y-2 rounded-lg border border-amber-500/30 bg-amber-950/15 p-2.5">
+                                        <div className="flex items-center justify-between gap-2">
+                                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-300 uppercase">
+                                            <Zap className="h-3 w-3" />
+                                            Freier Quick-Block
+                                          </span>
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              void handlePromoteQuickBlockToCatalog(block)
+                                            }
+                                            className="inline-flex items-center gap-1 rounded bg-emerald-600/90 px-2 py-0.5 text-[10px] font-bold text-white hover:bg-emerald-500"
+                                            title="Diesen freien Block mit 1 Klick als dauerhafte Übung in der Übungsdatenbank speichern"
+                                          >
+                                            <BookOpen className="h-3 w-3" />
+                                            In Übungsdatenbank umwandeln
+                                          </button>
+                                        </div>
+                                        <input
+                                          type="text"
+                                          value={block.quick_block_title ?? ''}
+                                          onChange={(e) =>
+                                            void handleUpdateBlock(block, {
+                                              quick_block_title: e.target.value
+                                            })
+                                          }
+                                          className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs font-bold text-white"
+                                        />
+                                        <textarea
+                                          rows={2}
+                                          placeholder="Kurzbeschreibung / Coaching-Fokus..."
+                                          value={block.quick_block_description ?? ''}
+                                          onChange={(e) =>
+                                            void handleUpdateBlock(block, {
+                                              quick_block_description: e.target.value
+                                            })
+                                          }
+                                          className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-200"
+                                        />
+                                      </div>
+                                    )}
+
+                                    {/* Trainer Notes on Block */}
+                                    <div className="border-t border-slate-800/80 pt-2 space-y-1.5">
+                                      {blockNotes.map((n) => (
+                                        <div
+                                          key={n.id}
+                                          className="rounded bg-slate-900 px-2.5 py-1 text-[11px] text-amber-200"
+                                        >
+                                          <strong className="text-amber-400">
+                                            {n.author_name}:
+                                          </strong>{' '}
+                                          {n.content}
+                                        </div>
+                                      ))}
+
+                                      {noteBlockId === block.id ? (
+                                        <form
+                                          onSubmit={(e) => void handleAddBlockNote(e, block.id)}
+                                          className="flex gap-1.5 pt-1"
+                                        >
+                                          <select
+                                            value={noteAuthorId}
+                                            onChange={(e) => setNoteAuthorId(e.target.value)}
+                                            className="rounded border border-slate-700 bg-slate-900 px-1.5 py-1 text-[11px] text-white"
+                                          >
+                                            {members.map((m) => (
+                                              <option key={m.id} value={m.id}>
+                                                {m.display_name.split(' (')[0]}
+                                              </option>
+                                            ))}
+                                          </select>
+                                          <input
+                                            type="text"
+                                            required
+                                            placeholder="Trainer-Notiz..."
+                                            value={noteContent}
+                                            onChange={(e) => setNoteContent(e.target.value)}
+                                            className="flex-1 rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-white"
+                                          />
+                                          <button
+                                            type="submit"
+                                            className="rounded bg-blue-600 px-2.5 py-1 text-xs font-semibold text-white"
+                                          >
+                                            OK
+                                          </button>
+                                        </form>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          onClick={() => setNoteBlockId(block.id)}
+                                          className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-300"
+                                        >
+                                          <MessageSquarePlus className="h-3 w-3" />
+                                          + Trainer-Notiz
+                                        </button>
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+
+                  {/* Quick-Block Speed-Bar inside the Active Phase */}
+                  {isTargetPhase && (
+                    <form
+                      onSubmit={handleAddQuickBlock}
+                      onClick={(e) => e.stopPropagation()}
+                      className="mt-4 rounded-xl border border-blue-500/30 bg-slate-950 p-3 space-y-2"
+                    >
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="flex items-center gap-1 font-bold text-blue-300">
+                          <Zap className="h-3.5 w-3.5 text-amber-400" />
+                          Schneller Quick-Block in „{phase.name}" (ohne Katalog-Zwang):
+                        </span>
+                        <label className="flex items-center gap-1.5 text-slate-300 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={quickIsParallel}
+                            onChange={(e) => setQuickIsParallel(e.target.checked)}
+                            className="rounded border-slate-700"
+                          />
+                          Als parallele Spur (z.B. Co-Trainer / Torwart)
+                        </label>
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-12">
+                        <input
+                          type="text"
+                          required
+                          placeholder="Titel eintippen (z.B. 4gg4 Überzahl-Spiel mit Joker) & Enter..."
+                          value={quickTitle}
+                          onChange={(e) => setQuickTitle(e.target.value)}
+                          className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-white sm:col-span-6"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Spur (z.B. Alle / TW)"
+                          value={quickTrackLabel}
+                          onChange={(e) => setQuickTrackLabel(e.target.value)}
+                          className="rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-xs text-white sm:col-span-3"
+                        />
+                        <input
+                          type="number"
+                          min={3}
+                          max={60}
+                          value={quickDuration}
+                          onChange={(e) => setQuickDuration(Number(e.target.value))}
+                          className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-white sm:col-span-1"
+                        />
+                        <button
+                          type="submit"
+                          className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-500 sm:col-span-2"
+                        >
+                          + Block
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Add new phase form */}
+            <form
+              onSubmit={handleAddPhase}
+              className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
+            >
+              <input
+                type="text"
+                required
+                placeholder="Neue Trainingsphase hinzufügen (z.B. 6. Individuelles Wurftraining)..."
+                value={newPhaseName}
+                onChange={(e) => setNewPhaseName(e.target.value)}
+                className="flex-1 rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-xs text-white"
+              />
+              <input
+                type="number"
+                min={5}
+                max={60}
+                value={newPhaseDuration}
+                onChange={(e) => setNewPhaseDuration(Number(e.target.value))}
+                className="w-20 rounded-xl border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white"
+              />
+              <button
+                type="submit"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-700"
+              >
+                <Plus className="h-4 w-4" />
+                Phase anlegen
+              </button>
+            </form>
+          </div>
+
+          {/* RIGHT COLUMN (5 Cols): Smart Exercise Catalog & Packing List */}
+          <div className="space-y-6 lg:col-span-5">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 space-y-4">
+              <div>
+                <span className="text-[11px] font-bold tracking-wider text-blue-400 uppercase">
+                  Übungs-Baukasten → Ziel: {targetPhase?.name ?? 'Phase wählen'}
+                </span>
+                <h3 className="text-base font-bold text-white">
+                  1-Klick-Zuweisung in aktive Trainingsphase
+                </h3>
+              </div>
+
+              {/* 3 Smart Tabs */}
+              <div className="grid grid-cols-3 gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1">
+                <button
+                  type="button"
+                  onClick={() => setCatalogTab('SMART_FOCUS')}
+                  className={`flex items-center justify-center gap-1 rounded-lg py-1.5 text-[11px] font-semibold transition ${
+                    catalogTab === 'SMART_FOCUS'
+                      ? 'bg-emerald-600 text-white'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Schwerpunkt
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCatalogTab('ALL')}
+                  className={`flex items-center justify-center gap-1 rounded-lg py-1.5 text-[11px] font-semibold transition ${
+                    catalogTab === 'ALL'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <BookOpen className="h-3.5 w-3.5" />
+                  Alle ({exercises.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCatalogTab('RECENT')}
+                  className={`flex items-center justify-center gap-1 rounded-lg py-1.5 text-[11px] font-semibold transition ${
+                    catalogTab === 'RECENT'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <History className="h-3.5 w-3.5" />
+                  Zuletzt genutzt
+                </button>
+              </div>
+
+              {catalogTab === 'SMART_FOCUS' && linkedPlanWeek && (
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-3 text-xs">
+                  <div className="font-semibold text-emerald-300">
+                    Gefiltert nach {linkedPlanWeek.focus_theme}:
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {linkedPlanWeek.focus_tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded bg-emerald-950 px-2 py-0.5 text-[10px] text-emerald-300"
+                      >
+                        #{FOCUS_TAG_LABELS[t]}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Search */}
+              <div className="relative">
+                <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Übung im Katalog filtern..."
+                  value={catalogSearch}
+                  onChange={(e) => setCatalogSearch(e.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Exercise Cards */}
+              <div className="max-h-[460px] space-y-2.5 overflow-y-auto pr-1">
+                {smartCatalogExercises.map((ex) => {
+                  const isPreviewOpen = previewExerciseId === ex.id;
+                  return (
+                    <div
+                      key={ex.id}
+                      className="rounded-xl border border-slate-800 bg-slate-950/90 p-3.5 space-y-2.5"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <div className="font-bold text-white text-xs">{ex.title}</div>
+                          <div className="mt-0.5 text-[11px] text-slate-400">
+                            {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp. +{' '}
+                            {ex.goalkeepers} TW
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPreviewExerciseId(isPreviewOpen ? null : ex.id)
+                          }
+                          className="rounded bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300 hover:bg-slate-700"
+                        >
+                          {isPreviewOpen ? 'Skizze ▲' : 'Skizze ▼'}
+                        </button>
+                      </div>
+
+                      {isPreviewOpen && (
+                        <TacticBoardPreview data={ex.tactic_board_data} />
+                      )}
+
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => void handleAddExerciseToPhase(ex, false)}
+                          className="flex-1 rounded-lg bg-blue-600 py-1.5 text-xs font-semibold text-white hover:bg-blue-500"
+                        >
+                          + In Phase einfügen
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => void handleAddExerciseToPhase(ex, true)}
+                          className="inline-flex items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-950/30 px-2.5 py-1.5 text-xs font-semibold text-amber-300 hover:bg-amber-900/40"
+                          title="Parallel zum bestehenden Block in dieser Phase ausführen (z.B. Gruppe B / Torwart)"
+                        >
+                          <Layers className="h-3.5 w-3.5" />
+                          + Parallel
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Automatic Material Packing List */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
+              <div className="flex items-center gap-2 text-amber-400">
+                <Package className="h-5 w-5" />
+                <h3 className="text-base font-bold text-white">
+                  Automatische Material-Packliste ({sessionPackingList.length})
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-slate-400">
+                Berücksichtigt parallele Spuren (gleichzeitiger Materialbedarf wird addiert):
+              </p>
+              <div className="mt-3 space-y-2">
+                {sessionPackingList.map((item) => (
+                  <div
+                    key={item.type}
+                    className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs"
+                  >
+                    <span className="flex items-center gap-2 text-slate-200">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                      {MATERIAL_LABELS[item.type]}
+                    </span>
+                    <span className="rounded bg-blue-950 px-2 py-0.5 font-bold text-blue-300">
+                      {item.quantity}x
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

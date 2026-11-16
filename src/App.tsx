@@ -5,21 +5,16 @@ import {
   Bot,
   Building2,
   CalendarRange,
-  CheckCircle2,
-  Clock,
   CopyPlus,
   Download,
   Edit3,
   ExternalLink as ExternalLinkIcon,
   GitBranch,
-  Layers,
   LayoutDashboard,
-  Package,
   Plus,
   Search,
   Sparkles,
   Trash2,
-  Users,
   Wifi,
   WifiOff
 } from 'lucide-react';
@@ -30,18 +25,13 @@ import { TacticBoardPreview } from './components/TacticBoardPreview';
 import { PwaInstallGuideModal } from './components/PwaInstallGuideModal';
 import { ExerciseEditorModal } from './components/ExerciseEditorModal';
 import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
+import { TrainingSessionPlanner } from './components/TrainingSessionPlanner';
 import {
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
-  MATERIAL_LABELS,
   PHASE_CATEGORY_LABELS,
   VISIBILITY_LABELS
 } from './constants/handballLabels';
-import {
-  aggregateSessionMaterials,
-  calculatePhaseEffectiveDuration,
-  calculateSessionTotalDuration
-} from './utils/trainingCalculations';
 import type { Exercise, VisibilityLevel } from './types/domain';
 
 type NavTab = 'DASHBOARD' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
@@ -52,7 +42,7 @@ export function App() {
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
 
-  // Exercise filter & modal states (Milestone 2)
+  // Exercise filter & modal states
   const [searchQuery, setSearchQuery] = useState('');
   const [visibilityFilter, setVisibilityFilter] = useState<'ALL' | VisibilityLevel>('ALL');
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
@@ -81,6 +71,7 @@ export function App() {
   const members = useLiveQuery(() => db.clubMembers.toArray(), []) ?? [];
   const teamMembers = useLiveQuery(() => db.teamMembers.toArray(), []) ?? [];
   const exercises = useLiveQuery(() => db.exercises.filter((e) => !e.is_deleted).toArray(), []) ?? [];
+  const templates = useLiveQuery(() => db.sessionTemplates.toArray(), []) ?? [];
   const multiWeekPlans = useLiveQuery(() => db.multiWeekPlans.toArray(), []) ?? [];
   const planWeeks = useLiveQuery(() => db.planWeeks.toArray(), []) ?? [];
   const sessions = useLiveQuery(() => db.trainingSessions.toArray(), []) ?? [];
@@ -140,42 +131,6 @@ export function App() {
         (ex.id === rootId || ex.parent_exercise_id === rootId)
     );
   }, [activeExercise, exercises]);
-
-  const activeTeamSessions = useMemo(
-    () => (activeTeam ? sessions.filter((s) => s.team_id === activeTeam.id) : []),
-    [sessions, activeTeam]
-  );
-
-  const currentSession = activeTeamSessions[0];
-  const currentSessionPhases = useMemo(
-    () =>
-      currentSession
-        ? phases
-            .filter((p) => p.training_session_id === currentSession.id)
-            .sort((a, b) => a.sort_order - b.sort_order)
-        : [],
-    [phases, currentSession]
-  );
-
-  const currentSessionBlocks = useMemo(() => {
-    const phaseIds = new Set(currentSessionPhases.map((p) => p.id));
-    return blocks.filter((b) => phaseIds.has(b.session_phase_id));
-  }, [blocks, currentSessionPhases]);
-
-  const totalSessionDuration = useMemo(
-    () => calculateSessionTotalDuration(currentSessionPhases, currentSessionBlocks),
-    [currentSessionPhases, currentSessionBlocks]
-  );
-
-  const sessionPackingList = useMemo(
-    () =>
-      aggregateSessionMaterials(
-        currentSessionBlocks,
-        exercisesById,
-        currentSession?.custom_materials_override ?? []
-      ),
-    [currentSessionBlocks, exercisesById, currentSession]
-  );
 
   const activePlan = useMemo(
     () => (activeTeam ? multiWeekPlans.find((p) => p.team_id === activeTeam.id) : undefined),
@@ -273,7 +228,7 @@ export function App() {
             }`}
           >
             <LayoutDashboard className="h-4 w-4" />
-            Dashboard & Trainingstag
+            Trainings-Editor & Tag
           </button>
 
           <button
@@ -415,7 +370,7 @@ export function App() {
         </header>
 
         <main className="mx-auto w-full max-w-7xl flex-1 p-4 lg:p-8">
-          {/* TAB 1: DASHBOARD & AKTUELLER TRAININGSTAG */}
+          {/* TAB 1: SPEED-PLANNING TRAININGS-EDITOR & VORLAGEN (MEILENSTEIN 3) */}
           {activeTab === 'DASHBOARD' && (
             <div className="space-y-6">
               {activePlan && activePlanWeeks[1] && (
@@ -445,203 +400,29 @@ export function App() {
                 </div>
               )}
 
-              {currentSession ? (
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-                  <div className="space-y-4 lg:col-span-8">
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
-                      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
-                        <div>
-                          <div className="flex items-center gap-2 text-xs text-blue-400 font-semibold">
-                            <span>Trainingseinheit · {currentSession.session_date}</span>
-                            <span>
-                              ({currentSession.start_time}–{currentSession.end_time} Uhr)
-                            </span>
-                          </div>
-                          <h3 className="mt-0.5 text-xl font-bold text-white">
-                            {currentSession.title}
-                          </h3>
-                        </div>
-
-                        <div className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2">
-                          <Clock className="h-4 w-4 text-emerald-400" />
-                          <div className="text-xs">
-                            <div className="text-slate-400">Geplante Zeit</div>
-                            <div className="font-bold text-white">
-                              {totalSessionDuration} / {currentSession.planned_duration_min} Min
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-5 space-y-4">
-                        {currentSessionPhases.map((phase) => {
-                          const blocksInPhase = currentSessionBlocks.filter(
-                            (b) => b.session_phase_id === phase.id
-                          );
-                          const effectiveMin = calculatePhaseEffectiveDuration(
-                            phase,
-                            blocksInPhase
-                          );
-                          const isParallel = blocksInPhase.length > 1;
-
-                          return (
-                            <div
-                              key={phase.id}
-                              className="rounded-xl border border-slate-800 bg-slate-950/70 p-4"
-                            >
-                              <div className="mb-3 flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-bold text-white text-sm">{phase.name}</span>
-                                  {isParallel && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-amber-950/80 border border-amber-500/40 px-2.5 py-0.5 text-[11px] font-semibold text-amber-300">
-                                      <Layers className="h-3 w-3" />
-                                      Parallele Spuren (Längste Spur zählt)
-                                    </span>
-                                  )}
-                                </div>
-                                <span className="rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-blue-300">
-                                  {effectiveMin} Min
-                                </span>
-                              </div>
-
-                              <div
-                                className={`grid gap-3 ${
-                                  isParallel ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'
-                                }`}
-                              >
-                                {blocksInPhase.map((block) => {
-                                  const linkedEx = block.exercise_id
-                                    ? exercisesById.get(block.exercise_id)
-                                    : undefined;
-                                  const coach = members.find(
-                                    (m) => m.id === block.assigned_member_id
-                                  );
-                                  const blockNotes = notes.filter(
-                                    (n) => n.session_block_id === block.id
-                                  );
-
-                                  return (
-                                    <div
-                                      key={block.id}
-                                      className="rounded-xl border border-slate-800/90 bg-slate-900 p-3.5"
-                                    >
-                                      <div className="flex items-center justify-between gap-2 text-[11px]">
-                                        <span className="rounded bg-blue-950/90 px-2 py-0.5 font-semibold text-blue-300">
-                                          {block.track_label}
-                                        </span>
-                                        <span className="text-slate-400">
-                                          {block.custom_duration_min} Min ·{' '}
-                                          {coach
-                                            ? coach.display_name.split(' (')[0]
-                                            : 'Trainerteam'}
-                                        </span>
-                                      </div>
-
-                                      <div className="mt-2 font-bold text-white text-sm">
-                                        {linkedEx
-                                          ? linkedEx.title
-                                          : block.quick_block_title ?? 'Freier Trainingsblock'}
-                                      </div>
-
-                                      <p className="mt-1 text-xs text-slate-300 line-clamp-2">
-                                        {linkedEx
-                                          ? linkedEx.flow_description
-                                          : block.quick_block_description}
-                                      </p>
-
-                                      {blockNotes.length > 0 && (
-                                        <div className="mt-2.5 space-y-1 border-t border-slate-800 pt-2">
-                                          {blockNotes.map((note) => (
-                                            <div
-                                              key={note.id}
-                                              className="rounded-lg bg-slate-950/90 px-2.5 py-1.5 text-[11px] text-amber-200/90"
-                                            >
-                                              <strong className="text-amber-400">
-                                                {note.author_name}:
-                                              </strong>{' '}
-                                              {note.content}
-                                            </div>
-                                          ))}
-                                        </div>
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6 lg:col-span-4">
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
-                      <div className="flex items-center gap-2 text-amber-400">
-                        <Package className="h-5 w-5" />
-                        <h3 className="text-base font-bold text-white">
-                          Material-Packliste (Geräteraum)
-                        </h3>
-                      </div>
-                      <p className="mt-1 text-xs text-slate-400">
-                        Automatisch berechnet aus den Phasen & parallelen Spuren dieser Einheit:
-                      </p>
-
-                      <div className="mt-4 space-y-2">
-                        {sessionPackingList.map((item) => (
-                          <div
-                            key={item.type}
-                            className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-sm"
-                          >
-                            <span className="flex items-center gap-2 text-slate-200">
-                              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                              {MATERIAL_LABELS[item.type]}
-                            </span>
-                            <span className="rounded-lg bg-blue-950 px-2.5 py-0.5 font-bold text-blue-300 text-xs">
-                              {item.quantity}x
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
-                      <div className="flex items-center gap-2 text-blue-400">
-                        <Users className="h-5 w-5" />
-                        <h3 className="text-base font-bold text-white">
-                          Feste Hallenzeiten ({activeTeam.name})
-                        </h3>
-                      </div>
-                      <div className="mt-3 space-y-2">
-                        {activeTeam.default_schedule.map((slot) => (
-                          <div
-                            key={slot.id}
-                            className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs"
-                          >
-                            <span className="font-semibold text-white">{slot.weekdayLabel}</span>
-                            <span className="text-slate-300">
-                              {slot.startTime}–{slot.endTime} Uhr
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center">
-                  <p className="text-sm text-slate-300">
-                    Für <strong>{activeTeam.name}</strong> ist aktuell noch keine Trainingseinheit angelegt.
-                  </p>
-                </div>
-              )}
+              <TrainingSessionPlanner
+                clubId={activeClub.id}
+                activeTeam={activeTeam}
+                members={members}
+                exercises={exercises}
+                templates={templates}
+                sessions={sessions}
+                phases={phases}
+                blocks={blocks}
+                notes={notes}
+                activePlanWeeks={activePlanWeeks}
+                onEditExercise={(ex) => {
+                  setEditingExercise(ex);
+                  setVariantParentExercise(null);
+                  setEditorModalOpen(true);
+                }}
+              />
             </div>
           )}
 
           {/* TAB 2: ÜBUNGSDATENBANK, TAKTIKBOARD & KI-IMPORT */}
           {activeTab === 'EXERCISES' && (
             <div className="space-y-6">
-              {/* Top Action Bar in Exercise Catalog */}
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-900/90 p-4">
                 <div>
                   <h2 className="text-lg font-bold text-white">
@@ -677,7 +458,6 @@ export function App() {
               </div>
 
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-                {/* Linke Liste (5 Cols) */}
                 <div className="space-y-4 lg:col-span-5">
                   <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 space-y-3">
                     <div className="relative">
@@ -756,7 +536,6 @@ export function App() {
                   </div>
                 </div>
 
-                {/* Rechte Detailansicht inkl. Taktikboard, Varianten & Aktionen (7 Cols) */}
                 <div className="lg:col-span-7">
                   {activeExercise ? (
                     <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 space-y-5">
@@ -815,7 +594,6 @@ export function App() {
                         </div>
                       </div>
 
-                      {/* Verknüpfte Varianten / Basis-Übung */}
                       {relatedVariants.length > 0 && (
                         <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-3">
                           <div className="mb-1.5 flex items-center gap-1.5 text-xs font-bold text-blue-300">
@@ -837,7 +615,6 @@ export function App() {
                         </div>
                       )}
 
-                      {/* Vektor-Taktikboard & Eingefügte Web-Zeichnung (Strg+V) */}
                       <div className="space-y-4">
                         <div>
                           <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
@@ -865,7 +642,6 @@ export function App() {
                         )}
                       </div>
 
-                      {/* Tags & Kategorien */}
                       <div className="flex flex-wrap gap-1.5">
                         {activeExercise.categories.phases.map((p) => (
                           <span
@@ -885,7 +661,6 @@ export function App() {
                         ))}
                       </div>
 
-                      {/* Strukturierte Beschreibung */}
                       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
                           <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
@@ -915,7 +690,6 @@ export function App() {
                         </p>
                       </div>
 
-                      {/* Web-Referenz / Quellen-Link & Externe Links */}
                       {(activeExercise.source_url || activeExercise.external_links.length > 0) && (
                         <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4 space-y-2">
                           <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
