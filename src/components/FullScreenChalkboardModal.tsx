@@ -1,0 +1,203 @@
+import { useEffect, useRef, useState } from 'react';
+import { Eraser, PenTool, X } from 'lucide-react';
+import type { TacticBoardData } from '../types/domain';
+import { TacticBoardPreview } from './TacticBoardPreview';
+
+interface FullScreenChalkboardModalProps {
+  isOpen: boolean;
+  title: string;
+  coachingPoints?: string;
+  tacticBoardData?: TacticBoardData;
+  referenceImageData?: string;
+  onClose: () => void;
+}
+
+const CHALK_COLORS = [
+  { hex: '#facc15', label: 'Gelb' },
+  { hex: '#ef4444', label: 'Rot' },
+  { hex: '#38bdf8', label: 'Hellblau' },
+  { hex: '#ffffff', label: 'Weiß' }
+];
+
+export function FullScreenChalkboardModal({
+  isOpen,
+  title,
+  coachingPoints,
+  tacticBoardData,
+  referenceImageData,
+  onClose
+}: FullScreenChalkboardModalProps) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [chalkColor, setChalkColor] = useState('#facc15');
+  const [isDrawing, setIsDrawing] = useState(false);
+
+  // Sync canvas pixel resolution to container dimensions
+  useEffect(() => {
+    if (!isOpen) return;
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
+    const resize = () => {
+      const rect = container.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  function clearChalkOverlay() {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function getCanvasCoords(e: React.PointerEvent<HTMLCanvasElement>) {
+    const canvas = canvasRef.current!;
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  }
+
+  function handlePointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const { x, y } = getCanvasCoords(e);
+    setIsDrawing(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+
+    ctx.strokeStyle = chalkColor;
+    ctx.lineWidth = 4.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+
+  function handlePointerMove(e: React.PointerEvent<HTMLCanvasElement>) {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const { x, y } = getCanvasCoords(e);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+
+  function handlePointerUp() {
+    setIsDrawing(false);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-slate-950 p-3 lg:p-6">
+      {/* Top Controls Bar (Large Touch Targets >= 48px for Hall Use) */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-5 py-3 shadow-xl">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-400">
+            <PenTool className="h-5 w-5" />
+          </div>
+          <div>
+            <span className="text-[11px] font-bold tracking-wider text-amber-400 uppercase">
+              Vollbild-Taktiktafel & Temporärer Live-Zeichenstift (Kreide-Modus)
+            </span>
+            <h2 className="text-base font-bold text-white lg:text-lg">{title}</h2>
+          </div>
+        </div>
+
+        {/* Chalk Pen Color Selector & Clear Button */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-slate-300">Stiftfarbe:</span>
+          {CHALK_COLORS.map((c) => (
+            <button
+              key={c.hex}
+              type="button"
+              onClick={() => setChalkColor(c.hex)}
+              className={`h-9 w-9 rounded-full border-2 transition ${
+                chalkColor === c.hex ? 'scale-110 border-white shadow-lg' : 'border-slate-700'
+              }`}
+              style={{ backgroundColor: c.hex }}
+              title={c.label}
+            />
+          ))}
+
+          <button
+            type="button"
+            onClick={clearChalkOverlay}
+            className="ml-2 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-amber-500/50 bg-amber-950/60 px-4 py-2 text-xs font-bold text-amber-200 hover:bg-amber-900"
+          >
+            <Eraser className="h-4 w-4" />
+            Freihand wegwischen
+          </button>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700"
+          >
+            <X className="h-4 w-4" />
+            Schließen
+          </button>
+        </div>
+      </div>
+
+      {/* Main Presentation Area with Temporary Freehand Canvas Overlay */}
+      <div className="mt-4 grid flex-1 grid-cols-1 gap-4 overflow-hidden lg:grid-cols-12">
+        <div
+          ref={containerRef}
+          className="relative flex items-center justify-center overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 lg:col-span-9"
+        >
+          {referenceImageData && !tacticBoardData ? (
+            <img
+              src={referenceImageData}
+              alt={title}
+              className="h-full w-full object-contain p-4 select-none"
+            />
+          ) : (
+            <TacticBoardPreview data={tacticBoardData} className="h-full w-full border-0" />
+          )}
+
+          {/* Transparent Chalk Canvas on Top */}
+          <canvas
+            ref={canvasRef}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            className="absolute inset-0 h-full w-full touch-none cursor-crosshair"
+          />
+        </div>
+
+        {/* Right Side: High-Contrast Coaching Points for Quick Glance */}
+        <div className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900 p-5 lg:col-span-3">
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-xs font-bold tracking-wider text-amber-400 uppercase">
+                Wichtigste Coaching-Punkte
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed font-medium text-slate-100 whitespace-pre-line lg:text-base">
+                {coachingPoints || 'Keine speziellen Coaching-Punkte hinterlegt.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 text-xs text-slate-400">
+            💡 <strong>Hinweis:</strong> Alles, was du hier mit dem Finger oder Stift einzeichnest, ist nur für die aktuelle Erklärung sichtbar und verändert deine gespeicherte Übung nicht.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

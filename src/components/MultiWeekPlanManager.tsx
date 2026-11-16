@@ -1,0 +1,552 @@
+import { useMemo, useState } from 'react';
+import {
+  CalendarPlus,
+  CalendarRange,
+  Edit3,
+  Play,
+  Plus,
+  Sparkles,
+  Tag
+} from 'lucide-react';
+import { db, queueSyncOperation } from '../db/database';
+import type {
+  ClubMember,
+  HandballFocusTag,
+  MultiWeekPlan,
+  PlanWeek,
+  SessionTemplate,
+  Team,
+  TrainingSession
+} from '../types/domain';
+import { FOCUS_TAG_LABELS } from '../constants/handballLabels';
+import { addDaysIso, generateMultiWeekPlanBundle } from '../utils/multiWeekPlanUtils';
+import { buildSessionFromTemplate } from '../utils/sessionPlannerUtils';
+
+interface MultiWeekPlanManagerProps {
+  activeTeam: Team;
+  members: ClubMember[];
+  plans: MultiWeekPlan[];
+  planWeeks: PlanWeek[];
+  sessions: TrainingSession[];
+  templates: SessionTemplate[];
+  onOpenSessionInEditor: (sessionId: string) => void;
+  onStartHallMode: (sessionId: string) => void;
+}
+
+const ALL_FOCUS_TAGS = Object.keys(FOCUS_TAG_LABELS) as HandballFocusTag[];
+
+export function MultiWeekPlanManager({
+  activeTeam,
+  members,
+  plans,
+  planWeeks,
+  sessions,
+  templates,
+  onOpenSessionInEditor,
+  onStartHallMode
+}: MultiWeekPlanManagerProps) {
+  const teamPlans = useMemo(
+    () =>
+      plans
+        .filter((p) => p.team_id === activeTeam.id)
+        .sort((a, b) => b.start_date.localeCompare(a.start_date)),
+    [plans, activeTeam.id]
+  );
+
+  const [selectedPlanId, setSelectedPlanId] = useState<string>('');
+  const activePlan = useMemo(() => {
+    if (selectedPlanId) {
+      const found = teamPlans.find((p) => p.id === selectedPlanId);
+      if (found) return found;
+    }
+    return teamPlans[0] ?? null;
+  }, [teamPlans, selectedPlanId]);
+
+  const activeWeeks = useMemo(
+    () =>
+      activePlan
+        ? planWeeks
+            .filter((pw) => pw.multi_week_plan_id === activePlan.id)
+            .sort((a, b) => a.week_number - b.week_number)
+        : [],
+    [planWeeks, activePlan]
+  );
+
+  // Generator form state
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [newTitle, setNewTitle] = useState(
+    'Aufbaublock Rückrunde: Tempospiel & Abwehr-Kooperation'
+  );
+  const [newStartDate, setNewStartDate] = useState('2026-12-07');
+  const [newWeekCount, setNewWeekCount] = useState(4);
+  const [newGoals, setNewGoals] = useState(
+    'Steigerung der 1. & 2. Welle sowie stabile Übergaben im Innenblock.'
+  );
+  const [newTemplateId, setNewTemplateId] = useState<string>(templates[0]?.id ?? '');
+
+  // Expanded tag selector per week
+  const [editingTagsWeekId, setEditingTagsWeekId] = useState<string | null>(null);
+
+  async function handleGeneratePlan(e: React.FormEvent) {
+    e.preventDefault();
+    if (!newTitle.trim()) return;
+
+    const defaultTemplate = templates.find((t) => t.id === newTemplateId);
+    const bundle = generateMultiWeekPlanBundle({
+      team: activeTeam,
+      title: newTitle,
+      startDate: newStartDate,
+      weekCount: newWeekCount,
+      goals: newGoals,
+      defaultTemplate,
+      defaultCoachMemberId: members[0]?.id
+    });
+
+    await db.transaction(
+      'rw',
+      [
+        db.multiWeekPlans,
+        db.planWeeks,
+        db.trainingSessions,
+        db.sessionPhases,
+        db.sessionBlocks,
+        db.syncOutbox
+      ],
+      async () => {
+        await db.multiWeekPlans.put(bundle.plan);
+        await queueSyncOperation('multi_week_plans', bundle.plan.id, 'UPSERT', bundle.plan);
+        await db.planWeeks.bulkPut(bundle.weeks);
+        for (const w of bundle.weeks) {
+          await queueSyncOperation('plan_weeks', w.id, 'UPSERT', w);
+        }
+        if (bundle.sessions.length > 0) {
+          await db.trainingSessions.bulkPut(bundle.sessions);
+          for (const s of bundle.sessions) {
+            await queueSyncOperation('training_sessions', s.id, 'UPSERT', s);
+          }
+        }
+        if (bundle.phases.length > 0) {
+          await db.sessionPhases.bulkPut(bundle.phases);
+        }
+        if (bundle.blocks.length > 0) {
+          await db.sessionBlocks.bulkPut(bundle.blocks);
+        }
+      }
+    );
+
+    setSelectedPlanId(bundle.plan.id);
+    setShowCreateForm(false);
+  }
+
+  async function handleUpdateWeek(week: PlanWeek, patch: Partial<PlanWeek>) {
+    const updated: PlanWeek = {
+      ...week,
+      ...patch,
+      updated_at: new Date().toISOString()
+    };
+    await db.planWeeks.put(updated);
+    await queueSyncOperation('plan_weeks', updated.id, 'UPSERT', updated);
+  }
+
+  async function handleToggleWeekTag(week: PlanWeek, tag: HandballFocusTag) {
+    const exists = week.focus_tags.includes(tag);
+    const nextTags = exists
+      ? week.focus_tags.filter((t) => t !== tag)
+      : [...week.focus_tags, tag];
+    await handleUpdateWeek(week, { focus_tags: nextTags });
+  }
+
+  async function handleAddExtraSessionToWeek(week: PlanWeek) {
+    const slot = activeTeam.default_schedule[0];
+    const sessionDate = addDaysIso(week.start_date, 5); // Default Saturday of that week
+    const bundle = buildSessionFromTemplate({
+      teamId: activeTeam.id,
+      sessionDate,
+      startTime: slot?.startTime ?? '10:00',
+      endTime: slot?.endTime ?? '12:00',
+      title: `Zusatztraining (${week.focus_theme.split(':')[0]})`,
+      planWeekId: week.id,
+      template: templates[0],
+      defaultCoachMemberId: members[0]?.id
+    });
+
+    await db.transaction(
+      'rw',
+      [db.trainingSessions, db.sessionPhases, db.sessionBlocks, db.syncOutbox],
+      async () => {
+        await db.trainingSessions.put(bundle.session);
+        await db.sessionPhases.bulkPut(bundle.phases);
+        await db.sessionBlocks.bulkPut(bundle.blocks);
+        await queueSyncOperation('training_sessions', bundle.session.id, 'UPSERT', bundle.session);
+      }
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Top Header & Plan Selector */}
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-lg">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/20 text-blue-400">
+              <CalendarRange className="h-5 w-5" />
+            </div>
+            <div>
+              <span className="text-xs font-bold tracking-wider text-blue-400 uppercase">
+                Mesozyklus- & Mehrwochenplanung ({activeTeam.name})
+              </span>
+              <div className="mt-0.5 flex items-center gap-2">
+                {teamPlans.length > 0 ? (
+                  <select
+                    value={activePlan?.id ?? ''}
+                    onChange={(e) => setSelectedPlanId(e.target.value)}
+                    className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm font-bold text-white"
+                  >
+                    {teamPlans.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.title} ({p.start_date} – {p.end_date})
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <span className="text-sm font-bold text-white">Noch kein Plan angelegt</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowCreateForm((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/20 hover:bg-blue-500"
+          >
+            <Plus className="h-4 w-4" />
+            Neuen Mehrwochenplan & Trainingstage generieren
+          </button>
+        </div>
+
+        {/* Generator Form */}
+        {showCreateForm && (
+          <form
+            onSubmit={handleGeneratePlan}
+            className="mt-5 rounded-xl border border-blue-500/40 bg-blue-950/20 p-5 space-y-4"
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-blue-400" />
+                Automatischer Mehrwochenplan-Generator für {activeTeam.name}
+              </h3>
+              <span className="text-xs text-blue-300">
+                Erzeugt automatisch {newWeekCount * activeTeam.default_schedule.length} Trainingstage anhand eurer festen Hallenzeiten!
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
+              <div className="md:col-span-2">
+                <label className="mb-1 block text-xs text-slate-300">Titel des Mehrwochenplans *</label>
+                <input
+                  type="text"
+                  required
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs text-slate-300">Startwoche (Datum)</label>
+                <input
+                  type="date"
+                  required
+                  value={newStartDate}
+                  onChange={(e) => setNewStartDate(e.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs text-slate-300">Anzahl Wochen</label>
+                <select
+                  value={newWeekCount}
+                  onChange={(e) => setNewWeekCount(Number(e.target.value))}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"
+                >
+                  {[2, 3, 4, 6, 8, 10, 12].map((n) => (
+                    <option key={n} value={n}>
+                      {n} Wochen ({n * activeTeam.default_schedule.length} Trainingseinheiten)
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <div>
+                <label className="mb-1 block text-xs text-slate-300">Übergeordnete Ziele im Block</label>
+                <input
+                  type="text"
+                  value={newGoals}
+                  onChange={(e) => setNewGoals(e.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs text-slate-300">
+                  Standard-Vorlage für generierte Trainingstage
+                </label>
+                <select
+                  value={newTemplateId}
+                  onChange={(e) => setNewTemplateId(e.target.value)}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"
+                >
+                  <option value="">Standard 5-Phasen-Struktur</option>
+                  {templates.map((tpl) => (
+                    <option key={tpl.id} value={tpl.id}>
+                      {tpl.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowCreateForm(false)}
+                className="rounded-xl bg-slate-800 px-4 py-2 text-xs text-slate-300"
+              >
+                Abbrechen
+              </button>
+              <button
+                type="submit"
+                className="rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-500"
+              >
+                Mehrwochenplan & Trainingstage erzeugen
+              </button>
+            </div>
+          </form>
+        )}
+
+        {activePlan && (
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800 pt-3 text-xs text-slate-300">
+            <div>
+              <strong className="text-white">Block-Zielsetzung:</strong> {activePlan.goals}
+            </div>
+            <div className="text-slate-400">
+              Zeitraum: {activePlan.start_date} bis {activePlan.end_date} ({activeWeeks.length} Wochen)
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Interactive Week Matrix (Microcycles & Assigned Training Sessions) */}
+      {activePlan ? (
+        <div className="space-y-4">
+          {activeWeeks.map((week) => {
+            const weekEndDate = addDaysIso(week.start_date, 6);
+            // Match sessions either explicitly linked by plan_week_id OR falling within the week's date range
+            const weekSessions = sessions
+              .filter(
+                (s) =>
+                  s.team_id === activeTeam.id &&
+                  (s.plan_week_id === week.id ||
+                    (s.session_date >= week.start_date && s.session_date <= weekEndDate))
+              )
+              .sort((a, b) => a.session_date.localeCompare(b.session_date));
+
+            const isEditingTags = editingTagsWeekId === week.id;
+
+            return (
+              <div
+                key={week.id}
+                className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-md"
+                style={{ borderLeftWidth: '5px', borderLeftColor: week.color_hex }}
+              >
+                <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+                  {/* Left (5 Cols): Week Focus Theme, Notes & Smart-Filter Focus Tags */}
+                  <div className="space-y-3 lg:col-span-5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="rounded-lg bg-slate-800 px-2.5 py-1 font-bold text-white">
+                        Woche {week.week_number} · {week.start_date} bis {weekEndDate}
+                      </span>
+                      <input
+                        type="color"
+                        value={week.color_hex}
+                        onChange={(e) =>
+                          void handleUpdateWeek(week, { color_hex: e.target.value })
+                        }
+                        className="h-6 w-8 cursor-pointer rounded border border-slate-700 bg-transparent"
+                        title="Wochen-Farbcode wählen"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-[11px] font-semibold text-slate-400">
+                        Wochen-Schwerpunkt / Thema
+                      </label>
+                      <input
+                        type="text"
+                        value={week.focus_theme}
+                        onChange={(e) =>
+                          void handleUpdateWeek(week, { focus_theme: e.target.value })
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-sm font-bold text-white focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-[11px] text-slate-400">
+                        Wochen-Notiz / Hinweis ans Trainerteam
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="z.B. Samstag Topspiel – Donnerstag Belastung dosieren..."
+                        value={week.notes}
+                        onChange={(e) =>
+                          void handleUpdateWeek(week, { notes: e.target.value })
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-xs text-slate-200"
+                      />
+                    </div>
+
+                    {/* Focus Tags (steuern Smart-Suggestions im Trainings-Editor) */}
+                    <div>
+                      <div className="mb-1.5 flex items-center justify-between text-[11px]">
+                        <span className="font-semibold text-emerald-400 flex items-center gap-1">
+                          <Sparkles className="h-3 w-3" />
+                          Smart-Filter Schwerpunkte ({week.focus_tags.length}):
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setEditingTagsWeekId(isEditingTags ? null : week.id)
+                          }
+                          className="inline-flex items-center gap-1 text-blue-400 hover:underline"
+                        >
+                          <Tag className="h-3 w-3" />
+                          {isEditingTags ? 'Fertig' : 'Tags anpassen'}
+                        </button>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {week.focus_tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-md border border-emerald-500/40 bg-emerald-950/60 px-2 py-0.5 text-[11px] font-medium text-emerald-300"
+                          >
+                            #{FOCUS_TAG_LABELS[tag]}
+                          </span>
+                        ))}
+                      </div>
+
+                      {isEditingTags && (
+                        <div className="mt-2.5 flex max-h-36 flex-wrap gap-1 overflow-y-auto rounded-xl border border-slate-800 bg-slate-950 p-2.5">
+                          {ALL_FOCUS_TAGS.map((tag) => {
+                            const active = week.focus_tags.includes(tag);
+                            return (
+                              <button
+                                key={tag}
+                                type="button"
+                                onClick={() => void handleToggleWeekTag(week, tag)}
+                                className={`rounded px-2 py-0.5 text-[10px] font-medium transition ${
+                                  active
+                                    ? 'bg-emerald-600 text-white'
+                                    : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                                }`}
+                              >
+                                {active ? '✓ ' : '+ '}
+                                {FOCUS_TAG_LABELS[tag]}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right (7 Cols): Training Sessions in this Week */}
+                  <div className="space-y-3 lg:col-span-7">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-300 uppercase">
+                        Trainingstage in Woche {week.week_number} ({weekSessions.length})
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => void handleAddExtraSessionToWeek(week)}
+                        className="inline-flex items-center gap-1 rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                      >
+                        <CalendarPlus className="h-3.5 w-3.5 text-blue-400" />
+                        + Zusatztraining in Woche {week.week_number}
+                      </button>
+                    </div>
+
+                    {weekSessions.length === 0 ? (
+                      <div className="rounded-xl border border-dashed border-slate-800 bg-slate-950/50 p-4 text-center text-xs text-slate-400">
+                        Keine Trainingseinheit in dieser Woche – klicke oben auf „+ Zusatztraining".
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {weekSessions.map((sess) => (
+                          <div
+                            key={sess.id}
+                            className="flex flex-col justify-between rounded-xl border border-slate-800 bg-slate-950/90 p-3.5 space-y-3"
+                          >
+                            <div>
+                              <div className="flex items-center justify-between text-[11px]">
+                                <span className="font-bold text-blue-400">
+                                  {sess.session_date} · {sess.start_time}–{sess.end_time}
+                                </span>
+                                <span
+                                  className={`rounded px-1.5 py-0.5 text-[10px] font-bold ${
+                                    sess.status === 'COMPLETED'
+                                      ? 'bg-emerald-950 text-emerald-300'
+                                      : sess.status === 'READY'
+                                        ? 'bg-blue-950 text-blue-300'
+                                        : 'bg-slate-800 text-slate-300'
+                                  }`}
+                                >
+                                  {sess.status === 'COMPLETED'
+                                    ? 'Durchgeführt'
+                                    : sess.status === 'READY'
+                                      ? 'Bereit'
+                                      : 'Geplant'}
+                                </span>
+                              </div>
+                              <div className="mt-1.5 font-bold text-white text-sm">
+                                {sess.title}
+                              </div>
+                              <div className="mt-0.5 text-[11px] text-slate-400">
+                                Zeitbudget: {sess.planned_duration_min} Min
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 pt-1">
+                              <button
+                                type="button"
+                                onClick={() => onOpenSessionInEditor(sess.id)}
+                                className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-slate-800 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                              >
+                                <Edit3 className="h-3.5 w-3.5 text-blue-400" />
+                                Planen
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => onStartHallMode(sess.id)}
+                                className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-emerald-600 py-1.5 text-xs font-semibold text-white hover:bg-emerald-500"
+                              >
+                                <Play className="h-3.5 w-3.5" />
+                                Halle Live
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  );
+}

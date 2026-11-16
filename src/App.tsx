@@ -5,12 +5,15 @@ import {
   Bot,
   Building2,
   CalendarRange,
+  CloudUpload,
   CopyPlus,
   Download,
   Edit3,
   ExternalLink as ExternalLinkIcon,
+  FileDown,
   GitBranch,
   LayoutDashboard,
+  Play,
   Plus,
   Search,
   Sparkles,
@@ -26,6 +29,12 @@ import { PwaInstallGuideModal } from './components/PwaInstallGuideModal';
 import { ExerciseEditorModal } from './components/ExerciseEditorModal';
 import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
 import { TrainingSessionPlanner } from './components/TrainingSessionPlanner';
+import { MultiWeekPlanManager } from './components/MultiWeekPlanManager';
+import { HallLiveMode } from './components/HallLiveMode';
+import {
+  exportClubDatabaseSnapshot,
+  flushSyncOutboxToCloud
+} from './services/cloudSyncService';
 import {
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
@@ -34,13 +43,15 @@ import {
 } from './constants/handballLabels';
 import type { Exercise, VisibilityLevel } from './types/domain';
 
-type NavTab = 'DASHBOARD' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
+type NavTab = 'DASHBOARD' | 'HALL_LIVE' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('DASHBOARD');
   const [activeTeamId, setActiveTeamId] = useState<string>('team-mb');
+  const [focusedSessionId, setFocusedSessionId] = useState<string | undefined>(undefined);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
+  const [syncStatusBanner, setSyncStatusBanner] = useState<string | null>(null);
 
   // Exercise filter & modal states
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,7 +67,10 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
+    const handleOnline = () => {
+      setIsOnline(true);
+      void flushSyncOutboxToCloud();
+    };
     const handleOffline = () => setIsOnline(false);
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
@@ -176,6 +190,29 @@ export function App() {
     }
   }
 
+  async function handleManualCloudSync() {
+    const res = await flushSyncOutboxToCloud();
+    if (res.mode === 'LOCAL_ONLY') {
+      setSyncStatusBanner(
+        'Lokaler Offline-First-Modus aktiv (Alle Änderungen sind sicher in IndexedDB gespeichert).'
+      );
+    } else {
+      setSyncStatusBanner(`${res.flushedCount} Änderung(en) mit Supabase Cloud synchronisiert!`);
+    }
+    setTimeout(() => setSyncStatusBanner(null), 3500);
+  }
+
+  async function handleDownloadBackupJson() {
+    const json = await exportClubDatabaseSnapshot();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `handball-verein-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   if (!activeClub || !activeTeam) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-300">
@@ -233,19 +270,19 @@ export function App() {
 
           <button
             type="button"
-            onClick={() => setActiveTab('EXERCISES')}
+            onClick={() => setActiveTab('HALL_LIVE')}
             className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
-              activeTab === 'EXERCISES'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
-                : 'text-slate-300 hover:bg-slate-800/70'
+              activeTab === 'HALL_LIVE'
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                : 'text-emerald-300 hover:bg-slate-800/70'
             }`}
           >
             <span className="flex items-center gap-3">
-              <BookOpen className="h-4 w-4" />
-              Übungsdatenbank
+              <Play className="h-4 w-4" />
+              Sporthallen-Modus (Live)
             </span>
-            <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-200">
-              {exercises.length}
+            <span className="rounded bg-emerald-950 px-1.5 py-0.5 text-[10px] font-bold text-emerald-300">
+              Timer
             </span>
           </button>
 
@@ -264,6 +301,24 @@ export function App() {
 
           <button
             type="button"
+            onClick={() => setActiveTab('EXERCISES')}
+            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+              activeTab === 'EXERCISES'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                : 'text-slate-300 hover:bg-slate-800/70'
+            }`}
+          >
+            <span className="flex items-center gap-3">
+              <BookOpen className="h-4 w-4" />
+              Übungsdatenbank
+            </span>
+            <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-200">
+              {exercises.length}
+            </span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('CLUB_ADMIN')}
             className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'CLUB_ADMIN'
@@ -277,36 +332,51 @@ export function App() {
         </nav>
 
         {/* Offline / Sync Status & Store-freie PWA Hilfe */}
-        <div className="mt-6 space-y-3 border-t border-slate-800 pt-4">
+        <div className="mt-6 space-y-2.5 border-t border-slate-800 pt-4">
           <div className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/80 px-3 py-2 text-xs">
             <span className="flex items-center gap-2 font-medium">
               {isOnline ? (
                 <>
                   <Wifi className="h-4 w-4 text-emerald-400" />
-                  <span className="text-emerald-300">Offline-DB bereit (Online)</span>
+                  <span className="text-emerald-300">Offline-DB bereit</span>
                 </>
               ) : (
                 <>
                   <WifiOff className="h-4 w-4 text-amber-400" />
-                  <span className="text-amber-300">Hallen-Offline-Modus aktiv</span>
+                  <span className="text-amber-300">Hallen-Offline aktiv</span>
                 </>
               )}
             </span>
-            {pendingSyncCount > 0 && (
-              <span className="rounded bg-blue-950 px-1.5 py-0.5 text-[10px] text-blue-300">
-                {pendingSyncCount} Outbox
-              </span>
-            )}
+            <button
+              type="button"
+              onClick={() => void handleManualCloudSync()}
+              className="inline-flex items-center gap-1 rounded bg-blue-950 px-2 py-0.5 text-[10px] font-semibold text-blue-300 hover:bg-blue-900"
+              title="Outbox synchronisieren"
+            >
+              <CloudUpload className="h-3 w-3" />
+              {pendingSyncCount} Sync
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setShowInstallModal(true)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-blue-500/40 bg-blue-950/40 px-3 py-2 text-xs font-semibold text-blue-300 hover:bg-blue-900/50"
-          >
-            <Download className="h-3.5 w-3.5" />
-            Ohne App Store installieren
-          </button>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setShowInstallModal(true)}
+              className="flex items-center justify-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-2.5 py-2 text-[11px] font-semibold text-blue-300 hover:bg-blue-900/50"
+            >
+              <Download className="h-3.5 w-3.5" />
+              PWA App
+            </button>
+            <button
+              type="button"
+              onClick={() => void handleDownloadBackupJson()}
+              className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-2.5 py-2 text-[11px] font-semibold text-slate-200 hover:bg-slate-700"
+              title="Komplettes Vereins-Backup als JSON herunterladen"
+            >
+              <FileDown className="h-3.5 w-3.5 text-emerald-400" />
+              Backup
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -335,6 +405,15 @@ export function App() {
                 </option>
               ))}
             </select>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('HALL_LIVE')}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-500"
+            >
+              <Play className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Hallen-Modus</span>
+            </button>
 
             <button
               type="button"
@@ -368,6 +447,14 @@ export function App() {
             </button>
           </div>
         </header>
+
+        {syncStatusBanner && (
+          <div className="mx-auto mt-3 w-full max-w-7xl px-4 lg:px-8">
+            <div className="rounded-xl border border-blue-500/40 bg-blue-950/50 px-4 py-2 text-xs font-semibold text-blue-200">
+              {syncStatusBanner}
+            </div>
+          </div>
+        )}
 
         <main className="mx-auto w-full max-w-7xl flex-1 p-4 lg:p-8">
           {/* TAB 1: SPEED-PLANNING TRAININGS-EDITOR & VORLAGEN (MEILENSTEIN 3) */}
@@ -411,16 +498,35 @@ export function App() {
                 blocks={blocks}
                 notes={notes}
                 activePlanWeeks={activePlanWeeks}
+                focusedSessionId={focusedSessionId}
                 onEditExercise={(ex) => {
                   setEditingExercise(ex);
                   setVariantParentExercise(null);
                   setEditorModalOpen(true);
                 }}
+                onStartHallMode={(sessionId) => {
+                  setFocusedSessionId(sessionId);
+                  setActiveTab('HALL_LIVE');
+                }}
               />
             </div>
           )}
 
-          {/* TAB 2: ÜBUNGSDATENBANK, TAKTIKBOARD & KI-IMPORT */}
+          {/* TAB 2: MOBILER SPORTHALLEN-MODUS LIVE (MEILENSTEIN 5) */}
+          {activeTab === 'HALL_LIVE' && (
+            <HallLiveMode
+              activeTeam={activeTeam}
+              sessions={sessions}
+              phases={phases}
+              blocks={blocks}
+              exercises={exercises}
+              members={members}
+              notes={notes}
+              initialSessionId={focusedSessionId}
+            />
+          )}
+
+          {/* TAB 3: ÜBUNGSDATENBANK, TAKTIKBOARD & KI-IMPORT (MEILENSTEIN 2) */}
           {activeTab === 'EXERCISES' && (
             <div className="space-y-6">
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-900/90 p-4">
@@ -729,55 +835,27 @@ export function App() {
             </div>
           )}
 
-          {/* TAB 3: MEHRWOCHENPLAN (MESOZYKLUS) */}
+          {/* TAB 4: MEHRWOCHENPLÄNE & WOCHENMATRIX (MEILENSTEIN 4) */}
           {activeTab === 'PLANS' && (
-            <div className="space-y-6">
-              {activePlan ? (
-                <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6">
-                  <div className="border-b border-slate-800 pb-4">
-                    <span className="text-xs font-semibold text-blue-400 uppercase">
-                      Mehrwöchiger Trainingsplan · {activePlan.start_date} bis {activePlan.end_date}
-                    </span>
-                    <h2 className="mt-1 text-xl font-bold text-white">{activePlan.title}</h2>
-                    <p className="mt-1 text-xs text-slate-300">{activePlan.goals}</p>
-                  </div>
-
-                  <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {activePlanWeeks.map((week) => (
-                      <div
-                        key={week.id}
-                        className="rounded-xl border border-slate-800 bg-slate-950/80 p-4"
-                        style={{ borderLeftWidth: '4px', borderLeftColor: week.color_hex }}
-                      >
-                        <div className="flex items-center justify-between text-xs text-slate-400">
-                          <span className="font-bold text-white">Woche {week.week_number}</span>
-                          <span>ab {week.start_date}</span>
-                        </div>
-                        <h3 className="mt-1 font-bold text-white text-sm">{week.focus_theme}</h3>
-                        <p className="mt-1 text-xs text-slate-400">{week.notes}</p>
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          {week.focus_tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded bg-slate-900 px-2 py-0.5 text-[11px] text-blue-300 border border-slate-700"
-                            >
-                              #{FOCUS_TAG_LABELS[tag]}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center text-sm text-slate-300">
-                  Für <strong>{activeTeam.name}</strong> ist noch kein Mehrwochenplan hinterlegt.
-                </div>
-              )}
-            </div>
+            <MultiWeekPlanManager
+              activeTeam={activeTeam}
+              members={members}
+              plans={multiWeekPlans}
+              planWeeks={planWeeks}
+              sessions={sessions}
+              templates={templates}
+              onOpenSessionInEditor={(sessionId) => {
+                setFocusedSessionId(sessionId);
+                setActiveTab('DASHBOARD');
+              }}
+              onStartHallMode={(sessionId) => {
+                setFocusedSessionId(sessionId);
+                setActiveTab('HALL_LIVE');
+              }}
+            />
           )}
 
-          {/* TAB 4: VEREIN, MANNSCHAFTEN & TRAINERTEAM */}
+          {/* TAB 5: VEREIN, MANNSCHAFTEN & TRAINERTEAM (MEILENSTEIN 1) */}
           {activeTab === 'CLUB_ADMIN' && (
             <ClubTeamManager
               club={activeClub}
@@ -796,27 +874,27 @@ export function App() {
         <button
           type="button"
           onClick={() => setActiveTab('DASHBOARD')}
-          className={`flex flex-col items-center gap-1 px-3 py-1 text-[11px] font-medium ${
+          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'DASHBOARD' ? 'text-blue-400' : 'text-slate-400'
           }`}
         >
           <LayoutDashboard className="h-5 w-5" />
-          Training
+          Planer
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('EXERCISES')}
-          className={`flex flex-col items-center gap-1 px-3 py-1 text-[11px] font-medium ${
-            activeTab === 'EXERCISES' ? 'text-blue-400' : 'text-slate-400'
+          onClick={() => setActiveTab('HALL_LIVE')}
+          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-bold ${
+            activeTab === 'HALL_LIVE' ? 'text-emerald-400' : 'text-slate-400'
           }`}
         >
-          <BookOpen className="h-5 w-5" />
-          Übungen
+          <Play className="h-5 w-5" />
+          Halle Live
         </button>
         <button
           type="button"
           onClick={() => setActiveTab('PLANS')}
-          className={`flex flex-col items-center gap-1 px-3 py-1 text-[11px] font-medium ${
+          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'PLANS' ? 'text-blue-400' : 'text-slate-400'
           }`}
         >
@@ -825,13 +903,23 @@ export function App() {
         </button>
         <button
           type="button"
+          onClick={() => setActiveTab('EXERCISES')}
+          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
+            activeTab === 'EXERCISES' ? 'text-blue-400' : 'text-slate-400'
+          }`}
+        >
+          <BookOpen className="h-5 w-5" />
+          Übungen
+        </button>
+        <button
+          type="button"
           onClick={() => setActiveTab('CLUB_ADMIN')}
-          className={`flex flex-col items-center gap-1 px-3 py-1 text-[11px] font-medium ${
+          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'CLUB_ADMIN' ? 'text-blue-400' : 'text-slate-400'
           }`}
         >
           <Building2 className="h-5 w-5" />
-          Verein/Team
+          Verein
         </button>
       </nav>
 

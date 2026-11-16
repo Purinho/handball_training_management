@@ -57,7 +57,9 @@ interface TrainingSessionPlannerProps {
   blocks: SessionBlock[];
   notes: SessionNote[];
   activePlanWeeks: PlanWeek[];
+  focusedSessionId?: string;
   onEditExercise: (exercise: Exercise) => void;
+  onStartHallMode: (sessionId: string) => void;
 }
 
 const SESSION_STATUS_LABELS: Record<SessionStatus, string> = {
@@ -78,7 +80,9 @@ export function TrainingSessionPlanner({
   blocks,
   notes,
   activePlanWeeks,
-  onEditExercise
+  focusedSessionId,
+  onEditExercise,
+  onStartHallMode
 }: TrainingSessionPlannerProps) {
   const teamSessions = useMemo(
     () =>
@@ -88,14 +92,15 @@ export function TrainingSessionPlanner({
     [sessions, activeTeam.id]
   );
 
-  const [selectedSessionId, setSelectedSessionId] = useState<string>('');
+  const [selectedSessionId, setSelectedSessionId] = useState<string>(focusedSessionId ?? '');
   const currentSession = useMemo(() => {
-    if (selectedSessionId) {
-      const found = teamSessions.find((s) => s.id === selectedSessionId);
+    const targetId = selectedSessionId || focusedSessionId;
+    if (targetId) {
+      const found = teamSessions.find((s) => s.id === targetId);
       if (found) return found;
     }
     return teamSessions[0] ?? null;
-  }, [teamSessions, selectedSessionId]);
+  }, [teamSessions, selectedSessionId, focusedSessionId]);
 
   const currentPhases = useMemo(
     () =>
@@ -488,6 +493,16 @@ export function TrainingSessionPlanner({
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {currentSession && (
+              <button
+                type="button"
+                onClick={() => onStartHallMode(currentSession.id)}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-emerald-600/20 hover:bg-emerald-500"
+              >
+                🏃 Sporthallen-Modus starten
+              </button>
+            )}
+
             <button
               type="button"
               onClick={() => setShowNewSessionForm((prev) => !prev)}
