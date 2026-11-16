@@ -18,6 +18,7 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
 
   const width = 400;
   const height = 280;
+  const template = data.courtTemplate ?? 'HALF_COURT_VERTICAL';
 
   return (
     <div className={`overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 shadow-inner ${className}`}>
@@ -39,36 +40,82 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
 
         {/* Court Floor */}
         <rect x="0" y="0" width={width} height={height} fill="#0f2942" />
-
-        {/* Outer Court Lines */}
         <rect x="16" y="12" width={width - 32} height={height - 24} fill="#163b5c" stroke="#93c5fd" strokeWidth="2" />
 
-        {/* 6m Goal Area */}
-        <path
-          d="M 85 12 A 115 95 0 0 0 315 12 Z"
-          fill="#1d4ed8"
-          fillOpacity="0.45"
-          stroke="#ffffff"
-          strokeWidth="2.5"
-        />
+        {/* Court Template markings */}
+        {template === 'HALF_COURT_VERTICAL' && (
+          <>
+            <path
+              d="M 85 12 A 115 95 0 0 0 315 12 Z"
+              fill="#1d4ed8"
+              fillOpacity="0.45"
+              stroke="#ffffff"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M 40 12 A 160 135 0 0 0 360 12"
+              fill="none"
+              stroke="#93c5fd"
+              strokeWidth="2"
+              strokeDasharray="8 6"
+            />
+            <line x1="192" y1="48" x2="208" y2="48" stroke="#ffffff" strokeWidth="2" />
+            <line x1="188" y1="78" x2="212" y2="78" stroke="#ffffff" strokeWidth="2.5" />
+            <rect x="170" y="4" width="60" height="10" fill="#ef4444" stroke="#ffffff" strokeWidth="2" />
+          </>
+        )}
 
-        {/* 9m Free-Throw Line (Dashed) */}
-        <path
-          d="M 40 12 A 160 135 0 0 0 360 12"
-          fill="none"
-          stroke="#93c5fd"
-          strokeWidth="2"
-          strokeDasharray="8 6"
-        />
+        {template === 'GOAL_SECTOR_ZOOM' && (
+          <>
+            <path
+              d="M 45 12 A 155 135 0 0 0 355 12 Z"
+              fill="#1d4ed8"
+              fillOpacity="0.45"
+              stroke="#ffffff"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M 16 95 A 190 165 0 0 0 384 95"
+              fill="none"
+              stroke="#93c5fd"
+              strokeWidth="2"
+              strokeDasharray="8 6"
+            />
+            <line x1="188" y1="62" x2="212" y2="62" stroke="#ffffff" strokeWidth="2" />
+            <line x1="184" y1="102" x2="216" y2="102" stroke="#ffffff" strokeWidth="2.5" />
+            <rect x="155" y="3" width="90" height="11" fill="#ef4444" stroke="#ffffff" strokeWidth="2" />
+          </>
+        )}
 
-        {/* 4m Goalkeeper Line & 7m Penalty Line */}
-        <line x1="192" y1="48" x2="208" y2="48" stroke="#ffffff" strokeWidth="2" />
-        <line x1="188" y1="78" x2="212" y2="78" stroke="#ffffff" strokeWidth="2.5" />
+        {template === 'FULL_COURT' && (
+          <>
+            {/* Top Goal & 6m/9m */}
+            <path d="M 120 12 A 80 55 0 0 0 280 12 Z" fill="#1d4ed8" fillOpacity="0.45" stroke="#ffffff" strokeWidth="2" />
+            <path d="M 90 12 A 110 80 0 0 0 310 12" fill="none" stroke="#93c5fd" strokeWidth="1.5" strokeDasharray="6 4" />
+            <rect x="176" y="4" width="48" height="9" fill="#ef4444" stroke="#ffffff" strokeWidth="1.5" />
+            {/* Center line */}
+            <line x1="16" y1={height / 2} x2={width - 16} y2={height / 2} stroke="#ffffff" strokeWidth="2" />
+            <circle cx={width / 2} cy={height / 2} r="18" fill="none" stroke="#93c5fd" strokeWidth="1.5" />
+            {/* Bottom Goal & 6m/9m */}
+            <path
+              d={`M 120 ${height - 12} A 80 55 0 0 1 280 ${height - 12} Z`}
+              fill="#1d4ed8"
+              fillOpacity="0.45"
+              stroke="#ffffff"
+              strokeWidth="2"
+            />
+            <path
+              d={`M 90 ${height - 12} A 110 80 0 0 1 310 ${height - 12}`}
+              fill="none"
+              stroke="#93c5fd"
+              strokeWidth="1.5"
+              strokeDasharray="6 4"
+            />
+            <rect x="176" y={height - 13} width="48" height="9" fill="#ef4444" stroke="#ffffff" strokeWidth="1.5" />
+          </>
+        )}
 
-        {/* Handball Goal */}
-        <rect x="170" y="4" width="60" height="10" fill="#ef4444" stroke="#ffffff" strokeWidth="2" />
-
-        {/* Paths (Run, Pass, Shot, Screen, Dribble) */}
+        {/* Paths */}
         {data.paths.map((path) => {
           if (path.points.length < 2) return null;
           const pts = path.points.map((p) => `${p.x * width},${p.y * height}`).join(' ');
@@ -81,16 +128,18 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
           const isShot = path.type === 'SHOT_PATH';
           const isScreen = path.type === 'SCREEN_BLOCK_PATH';
           const isDribble = path.type === 'DRIBBLE_PATH';
+          const isFeint = path.type === 'FEINT_PATH';
 
           const markerEnd = isScreen
             ? 'url(#screen-t)'
-            : isShot
+            : isShot || isFeint
               ? 'url(#arrow-amber)'
               : isPass
                 ? 'url(#arrow-blue)'
                 : 'url(#arrow-white)';
 
-          const strokeColor = isShot || isScreen ? '#f59e0b' : isPass ? '#60a5fa' : '#f8fafc';
+          const strokeColor =
+            isShot || isScreen || isFeint ? '#f59e0b' : isPass ? '#60a5fa' : '#f8fafc';
 
           return (
             <g key={path.id}>
@@ -99,19 +148,15 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
                 fill="none"
                 stroke={strokeColor}
                 strokeWidth={isShot ? 3.5 : 2.5}
-                strokeDasharray={isPass ? '6 4' : isDribble ? '3 3' : undefined}
+                strokeDasharray={
+                  isPass ? '6 4' : isDribble ? '3 3' : isFeint ? '2 4' : undefined
+                }
                 markerEnd={markerEnd}
               />
               {path.stepNumber !== undefined && (
                 <g transform={`translate(${midX}, ${midY - 8})`}>
                   <circle r="8" fill="#0f172a" stroke={strokeColor} strokeWidth="1.5" />
-                  <text
-                    textAnchor="middle"
-                    dy="3"
-                    fontSize="9"
-                    fontWeight="bold"
-                    fill="#ffffff"
-                  >
+                  <text textAnchor="middle" dy="3" fontSize="9" fontWeight="bold" fill="#ffffff">
                     {path.stepNumber}
                   </text>
                 </g>
@@ -120,7 +165,7 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
           );
         })}
 
-        {/* Nodes (Players, Queues, Cones, Waypoints) */}
+        {/* Nodes */}
         {data.nodes.map((node) => {
           const cx = node.x * width;
           const cy = node.y * height;
@@ -131,7 +176,7 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
                 key={node.id}
                 cx={cx}
                 cy={cy}
-                r="4"
+                r="4.5"
                 fill="#f8fafc"
                 stroke="#0f172a"
                 strokeWidth="1.5"
@@ -151,13 +196,52 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
             );
           }
 
+          if (node.type === 'EQUIPMENT_MAT') {
+            return (
+              <rect
+                key={node.id}
+                x={cx - 16}
+                y={cy - 10}
+                width="32"
+                height="20"
+                rx="3"
+                fill="#0284c7"
+                stroke="#e0f2fe"
+                strokeWidth="1.5"
+              />
+            );
+          }
+
+          if (node.type === 'EQUIPMENT_GOAL_TARGET') {
+            return (
+              <rect
+                key={node.id}
+                x={cx - 9}
+                y={cy - 6}
+                width="18"
+                height="12"
+                fill="none"
+                stroke="#facc15"
+                strokeWidth="2.5"
+              />
+            );
+          }
+
           const isDefense = node.type === 'DEFENSE_PLAYER';
           const isGK = node.type === 'GOALKEEPER';
-          const fill = node.color ?? (isDefense ? '#dc2626' : isGK ? '#10b981' : '#2563eb');
+          const isCoach = node.type === 'COACH_FEEDER';
+          const fill =
+            node.color ??
+            (isDefense
+              ? '#dc2626'
+              : isGK
+                ? '#10b981'
+                : isCoach
+                  ? '#8b5cf6'
+                  : '#2563eb');
 
           return (
             <g key={node.id} transform={`translate(${cx}, ${cy})`}>
-              {/* Queue indicator rings ((RL)) for training queues */}
               {node.isQueue && (
                 <>
                   <circle cx="-5" cy="5" r="14" fill="none" stroke={fill} strokeWidth="2" opacity="0.65" />
@@ -180,29 +264,14 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
                 <circle r="14" fill={fill} stroke="#ffffff" strokeWidth="2.2" />
               )}
 
-              <text
-                textAnchor="middle"
-                dy="4"
-                fontSize="10"
-                fontWeight="bold"
-                fill="#ffffff"
-              >
-                {node.label ?? ''}
+              <text textAnchor="middle" dy="4" fontSize="10" fontWeight="bold" fill="#ffffff">
+                {node.label ?? (isCoach ? 'T' : '')}
               </text>
 
-              {/* Ball possession indicator */}
               {node.hasBall && (
-                <circle
-                  cx="11"
-                  cy="-10"
-                  r="5"
-                  fill="#f59e0b"
-                  stroke="#0f172a"
-                  strokeWidth="1.5"
-                />
+                <circle cx="11" cy="-10" r="5" fill="#f59e0b" stroke="#0f172a" strokeWidth="1.5" />
               )}
 
-              {/* Queue count badge */}
               {node.isQueue && node.queueCount && (
                 <g transform="translate(-13, -12)">
                   <rect x="-8" y="-6" width="18" height="12" rx="4" fill="#0f172a" stroke="#93c5fd" strokeWidth="1" />

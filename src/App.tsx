@@ -2,26 +2,34 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import {
   BookOpen,
+  Bot,
   Building2,
   CalendarRange,
   CheckCircle2,
   Clock,
+  CopyPlus,
   Download,
+  Edit3,
+  ExternalLink as ExternalLinkIcon,
   GitBranch,
   Layers,
   LayoutDashboard,
   Package,
+  Plus,
   Search,
   Sparkles,
+  Trash2,
   Users,
   Wifi,
   WifiOff
 } from 'lucide-react';
-import { db } from './db/database';
+import { db, queueSyncOperation } from './db/database';
 import { seedInitialDataIfEmpty } from './db/seedData';
 import { ClubTeamManager } from './components/ClubTeamManager';
 import { TacticBoardPreview } from './components/TacticBoardPreview';
 import { PwaInstallGuideModal } from './components/PwaInstallGuideModal';
+import { ExerciseEditorModal } from './components/ExerciseEditorModal';
+import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
 import {
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
@@ -34,7 +42,7 @@ import {
   calculatePhaseEffectiveDuration,
   calculateSessionTotalDuration
 } from './utils/trainingCalculations';
-import type { VisibilityLevel } from './types/domain';
+import type { Exercise, VisibilityLevel } from './types/domain';
 
 type NavTab = 'DASHBOARD' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
 
@@ -44,10 +52,14 @@ export function App() {
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
 
-  // Exercise filter state
+  // Exercise filter & modal states (Milestone 2)
   const [searchQuery, setSearchQuery] = useState('');
   const [visibilityFilter, setVisibilityFilter] = useState<'ALL' | VisibilityLevel>('ALL');
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
+  const [editorModalOpen, setEditorModalOpen] = useState(false);
+  const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
+  const [variantParentExercise, setVariantParentExercise] = useState<Exercise | null>(null);
+  const [aiImporterOpen, setAiImporterOpen] = useState(false);
 
   useEffect(() => {
     void seedInitialDataIfEmpty();
@@ -119,6 +131,16 @@ export function App() {
     return filteredExercises[0] ?? null;
   }, [selectedExerciseId, exercisesById, filteredExercises]);
 
+  const relatedVariants = useMemo(() => {
+    if (!activeExercise) return [];
+    const rootId = activeExercise.parent_exercise_id ?? activeExercise.id;
+    return exercises.filter(
+      (ex) =>
+        ex.id !== activeExercise.id &&
+        (ex.id === rootId || ex.parent_exercise_id === rootId)
+    );
+  }, [activeExercise, exercises]);
+
   const activeTeamSessions = useMemo(
     () => (activeTeam ? sessions.filter((s) => s.team_id === activeTeam.id) : []),
     [sessions, activeTeam]
@@ -169,6 +191,35 @@ export function App() {
         : [],
     [planWeeks, activePlan]
   );
+
+  async function handleSaveExercise(exercise: Exercise) {
+    await db.exercises.put(exercise);
+    await queueSyncOperation('exercises', exercise.id, 'UPSERT', exercise);
+    setSelectedExerciseId(exercise.id);
+  }
+
+  async function handleImportAiExercises(importedList: Exercise[]) {
+    await db.exercises.bulkPut(importedList);
+    for (const ex of importedList) {
+      await queueSyncOperation('exercises', ex.id, 'UPSERT', ex);
+    }
+    if (importedList[0]) {
+      setSelectedExerciseId(importedList[0].id);
+    }
+  }
+
+  async function handleDeleteExercise(ex: Exercise) {
+    const updated: Exercise = {
+      ...ex,
+      is_deleted: true,
+      updated_at: new Date().toISOString()
+    };
+    await db.exercises.put(updated);
+    await queueSyncOperation('exercises', updated.id, 'DELETE', updated);
+    if (selectedExerciseId === ex.id) {
+      setSelectedExerciseId(null);
+    }
+  }
 
   if (!activeClub || !activeTeam) {
     return (
@@ -306,7 +357,7 @@ export function App() {
 
       {/* Hauptinhalt */}
       <div className="flex flex-1 flex-col pb-20 lg:pb-0">
-        {/* Topbar für Mobile / Tablet & Kontext-Header */}
+        {/* Topbar */}
         <header className="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/90 bg-slate-900/90 px-4 py-3 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <span className="rounded-lg bg-blue-600/20 px-2.5 py-1 text-xs font-bold text-blue-400">
@@ -332,11 +383,33 @@ export function App() {
 
             <button
               type="button"
+              onClick={() => {
+                setEditingExercise(null);
+                setVariantParentExercise(null);
+                setEditorModalOpen(true);
+              }}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-500"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Neue Übung
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setAiImporterOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-purple-500/40 bg-purple-950/50 px-3 py-1.5 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
+            >
+              <Bot className="h-3.5 w-3.5 text-purple-400" />
+              <span className="hidden sm:inline">KI-JSON Import</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setShowInstallModal(true)}
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700"
             >
               <Download className="h-3.5 w-3.5 text-blue-400" />
-              <span className="hidden sm:inline">App auf Gerät installieren</span>
+              <span className="hidden md:inline">Installieren</span>
             </button>
           </div>
         </header>
@@ -345,7 +418,6 @@ export function App() {
           {/* TAB 1: DASHBOARD & AKTUELLER TRAININGSTAG */}
           {activeTab === 'DASHBOARD' && (
             <div className="space-y-6">
-              {/* Wochen-Schwerpunkt Banner aus dem Mehrwochenplan */}
               {activePlan && activePlanWeeks[1] && (
                 <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 p-5">
                   <div className="flex flex-wrap items-center justify-between gap-4">
@@ -373,10 +445,8 @@ export function App() {
                 </div>
               )}
 
-              {/* Haupt-Grid: Trainingseinheit mit Parallelen Spuren + Material-Packliste */}
               {currentSession ? (
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-                  {/* Linke Spalte (8 Cols): Phasen & Parallele Spuren */}
                   <div className="space-y-4 lg:col-span-8">
                     <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
                       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -403,7 +473,6 @@ export function App() {
                         </div>
                       </div>
 
-                      {/* Phasen-Timeline */}
                       <div className="mt-5 space-y-4">
                         {currentSessionPhases.map((phase) => {
                           const blocksInPhase = currentSessionBlocks.filter(
@@ -506,7 +575,6 @@ export function App() {
                     </div>
                   </div>
 
-                  {/* Rechte Spalte (4 Cols): Automatische Material-Packliste & Team-Kurzinfo */}
                   <div className="space-y-6 lg:col-span-4">
                     <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5">
                       <div className="flex items-center gap-2 text-amber-400">
@@ -570,174 +638,319 @@ export function App() {
             </div>
           )}
 
-          {/* TAB 2: ÜBUNGSDATENBANK & TAKTIKBOARD-VORSCHAU */}
+          {/* TAB 2: ÜBUNGSDATENBANK, TAKTIKBOARD & KI-IMPORT */}
           {activeTab === 'EXERCISES' && (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-              {/* Linke Liste (5 Cols) */}
-              <div className="space-y-4 lg:col-span-5">
-                <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 space-y-3">
-                  <div className="relative">
-                    <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
-                    <input
-                      type="text"
-                      placeholder="Übung, Schwerpunkt oder Coaching-Punkt suchen..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {(['ALL', 'CLUB', 'TEAM'] as const).map((vis) => (
-                      <button
-                        key={vis}
-                        type="button"
-                        onClick={() => setVisibilityFilter(vis)}
-                        className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
-                          visibilityFilter === vis
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                        }`}
-                      >
-                        {vis === 'ALL'
-                          ? 'Alle Sichtbarkeiten'
-                          : vis === 'CLUB'
-                            ? 'Vereins-Pool (CLUB)'
-                            : 'Nur mein Team (TEAM)'}
-                      </button>
-                    ))}
-                  </div>
+            <div className="space-y-6">
+              {/* Top Action Bar in Exercise Catalog */}
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-900/90 p-4">
+                <div>
+                  <h2 className="text-lg font-bold text-white">
+                    Vereins- & Team-Übungsdatenbank ({filteredExercises.length})
+                  </h2>
+                  <p className="text-xs text-slate-400">
+                    Erstelle eigene Übungen mit Taktikboard, füge Web-Zeichnungen per Strg+V ein oder importiere per KI-JSON.
+                  </p>
                 </div>
 
-                <div className="space-y-2.5">
-                  {filteredExercises.map((ex) => {
-                    const isSelected = activeExercise?.id === ex.id;
-                    return (
-                      <button
-                        key={ex.id}
-                        type="button"
-                        onClick={() => setSelectedExerciseId(ex.id)}
-                        className={`w-full rounded-xl border p-4 text-left transition ${
-                          isSelected
-                            ? 'border-blue-500 bg-blue-950/30 shadow-md'
-                            : 'border-slate-800 bg-slate-900/80 hover:border-slate-700'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2 text-[11px]">
-                          <span
-                            className={`rounded px-2 py-0.5 font-semibold ${
-                              ex.visibility === 'CLUB'
-                                ? 'bg-emerald-950 text-emerald-300'
-                                : 'bg-amber-950 text-amber-300'
-                            }`}
-                          >
-                            {VISIBILITY_LABELS[ex.visibility]}
-                          </span>
-                          <span className="text-slate-400">
-                            {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp.
-                          </span>
-                        </div>
-
-                        <div className="mt-1.5 font-bold text-white text-sm">{ex.title}</div>
-
-                        {ex.parent_exercise_id && (
-                          <div className="mt-1 flex items-center gap-1 text-[11px] text-blue-400">
-                            <GitBranch className="h-3 w-3" />
-                            Variante einer Grundübung
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setAiImporterOpen(true)}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-purple-500/40 bg-purple-950/50 px-3.5 py-2 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
+                  >
+                    <Bot className="h-4 w-4 text-purple-400" />
+                    KI-JSON Import & Prompt-Generator
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditingExercise(null);
+                      setVariantParentExercise(null);
+                      setEditorModalOpen(true);
+                    }}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/20 hover:bg-blue-500"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Neue Übung & Taktik-Skizze
+                  </button>
                 </div>
               </div>
 
-              {/* Rechte Detailansicht inkl. Taktikboard (7 Cols) */}
-              <div className="lg:col-span-7">
-                {activeExercise ? (
-                  <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 space-y-5">
-                    <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-800 pb-4">
-                      <div>
-                        <div className="flex items-center gap-2 text-xs">
-                          <span className="rounded bg-blue-950 px-2.5 py-0.5 font-semibold text-blue-300">
-                            {COMPLEXITY_LABELS[activeExercise.categories.level]}
-                          </span>
-                          <span className="text-slate-400">
-                            Empfohlene Dauer: {activeExercise.default_duration_min} Min ·{' '}
-                            {activeExercise.min_players}–{activeExercise.max_players} Feldspieler +{' '}
-                            {activeExercise.goalkeepers} TW
-                          </span>
-                        </div>
-                        <h2 className="mt-1.5 text-xl font-bold text-white">
-                          {activeExercise.title}
-                        </h2>
-                      </div>
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+                {/* Linke Liste (5 Cols) */}
+                <div className="space-y-4 lg:col-span-5">
+                  <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 space-y-3">
+                    <div className="relative">
+                      <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="Übung, Schwerpunkt oder Coaching-Punkt suchen..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
+                      />
                     </div>
 
-                    {/* Vektor-Taktikboard-Vorschau */}
-                    <div>
-                      <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
-                        <span className="font-semibold text-slate-200 uppercase">
-                          Integriertes Handball-Taktikboard (Vektor-Skizze)
-                        </span>
-                        <span>
-                          Blau = Angriff · Rot = Abwehr · Grün = TW · ((RL)) = Anstellreihe
-                        </span>
-                      </div>
-                      <TacticBoardPreview data={activeExercise.tactic_board_data} />
-                    </div>
-
-                    {/* Tags & Kategorien */}
                     <div className="flex flex-wrap gap-1.5">
-                      {activeExercise.categories.phases.map((p) => (
-                        <span
-                          key={p}
-                          className="rounded-md bg-slate-800 px-2.5 py-1 text-xs text-slate-200"
+                      {(['ALL', 'CLUB', 'TEAM'] as const).map((vis) => (
+                        <button
+                          key={vis}
+                          type="button"
+                          onClick={() => setVisibilityFilter(vis)}
+                          className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
+                            visibilityFilter === vis
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                          }`}
                         >
-                          {PHASE_CATEGORY_LABELS[p]}
-                        </span>
+                          {vis === 'ALL'
+                            ? 'Alle Sichtbarkeiten'
+                            : vis === 'CLUB'
+                              ? 'Vereins-Pool (CLUB)'
+                              : 'Nur mein Team (TEAM)'}
+                        </button>
                       ))}
-                      {activeExercise.categories.focus.map((f) => (
-                        <span
-                          key={f}
-                          className="rounded-md bg-blue-950/80 border border-blue-700/40 px-2.5 py-1 text-xs text-blue-300"
-                        >
-                          #{FOCUS_TAG_LABELS[f]}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Strukturierte Beschreibung */}
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                        <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-                          Aufbau & Organisation
-                        </h4>
-                        <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
-                          {activeExercise.setup_description}
-                        </p>
-                      </div>
-
-                      <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                        <h4 className="text-xs font-bold tracking-wider text-amber-400 uppercase">
-                          Coaching-Punkte / Korrekturen
-                        </h4>
-                        <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
-                          {activeExercise.coaching_points}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                      <h4 className="text-xs font-bold tracking-wider text-blue-400 uppercase">
-                        Übungsablauf
-                      </h4>
-                      <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
-                        {activeExercise.flow_description}
-                      </p>
                     </div>
                   </div>
-                ) : null}
+
+                  <div className="space-y-2.5">
+                    {filteredExercises.map((ex) => {
+                      const isSelected = activeExercise?.id === ex.id;
+                      return (
+                        <button
+                          key={ex.id}
+                          type="button"
+                          onClick={() => setSelectedExerciseId(ex.id)}
+                          className={`w-full rounded-xl border p-4 text-left transition ${
+                            isSelected
+                              ? 'border-blue-500 bg-blue-950/30 shadow-md'
+                              : 'border-slate-800 bg-slate-900/80 hover:border-slate-700'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2 text-[11px]">
+                            <span
+                              className={`rounded px-2 py-0.5 font-semibold ${
+                                ex.visibility === 'CLUB'
+                                  ? 'bg-emerald-950 text-emerald-300'
+                                  : 'bg-amber-950 text-amber-300'
+                              }`}
+                            >
+                              {VISIBILITY_LABELS[ex.visibility]}
+                            </span>
+                            <span className="text-slate-400">
+                              {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp.
+                            </span>
+                          </div>
+
+                          <div className="mt-1.5 font-bold text-white text-sm">{ex.title}</div>
+
+                          {ex.parent_exercise_id && (
+                            <div className="mt-1 flex items-center gap-1 text-[11px] text-blue-400">
+                              <GitBranch className="h-3 w-3" />
+                              Variante einer Grundübung
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Rechte Detailansicht inkl. Taktikboard, Varianten & Aktionen (7 Cols) */}
+                <div className="lg:col-span-7">
+                  {activeExercise ? (
+                    <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 space-y-5">
+                      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-800 pb-4">
+                        <div>
+                          <div className="flex items-center gap-2 text-xs">
+                            <span className="rounded bg-blue-950 px-2.5 py-0.5 font-semibold text-blue-300">
+                              {COMPLEXITY_LABELS[activeExercise.categories.level]}
+                            </span>
+                            <span className="text-slate-400">
+                              Empfohlene Dauer: {activeExercise.default_duration_min} Min ·{' '}
+                              {activeExercise.min_players}–{activeExercise.max_players} Feldspieler +{' '}
+                              {activeExercise.goalkeepers} TW
+                            </span>
+                          </div>
+                          <h2 className="mt-1.5 text-xl font-bold text-white">
+                            {activeExercise.title}
+                          </h2>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingExercise(activeExercise);
+                              setVariantParentExercise(null);
+                              setEditorModalOpen(true);
+                            }}
+                            className="inline-flex items-center gap-1.5 rounded-xl bg-slate-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700"
+                          >
+                            <Edit3 className="h-3.5 w-3.5 text-blue-400" />
+                            Bearbeiten
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingExercise(null);
+                              setVariantParentExercise(activeExercise);
+                              setEditorModalOpen(true);
+                            }}
+                            className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-3 py-1.5 text-xs font-semibold text-blue-300 hover:bg-blue-900/50"
+                          >
+                            <CopyPlus className="h-3.5 w-3.5" />
+                            Als Variante duplizieren
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteExercise(activeExercise)}
+                            className="rounded-xl bg-rose-950/60 p-1.5 text-rose-300 hover:bg-rose-900"
+                            title="Übung löschen"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Verknüpfte Varianten / Basis-Übung */}
+                      {relatedVariants.length > 0 && (
+                        <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-3">
+                          <div className="mb-1.5 flex items-center gap-1.5 text-xs font-bold text-blue-300">
+                            <GitBranch className="h-3.5 w-3.5" />
+                            Verknüpfte Grundübung / Varianten ({relatedVariants.length}):
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {relatedVariants.map((rel) => (
+                              <button
+                                key={rel.id}
+                                type="button"
+                                onClick={() => setSelectedExerciseId(rel.id)}
+                                className="rounded-lg border border-blue-500/40 bg-slate-900 px-2.5 py-1 text-xs font-medium text-blue-200 hover:bg-blue-950"
+                              >
+                                ↳ {rel.title}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Vektor-Taktikboard & Eingefügte Web-Zeichnung (Strg+V) */}
+                      <div className="space-y-4">
+                        <div>
+                          <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
+                            <span className="font-semibold text-slate-200 uppercase">
+                              Handball-Taktikboard (Vektor-Skizze)
+                            </span>
+                            <span>
+                              Blau = Angriff · Rot = Abwehr · Grün = TW · ((RL)) = Anstellreihe
+                            </span>
+                          </div>
+                          <TacticBoardPreview data={activeExercise.tactic_board_data} />
+                        </div>
+
+                        {activeExercise.reference_image_data && (
+                          <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+                            <div className="mb-2 text-xs font-semibold text-slate-300 uppercase">
+                              Eingefügte Original-Zeichnung / Web-Referenz (Strg+V)
+                            </div>
+                            <img
+                              src={activeExercise.reference_image_data}
+                              alt={activeExercise.title}
+                              className="mx-auto max-h-72 rounded-lg object-contain"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Tags & Kategorien */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeExercise.categories.phases.map((p) => (
+                          <span
+                            key={p}
+                            className="rounded-md bg-slate-800 px-2.5 py-1 text-xs text-slate-200"
+                          >
+                            {PHASE_CATEGORY_LABELS[p]}
+                          </span>
+                        ))}
+                        {activeExercise.categories.focus.map((f) => (
+                          <span
+                            key={f}
+                            className="rounded-md bg-blue-950/80 border border-blue-700/40 px-2.5 py-1 text-xs text-blue-300"
+                          >
+                            #{FOCUS_TAG_LABELS[f]}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Strukturierte Beschreibung */}
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
+                          <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+                            Aufbau & Organisation
+                          </h4>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
+                            {activeExercise.setup_description}
+                          </p>
+                        </div>
+
+                        <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
+                          <h4 className="text-xs font-bold tracking-wider text-amber-400 uppercase">
+                            Coaching-Punkte / Korrekturen
+                          </h4>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
+                            {activeExercise.coaching_points}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
+                        <h4 className="text-xs font-bold tracking-wider text-blue-400 uppercase">
+                          Übungsablauf
+                        </h4>
+                        <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
+                          {activeExercise.flow_description}
+                        </p>
+                      </div>
+
+                      {/* Web-Referenz / Quellen-Link & Externe Links */}
+                      {(activeExercise.source_url || activeExercise.external_links.length > 0) && (
+                        <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4 space-y-2">
+                          <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+                            Web-Referenzen & Weiterführende Links
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {activeExercise.source_url && (
+                              <a
+                                href={activeExercise.source_url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-blue-400 hover:underline"
+                              >
+                                <ExternalLinkIcon className="h-3.5 w-3.5" />
+                                Original-Quelle öffnen
+                              </a>
+                            )}
+                            {activeExercise.external_links.map((lnk, idx) => (
+                              <a
+                                key={idx}
+                                href={lnk.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-blue-300 hover:underline"
+                              >
+                                <ExternalLinkIcon className="h-3.5 w-3.5" />
+                                {lnk.title}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           )}
@@ -851,6 +1064,24 @@ export function App() {
       <PwaInstallGuideModal
         isOpen={showInstallModal}
         onClose={() => setShowInstallModal(false)}
+      />
+
+      <ExerciseEditorModal
+        isOpen={editorModalOpen}
+        initialExercise={editingExercise}
+        parentExercise={variantParentExercise}
+        clubId={activeClub.id}
+        activeTeamId={activeTeam.id}
+        onClose={() => setEditorModalOpen(false)}
+        onSave={handleSaveExercise}
+      />
+
+      <AiExerciseImporterModal
+        isOpen={aiImporterOpen}
+        clubId={activeClub.id}
+        activeTeamId={activeTeam.id}
+        onClose={() => setAiImporterOpen(false)}
+        onImportExercises={handleImportAiExercises}
       />
     </div>
   );
