@@ -26,6 +26,7 @@ interface AuthClubModalProps {
   activeClub?: Club;
   currentMember?: ClubMember;
   needsClubOnboarding: boolean;
+  onNeedsOnboarding: () => void;
   onSyncCompleted: (message: string) => void;
 }
 
@@ -36,6 +37,7 @@ export function AuthClubModal({
   activeClub,
   currentMember,
   needsClubOnboarding,
+  onNeedsOnboarding,
   onSyncCompleted
 }: AuthClubModalProps) {
   const [authMode, setAuthMode] = useState<'LOGIN' | 'SIGNUP'>('LOGIN');
@@ -75,7 +77,11 @@ export function AuthClubModal({
           setErrorMsg(error.message);
         } else {
           const syncRes = await syncWithSupabaseCloud();
-          if (syncRes.mode === 'CLOUD') {
+          if (syncRes.errorMessage) {
+            setErrorMsg(`Sync-Fehler: ${syncRes.errorMessage}`);
+          } else if (syncRes.mode === 'NO_CLUB') {
+            onNeedsOnboarding();
+          } else if (syncRes.mode === 'CLOUD') {
             onSyncCompleted(
               `Angemeldet & synchronisiert (${syncRes.pulledCount} geladen, ${syncRes.pushedCount} gesendet).`
             );
@@ -83,14 +89,21 @@ export function AuthClubModal({
           }
         }
       } else {
+        const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL}`;
         const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
-          password
+          password,
+          options: {
+            emailRedirectTo: redirectTo
+          }
         });
         if (error) {
           setErrorMsg(error.message);
         } else if (data.session) {
-          await syncWithSupabaseCloud();
+          const syncRes = await syncWithSupabaseCloud();
+          if (syncRes.mode === 'NO_CLUB') {
+            onNeedsOnboarding();
+          }
           setInfoMsg('Konto erstellt! Bitte jetzt einem Verein beitreten oder einen neuen Verein anlegen.');
         } else {
           setInfoMsg(

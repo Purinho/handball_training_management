@@ -103,7 +103,11 @@ export function App() {
       setAuthUserId(user?.id ?? null);
       if (user) {
         void syncWithSupabaseCloud().then((res) => {
-          setNeedsClubOnboarding(res.mode === 'NO_CLUB');
+          const noClub = res.mode === 'NO_CLUB';
+          setNeedsClubOnboarding(noClub);
+          if (noClub) {
+            setShowAuthModal(true);
+          }
         });
       } else {
         setNeedsClubOnboarding(false);
@@ -1047,6 +1051,7 @@ export function App() {
         activeClub={activeClub}
         currentMember={members.find((m) => m.user_id && m.user_id === authUserId)}
         needsClubOnboarding={needsClubOnboarding}
+        onNeedsOnboarding={() => setNeedsClubOnboarding(true)}
         onSyncCompleted={(msg) => {
           setNeedsClubOnboarding(false);
           setSyncStatusBanner(msg);
