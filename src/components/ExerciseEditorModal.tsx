@@ -241,7 +241,7 @@ export function ExerciseEditorModal({
 
     const now = new Date().toISOString();
     const exerciseToSave: Exercise = {
-      id: initialExercise?.id ?? `ex-${crypto.randomUUID().slice(0, 8)}`,
+      id: initialExercise?.id ?? crypto.randomUUID(),
       club_id: clubId,
       parent_exercise_id:
         initialExercise?.parent_exercise_id ?? parentExercise?.id ?? undefined,

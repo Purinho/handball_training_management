@@ -18,6 +18,7 @@ import {
   Search,
   Sparkles,
   Trash2,
+  User,
   Wifi,
   WifiOff
 } from 'lucide-react';
@@ -26,6 +27,7 @@ import { seedInitialDataIfEmpty } from './db/seedData';
 import { ClubTeamManager } from './components/ClubTeamManager';
 import { TacticBoardPreview } from './components/TacticBoardPreview';
 import { PwaInstallGuideModal } from './components/PwaInstallGuideModal';
+import { AuthClubModal } from './components/AuthClubModal';
 import { ExerciseEditorModal } from './components/ExerciseEditorModal';
 import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
 import { TrainingSessionPlanner } from './components/TrainingSessionPlanner';
@@ -33,8 +35,9 @@ import { MultiWeekPlanManager } from './components/MultiWeekPlanManager';
 import { HallLiveMode } from './components/HallLiveMode';
 import {
   exportClubDatabaseSnapshot,
-  flushSyncOutboxToCloud
+  syncWithSupabaseCloud
 } from './services/cloudSyncService';
+import { getSupabaseClient, isSupabaseConfigured } from './services/supabaseClient';
 import {
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
@@ -51,6 +54,10 @@ export function App() {
   const [focusedSessionId, setFocusedSessionId] = useState<string | undefined>(undefined);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
+  const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
+  const [authUserEmail, setAuthUserEmail] = useState<string | null>(null);
+  const [authUserId, setAuthUserId] = useState<string | null>(null);
+  const [needsClubOnboarding, setNeedsClubOnboarding] = useState<boolean>(false);
   const [syncStatusBanner, setSyncStatusBanner] = useState<string | null>(null);
 
   // Exercise filter & modal states
@@ -63,13 +70,55 @@ export function App() {
   const [aiImporterOpen, setAiImporterOpen] = useState(false);
 
   useEffect(() => {
-    void seedInitialDataIfEmpty();
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      void seedInitialDataIfEmpty();
+      return;
+    }
+
+    async function initAuthAndSync() {
+      if (!supabase) return;
+      const { data } = await supabase.auth.getSession();
+      const user = data.session?.user ?? null;
+      setAuthUserEmail(user?.email ?? null);
+      setAuthUserId(user?.id ?? null);
+
+      if (user) {
+        const res = await syncWithSupabaseCloud();
+        setNeedsClubOnboarding(res.mode === 'NO_CLUB');
+        if (res.mode === 'NO_CLUB') {
+          await seedInitialDataIfEmpty();
+          setShowAuthModal(true);
+        }
+      } else {
+        await seedInitialDataIfEmpty();
+      }
+    }
+
+    void initAuthAndSync();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      const user = session?.user ?? null;
+      setAuthUserEmail(user?.email ?? null);
+      setAuthUserId(user?.id ?? null);
+      if (user) {
+        void syncWithSupabaseCloud().then((res) => {
+          setNeedsClubOnboarding(res.mode === 'NO_CLUB');
+        });
+      } else {
+        setNeedsClubOnboarding(false);
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
-      void flushSyncOutboxToCloud();
+      void syncWithSupabaseCloud();
     };
     const handleOffline = () => setIsOnline(false);
     window.addEventListener('online', handleOnline);
@@ -191,13 +240,28 @@ export function App() {
   }
 
   async function handleManualCloudSync() {
-    const res = await flushSyncOutboxToCloud();
+    if (isSupabaseConfigured() && !authUserEmail) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    const res = await syncWithSupabaseCloud();
     if (res.mode === 'LOCAL_ONLY') {
       setSyncStatusBanner(
         'Lokaler Offline-First-Modus aktiv (Alle Änderungen sind sicher in IndexedDB gespeichert).'
       );
+    } else if (res.mode === 'AUTH_REQUIRED') {
+      setShowAuthModal(true);
+    } else if (res.mode === 'NO_CLUB') {
+      setNeedsClubOnboarding(true);
+      setShowAuthModal(true);
+    } else if (res.errorMessage) {
+      setSyncStatusBanner(`Sync-Hinweis: ${res.errorMessage}`);
     } else {
-      setSyncStatusBanner(`${res.flushedCount} Änderung(en) mit Supabase Cloud synchronisiert!`);
+      setNeedsClubOnboarding(false);
+      setSyncStatusBanner(
+        `Cloud-Sync fertig: ${res.pushedCount} gesendet, ${res.pulledCount} aktualisiert.`
+      );
     }
     setTimeout(() => setSyncStatusBanner(null), 3500);
   }
@@ -358,7 +422,41 @@ export function App() {
             </button>
           </div>
 
+          <button
+            type="button"
+            onClick={() => setShowAuthModal(true)}
+            className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-xs font-semibold transition ${
+              authUserEmail
+                ? 'border-emerald-500/40 bg-emerald-950/30 text-emerald-200 hover:bg-emerald-900/40'
+                : 'border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700'
+            }`}
+          >
+            <span className="flex items-center gap-2 truncate">
+              <User className="h-3.5 w-3.5 shrink-0" />
+              <span className="truncate">
+                {authUserEmail ? authUserEmail : isSupabaseConfigured() ? 'Cloud-Login' : 'Konto / Sync'}
+              </span>
+            </span>
+            <span className="text-[10px] opacity-80">
+              {authUserEmail ? 'Aktiv' : 'Lokal'}
+            </span>
+          </button>
+
           <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setShowAuthModal(true)}
+              className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium ${
+                authUserEmail
+                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/50'
+                  : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+              }`}
+              title="Cloud-Sync & Anmeldung"
+            >
+              <User className="h-3.5 w-3.5 text-emerald-400" />
+              <span className="hidden md:inline">{authUserEmail ? 'Cloud' : 'Login'}</span>
+            </button>
+
             <button
               type="button"
               onClick={() => setShowInstallModal(true)}
@@ -435,6 +533,20 @@ export function App() {
             >
               <Bot className="h-3.5 w-3.5 text-purple-400" />
               <span className="hidden sm:inline">KI-JSON Import</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowAuthModal(true)}
+              className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium ${
+                authUserEmail
+                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/50'
+                  : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+              }`}
+              title="Cloud-Sync & Anmeldung"
+            >
+              <User className="h-3.5 w-3.5 text-emerald-400" />
+              <span className="hidden md:inline">{authUserEmail ? 'Cloud' : 'Login'}</span>
             </button>
 
             <button
@@ -926,6 +1038,20 @@ export function App() {
       <PwaInstallGuideModal
         isOpen={showInstallModal}
         onClose={() => setShowInstallModal(false)}
+      />
+
+      <AuthClubModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        userEmail={authUserEmail}
+        activeClub={activeClub}
+        currentMember={members.find((m) => m.user_id && m.user_id === authUserId)}
+        needsClubOnboarding={needsClubOnboarding}
+        onSyncCompleted={(msg) => {
+          setNeedsClubOnboarding(false);
+          setSyncStatusBanner(msg);
+          setTimeout(() => setSyncStatusBanner(null), 4000);
+        }}
       />
 
       <ExerciseEditorModal

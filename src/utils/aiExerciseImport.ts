@@ -210,7 +210,7 @@ export function parseAndNormalizeAiExerciseJson(
       });
 
     return {
-      id: `ex-ai-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       club_id: clubId,
       visibility,
       owner_team_id: visibility === 'TEAM' ? ownerTeamId : undefined,

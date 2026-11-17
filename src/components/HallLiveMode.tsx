@@ -258,7 +258,7 @@ export function HallLiveMode({
     const author = members.find((m) => m.id === liveNoteAuthorId) ?? members[0];
     const now = new Date().toISOString();
     const note: SessionNote = {
-      id: `note-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       training_session_id: currentSession.id,
       session_block_id: activeBlock.id,
       author_member_id: author?.id,

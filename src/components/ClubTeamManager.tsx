@@ -106,7 +106,7 @@ export function ClubTeamManager({
 
     const now = new Date().toISOString();
     const newTeam: Team = {
-      id: `team-${ crypto.randomUUID().slice(0, 8) }`,
+      id: crypto.randomUUID(),
       club_id: club.id,
       name: newTeamName.trim(),
       age_group: newTeamAgeGroup.trim() || 'Jugend / Aktive',
@@ -174,7 +174,7 @@ export function ClubTeamManager({
 
     const now = new Date().toISOString();
     const member: ClubMember = {
-      id: `member-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       club_id: club.id,
       club_role: newCoachRole,
       display_name: newCoachName.trim(),
@@ -188,7 +188,7 @@ export function ClubTeamManager({
 
     if (newCoachInitialTeamId) {
       const assignment: TeamMember = {
-        id: `tm-${crypto.randomUUID().slice(0, 8)}`,
+        id: crypto.randomUUID(),
         team_id: newCoachInitialTeamId,
         club_member_id: member.id,
         team_role: newCoachTeamRole
@@ -210,7 +210,7 @@ export function ClubTeamManager({
       await queueSyncOperation('team_members', existing.id, 'DELETE', { id: existing.id });
     } else {
       const assignment: TeamMember = {
-        id: `tm-${crypto.randomUUID().slice(0, 8)}`,
+        id: crypto.randomUUID(),
         team_id: teamId,
         club_member_id: memberId,
         team_role: 'HEAD_COACH'

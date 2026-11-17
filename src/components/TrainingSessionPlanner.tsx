@@ -333,7 +333,7 @@ export function TrainingSessionPlanner({
     if (!currentSession || !newPhaseName.trim()) return;
     const now = new Date().toISOString();
     const newPhase: SessionPhase = {
-      id: `phase-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       training_session_id: currentSession.id,
       name: newPhaseName.trim(),
       sort_order: currentPhases.length + 1,
@@ -370,7 +370,7 @@ export function TrainingSessionPlanner({
 
     const now = new Date().toISOString();
     const newBlock: SessionBlock = {
-      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       session_phase_id: targetPhase.id,
       exercise_id: exercise.id,
       time_slot_index: slotIndex,
@@ -398,7 +398,7 @@ export function TrainingSessionPlanner({
 
     const now = new Date().toISOString();
     const newBlock: SessionBlock = {
-      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       session_phase_id: targetPhase.id,
       quick_block_title: quickTitle.trim(),
       quick_block_description: quickDesc.trim() || undefined,
@@ -452,7 +452,7 @@ export function TrainingSessionPlanner({
     const author = members.find((m) => m.id === noteAuthorId) ?? members[0];
     const now = new Date().toISOString();
     const newNote: SessionNote = {
-      id: `note-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       training_session_id: currentSession.id,
       session_block_id: blockId,
       author_member_id: author?.id,

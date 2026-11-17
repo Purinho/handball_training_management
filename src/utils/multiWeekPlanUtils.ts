@@ -60,7 +60,7 @@ export function generateMultiWeekPlanBundle(params: {
   const clampedWeeks = Math.min(16, Math.max(1, params.weekCount));
   const endDate = addDaysIso(mondayStart, clampedWeeks * 7 - 1);
 
-  const planId = `mwp-${crypto.randomUUID().slice(0, 8)}`;
+  const planId = crypto.randomUUID();
   const plan: MultiWeekPlan = {
     id: planId,
     team_id: params.team.id,
@@ -79,7 +79,7 @@ export function generateMultiWeekPlanBundle(params: {
   for (let w = 0; w < clampedWeeks; w++) {
     const weekNumber = w + 1;
     const weekMonday = addDaysIso(mondayStart, w * 7);
-    const weekId = `pw-${crypto.randomUUID().slice(0, 8)}`;
+    const weekId = crypto.randomUUID();
 
     const week: PlanWeek = {
       id: weekId,

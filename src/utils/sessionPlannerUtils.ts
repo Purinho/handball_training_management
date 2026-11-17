@@ -29,7 +29,7 @@ export function buildSessionFromTemplate(params: {
   defaultCoachMemberId?: string;
 }): SessionBundle {
   const now = new Date().toISOString();
-  const sessionId = `session-${crypto.randomUUID().slice(0, 8)}`;
+  const sessionId = crypto.randomUUID();
   const plannedMin = calculateMinutesBetweenTimes(params.startTime, params.endTime);
 
   const session: TrainingSession = {
@@ -61,7 +61,7 @@ export function buildSessionFromTemplate(params: {
   const blocks: SessionBlock[] = [];
 
   templatePhases.forEach((tp, index) => {
-    const phaseId = `phase-${crypto.randomUUID().slice(0, 8)}`;
+    const phaseId = crypto.randomUUID();
     phases.push({
       id: phaseId,
       training_session_id: sessionId,
@@ -73,7 +73,7 @@ export function buildSessionFromTemplate(params: {
 
     if (tp.default_exercise_id) {
       blocks.push({
-        id: `block-${crypto.randomUUID().slice(0, 8)}`,
+        id: crypto.randomUUID(),
         session_phase_id: phaseId,
         exercise_id: tp.default_exercise_id,
         time_slot_index: 0,
@@ -100,7 +100,7 @@ export function cloneTrainingSessionBundle(params: {
   newTitle?: string;
 }): SessionBundle {
   const now = new Date().toISOString();
-  const newSessionId = `session-${crypto.randomUUID().slice(0, 8)}`;
+  const newSessionId = crypto.randomUUID();
 
   const session: TrainingSession = {
     ...params.sourceSession,
@@ -116,7 +116,7 @@ export function cloneTrainingSessionBundle(params: {
     .slice()
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((p) => {
-      const nextPhaseId = `phase-${crypto.randomUUID().slice(0, 8)}`;
+      const nextPhaseId = crypto.randomUUID();
       phaseIdMap.set(p.id, nextPhaseId);
       return {
         ...p,
@@ -130,7 +130,7 @@ export function cloneTrainingSessionBundle(params: {
     .filter((b) => phaseIdMap.has(b.session_phase_id))
     .map((b) => ({
       ...b,
-      id: `block-${crypto.randomUUID().slice(0, 8)}`,
+      id: crypto.randomUUID(),
       session_phase_id: phaseIdMap.get(b.session_phase_id)!,
       updated_at: now
     }));
@@ -149,7 +149,7 @@ export function convertQuickBlockToCatalogExercise(params: {
   focusTags?: HandballFocusTag[];
 }): { exercise: Exercise; updatedBlock: SessionBlock } {
   const now = new Date().toISOString();
-  const exerciseId = `ex-${crypto.randomUUID().slice(0, 8)}`;
+  const exerciseId = crypto.randomUUID();
 
   const exercise: Exercise = {
     id: exerciseId,
@@ -207,7 +207,7 @@ export function buildTemplateFromSession(params: {
   const sortedPhases = params.phases.slice().sort((a, b) => a.sort_order - b.sort_order);
 
   return {
-    id: `tpl-${crypto.randomUUID().slice(0, 8)}`,
+    id: crypto.randomUUID(),
     club_id: params.clubId,
     title: params.title.trim() || `Vorlage: ${params.session.title}`,
     description: params.description.trim() || 'Aus bestehender Trainingseinheit gespeichert',
