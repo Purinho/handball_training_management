@@ -68,6 +68,7 @@ export function App() {
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [variantParentExercise, setVariantParentExercise] = useState<Exercise | null>(null);
   const [aiImporterOpen, setAiImporterOpen] = useState(false);
+  const [confirmDeleteExerciseId, setConfirmDeleteExerciseId] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = getSupabaseClient();
@@ -281,10 +282,30 @@ export function App() {
     URL.revokeObjectURL(url);
   }
 
-  if (!activeClub || !activeTeam) {
+  if (!activeClub) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-300">
         Initialisiere lokale Offline-Datenbank...
+      </div>
+    );
+  }
+
+  if (!activeTeam) {
+    return (
+      <div className="min-h-screen bg-slate-950 p-6 text-slate-100">
+        <div className="mx-auto max-w-6xl space-y-6">
+          <div className="rounded-2xl border border-amber-500/40 bg-amber-950/30 p-4 text-sm text-amber-200">
+            Aktuell ist keine Mannschaft im Verein vorhanden. Bitte lege unten eine neue Mannschaft an.
+          </div>
+          <ClubTeamManager
+            club={activeClub}
+            teams={teams}
+            members={members}
+            teamMembers={teamMembers}
+            activeTeamId=""
+            onSelectTeam={(id) => setActiveTeamId(id)}
+          />
+        </div>
       </div>
     );
   }
@@ -805,14 +826,37 @@ export function App() {
                             Als Variante duplizieren
                           </button>
 
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteExercise(activeExercise)}
-                            className="rounded-xl bg-rose-950/60 p-1.5 text-rose-300 hover:bg-rose-900"
-                            title="Übung löschen"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                          {confirmDeleteExerciseId === activeExercise.id ? (
+                            <div className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/50 bg-rose-950/70 px-2.5 py-1 text-xs">
+                              <span className="font-semibold text-rose-200">Löschen?</span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  void handleDeleteExercise(activeExercise);
+                                  setConfirmDeleteExerciseId(null);
+                                }}
+                                className="rounded bg-rose-600 px-2 py-0.5 font-bold text-white hover:bg-rose-500"
+                              >
+                                Ja
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setConfirmDeleteExerciseId(null)}
+                                className="rounded bg-slate-800 px-2 py-0.5 text-slate-300 hover:bg-slate-700"
+                              >
+                                Nein
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setConfirmDeleteExerciseId(activeExercise.id)}
+                              className="rounded-xl bg-rose-950/60 p-1.5 text-rose-300 hover:bg-rose-900"
+                              title="Übung löschen"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          )}
                         </div>
                       </div>
 

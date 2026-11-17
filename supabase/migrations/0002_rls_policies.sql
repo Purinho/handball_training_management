@@ -101,9 +101,9 @@ set search_path = public
 as $$
 declare
   v_user_id uuid := auth.uid();
-  v_club_id uuid := uuid_generate_v4();
-  v_member_id uuid := uuid_generate_v4();
-  v_team_id uuid := uuid_generate_v4();
+  v_club_id uuid := gen_random_uuid();
+  v_member_id uuid := gen_random_uuid();
+  v_team_id uuid := gen_random_uuid();
   v_prefix text;
   v_invite_code text;
 begin
@@ -203,7 +203,7 @@ begin
   end if;
 
   -- Otherwise create a new COACH member
-  v_member_id := uuid_generate_v4();
+  v_member_id := gen_random_uuid();
   insert into public.club_members (id, club_id, user_id, club_role, display_name, email)
   values (
     v_member_id,

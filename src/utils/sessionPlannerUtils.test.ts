@@ -2,8 +2,12 @@ import { describe, expect, it } from 'vitest';
 import {
   buildSessionFromTemplate,
   cloneTrainingSessionBundle,
-  convertQuickBlockToCatalogExercise
+  convertQuickBlockToCatalogExercise,
+  moveBlockInPhase,
+  movePhaseInSession,
+  toggleBlockParallelWithPrevious
 } from './sessionPlannerUtils';
+import type { SessionBlock, SessionPhase } from '../types/domain';
 
 describe('sessionPlannerUtils', () => {
   it('creates a session bundle from a template with default phases and exercise blocks', () => {
@@ -90,5 +94,65 @@ describe('sessionPlannerUtils', () => {
     expect(exercise.default_duration_min).toBe(20);
     expect(updatedBlock.exercise_id).toBe(exercise.id);
     expect(updatedBlock.quick_block_title).toBeUndefined();
+  });
+
+  it('moves sequential and parallel blocks up/down within a phase', () => {
+    const now = '2026-11-17T10:00:00.000Z';
+    const blocks: SessionBlock[] = [
+      { id: 'b1', session_phase_id: 'p1', time_slot_index: 0, track_label: 'Alle', custom_duration_min: 10, updated_at: now },
+      { id: 'b2', session_phase_id: 'p1', time_slot_index: 2, track_label: 'Spur A', custom_duration_min: 15, updated_at: now },
+      { id: 'b3', session_phase_id: 'p1', time_slot_index: 2, track_label: 'Spur B', custom_duration_min: 15, updated_at: now },
+      { id: 'b4', session_phase_id: 'p1', time_slot_index: 5, track_label: 'Alle', custom_duration_min: 10, updated_at: now }
+    ];
+
+    // Move b1 DOWN: swaps slot 0 with slot [b2, b3]
+    const movedDown = moveBlockInPhase(blocks, 'b1', 'DOWN');
+    const slotByIdDown = new Map(movedDown.map((b) => [b.id, b.time_slot_index]));
+    expect(slotByIdDown.get('b2')).toBe(0);
+    expect(slotByIdDown.get('b3')).toBe(0);
+    expect(slotByIdDown.get('b1')).toBe(1);
+    expect(slotByIdDown.get('b4')).toBe(2);
+
+    // Move b2 UP from parallel slot: splits out before b3
+    const splitUp = moveBlockInPhase(blocks, 'b2', 'UP');
+    const slotByIdSplit = new Map(splitUp.map((b) => [b.id, b.time_slot_index]));
+    expect(slotByIdSplit.get('b2')).toBe(1);
+    expect(slotByIdSplit.get('b4')).toBe(3);
+
+    // Move b1 UP when already first: no changes
+    expect(moveBlockInPhase(blocks, 'b1', 'UP')).toHaveLength(0);
+  });
+
+  it('toggles a block between parallel with previous and its own sequential slot', () => {
+    const now = '2026-11-17T10:00:00.000Z';
+    const blocks: SessionBlock[] = [
+      { id: 'b1', session_phase_id: 'p1', time_slot_index: 0, track_label: 'Alle', custom_duration_min: 10, updated_at: now },
+      { id: 'b2', session_phase_id: 'p1', time_slot_index: 1, track_label: 'Alle', custom_duration_min: 15, updated_at: now }
+    ];
+
+    const merged = toggleBlockParallelWithPrevious(blocks, 'b2');
+    expect(merged).toHaveLength(1);
+    expect(merged[0].id).toBe('b2');
+    expect(merged[0].time_slot_index).toBe(0);
+
+    const updatedBlocks = blocks.map((b) => (b.id === 'b2' ? { ...b, time_slot_index: 0 } : b));
+    const split = toggleBlockParallelWithPrevious(updatedBlocks, 'b2');
+    expect(split).toHaveLength(1);
+    expect(split[0].id).toBe('b2');
+    expect(split[0].time_slot_index).toBe(1);
+  });
+
+  it('reorders phases within a session cleanly', () => {
+    const now = '2026-11-17T10:00:00.000Z';
+    const phases: SessionPhase[] = [
+      { id: 'p1', training_session_id: 's1', name: 'Phase 1', sort_order: 1, target_duration_min: 15, updated_at: now },
+      { id: 'p2', training_session_id: 's1', name: 'Phase 2', sort_order: 2, target_duration_min: 20, updated_at: now },
+      { id: 'p3', training_session_id: 's1', name: 'Phase 3', sort_order: 3, target_duration_min: 15, updated_at: now }
+    ];
+
+    const moved = movePhaseInSession(phases, 'p2', 'UP');
+    expect(moved).toHaveLength(2);
+    expect(moved.find((p) => p.id === 'p2')?.sort_order).toBe(1);
+    expect(moved.find((p) => p.id === 'p1')?.sort_order).toBe(2);
   });
 });

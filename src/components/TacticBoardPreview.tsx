@@ -1,4 +1,5 @@
 import type { TacticBoardData } from '../types/domain';
+import { TacticPlayerGlyph } from './TacticPlayerGlyph';
 
 interface TacticBoardPreviewProps {
   data?: TacticBoardData;
@@ -227,59 +228,9 @@ export function TacticBoardPreview({ data, className = '' }: TacticBoardPreviewP
             );
           }
 
-          const isDefense = node.type === 'DEFENSE_PLAYER';
-          const isGK = node.type === 'GOALKEEPER';
-          const isCoach = node.type === 'COACH_FEEDER';
-          const fill =
-            node.color ??
-            (isDefense
-              ? '#dc2626'
-              : isGK
-                ? '#10b981'
-                : isCoach
-                  ? '#8b5cf6'
-                  : '#2563eb');
-
           return (
             <g key={node.id} transform={`translate(${cx}, ${cy})`}>
-              {node.isQueue && (
-                <>
-                  <circle cx="-5" cy="5" r="14" fill="none" stroke={fill} strokeWidth="2" opacity="0.65" />
-                  <circle cx="-2.5" cy="2.5" r="14" fill="none" stroke="#ffffff" strokeWidth="1.5" opacity="0.8" />
-                </>
-              )}
-
-              {isDefense ? (
-                <rect
-                  x="-13"
-                  y="-11"
-                  width="26"
-                  height="22"
-                  rx="6"
-                  fill={fill}
-                  stroke="#ffffff"
-                  strokeWidth="2"
-                />
-              ) : (
-                <circle r="14" fill={fill} stroke="#ffffff" strokeWidth="2.2" />
-              )}
-
-              <text textAnchor="middle" dy="4" fontSize="10" fontWeight="bold" fill="#ffffff">
-                {node.label ?? (isCoach ? 'T' : '')}
-              </text>
-
-              {node.hasBall && (
-                <circle cx="11" cy="-10" r="5" fill="#f59e0b" stroke="#0f172a" strokeWidth="1.5" />
-              )}
-
-              {node.isQueue && node.queueCount && (
-                <g transform="translate(-13, -12)">
-                  <rect x="-8" y="-6" width="18" height="12" rx="4" fill="#0f172a" stroke="#93c5fd" strokeWidth="1" />
-                  <text textAnchor="middle" x="1" dy="3" fontSize="8" fontWeight="bold" fill="#93c5fd">
-                    x{node.queueCount}
-                  </text>
-                </g>
-              )}
+              <TacticPlayerGlyph node={node} scale={0.85} />
             </g>
           );
         })}

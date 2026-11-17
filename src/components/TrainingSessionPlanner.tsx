@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import {
   AlertTriangle,
+  ArrowDown,
+  ArrowUp,
   BookmarkPlus,
   BookOpen,
   CheckCircle2,
@@ -42,7 +44,10 @@ import {
   buildSessionFromTemplate,
   buildTemplateFromSession,
   cloneTrainingSessionBundle,
-  convertQuickBlockToCatalogExercise
+  convertQuickBlockToCatalogExercise,
+  moveBlockInPhase,
+  movePhaseInSession,
+  toggleBlockParallelWithPrevious
 } from '../utils/sessionPlannerUtils';
 import { TacticBoardPreview } from './TacticBoardPreview';
 
@@ -176,8 +181,9 @@ export function TrainingSessionPlanner({
   const [noteContent, setNoteContent] = useState('');
   const [noteAuthorId, setNoteAuthorId] = useState<string>(members[0]?.id ?? '');
 
-  // Template save feedback
+  // Template save feedback & delete confirmation
   const [savedTemplateBanner, setSavedTemplateBanner] = useState<string | null>(null);
+  const [confirmDeleteSessionId, setConfirmDeleteSessionId] = useState<string | null>(null);
 
   const totalSessionDuration = useMemo(
     () => calculateSessionTotalDuration(currentPhases, currentBlocks),
@@ -348,13 +354,110 @@ export function TrainingSessionPlanner({
 
   async function handleDeletePhase(phaseId: string) {
     const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phaseId);
-    await db.transaction('rw', [db.sessionPhases, db.sessionBlocks], async () => {
+    await db.transaction('rw', [db.sessionPhases, db.sessionBlocks, db.syncOutbox], async () => {
       await db.sessionPhases.delete(phaseId);
+      await queueSyncOperation('session_phases', phaseId, 'DELETE', { id: phaseId });
       for (const b of phaseBlocks) {
         await db.sessionBlocks.delete(b.id);
+        await queueSyncOperation('session_blocks', b.id, 'DELETE', { id: b.id });
       }
     });
-    await queueSyncOperation('session_phases', phaseId, 'DELETE', { id: phaseId });
+  }
+
+  async function handleMovePhase(phaseId: string, direction: 'UP' | 'DOWN') {
+    const changed = movePhaseInSession(currentPhases, phaseId, direction);
+    if (changed.length === 0) return;
+    await db.transaction('rw', [db.sessionPhases, db.syncOutbox], async () => {
+      await db.sessionPhases.bulkPut(changed);
+      for (const p of changed) {
+        await queueSyncOperation('session_phases', p.id, 'UPSERT', p);
+      }
+    });
+  }
+
+  async function handleRenamePhase(phase: SessionPhase, name: string) {
+    const updated: SessionPhase = {
+      ...phase,
+      name,
+      updated_at: new Date().toISOString()
+    };
+    await db.sessionPhases.put(updated);
+    await queueSyncOperation('session_phases', updated.id, 'UPSERT', updated);
+  }
+
+  async function handleMoveBlockInPhase(
+    phaseId: string,
+    blockId: string,
+    direction: 'UP' | 'DOWN'
+  ) {
+    const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phaseId);
+    const changed = moveBlockInPhase(phaseBlocks, blockId, direction);
+    if (changed.length === 0) return;
+    await db.transaction('rw', [db.sessionBlocks, db.syncOutbox], async () => {
+      await db.sessionBlocks.bulkPut(changed);
+      for (const b of changed) {
+        await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+      }
+    });
+  }
+
+  async function handleToggleBlockParallel(phaseId: string, blockId: string) {
+    const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phaseId);
+    const changed = toggleBlockParallelWithPrevious(phaseBlocks, blockId);
+    if (changed.length === 0) return;
+    await db.transaction('rw', [db.sessionBlocks, db.syncOutbox], async () => {
+      await db.sessionBlocks.bulkPut(changed);
+      for (const b of changed) {
+        await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+      }
+    });
+  }
+
+  async function handleMoveBlockToPhase(block: SessionBlock, targetPhaseId: string) {
+    if (block.session_phase_id === targetPhaseId) return;
+    const targetBlocks = currentBlocks.filter((b) => b.session_phase_id === targetPhaseId);
+    const nextSlot =
+      targetBlocks.length > 0
+        ? Math.max(...targetBlocks.map((b) => b.time_slot_index)) + 1
+        : 0;
+    const updated: SessionBlock = {
+      ...block,
+      session_phase_id: targetPhaseId,
+      time_slot_index: nextSlot,
+      updated_at: new Date().toISOString()
+    };
+    await db.sessionBlocks.put(updated);
+    await queueSyncOperation('session_blocks', updated.id, 'UPSERT', updated);
+    setActivePhaseId(targetPhaseId);
+  }
+
+  async function handleDeleteSession(sessionId: string) {
+    const sessionPhases = phases.filter((p) => p.training_session_id === sessionId);
+    const phaseIds = new Set(sessionPhases.map((p) => p.id));
+    const sessionBlocks = blocks.filter((b) => phaseIds.has(b.session_phase_id));
+    const sessionNotes = notes.filter((n) => n.training_session_id === sessionId);
+
+    await db.transaction(
+      'rw',
+      [db.trainingSessions, db.sessionPhases, db.sessionBlocks, db.sessionNotes, db.syncOutbox],
+      async () => {
+        await db.trainingSessions.delete(sessionId);
+        await queueSyncOperation('training_sessions', sessionId, 'DELETE', { id: sessionId });
+        for (const p of sessionPhases) {
+          await db.sessionPhases.delete(p.id);
+        }
+        for (const b of sessionBlocks) {
+          await db.sessionBlocks.delete(b.id);
+        }
+        for (const n of sessionNotes) {
+          await db.sessionNotes.delete(n.id);
+        }
+      }
+    );
+
+    setConfirmDeleteSessionId(null);
+    const remaining = teamSessions.filter((s) => s.id !== sessionId);
+    setSelectedSessionId(remaining[0]?.id ?? '');
   }
 
   async function handleAddExerciseToPhase(exercise: Exercise, asParallelTrack: boolean) {
@@ -533,6 +636,35 @@ export function TrainingSessionPlanner({
                   <BookmarkPlus className="h-3.5 w-3.5 text-emerald-400" />
                   Als Vorlage speichern
                 </button>
+
+                {confirmDeleteSessionId === currentSession.id ? (
+                  <div className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/50 bg-rose-950/60 px-2.5 py-1.5 text-xs">
+                    <span className="font-semibold text-rose-200">Einheit löschen?</span>
+                    <button
+                      type="button"
+                      onClick={() => void handleDeleteSession(currentSession.id)}
+                      className="rounded-lg bg-rose-600 px-2 py-0.5 font-bold text-white hover:bg-rose-500"
+                    >
+                      Ja
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setConfirmDeleteSessionId(null)}
+                      className="rounded-lg bg-slate-800 px-2 py-0.5 text-slate-300 hover:bg-slate-700"
+                    >
+                      Nein
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setConfirmDeleteSessionId(currentSession.id)}
+                    className="inline-flex items-center gap-1 rounded-xl border border-slate-700 bg-slate-800 px-2.5 py-2 text-xs font-semibold text-rose-300 hover:bg-rose-950/50 hover:border-rose-700/50"
+                    title="Aktuelle Trainingseinheit löschen"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
               </>
             )}
           </div>
@@ -737,7 +869,7 @@ export function TrainingSessionPlanner({
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* LEFT COLUMN (7 Cols): Phases, Parallel Tracks & Quick-Block Input */}
           <div className="space-y-4 lg:col-span-7">
-            {currentPhases.map((phase) => {
+            {currentPhases.map((phase, phaseIndex) => {
               const isTargetPhase = targetPhase?.id === phase.id;
               const phaseBlocks = currentBlocks.filter((b) => b.session_phase_id === phase.id);
               const effectiveMin = calculatePhaseEffectiveDuration(phase, phaseBlocks);
@@ -771,22 +903,39 @@ export function TrainingSessionPlanner({
                       <input
                         type="text"
                         value={phase.name}
-                        onChange={(e) => {
-                          const updated: SessionPhase = {
-                            ...phase,
-                            name: e.target.value,
-                            updated_at: new Date().toISOString()
-                          };
-                          void db.sessionPhases.put(updated);
-                        }}
+                        onChange={(e) => void handleRenamePhase(phase, e.target.value)}
                         className="bg-transparent font-bold text-white text-sm focus:border-b focus:border-blue-400 focus:outline-none"
                       />
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <span className="rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-blue-300">
                         Effektiv: {effectiveMin} Min
                       </span>
+                      <button
+                        type="button"
+                        disabled={phaseIndex === 0}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          void handleMovePhase(phase.id, 'UP');
+                        }}
+                        className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                        title="Phase nach oben verschieben"
+                      >
+                        <ArrowUp className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        disabled={phaseIndex === currentPhases.length - 1}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          void handleMovePhase(phase.id, 'DOWN');
+                        }}
+                        className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                        title="Phase nach unten verschieben"
+                      >
+                        <ArrowDown className="h-3.5 w-3.5" />
+                      </button>
                       <button
                         type="button"
                         onClick={(e) => {
@@ -808,7 +957,7 @@ export function TrainingSessionPlanner({
                         Noch keine Übung in dieser Phase – wähle rechts im Katalog eine Übung oder tippe unten einen Quick-Block ein.
                       </div>
                     ) : (
-                      sortedSlots.map(([slotIdx, slotBlocks]) => {
+                      sortedSlots.map(([slotIdx, slotBlocks], slotOrderIndex) => {
                         const isParallelSlot = slotBlocks.length > 1;
                         return (
                           <div key={slotIdx} className="space-y-1.5">
@@ -883,6 +1032,71 @@ export function TrainingSessionPlanner({
                                             </option>
                                           ))}
                                         </select>
+
+                                        {currentPhases.length > 1 && (
+                                          <select
+                                            value={phase.id}
+                                            onChange={(e) =>
+                                              void handleMoveBlockToPhase(block, e.target.value)
+                                            }
+                                            className="max-w-[110px] rounded border border-slate-700 bg-slate-900 px-1.5 py-0.5 text-[11px] text-slate-300"
+                                            title="Übung in eine andere Phase verschieben"
+                                          >
+                                            {currentPhases.map((p) => (
+                                              <option key={p.id} value={p.id}>
+                                                {p.id === phase.id ? `Phase: ${p.name}` : `→ ${p.name}`}
+                                              </option>
+                                            ))}
+                                          </select>
+                                        )}
+
+                                        {(isParallelSlot || slotOrderIndex > 0) && (
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              void handleToggleBlockParallel(phase.id, block.id)
+                                            }
+                                            className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold transition ${
+                                              isParallelSlot
+                                                ? 'border-amber-500/40 bg-amber-950/50 text-amber-300 hover:bg-amber-900/50'
+                                                : 'border-slate-700 bg-slate-900 text-slate-300 hover:bg-slate-800'
+                                            }`}
+                                            title={
+                                              isParallelSlot
+                                                ? 'Aus Parallel-Block als eigene Übung danach lösen'
+                                                : 'Parallel zum vorherigen Block ausführen'
+                                            }
+                                          >
+                                            {isParallelSlot ? 'Trennen' : 'Parallel'}
+                                          </button>
+                                        )}
+
+                                        <button
+                                          type="button"
+                                          disabled={!isParallelSlot && slotOrderIndex === 0}
+                                          onClick={() =>
+                                            void handleMoveBlockInPhase(phase.id, block.id, 'UP')
+                                          }
+                                          className="rounded p-0.5 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                                          title="Innerhalb der Phase nach oben verschieben"
+                                        >
+                                          <ArrowUp className="h-3.5 w-3.5" />
+                                        </button>
+
+                                        <button
+                                          type="button"
+                                          disabled={
+                                            !isParallelSlot &&
+                                            slotOrderIndex === sortedSlots.length - 1
+                                          }
+                                          onClick={() =>
+                                            void handleMoveBlockInPhase(phase.id, block.id, 'DOWN')
+                                          }
+                                          className="rounded p-0.5 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                                          title="Innerhalb der Phase nach unten verschieben"
+                                        >
+                                          <ArrowDown className="h-3.5 w-3.5" />
+                                        </button>
 
                                         <button
                                           type="button"

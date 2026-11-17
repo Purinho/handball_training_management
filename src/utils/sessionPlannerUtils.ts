@@ -224,3 +224,141 @@ export function buildTemplateFromSession(params: {
     updated_at: now
   };
 }
+
+function groupPhaseBlocksBySlot(phaseBlocks: SessionBlock[]): SessionBlock[][] {
+  const slotMap = new Map<number, SessionBlock[]>();
+  for (const b of phaseBlocks) {
+    const existing = slotMap.get(b.time_slot_index) ?? [];
+    slotMap.set(b.time_slot_index, [...existing, b]);
+  }
+  return Array.from(slotMap.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([, list]) => list);
+}
+
+function collectChangedBlocks(
+  original: SessionBlock[],
+  reorderedSlots: SessionBlock[][]
+): SessionBlock[] {
+  const now = new Date().toISOString();
+  const originalSlotById = new Map(original.map((b) => [b.id, b.time_slot_index]));
+  const changed: SessionBlock[] = [];
+
+  reorderedSlots.forEach((slotBlocks, newSlotIdx) => {
+    for (const block of slotBlocks) {
+      if (originalSlotById.get(block.id) !== newSlotIdx) {
+        changed.push({
+          ...block,
+          time_slot_index: newSlotIdx,
+          updated_at: now
+        });
+      }
+    }
+  });
+
+  return changed;
+}
+
+/**
+ * Moves a block up or down within a phase's time-slot sequence.
+ * Single-block slots swap with the adjacent slot; parallel-track blocks split out before/after.
+ * Returns only the SessionBlock records whose time_slot_index changed.
+ */
+export function moveBlockInPhase(
+  phaseBlocks: SessionBlock[],
+  blockId: string,
+  direction: 'UP' | 'DOWN'
+): SessionBlock[] {
+  const slots = groupPhaseBlocksBySlot(phaseBlocks);
+  const slotIdx = slots.findIndex((group) => group.some((b) => b.id === blockId));
+  if (slotIdx === -1) return [];
+
+  const currentGroup = slots[slotIdx];
+  const nextSlots = slots.map((g) => [...g]);
+
+  if (currentGroup.length === 1) {
+    const targetIdx = direction === 'UP' ? slotIdx - 1 : slotIdx + 1;
+    if (targetIdx < 0 || targetIdx >= nextSlots.length) return [];
+    const temp = nextSlots[slotIdx];
+    nextSlots[slotIdx] = nextSlots[targetIdx];
+    nextSlots[targetIdx] = temp;
+  } else {
+    const targetBlock = currentGroup.find((b) => b.id === blockId);
+    if (!targetBlock) return [];
+    nextSlots[slotIdx] = currentGroup.filter((b) => b.id !== blockId);
+    const insertAt = direction === 'UP' ? slotIdx : slotIdx + 1;
+    nextSlots.splice(insertAt, 0, [targetBlock]);
+  }
+
+  return collectChangedBlocks(phaseBlocks, nextSlots);
+}
+
+/**
+ * Merges a sequential block into the previous time slot (parallel track) or
+ * splits a parallel block out into its own sequential slot.
+ */
+export function toggleBlockParallelWithPrevious(
+  phaseBlocks: SessionBlock[],
+  blockId: string
+): SessionBlock[] {
+  const slots = groupPhaseBlocksBySlot(phaseBlocks);
+  const slotIdx = slots.findIndex((group) => group.some((b) => b.id === blockId));
+  if (slotIdx === -1) return [];
+
+  const currentGroup = slots[slotIdx];
+  const targetBlock = currentGroup.find((b) => b.id === blockId);
+  if (!targetBlock) return [];
+
+  const nextSlots = slots.map((g) => [...g]);
+
+  if (currentGroup.length > 1) {
+    // Split out of parallel slot into its own sequential slot right after
+    nextSlots[slotIdx] = currentGroup.filter((b) => b.id !== blockId);
+    nextSlots.splice(slotIdx + 1, 0, [targetBlock]);
+  } else if (slotIdx > 0) {
+    // Merge into previous slot to run in parallel
+    nextSlots[slotIdx - 1].push(targetBlock);
+    nextSlots.splice(slotIdx, 1);
+  } else {
+    return [];
+  }
+
+  return collectChangedBlocks(phaseBlocks, nextSlots);
+}
+
+/**
+ * Reorders a SessionPhase up or down within a TrainingSession and normalizes sort_order (1..N).
+ * Returns only the phases whose sort_order changed.
+ */
+export function movePhaseInSession(
+  sessionPhases: SessionPhase[],
+  phaseId: string,
+  direction: 'UP' | 'DOWN'
+): SessionPhase[] {
+  const sorted = sessionPhases.slice().sort((a, b) => a.sort_order - b.sort_order);
+  const idx = sorted.findIndex((p) => p.id === phaseId);
+  if (idx === -1) return [];
+
+  const targetIdx = direction === 'UP' ? idx - 1 : idx + 1;
+  if (targetIdx < 0 || targetIdx >= sorted.length) return [];
+
+  const reordered = [...sorted];
+  const temp = reordered[idx];
+  reordered[idx] = reordered[targetIdx];
+  reordered[targetIdx] = temp;
+
+  const now = new Date().toISOString();
+  const changed: SessionPhase[] = [];
+  reordered.forEach((phase, index) => {
+    const nextOrder = index + 1;
+    if (phase.sort_order !== nextOrder) {
+      changed.push({
+        ...phase,
+        sort_order: nextOrder,
+        updated_at: now
+      });
+    }
+  });
+
+  return changed;
+}

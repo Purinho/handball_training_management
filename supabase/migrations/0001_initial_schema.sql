@@ -4,11 +4,11 @@
 -- Multi-Week Plans, Training Sessions (with Parallel Tracks) & Session Notes.
 -- ============================================================================
 
-create extension if not exists "uuid-ossp";
+-- Uses PostgreSQL built-in gen_random_uuid() (no extension required)
 
 -- 1. CLUBS (Mandanten / Vereine)
 create table if not exists public.clubs (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   name text not null,
   invite_code text unique not null,
   created_at timestamptz not null default now(),
@@ -17,7 +17,7 @@ create table if not exists public.clubs (
 
 -- 2. CLUB MEMBERS (Trainer im Verein)
 create table if not exists public.club_members (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
   user_id uuid references auth.users(id) on delete set null,
   club_role text not null default 'COACH' check (club_role in ('CLUB_ADMIN', 'COACH')),
@@ -29,7 +29,7 @@ create table if not exists public.club_members (
 
 -- 3. TEAMS (Mannschaften eines Vereins)
 create table if not exists public.teams (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
   name text not null,
   age_group text not null,
@@ -42,7 +42,7 @@ create table if not exists public.teams (
 
 -- 4. TEAM MEMBERS (Zuordnung Trainer -> Mannschaft)
 create table if not exists public.team_members (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   team_id uuid not null references public.teams(id) on delete cascade,
   club_member_id uuid not null references public.club_members(id) on delete cascade,
   team_role text not null default 'HEAD_COACH' check (team_role in ('HEAD_COACH', 'ASSISTANT_COACH')),
@@ -51,7 +51,7 @@ create table if not exists public.team_members (
 
 -- 5. EXERCISES (Übungsdatenbank inkl. Varianten, Web-Referenzen & Taktikboard-JSON)
 create table if not exists public.exercises (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
   created_by_member_id uuid references public.club_members(id) on delete set null,
   parent_exercise_id uuid references public.exercises(id) on delete set null,
@@ -79,7 +79,7 @@ create table if not exists public.exercises (
 
 -- 6. SESSION TEMPLATES (Wiederverwendbare Trainings-Vorlagen)
 create table if not exists public.session_templates (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   club_id uuid not null references public.clubs(id) on delete cascade,
   title text not null,
   description text not null default '',
@@ -90,7 +90,7 @@ create table if not exists public.session_templates (
 
 -- 7. MULTI-WEEK PLANS (Mehrwöchige Trainingspläne / Mesozyklen)
 create table if not exists public.multi_week_plans (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   team_id uuid not null references public.teams(id) on delete cascade,
   title text not null,
   start_date date not null,
@@ -101,7 +101,7 @@ create table if not exists public.multi_week_plans (
 
 -- 8. PLAN WEEKS (Wochen-Schwerpunkte / Mikrozyklen innerhalb eines Mehrwochenplans)
 create table if not exists public.plan_weeks (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   multi_week_plan_id uuid not null references public.multi_week_plans(id) on delete cascade,
   week_number integer not null,
   start_date date not null,
@@ -114,7 +114,7 @@ create table if not exists public.plan_weeks (
 
 -- 9. TRAINING SESSIONS (Konkrete Trainingseinheiten)
 create table if not exists public.training_sessions (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   team_id uuid not null references public.teams(id) on delete cascade,
   plan_week_id uuid references public.plan_weeks(id) on delete set null,
   session_date date not null,
@@ -129,7 +129,7 @@ create table if not exists public.training_sessions (
 
 -- 10. SESSION PHASES (Chronologische Phasen innerhalb einer Trainingseinheit)
 create table if not exists public.session_phases (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   training_session_id uuid not null references public.training_sessions(id) on delete cascade,
   name text not null,
   sort_order integer not null default 0,
@@ -139,7 +139,7 @@ create table if not exists public.session_phases (
 
 -- 11. SESSION BLOCKS (Übungsblöcke / Parallele Spuren innerhalb einer Phase)
 create table if not exists public.session_blocks (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   session_phase_id uuid not null references public.session_phases(id) on delete cascade,
   exercise_id uuid references public.exercises(id) on delete set null,
   quick_block_title text,
@@ -153,7 +153,7 @@ create table if not exists public.session_blocks (
 
 -- 12. SESSION NOTES (Konfliktfreie Einzel-Notizen pro Trainer & Block/Training)
 create table if not exists public.session_notes (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   training_session_id uuid not null references public.training_sessions(id) on delete cascade,
   session_block_id uuid references public.session_blocks(id) on delete cascade,
   author_member_id uuid references public.club_members(id) on delete set null,

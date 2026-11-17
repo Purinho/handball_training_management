@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Building2,
   CalendarClock,
   Check,
   Copy,
+  Edit3,
   Plus,
   RefreshCw,
   Shield,
   Trash2,
   UserPlus,
-  Users
+  Users,
+  X
 } from 'lucide-react';
 import { db, queueSyncOperation } from '../db/database';
 import type {
@@ -41,7 +43,19 @@ export function ClubTeamManager({
   onSelectTeam
 }: ClubTeamManagerProps) {
   const [clubName, setClubName] = useState(club.name);
+  const [clubSavedBanner, setClubSavedBanner] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
+
+  // Team edit & delete confirmation state
+  const [editingTeamId, setEditingTeamId] = useState<string | null>(null);
+  const [editTeamName, setEditTeamName] = useState('');
+  const [editTeamAgeGroup, setEditTeamAgeGroup] = useState('');
+  const [editTeamSeason, setEditTeamSeason] = useState('');
+  const [confirmDeleteTeamId, setConfirmDeleteTeamId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setClubName(club.name);
+  }, [club.name]);
 
   // New team form state
   const [newTeamName, setNewTeamName] = useState('');
@@ -71,6 +85,8 @@ export function ClubTeamManager({
     };
     await db.clubs.put(updated);
     await queueSyncOperation('clubs', updated.id, 'UPSERT', updated);
+    setClubSavedBanner(true);
+    setTimeout(() => setClubSavedBanner(false), 2500);
   }
 
   async function handleRegenerateInviteCode() {
@@ -131,6 +147,99 @@ export function ClubTeamManager({
     setNewTeamName('');
     setNewTeamAgeGroup('');
     onSelectTeam(newTeam.id);
+  }
+
+  function handleStartEditTeam(team: Team) {
+    setEditingTeamId(team.id);
+    setEditTeamName(team.name);
+    setEditTeamAgeGroup(team.age_group);
+    setEditTeamSeason(team.season);
+    setConfirmDeleteTeamId(null);
+  }
+
+  async function handleSaveTeamEdit(team: Team) {
+    if (!editTeamName.trim()) return;
+    const updated: Team = {
+      ...team,
+      name: editTeamName.trim(),
+      age_group: editTeamAgeGroup.trim() || team.age_group,
+      season: editTeamSeason.trim() || team.season,
+      updated_at: new Date().toISOString()
+    };
+    await db.teams.put(updated);
+    await queueSyncOperation('teams', updated.id, 'UPSERT', updated);
+    setEditingTeamId(null);
+  }
+
+  async function handleDeleteTeam(teamId: string) {
+    if (teams.length <= 1) return;
+
+    const teamSessions = await db.trainingSessions.where('team_id').equals(teamId).toArray();
+    const sessionIds = teamSessions.map((s) => s.id);
+    const teamPhases =
+      sessionIds.length > 0
+        ? await db.sessionPhases.where('training_session_id').anyOf(sessionIds).toArray()
+        : [];
+    const phaseIds = teamPhases.map((p) => p.id);
+    const teamBlocks =
+      phaseIds.length > 0
+        ? await db.sessionBlocks.where('session_phase_id').anyOf(phaseIds).toArray()
+        : [];
+    const teamNotes =
+      sessionIds.length > 0
+        ? await db.sessionNotes.where('training_session_id').anyOf(sessionIds).toArray()
+        : [];
+
+    const teamPlans = await db.multiWeekPlans.where('team_id').equals(teamId).toArray();
+    const planIds = teamPlans.map((p) => p.id);
+    const teamPlanWeeks =
+      planIds.length > 0
+        ? await db.planWeeks.where('multi_week_plan_id').anyOf(planIds).toArray()
+        : [];
+
+    const assignedLinks = teamMembers.filter((tm) => tm.team_id === teamId);
+
+    await db.transaction(
+      'rw',
+      [
+        db.teams,
+        db.teamMembers,
+        db.multiWeekPlans,
+        db.planWeeks,
+        db.trainingSessions,
+        db.sessionPhases,
+        db.sessionBlocks,
+        db.sessionNotes,
+        db.syncOutbox
+      ],
+      async () => {
+        await db.teams.delete(teamId);
+        await queueSyncOperation('teams', teamId, 'DELETE', { id: teamId });
+
+        for (const tm of assignedLinks) await db.teamMembers.delete(tm.id);
+        for (const w of teamPlanWeeks) await db.planWeeks.delete(w.id);
+        for (const p of teamPlans) await db.multiWeekPlans.delete(p.id);
+        for (const b of teamBlocks) await db.sessionBlocks.delete(b.id);
+        for (const ph of teamPhases) await db.sessionPhases.delete(ph.id);
+        for (const n of teamNotes) await db.sessionNotes.delete(n.id);
+        for (const s of teamSessions) await db.trainingSessions.delete(s.id);
+      }
+    );
+
+    setConfirmDeleteTeamId(null);
+    if (editingTeamId === teamId) setEditingTeamId(null);
+
+    const remainingTeams = teams.filter((t) => t.id !== teamId);
+    const fallbackId = remainingTeams[0]?.id ?? '';
+    if (activeTeamId === teamId && fallbackId) {
+      onSelectTeam(fallbackId);
+    }
+    if (scheduleTeamId === teamId) {
+      setScheduleTeamId(fallbackId);
+    }
+    if (newCoachInitialTeamId === teamId) {
+      setNewCoachInitialTeamId(fallbackId);
+    }
   }
 
   async function handleAddScheduleSlot(e: React.FormEvent) {
@@ -282,6 +391,12 @@ export function ClubTeamManager({
           >
             Vereinsname speichern
           </button>
+          {clubSavedBanner && (
+            <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400">
+              <Check className="h-4 w-4" />
+              Gespeichert
+            </span>
+          )}
         </div>
       </section>
 
@@ -317,28 +432,117 @@ export function ClubTeamManager({
                   }`}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-base font-bold text-white">{team.name}</span>
-                        <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs text-slate-300">
-                          {team.age_group}
-                        </span>
-                        <span className="rounded-full bg-blue-950 px-2.5 py-0.5 text-xs text-blue-300">
-                          Saison {team.season}
-                        </span>
+                    {editingTeamId === team.id ? (
+                      <div className="flex flex-1 flex-wrap items-center gap-2">
+                        <input
+                          type="text"
+                          value={editTeamName}
+                          onChange={(e) => setEditTeamName(e.target.value)}
+                          placeholder="Mannschaftsname"
+                          className="min-w-[140px] flex-1 rounded-lg border border-blue-500/60 bg-slate-900 px-2.5 py-1 text-sm font-bold text-white focus:outline-none"
+                        />
+                        <input
+                          type="text"
+                          value={editTeamAgeGroup}
+                          onChange={(e) => setEditTeamAgeGroup(e.target.value)}
+                          placeholder="Altersklasse"
+                          className="w-36 rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1 text-xs text-white"
+                        />
+                        <input
+                          type="text"
+                          value={editTeamSeason}
+                          onChange={(e) => setEditTeamSeason(e.target.value)}
+                          placeholder="Saison"
+                          className="w-24 rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1 text-xs text-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => void handleSaveTeamEdit(team)}
+                          className="inline-flex items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-emerald-500"
+                        >
+                          <Check className="h-3.5 w-3.5" />
+                          Speichern
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingTeamId(null)}
+                          className="rounded-lg bg-slate-800 p-1 text-slate-300 hover:bg-slate-700"
+                          title="Abbrechen"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
                       </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => onSelectTeam(team.id)}
-                      className={`rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                        isSelected
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                      }`}
-                    >
-                      {isSelected ? 'Aktive Mannschaft' : 'Auswählen'}
-                    </button>
+                    ) : (
+                      <>
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-base font-bold text-white">{team.name}</span>
+                            <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs text-slate-300">
+                              {team.age_group}
+                            </span>
+                            <span className="rounded-full bg-blue-950 px-2.5 py-0.5 text-xs text-blue-300">
+                              Saison {team.season}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => onSelectTeam(team.id)}
+                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                              isSelected
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            }`}
+                          >
+                            {isSelected ? 'Aktive Mannschaft' : 'Auswählen'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleStartEditTeam(team)}
+                            className="rounded-lg bg-slate-800 p-1.5 text-slate-300 hover:bg-slate-700 hover:text-white"
+                            title="Mannschaft bearbeiten"
+                          >
+                            <Edit3 className="h-3.5 w-3.5" />
+                          </button>
+                          {confirmDeleteTeamId === team.id ? (
+                            <div className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/50 bg-rose-950/70 px-2.5 py-1 text-xs">
+                              <span className="font-semibold text-rose-200">
+                                Inkl. Pläne löschen?
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => void handleDeleteTeam(team.id)}
+                                className="rounded bg-rose-600 px-2 py-0.5 font-bold text-white hover:bg-rose-500"
+                              >
+                                Ja
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setConfirmDeleteTeamId(null)}
+                                className="rounded bg-slate-800 px-2 py-0.5 text-slate-300 hover:bg-slate-700"
+                              >
+                                Nein
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              disabled={teams.length <= 1}
+                              onClick={() => setConfirmDeleteTeamId(team.id)}
+                              className="rounded-lg bg-slate-800 p-1.5 text-slate-400 hover:bg-rose-950/60 hover:text-rose-400 disabled:opacity-30 disabled:hover:bg-slate-800 disabled:hover:text-slate-400"
+                              title={
+                                teams.length <= 1
+                                  ? 'Mindestens eine Mannschaft muss im Verein bleiben'
+                                  : 'Mannschaft löschen'
+                              }
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Feste Trainingszeiten */}

@@ -1,11 +1,15 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  ArrowLeft,
+  ArrowRight,
   CircleDot,
   Eraser,
   Layers,
+  ListOrdered,
   MousePointer,
   MoveRight,
   RotateCcw,
+  RotateCw,
   Shield,
   Sparkles,
   Trash2,
@@ -20,9 +24,19 @@ import type {
   TacticPathType
 } from '../types/domain';
 import { buildTacticBoardPreset, TACTIC_PRESETS } from '../utils/tacticPresets';
+import {
+  deleteTacticPath,
+  distancePointToSegment,
+  hasPathNumberingGaps,
+  moveTacticPathOrder,
+  renumberTacticPaths,
+  setTacticPathStepNumber
+} from '../utils/tacticBoardUtils';
+import { getDefaultNodeRotation, TacticPlayerGlyph } from './TacticPlayerGlyph';
 
 type EditorTool =
   | 'SELECT_MOVE'
+  | 'ROTATE'
   | 'STAMP_OFFENSE'
   | 'STAMP_DEFENSE'
   | 'STAMP_GK'
@@ -45,11 +59,22 @@ interface TacticBoardEditorProps {
 const OFFENSE_LABELS = ['RL', 'RM', 'RR', 'KM', 'LA', 'RA', 'A1', 'A2'];
 const DEFENSE_LABELS = ['IL', 'IR', 'HL', 'HR', 'AL', 'AR', 'VM', 'HM'];
 
+const PATH_TYPE_LABELS: Record<TacticPathType, string> = {
+  RUN_PATH: 'Laufweg',
+  PASS_PATH: 'Passweg',
+  DRIBBLE_PATH: 'Prellen',
+  SHOT_PATH: 'Torwurf',
+  SCREEN_BLOCK_PATH: 'Sperre',
+  FEINT_PATH: 'Täuschung'
+};
+
 export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [activeTool, setActiveTool] = useState<EditorTool>('SELECT_MOVE');
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
   const [draggingNodeId, setDraggingNodeId] = useState<string | null>(null);
+  const [rotatingNodeId, setRotatingNodeId] = useState<string | null>(null);
 
   // Active path drawing state
   const [drawingStart, setDrawingStart] = useState<{
@@ -65,6 +90,39 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
   const template = value.courtTemplate ?? 'HALF_COURT_VERTICAL';
 
   const selectedNode = value.nodes.find((n) => n.id === selectedNodeId) ?? null;
+  const selectedPath = value.paths.find((p) => p.id === selectedPathId) ?? null;
+  const numberingHasGaps = hasPathNumberingGaps(value.paths);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT')
+      ) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        setSelectedNodeId(null);
+        setSelectedPathId(null);
+        setActiveTool('SELECT_MOVE');
+      } else if (e.key === 'Delete' || e.key === 'Backspace') {
+        if (selectedNodeId) {
+          e.preventDefault();
+          handleDeleteSelectedNode();
+        } else if (selectedPathId) {
+          e.preventDefault();
+          handleDeleteSelectedPath();
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
 
   function getNormalizedCoords(e: React.PointerEvent<SVGSVGElement>): { x: number; y: number } {
     const svg = svgRef.current;
@@ -86,6 +144,35 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
       if (dist <= bestDist) {
         bestDist = dist;
         best = node;
+      }
+    }
+    return best;
+  }
+
+  function findNearestPath(x: number, y: number, maxDist = 0.045): TacticPath | undefined {
+    let best: TacticPath | undefined;
+    let bestDist = maxDist;
+    for (const path of value.paths) {
+      if (path.points.length < 2) continue;
+      // Check step badge position first
+      const first = path.points[0];
+      const last = path.points[path.points.length - 1];
+      const badgeX = (first.x + last.x) / 2;
+      const badgeY = (first.y + last.y) / 2 - 9 / height;
+      const badgeDist = Math.hypot(x - badgeX, y - badgeY);
+      if (badgeDist <= bestDist) {
+        bestDist = badgeDist;
+        best = path;
+      }
+
+      for (let i = 0; i < path.points.length - 1; i++) {
+        const a = path.points[i];
+        const b = path.points[i + 1];
+        const segDist = distancePointToSegment(x, y, a.x, a.y, b.x, b.y);
+        if (segDist <= bestDist) {
+          bestDist = segDist;
+          best = path;
+        }
       }
     }
     return best;
@@ -113,17 +200,79 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
     }
   }
 
+  function isRotatableNode(node: TacticNode): boolean {
+    return node.type === 'OFFENSE_PLAYER' || node.type === 'DEFENSE_PLAYER';
+  }
+
+  function getRotationHandleCoords(node: TacticNode): { hx: number; hy: number } {
+    const rotRad = (getDefaultNodeRotation(node) * Math.PI) / 180;
+    return {
+      hx: node.x * width + Math.sin(rotRad) * 32,
+      hy: node.y * height - Math.cos(rotRad) * 32
+    };
+  }
+
+  function computeAngleFromNodeToCoords(
+    node: TacticNode,
+    coords: { x: number; y: number }
+  ): number {
+    const dx = (coords.x - node.x) * width;
+    const dy = (coords.y - node.y) * height;
+    let deg = (Math.atan2(dx, -dy) * 180) / Math.PI;
+    if (deg < 0) deg += 360;
+    return (Math.round(deg / 5) * 5) % 360;
+  }
+
   function handlePointerDown(e: React.PointerEvent<SVGSVGElement>) {
     const coords = getNormalizedCoords(e);
 
     if (activeTool === 'SELECT_MOVE') {
+      // Check rotation handle of currently selected player first
+      if (selectedNode && isRotatableNode(selectedNode)) {
+        const { hx, hy } = getRotationHandleCoords(selectedNode);
+        const px = coords.x * width;
+        const py = coords.y * height;
+        if (Math.hypot(px - hx, py - hy) <= 13) {
+          setRotatingNodeId(selectedNode.id);
+          e.currentTarget.setPointerCapture(e.pointerId);
+          return;
+        }
+      }
+
       const hitNode = findNearestSnapNode(coords.x, coords.y, 0.055);
       if (hitNode) {
         setSelectedNodeId(hitNode.id);
+        setSelectedPathId(null);
         setDraggingNodeId(hitNode.id);
         e.currentTarget.setPointerCapture(e.pointerId);
       } else {
+        const hitPath = findNearestPath(coords.x, coords.y, 0.045);
         setSelectedNodeId(null);
+        setSelectedPathId(hitPath ? hitPath.id : null);
+      }
+      return;
+    }
+
+    if (activeTool === 'ROTATE') {
+      const hitNode = findNearestSnapNode(coords.x, coords.y, 0.075);
+      if (hitNode && isRotatableNode(hitNode)) {
+        setSelectedNodeId(hitNode.id);
+        setSelectedPathId(null);
+        setRotatingNodeId(hitNode.id);
+        e.currentTarget.setPointerCapture(e.pointerId);
+
+        const distPx = Math.hypot((coords.x - hitNode.x) * width, (coords.y - hitNode.y) * height);
+        const nextRotation =
+          distPx < 8
+            ? (getDefaultNodeRotation(hitNode) + 45) % 360
+            : computeAngleFromNodeToCoords(hitNode, coords);
+
+        onChange({
+          ...value,
+          nodes: value.nodes.map((n) =>
+            n.id === hitNode.id ? { ...n, rotation: nextRotation } : n
+          )
+        });
       }
       return;
     }
@@ -157,8 +306,8 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
         label,
         x: coords.x,
         y: coords.y,
-        color: '#2563eb',
-        hasBall: offCount === 0
+        hasBall: offCount === 0,
+        rotation: 0
       };
     } else if (activeTool === 'STAMP_DEFENSE') {
       const defCount = value.nodes.filter((n) => n.type === 'DEFENSE_PLAYER').length;
@@ -169,7 +318,7 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
         label,
         x: coords.x,
         y: coords.y,
-        color: '#dc2626'
+        rotation: 180
       };
     } else if (activeTool === 'STAMP_GK') {
       newNode = {
@@ -224,6 +373,26 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
   }
 
   function handlePointerMove(e: React.PointerEvent<SVGSVGElement>) {
+    if (rotatingNodeId) {
+      const targetNode = value.nodes.find((n) => n.id === rotatingNodeId);
+      if (!targetNode) return;
+      const coords = getNormalizedCoords(e);
+      const distPx = Math.hypot(
+        (coords.x - targetNode.x) * width,
+        (coords.y - targetNode.y) * height
+      );
+      if (distPx >= 8) {
+        const nextRotation = computeAngleFromNodeToCoords(targetNode, coords);
+        onChange({
+          ...value,
+          nodes: value.nodes.map((n) =>
+            n.id === rotatingNodeId ? { ...n, rotation: nextRotation } : n
+          )
+        });
+      }
+      return;
+    }
+
     if (draggingNodeId && activeTool === 'SELECT_MOVE') {
       const coords = getNormalizedCoords(e);
       const nextNodes = value.nodes.map((n) =>
@@ -263,6 +432,11 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
   }
 
   function handlePointerUp(e: React.PointerEvent<SVGSVGElement>) {
+    if (rotatingNodeId) {
+      setRotatingNodeId(null);
+      return;
+    }
+
     if (draggingNodeId) {
       setDraggingNodeId(null);
       return;
@@ -335,6 +509,7 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
     const presetData = buildTacticBoardPreset(presetId, template);
     onChange(presetData);
     setSelectedNodeId(null);
+    setSelectedPathId(null);
   }
 
   function handleUpdateSelectedNode(patch: Partial<TacticNode>) {
@@ -347,32 +522,65 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
 
   function handleDeleteSelectedNode() {
     if (!selectedNodeId) return;
+    const remainingPaths = value.paths.filter(
+      (p) =>
+        p.fromNodeId !== selectedNodeId &&
+        p.toNodeId !== selectedNodeId &&
+        p.fromWaypointId !== selectedNodeId &&
+        p.toWaypointId !== selectedNodeId
+    );
     onChange({
       ...value,
       nodes: value.nodes.filter((n) => n.id !== selectedNodeId),
-      paths: value.paths.filter(
-        (p) =>
-          p.fromNodeId !== selectedNodeId &&
-          p.toNodeId !== selectedNodeId &&
-          p.fromWaypointId !== selectedNodeId &&
-          p.toWaypointId !== selectedNodeId
-      )
+      paths: renumberTacticPaths(remainingPaths)
     });
     setSelectedNodeId(null);
+  }
+
+  function handleUpdateSelectedPath(patch: Partial<TacticPath>) {
+    if (!selectedPathId) return;
+    onChange({
+      ...value,
+      paths: value.paths.map((p) => (p.id === selectedPathId ? { ...p, ...patch } : p))
+    });
+  }
+
+  function handleSetSelectedPathStep(nextStep: number) {
+    if (!selectedPathId || Number.isNaN(nextStep)) return;
+    onChange({
+      ...value,
+      paths: setTacticPathStepNumber(value.paths, selectedPathId, nextStep)
+    });
+  }
+
+  function handleMovePathOrder(pathId: string, direction: 'EARLIER' | 'LATER') {
+    onChange({
+      ...value,
+      paths: moveTacticPathOrder(value.paths, pathId, direction)
+    });
+  }
+
+  function handleRenumberAllPaths() {
+    onChange({
+      ...value,
+      paths: renumberTacticPaths(value.paths)
+    });
+  }
+
+  function handleDeleteSelectedPath() {
+    if (!selectedPathId) return;
+    onChange(deleteTacticPath(value, selectedPathId, true));
+    setSelectedPathId(null);
   }
 
   function handleUndoLastPath() {
     if (value.paths.length === 0) return;
     const lastPath = value.paths[value.paths.length - 1];
-    const remainingPaths = value.paths.slice(0, -1);
-    const remainingNodes = lastPath.toWaypointId
-      ? value.nodes.filter((n) => n.id !== lastPath.toWaypointId)
-      : value.nodes;
-    onChange({
-      ...value,
-      nodes: remainingNodes,
-      paths: remainingPaths
-    });
+    const nextBoard = deleteTacticPath(value, lastPath.id, true);
+    if (selectedPathId === lastPath.id) {
+      setSelectedPathId(null);
+    }
+    onChange(nextBoard);
   }
 
   function handleClearBoard() {
@@ -383,6 +591,7 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
       paths: []
     });
     setSelectedNodeId(null);
+    setSelectedPathId(null);
   }
 
   return (
@@ -455,6 +664,20 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
         >
           <MousePointer className="h-3.5 w-3.5" />
           Bewegen / Auswählen
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTool('ROTATE')}
+          className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition ${
+            activeTool === 'ROTATE'
+              ? 'bg-cyan-600 text-white shadow'
+              : 'bg-slate-800 text-cyan-300 hover:bg-slate-700'
+          }`}
+          title="Angreifer oder Verteidiger in Blickrichtung drehen"
+        >
+          <RotateCw className="h-3.5 w-3.5" />
+          Drehen
         </button>
 
         {/* Stempel-Werkzeuge */}
@@ -704,9 +927,20 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
                   : 'url(#ed-arrow-white)';
 
             const strokeColor = isShot || isScreen ? '#f59e0b' : isPass ? '#60a5fa' : '#f8fafc';
+            const isSelectedPath = path.id === selectedPathId;
 
             return (
               <g key={path.id}>
+                {isSelectedPath && (
+                  <polyline
+                    points={pts}
+                    fill="none"
+                    stroke="#38bdf8"
+                    strokeWidth={isShot ? 9 : 7.5}
+                    strokeOpacity="0.45"
+                    strokeLinecap="round"
+                  />
+                )}
                 <polyline
                   points={pts}
                   fill="none"
@@ -717,7 +951,12 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
                 />
                 {path.stepNumber !== undefined && (
                   <g transform={`translate(${midX}, ${midY - 9})`}>
-                    <circle r="9" fill="#0f172a" stroke={strokeColor} strokeWidth="1.5" />
+                    <circle
+                      r={isSelectedPath ? 11 : 9}
+                      fill={isSelectedPath ? '#0284c7' : '#0f172a'}
+                      stroke={isSelectedPath ? '#bae6fd' : strokeColor}
+                      strokeWidth={isSelectedPath ? 2 : 1.5}
+                    />
                     <text textAnchor="middle" dy="3.5" fontSize="10" fontWeight="bold" fill="#ffffff">
                       {path.stepNumber}
                     </text>
@@ -809,61 +1048,36 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
               );
             }
 
-            const isDefense = node.type === 'DEFENSE_PLAYER';
-            const isGK = node.type === 'GOALKEEPER';
-            const isCoach = node.type === 'COACH_FEEDER';
-            const fill =
-              node.color ??
-              (isDefense
-                ? '#dc2626'
-                : isGK
-                  ? '#10b981'
-                  : isCoach
-                    ? '#8b5cf6'
-                    : '#2563eb');
+            const showRotateHandle =
+              isSelected &&
+              isRotatableNode(node) &&
+              (activeTool === 'SELECT_MOVE' || activeTool === 'ROTATE');
+            const handleCoords = showRotateHandle ? getRotationHandleCoords(node) : null;
 
             return (
-              <g key={node.id} transform={`translate(${cx}, ${cy})`}>
-                {isSelected && (
-                  <circle r="22" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="4 3" />
-                )}
-
-                {node.isQueue && (
-                  <>
-                    <circle cx="-6" cy="6" r="16" fill="none" stroke={fill} strokeWidth="2.2" opacity="0.7" />
-                    <circle cx="-3" cy="3" r="16" fill="none" stroke="#ffffff" strokeWidth="1.5" opacity="0.85" />
-                  </>
-                )}
-
-                {isDefense ? (
-                  <rect
-                    x="-15"
-                    y="-13"
-                    width="30"
-                    height="26"
-                    rx="7"
-                    fill={fill}
-                    stroke="#ffffff"
-                    strokeWidth="2.2"
-                  />
-                ) : (
-                  <circle r="16" fill={fill} stroke="#ffffff" strokeWidth="2.5" />
-                )}
-
-                <text textAnchor="middle" dy="4" fontSize="11" fontWeight="bold" fill="#ffffff">
-                  {node.label ?? (isCoach ? 'T' : '')}
-                </text>
-
-                {node.hasBall && (
-                  <circle cx="13" cy="-12" r="5.5" fill="#f59e0b" stroke="#0f172a" strokeWidth="1.5" />
-                )}
-
-                {node.isQueue && node.queueCount && (
-                  <g transform="translate(-15, -14)">
-                    <rect x="-9" y="-7" width="20" height="14" rx="4" fill="#0f172a" stroke="#93c5fd" strokeWidth="1.2" />
-                    <text textAnchor="middle" x="1" dy="3" fontSize="9" fontWeight="bold" fill="#93c5fd">
-                      x{node.queueCount}
-                    </text>
+              <g key={node.id}>
+                <g transform={`translate(${cx}, ${cy})`}>
+                  <TacticPlayerGlyph node={node} isSelected={isSelected} />
+                </g>
+                {handleCoords && (
+                  <g className="cursor-grab">
+                    <line
+                      x1={cx}
+                      y1={cy}
+                      x2={handleCoords.hx}
+                      y2={handleCoords.hy}
+                      stroke="#38bdf8"
+                      strokeWidth="1.5"
+                      strokeDasharray="3 2"
+                    />
+                    <circle
+                      cx={handleCoords.hx}
+                      cy={handleCoords.hy}
+                      r="6"
+                      fill="#0ea5e9"
+                      stroke="#ffffff"
+                      strokeWidth="1.5"
+                    />
                   </g>
                 )}
               </g>
@@ -944,6 +1158,51 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
                 )}
               </>
             )}
+
+            {isRotatableNode(selectedNode) && (
+              <div className="flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-950/30 px-2 py-0.5">
+                <span className="text-cyan-300">Blickrichtung:</span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleUpdateSelectedNode({
+                      rotation: (getDefaultNodeRotation(selectedNode) + 315) % 360
+                    })
+                  }
+                  className="rounded bg-slate-800 px-1.5 py-0.5 text-slate-200 hover:bg-slate-700"
+                  title="45° gegen den Uhrzeigersinn drehen"
+                >
+                  ↺ 45°
+                </button>
+                <span className="min-w-[32px] text-center font-mono font-bold text-white">
+                  {getDefaultNodeRotation(selectedNode)}°
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleUpdateSelectedNode({
+                      rotation: (getDefaultNodeRotation(selectedNode) + 45) % 360
+                    })
+                  }
+                  className="rounded bg-slate-800 px-1.5 py-0.5 text-slate-200 hover:bg-slate-700"
+                  title="45° im Uhrzeigersinn drehen"
+                >
+                  ↻ 45°
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleUpdateSelectedNode({
+                      rotation: (getDefaultNodeRotation(selectedNode) + 180) % 360
+                    })
+                  }
+                  className="rounded bg-slate-800 px-1.5 py-0.5 text-slate-200 hover:bg-slate-700"
+                  title="Um 180° wenden"
+                >
+                  180°
+                </button>
+              </div>
+            )}
           </div>
 
           <button
@@ -955,15 +1214,127 @@ export function TacticBoardEditor({ value, onChange }: TacticBoardEditorProps) {
             Element löschen
           </button>
         </div>
+      ) : selectedPath ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-sky-500/40 bg-sky-950/30 px-4 py-2.5 text-xs">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="font-bold text-sky-300">Ausgewählter Schritt:</span>
+
+            <div className="flex items-center gap-1.5">
+              <label className="text-slate-300">Nr.:</label>
+              <input
+                type="number"
+                min={1}
+                max={99}
+                value={selectedPath.stepNumber ?? 1}
+                onChange={(e) => handleSetSelectedPathStep(Number(e.target.value))}
+                className="w-14 rounded-lg border border-slate-700 bg-slate-900 px-2 py-1 text-center font-bold text-white"
+              />
+              <button
+                type="button"
+                onClick={() => handleMovePathOrder(selectedPath.id, 'EARLIER')}
+                className="inline-flex items-center gap-1 rounded-lg bg-slate-800 px-2 py-1 text-slate-200 hover:bg-slate-700"
+                title="Schritt in der Reihenfolge vorziehen"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                Früher
+              </button>
+              <button
+                type="button"
+                onClick={() => handleMovePathOrder(selectedPath.id, 'LATER')}
+                className="inline-flex items-center gap-1 rounded-lg bg-slate-800 px-2 py-1 text-slate-200 hover:bg-slate-700"
+                title="Schritt in der Reihenfolge nach hinten schieben"
+              >
+                Später
+                <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <label className="text-slate-300">Typ:</label>
+              <select
+                value={selectedPath.type}
+                onChange={(e) =>
+                  handleUpdateSelectedPath({ type: e.target.value as TacticPathType })
+                }
+                className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-1 text-white"
+              >
+                {(Object.keys(PATH_TYPE_LABELS) as TacticPathType[]).map((pt) => (
+                  <option key={pt} value={pt}>
+                    {PATH_TYPE_LABELS[pt]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleDeleteSelectedPath}
+            className="inline-flex items-center gap-1 rounded-lg bg-rose-600 px-2.5 py-1 font-semibold text-white hover:bg-rose-500"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            Pfeil löschen
+          </button>
+        </div>
       ) : (
         <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
           <span className="flex items-center gap-1.5">
             <Layers className="h-3.5 w-3.5 text-blue-400" />
-            Tipp: Pfeile rasten magnetisch an Spielern ein. Am Ende eines Laufwegs entsteht automatisch ein Wegpunkt für Folgepässe!
+            Tipp: Pfeile rasten magnetisch an Spielern ein. Im „Bewegen / Auswählen“-Modus kannst du Spieler verschieben oder Pfeile/Nummern anklicken.
           </span>
           <span>
             {value.nodes.length} Elemente · {value.paths.length} Aktionen
           </span>
+        </div>
+      )}
+
+      {/* Ablauf-Reihenfolge & Neu-Nummerierung */}
+      {value.paths.length > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-xs">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="mr-1 inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400">
+              <ListOrdered className="h-3.5 w-3.5 text-sky-400" />
+              Reihenfolge:
+            </span>
+            {value.paths.map((p) => {
+              const isSelected = p.id === selectedPathId;
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveTool('SELECT_MOVE');
+                    setSelectedNodeId(null);
+                    setSelectedPathId(p.id);
+                  }}
+                  className={`inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-[11px] font-semibold transition ${
+                    isSelected
+                      ? 'border-sky-400 bg-sky-600 text-white'
+                      : 'border-slate-700 bg-slate-800/80 text-slate-300 hover:bg-slate-700'
+                  }`}
+                >
+                  <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-slate-950/80 text-[10px] font-bold text-white">
+                    {p.stepNumber ?? '?'}
+                  </span>
+                  <span>{PATH_TYPE_LABELS[p.type]}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleRenumberAllPaths}
+            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition ${
+              numberingHasGaps
+                ? 'bg-amber-500 text-slate-950 hover:bg-amber-400'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+            title="Alle Aktions-Schritte lückenlos 1 bis N neu nummerieren"
+          >
+            <ListOrdered className="h-3.5 w-3.5" />
+            1…{value.paths.length} neu nummerieren
+          </button>
         </div>
       )}
     </div>
