@@ -403,11 +403,11 @@ export function ExerciseEditorModal({
                   Aufbau & Organisation
                 </label>
                 <textarea
-                  rows={2}
+                  rows={4}
                   placeholder="Positionen, Hütchen, Gruppengröße..."
                   value={setupDesc}
                   onChange={(e) => setSetupDesc(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
+                  className="w-full min-h-[6rem] resize-y rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
                 />
               </div>
 
@@ -416,11 +416,11 @@ export function ExerciseEditorModal({
                   Übungsablauf (Schritt für Schritt)
                 </label>
                 <textarea
-                  rows={3}
+                  rows={6}
                   placeholder="1. RL stößt auf die Nahtstelle...\n2. Parallelpass zu RM..."
                   value={flowDesc}
                   onChange={(e) => setFlowDesc(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
+                  className="w-full min-h-[9rem] resize-y rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
                 />
               </div>
 
@@ -429,11 +429,11 @@ export function ExerciseEditorModal({
                   Coaching-Punkte & Korrekturen
                 </label>
                 <textarea
-                  rows={2}
+                  rows={4}
                   placeholder="- Tiefgang mit Wurfarm oben\n- Früher Blickkontakt zum Kreis..."
                   value={coachingPoints}
                   onChange={(e) => setCoachingPoints(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
+                  className="w-full min-h-[6rem] resize-y rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
                 />
               </div>
 
@@ -442,11 +442,11 @@ export function ExerciseEditorModal({
                   Variationen & Steigerungen
                 </label>
                 <textarea
-                  rows={2}
+                  rows={4}
                   placeholder="Steigerung: Abwehrspieler darf aktiv heraustreten..."
                   value={variationsText}
                   onChange={(e) => setVariationsText(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
+                  className="w-full min-h-[6rem] resize-y rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-xs text-white"
                 />
               </div>
 

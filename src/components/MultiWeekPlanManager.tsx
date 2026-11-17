@@ -127,9 +127,15 @@ export function MultiWeekPlanManager({
         }
         if (bundle.phases.length > 0) {
           await db.sessionPhases.bulkPut(bundle.phases);
+          for (const p of bundle.phases) {
+            await queueSyncOperation('session_phases', p.id, 'UPSERT', p);
+          }
         }
         if (bundle.blocks.length > 0) {
           await db.sessionBlocks.bulkPut(bundle.blocks);
+          for (const b of bundle.blocks) {
+            await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+          }
         }
       }
     );
@@ -175,9 +181,19 @@ export function MultiWeekPlanManager({
       [db.trainingSessions, db.sessionPhases, db.sessionBlocks, db.syncOutbox],
       async () => {
         await db.trainingSessions.put(bundle.session);
-        await db.sessionPhases.bulkPut(bundle.phases);
-        await db.sessionBlocks.bulkPut(bundle.blocks);
         await queueSyncOperation('training_sessions', bundle.session.id, 'UPSERT', bundle.session);
+        if (bundle.phases.length > 0) {
+          await db.sessionPhases.bulkPut(bundle.phases);
+          for (const p of bundle.phases) {
+            await queueSyncOperation('session_phases', p.id, 'UPSERT', p);
+          }
+        }
+        if (bundle.blocks.length > 0) {
+          await db.sessionBlocks.bulkPut(bundle.blocks);
+          for (const b of bundle.blocks) {
+            await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+          }
+        }
       }
     );
   }

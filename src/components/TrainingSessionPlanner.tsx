@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   ArrowDown,
   ArrowUp,
+  ArrowUpRight,
   BookmarkPlus,
   BookOpen,
   CheckCircle2,
@@ -64,6 +65,7 @@ interface TrainingSessionPlannerProps {
   activePlanWeeks: PlanWeek[];
   focusedSessionId?: string;
   onEditExercise: (exercise: Exercise) => void;
+  onOpenExercise?: (exercise: Exercise) => void;
   onStartHallMode: (sessionId: string) => void;
 }
 
@@ -87,6 +89,7 @@ export function TrainingSessionPlanner({
   activePlanWeeks,
   focusedSessionId,
   onEditExercise,
+  onOpenExercise,
   onStartHallMode
 }: TrainingSessionPlannerProps) {
   const teamSessions = useMemo(
@@ -1421,23 +1424,47 @@ export function TrainingSessionPlanner({
                       className="rounded-xl border border-slate-800 bg-slate-950/90 p-3.5 space-y-2.5"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <div className="font-bold text-white text-xs">{ex.title}</div>
+                        <div className="min-w-0">
+                          {onOpenExercise ? (
+                            <button
+                              type="button"
+                              onClick={() => onOpenExercise(ex)}
+                              className="group inline-flex items-center gap-1 text-left font-bold text-white text-xs hover:text-blue-400"
+                              title="Übung in der Übungsdatenbank öffnen"
+                            >
+                              <span className="truncate group-hover:underline">{ex.title}</span>
+                              <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-blue-400" />
+                            </button>
+                          ) : (
+                            <div className="font-bold text-white text-xs">{ex.title}</div>
+                          )}
                           <div className="mt-0.5 text-[11px] text-slate-400">
                             {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp. +{' '}
                             {ex.goalkeepers} TW
                           </div>
                         </div>
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setPreviewExerciseId(isPreviewOpen ? null : ex.id)
-                          }
-                          className="rounded bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300 hover:bg-slate-700"
-                        >
-                          {isPreviewOpen ? 'Skizze ▲' : 'Skizze ▼'}
-                        </button>
+                        <div className="flex shrink-0 items-center gap-1">
+                          {onOpenExercise && (
+                            <button
+                              type="button"
+                              onClick={() => onOpenExercise(ex)}
+                              className="rounded bg-slate-800 px-2 py-0.5 text-[10px] text-blue-300 hover:bg-slate-700"
+                              title="Zur Übung navigieren"
+                            >
+                              Öffnen
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPreviewExerciseId(isPreviewOpen ? null : ex.id)
+                            }
+                            className="rounded bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300 hover:bg-slate-700"
+                          >
+                            {isPreviewOpen ? 'Skizze ▲' : 'Skizze ▼'}
+                          </button>
+                        </div>
                       </div>
 
                       {isPreviewOpen && (

@@ -268,7 +268,7 @@ export function App() {
         `Cloud-Sync fertig: ${res.pushedCount} gesendet, ${res.pulledCount} aktualisiert.`
       );
     }
-    setTimeout(() => setSyncStatusBanner(null), 3500);
+    setTimeout(() => setSyncStatusBanner(null), res.errorMessage ? 6500 : 3500);
   }
 
   async function handleDownloadBackupJson() {
@@ -313,7 +313,7 @@ export function App() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 lg:flex-row">
       {/* Linke Navigation (Desktop & Tablet Querformat) */}
-      <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-800/90 bg-slate-900/90 p-5 lg:flex">
+      <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-800/90 bg-slate-900/90 p-5 lg:sticky lg:top-0 lg:flex lg:h-screen lg:overflow-y-auto">
         <div className="flex items-center gap-3 pb-5 border-b border-slate-800">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-black text-white shadow-md shadow-blue-600/30">
             HB
@@ -343,7 +343,7 @@ export function App() {
         </div>
 
         {/* Hauptnavigation */}
-        <nav className="mt-6 flex-1 space-y-1.5">
+        <nav className="mt-5 space-y-1.5">
           <button
             type="button"
             onClick={() => setActiveTab('DASHBOARD')}
@@ -468,20 +468,6 @@ export function App() {
           </button>
 
           <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => setShowAuthModal(true)}
-              className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium ${
-                authUserEmail
-                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/50'
-                  : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
-              }`}
-              title="Cloud-Sync & Anmeldung"
-            >
-              <User className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="hidden md:inline">{authUserEmail ? 'Cloud' : 'Login'}</span>
-            </button>
-
             <button
               type="button"
               onClick={() => setShowInstallModal(true)}
@@ -640,6 +626,10 @@ export function App() {
                   setEditingExercise(ex);
                   setVariantParentExercise(null);
                   setEditorModalOpen(true);
+                }}
+                onOpenExercise={(ex) => {
+                  setSelectedExerciseId(ex.id);
+                  setActiveTab('EXERCISES');
                 }}
                 onStartHallMode={(sessionId) => {
                   setFocusedSessionId(sessionId);
