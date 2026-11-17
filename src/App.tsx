@@ -121,6 +121,40 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    const validTabs: NavTab[] = ['DASHBOARD', 'HALL_LIVE', 'EXERCISES', 'PLANS', 'CLUB_ADMIN'];
+    const currentStateTab = (window.history.state as { tab?: NavTab } | null)?.tab;
+    if (!currentStateTab || !validTabs.includes(currentStateTab)) {
+      window.history.replaceState(
+        { tab: 'DASHBOARD' satisfies NavTab },
+        '',
+        window.location.pathname + window.location.search
+      );
+    }
+
+    function handlePopState(event: PopStateEvent) {
+      const stateTab = (event.state as { tab?: NavTab } | null)?.tab;
+      if (stateTab && validTabs.includes(stateTab)) {
+        setActiveTab(stateTab);
+      } else {
+        setActiveTab('DASHBOARD');
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  function navigateToTab(nextTab: NavTab) {
+    if (nextTab === activeTab) return;
+    window.history.pushState(
+      { tab: nextTab },
+      '',
+      `${window.location.pathname}${window.location.search}#${nextTab.toLowerCase()}`
+    );
+    setActiveTab(nextTab);
+  }
+
+  useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
       void syncWithSupabaseCloud();
@@ -346,7 +380,7 @@ export function App() {
         <nav className="mt-5 space-y-1.5">
           <button
             type="button"
-            onClick={() => setActiveTab('DASHBOARD')}
+            onClick={() => navigateToTab('DASHBOARD')}
             className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'DASHBOARD'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
@@ -359,7 +393,7 @@ export function App() {
 
           <button
             type="button"
-            onClick={() => setActiveTab('HALL_LIVE')}
+            onClick={() => navigateToTab('HALL_LIVE')}
             className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'HALL_LIVE'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
@@ -377,7 +411,7 @@ export function App() {
 
           <button
             type="button"
-            onClick={() => setActiveTab('PLANS')}
+            onClick={() => navigateToTab('PLANS')}
             className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'PLANS'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
@@ -390,7 +424,7 @@ export function App() {
 
           <button
             type="button"
-            onClick={() => setActiveTab('EXERCISES')}
+            onClick={() => navigateToTab('EXERCISES')}
             className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'EXERCISES'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
@@ -408,7 +442,7 @@ export function App() {
 
           <button
             type="button"
-            onClick={() => setActiveTab('CLUB_ADMIN')}
+            onClick={() => navigateToTab('CLUB_ADMIN')}
             className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
               activeTab === 'CLUB_ADMIN'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
@@ -517,7 +551,7 @@ export function App() {
 
             <button
               type="button"
-              onClick={() => setActiveTab('HALL_LIVE')}
+              onClick={() => navigateToTab('HALL_LIVE')}
               className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-500"
             >
               <Play className="h-3.5 w-3.5" />
@@ -629,11 +663,11 @@ export function App() {
                 }}
                 onOpenExercise={(ex) => {
                   setSelectedExerciseId(ex.id);
-                  setActiveTab('EXERCISES');
+                  navigateToTab('EXERCISES');
                 }}
                 onStartHallMode={(sessionId) => {
                   setFocusedSessionId(sessionId);
-                  setActiveTab('HALL_LIVE');
+                  navigateToTab('HALL_LIVE');
                 }}
               />
             </div>
@@ -996,11 +1030,11 @@ export function App() {
               templates={templates}
               onOpenSessionInEditor={(sessionId) => {
                 setFocusedSessionId(sessionId);
-                setActiveTab('DASHBOARD');
+                navigateToTab('DASHBOARD');
               }}
               onStartHallMode={(sessionId) => {
                 setFocusedSessionId(sessionId);
-                setActiveTab('HALL_LIVE');
+                navigateToTab('HALL_LIVE');
               }}
             />
           )}
@@ -1023,7 +1057,7 @@ export function App() {
       <nav className="fixed right-0 bottom-0 left-0 z-40 flex items-center justify-around border-t border-slate-800 bg-slate-900/95 py-2 backdrop-blur-md lg:hidden">
         <button
           type="button"
-          onClick={() => setActiveTab('DASHBOARD')}
+          onClick={() => navigateToTab('DASHBOARD')}
           className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'DASHBOARD' ? 'text-blue-400' : 'text-slate-400'
           }`}
@@ -1033,7 +1067,7 @@ export function App() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('HALL_LIVE')}
+          onClick={() => navigateToTab('HALL_LIVE')}
           className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-bold ${
             activeTab === 'HALL_LIVE' ? 'text-emerald-400' : 'text-slate-400'
           }`}
@@ -1043,7 +1077,7 @@ export function App() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('PLANS')}
+          onClick={() => navigateToTab('PLANS')}
           className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'PLANS' ? 'text-blue-400' : 'text-slate-400'
           }`}
@@ -1053,7 +1087,7 @@ export function App() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('EXERCISES')}
+          onClick={() => navigateToTab('EXERCISES')}
           className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'EXERCISES' ? 'text-blue-400' : 'text-slate-400'
           }`}
@@ -1063,7 +1097,7 @@ export function App() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('CLUB_ADMIN')}
+          onClick={() => navigateToTab('CLUB_ADMIN')}
           className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
             activeTab === 'CLUB_ADMIN' ? 'text-blue-400' : 'text-slate-400'
           }`}
