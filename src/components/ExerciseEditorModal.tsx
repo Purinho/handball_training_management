@@ -643,6 +643,16 @@ export function ExerciseEditorModal({
                       type="button"
                       onClick={() => {
                         setAgeGroupError(null);
+                        setAgeGroups(['MINIS', 'F_YOUTH', 'E_YOUTH']);
+                      }}
+                      className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-slate-700"
+                    >
+                      Minis – E-Jugend
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgeGroupError(null);
                         setAgeGroups(['E_YOUTH', 'D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH']);
                       }}
                       className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-slate-700"

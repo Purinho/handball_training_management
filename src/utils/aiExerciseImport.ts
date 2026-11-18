@@ -5,13 +5,18 @@ import type {
   HandballFocusTag,
   MaterialItem,
   MaterialType,
+  TacticBoardAnimationSettings,
   TacticBoardData,
+  TacticKeyframe,
+  TacticKeyframeNodeState,
   TacticNode,
   TacticPath,
+  TacticZone,
   TrainingPhaseCategory,
   VisibilityLevel
 } from '../types/domain';
 import { ALL_AGE_GROUPS, DEFAULT_AGE_GROUPS } from '../constants/handballLabels';
+import { generateKeyframesFromPaths } from './tacticBoardUtils';
 
 export const AI_EXERCISE_SYSTEM_PROMPT = `Du bist ein erfahrener DHB-Handball-Trainer und Daten-Assistent.
 Deine Aufgabe ist es, die vom Nutzer bereitgestellten Handball-Übungen (aus Screenshots, Skizzen-Bildern, PDF-Auszügen oder Web-Texten) in das exakte JSON-Format unserer Handball Trainings-App umzuwandeln.
@@ -28,6 +33,7 @@ Antworte AUSSCHLIESSLICH mit validem JSON (entweder ein einzelnes Objekt oder ei
 - Typische Abwehr-Positionen (6:0):
   - AL: (x: 0.16, y: 0.16), HL: (x: 0.29, y: 0.23), IL: (x: 0.43, y: 0.26), IR: (x: 0.57, y: 0.26), HR: (x: 0.71, y: 0.23), AR: (x: 0.84, y: 0.16), VM (bei 5:1/3:2:1): (x: 0.50, y: 0.38)
 - Wenn auf einer Position im Training eine Warteschlange/Anstellreihe steht, setze "isQueue": true und "queueCount": 3.
+- Optional (v2): "zones" für Ziel-/Sperrzonen ({ id, shape: "RECT"|"ELLIPSE", x, y, width, height, color, opacity, label }), "controlPoint": { "x": 0.35, "y": 0.42 } auf Pfaden für Bogenläufe, sowie "keyframes" für explizite Animations-Szenen.
 
 ### Erlaubte Enum-Werte:
 - phases: ["WARMUP", "SMALL_GAME", "GOALKEEPER_WARMUP", "GROUND_EXERCISE", "GROUND_GAME", "TARGET_GAME", "ATHLETICS_COORDINATION", "COOL_DOWN"]
@@ -131,6 +137,15 @@ function normalizeTacticBoard(rawBoard: unknown): TacticBoardData | undefined {
         };
       });
 
+      const rawCp = item.controlPoint as Record<string, unknown> | undefined;
+      const controlPoint =
+        rawCp && typeof rawCp === 'object'
+          ? {
+              x: clampCoord(rawCp.x, 0.5),
+              y: clampCoord(rawCp.y, 0.5)
+            }
+          : undefined;
+
       return {
         id: typeof item.id === 'string' && item.id ? item.id : `path-${idx + 1}`,
         type: (typeof item.type === 'string' ? item.type : 'RUN_PATH') as TacticPath['type'],
@@ -139,19 +154,94 @@ function normalizeTacticBoard(rawBoard: unknown): TacticBoardData | undefined {
         fromWaypointId: typeof item.fromWaypointId === 'string' ? item.fromWaypointId : undefined,
         toNodeId: typeof item.toNodeId === 'string' ? item.toNodeId : undefined,
         toWaypointId: typeof item.toWaypointId === 'string' ? item.toWaypointId : undefined,
-        points
+        points,
+        controlPoint,
+        curved: Boolean(item.curved || controlPoint)
       };
     })
     .filter((p) => p.points.length >= 2);
 
+  const rawZones = Array.isArray(obj.zones) ? obj.zones : [];
+  const zones: TacticZone[] = rawZones.map((z, idx) => {
+    const item = (z ?? {}) as Record<string, unknown>;
+    return {
+      id: typeof item.id === 'string' && item.id ? item.id : `zone-${idx + 1}`,
+      shape: item.shape === 'ELLIPSE' ? 'ELLIPSE' : 'RECT',
+      x: clampCoord(item.x, 0.5),
+      y: clampCoord(item.y, 0.5),
+      width: Math.min(0.95, Math.max(0.05, Number(item.width) || 0.2)),
+      height: Math.min(0.95, Math.max(0.05, Number(item.height) || 0.15)),
+      rotation: typeof item.rotation === 'number' ? item.rotation : undefined,
+      color: typeof item.color === 'string' ? item.color : '#22c55e',
+      opacity: typeof item.opacity === 'number' ? item.opacity : 0.22,
+      label: typeof item.label === 'string' ? item.label : undefined
+    };
+  });
+
+  const rawKeyframes = Array.isArray(obj.keyframes) ? obj.keyframes : [];
+  const keyframes: TacticKeyframe[] = rawKeyframes.map((kf, idx) => {
+    const item = (kf ?? {}) as Record<string, unknown>;
+    const rawStates =
+      item.nodeStates && typeof item.nodeStates === 'object'
+        ? (item.nodeStates as Record<string, unknown>)
+        : {};
+    const nodeStates: Record<string, TacticKeyframeNodeState> = {};
+    for (const [nid, rawNs] of Object.entries(rawStates)) {
+      const ns = (rawNs ?? {}) as Record<string, unknown>;
+      nodeStates[nid] = {
+        x: clampCoord(ns.x, 0.5),
+        y: clampCoord(ns.y, 0.5),
+        hasBall: typeof ns.hasBall === 'boolean' ? ns.hasBall : undefined,
+        rotation: typeof ns.rotation === 'number' ? ns.rotation : undefined,
+        visible: typeof ns.visible === 'boolean' ? ns.visible : true
+      };
+    }
+    const rawBall =
+      item.ballPosition && typeof item.ballPosition === 'object'
+        ? (item.ballPosition as Record<string, unknown>)
+        : undefined;
+    return {
+      id: typeof item.id === 'string' && item.id ? item.id : `kf-${idx}`,
+      index: typeof item.index === 'number' ? item.index : idx,
+      label: typeof item.label === 'string' ? item.label : undefined,
+      durationMs: typeof item.durationMs === 'number' && item.durationMs > 0 ? item.durationMs : 1400,
+      pauseAfterMs: typeof item.pauseAfterMs === 'number' ? item.pauseAfterMs : 300,
+      nodeStates,
+      activePathIds: Array.isArray(item.activePathIds)
+        ? item.activePathIds.filter((id): id is string => typeof id === 'string')
+        : undefined,
+      ballPosition: rawBall
+        ? {
+            holderNodeId:
+              typeof rawBall.holderNodeId === 'string' ? rawBall.holderNodeId : undefined,
+            x: typeof rawBall.x === 'number' ? clampCoord(rawBall.x, 0.5) : undefined,
+            y: typeof rawBall.y === 'number' ? clampCoord(rawBall.y, 0.5) : undefined
+          }
+        : undefined
+    };
+  });
+
+  const hasV2Features =
+    zones.length > 0 ||
+    keyframes.length > 0 ||
+    paths.some((p) => Boolean(p.controlPoint));
+
+  const animationSettings =
+    obj.animationSettings && typeof obj.animationSettings === 'object'
+      ? (obj.animationSettings as TacticBoardAnimationSettings)
+      : undefined;
+
   return {
-    version: 1,
+    version: hasV2Features || obj.version === 2 ? 2 : 1,
     courtTemplate:
       typeof obj.courtTemplate === 'string'
         ? (obj.courtTemplate as TacticBoardData['courtTemplate'])
         : 'HALF_COURT_VERTICAL',
     nodes,
-    paths
+    paths,
+    ...(zones.length > 0 ? { zones } : {}),
+    ...(keyframes.length > 0 ? { keyframes } : {}),
+    ...(animationSettings ? { animationSettings } : {})
   };
 }
 
@@ -159,7 +249,8 @@ export function parseAndNormalizeAiExerciseJson(
   rawInput: string,
   clubId: string,
   visibility: VisibilityLevel = 'CLUB',
-  ownerTeamId?: string
+  ownerTeamId?: string,
+  autoGenerateAnimation = false
 ): Exercise[] {
   const trimmed = rawInput
     .trim()
@@ -248,7 +339,18 @@ export function parseAndNormalizeAiExerciseJson(
         typeof item.variations_text === 'string' ? item.variations_text : '',
       source_url: typeof item.source_url === 'string' ? item.source_url : undefined,
       external_links: [],
-      tactic_board_data: normalizeTacticBoard(item.tactic_board_data),
+      tactic_board_data: (() => {
+        const board = normalizeTacticBoard(item.tactic_board_data);
+        if (
+          board &&
+          autoGenerateAnimation &&
+          (!board.keyframes || board.keyframes.length === 0) &&
+          board.paths.length > 0
+        ) {
+          return generateKeyframesFromPaths(board);
+        }
+        return board;
+      })(),
       is_deleted: false,
       created_at: now,
       updated_at: now

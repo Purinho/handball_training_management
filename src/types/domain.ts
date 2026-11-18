@@ -101,6 +101,19 @@ export interface TacticNode {
   rotation?: number;
 }
 
+export interface TacticZone {
+  id: string;
+  shape: 'RECT' | 'ELLIPSE';
+  x: number; // Normalized center X 0.0 to 1.0
+  y: number; // Normalized center Y 0.0 to 1.0
+  width: number; // Normalized 0.0 to 1.0
+  height: number; // Normalized 0.0 to 1.0
+  rotation?: number;
+  color: string; // e.g. '#EF4444' or '#22C55E'
+  opacity?: number; // Default: 0.22
+  label?: string;
+}
+
 export interface TacticPathPoint {
   x: number;
   y: number;
@@ -115,8 +128,39 @@ export interface TacticPath {
   toNodeId?: string;
   toWaypointId?: string;
   points: TacticPathPoint[];
+  controlPoint?: { x: number; y: number };
   curved?: boolean;
   color?: string;
+}
+
+export interface TacticKeyframeNodeState {
+  x: number;
+  y: number;
+  hasBall?: boolean;
+  rotation?: number;
+  visible?: boolean;
+}
+
+export interface TacticKeyframe {
+  id: string;
+  index: number;
+  label?: string;
+  durationMs: number;
+  pauseAfterMs?: number;
+  nodeStates: Record<string, TacticKeyframeNodeState>;
+  activePathIds?: string[];
+  ballPosition?: {
+    holderNodeId?: string;
+    x?: number;
+    y?: number;
+  };
+}
+
+export interface TacticBoardAnimationSettings {
+  defaultSpeed: 0.5 | 1 | 1.5 | 2;
+  loop: boolean;
+  showTrails: boolean;
+  showPathsDuringPlay: boolean;
 }
 
 export interface TacticBoardData {
@@ -125,6 +169,9 @@ export interface TacticBoardData {
   presetUsed?: string;
   nodes: TacticNode[];
   paths: TacticPath[];
+  zones?: TacticZone[];
+  keyframes?: TacticKeyframe[];
+  animationSettings?: TacticBoardAnimationSettings;
 }
 
 export interface Club {
@@ -203,6 +250,7 @@ export interface Exercise {
   reference_image_data?: string;
   external_links: ExternalLink[];
   tactic_board_data?: TacticBoardData;
+  is_favorite?: boolean;
   is_deleted: boolean;
   created_at: string;
   updated_at: string;

@@ -87,13 +87,14 @@ export function AiExerciseImporterModal({
   const [activeTab, setActiveTab] = useState<'IMPORT' | 'PROMPT'>('IMPORT');
   const [jsonInput, setJsonInput] = useState('');
   const [visibility, setVisibility] = useState<VisibilityLevel>('CLUB');
+  const [autoGenerateAnimation, setAutoGenerateAnimation] = useState(true);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [previewList, setPreviewList] = useState<Exercise[]>([]);
 
   if (!isOpen) return null;
 
-  function handleValidateAndPreview(inputText: string) {
+  function handleValidateAndPreview(inputText: string, autoAnim = autoGenerateAnimation) {
     setJsonInput(inputText);
     if (!inputText.trim()) {
       setPreviewList([]);
@@ -105,7 +106,8 @@ export function AiExerciseImporterModal({
         inputText,
         clubId,
         visibility,
-        activeTeamId
+        activeTeamId,
+        autoAnim
       );
       setPreviewList(parsed);
       setErrorMsg(null);
@@ -246,6 +248,22 @@ export function AiExerciseImporterModal({
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
               {/* Left: JSON Input */}
               <div className="space-y-3 lg:col-span-5">
+                <label className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-950/20 px-3 py-2 text-xs text-emerald-200 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={autoGenerateAnimation}
+                    onChange={(e) => {
+                      const next = e.target.checked;
+                      setAutoGenerateAnimation(next);
+                      if (jsonInput.trim()) {
+                        handleValidateAndPreview(jsonInput, next);
+                      }
+                    }}
+                    className="h-4 w-4 rounded accent-emerald-500"
+                  />
+                  Nummerierte Schritte automatisch als Animation importieren
+                </label>
+
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold text-slate-300">
                     Von der KI generiertes JSON hier einfügen:

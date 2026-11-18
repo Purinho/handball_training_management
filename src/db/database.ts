@@ -48,6 +48,10 @@ export class HandballTrainingDB extends Dexie {
       sessionNotes: 'id, training_session_id, session_block_id, author_member_id, created_at',
       syncOutbox: '++id, entity_table, entity_id, synced, created_at'
     });
+
+    this.version(2).stores({
+      exercises: 'id, club_id, parent_exercise_id, visibility, owner_team_id, is_favorite, is_deleted, updated_at'
+    });
   }
 }
 

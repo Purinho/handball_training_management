@@ -4,6 +4,7 @@ interface TacticPlayerGlyphProps {
   node: TacticNode;
   isSelected?: boolean;
   scale?: number;
+  opacity?: number;
 }
 
 export function getDefaultNodeRotation(node: TacticNode): number {
@@ -20,7 +21,8 @@ export function getDefaultNodeRotation(node: TacticNode): number {
 export function TacticPlayerGlyph({
   node,
   isSelected = false,
-  scale = 1
+  scale = 1,
+  opacity = 1
 }: TacticPlayerGlyphProps) {
   const isOffense = node.type === 'OFFENSE_PLAYER';
   const isDefense = node.type === 'DEFENSE_PLAYER';
@@ -38,10 +40,11 @@ export function TacticPlayerGlyph({
           ? '#8b5cf6'
           : '#1e3a8a');
 
-  const accentTipFill = isDefense ? '#fca5a5' : '#60a5fa';
+  // Schwarze Blickrichtung für maximalen Kontrast auf allen Spielfeldfarben
+  const gazeFill = '#0f172a';
 
   return (
-    <g transform={`scale(${scale})`}>
+    <g transform={`scale(${scale})`} opacity={opacity}>
       {isSelected && (
         <circle
           r="23"
@@ -92,7 +95,7 @@ export function TacticPlayerGlyph({
           />
           <polygon
             points="0,-20 6.7,-7 -6.7,-7"
-            fill={accentTipFill}
+            fill={gazeFill}
             stroke="#ffffff"
             strokeWidth="1.2"
             strokeLinejoin="round"
@@ -100,7 +103,7 @@ export function TacticPlayerGlyph({
         </g>
       ) : isDefense ? (
         <g transform={`rotate(${rotation})`}>
-          {/* Verteidiger: Kreis mit kleiner ausgefüllter Fläche in Blickrichtung */}
+          {/* Verteidiger: Kreis mit vergrößertem schwarzem Blickrichtungs-Segment (bis y = -7 bei r = 16) */}
           <circle
             r="16"
             fill={fill}
@@ -108,8 +111,8 @@ export function TacticPlayerGlyph({
             strokeWidth="2.2"
           />
           <path
-            d="M -10.3 -12.2 A 16 16 0 0 1 10.3 -12.2 Z"
-            fill={accentTipFill}
+            d="M -14.39 -7 A 16 16 0 0 1 14.39 -7 Z"
+            fill={gazeFill}
             stroke="#ffffff"
             strokeWidth="1.2"
           />

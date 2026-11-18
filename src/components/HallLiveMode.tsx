@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
+  Bell,
+  BellOff,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
@@ -8,13 +10,16 @@ import {
   GitBranch,
   Maximize2,
   MessageSquarePlus,
+  Minus,
   Package,
   Pause,
   Play,
+  Plus,
   RefreshCw,
   RotateCcw,
   Sun,
-  Timer
+  Timer,
+  Trophy
 } from 'lucide-react';
 import { db, queueSyncOperation } from '../db/database';
 import type {
@@ -157,10 +162,97 @@ export function HallLiveMode({
   // Section Countdown Timer state
   const [remainingSeconds, setRemainingSeconds] = useState<number>(15 * 60);
   const [timerRunning, setTimerRunning] = useState<boolean>(false);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [timerTab, setTimerTab] = useState<'SECTION' | 'INTERVAL'>('SECTION');
+
+  // Interval / Circuit Timer state
+  const [intervalWorkSec, setIntervalWorkSec] = useState(30);
+  const [intervalRestSec, setIntervalRestSec] = useState(15);
+  const [intervalRounds, setIntervalRounds] = useState(8);
+  const [intervalCurrentRound, setIntervalCurrentRound] = useState(1);
+  const [intervalPhase, setIntervalPhase] = useState<'WORK' | 'REST'>('WORK');
+  const [intervalSecLeft, setIntervalSecLeft] = useState(30);
+  const [intervalRunning, setIntervalRunning] = useState(false);
+
+  // Live Scoreboard state (Team A vs. Team B)
+  const [showScoreboard, setShowScoreboard] = useState(false);
+  const [teamAName, setTeamAName] = useState('Team A');
+  const [teamBName, setTeamBName] = useState('Team B');
+  const [scoreA, setScoreA] = useState(0);
+  const [scoreB, setScoreB] = useState(0);
 
   // Interval Stopwatch state
   const [stopwatchSeconds, setStopwatchSeconds] = useState<number>(0);
   const [stopwatchRunning, setStopwatchRunning] = useState<boolean>(false);
+
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const remainingSecondsRef = useRef<number>(remainingSeconds);
+  remainingSecondsRef.current = remainingSeconds;
+  const intervalSecLeftRef = useRef<number>(intervalSecLeft);
+  intervalSecLeftRef.current = intervalSecLeft;
+
+  function getOrCreateAudioContext(): AudioContext | null {
+    try {
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return null;
+      if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
+        audioCtxRef.current = new AudioCtx();
+      }
+      return audioCtxRef.current;
+    } catch {
+      return null;
+    }
+  }
+
+  function unlockAudio() {
+    const ctx = getOrCreateAudioContext();
+    if (ctx && ctx.state === 'suspended') {
+      void ctx.resume();
+    }
+  }
+
+  function triggerAlertSignal(high = false) {
+    if (soundEnabled) {
+      try {
+        const ctx = getOrCreateAudioContext();
+        if (ctx) {
+          if (ctx.state === 'suspended') {
+            void ctx.resume();
+          }
+          const now = ctx.currentTime;
+          const playTone = (startOffset: number, freq: number, duration: number) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + startOffset);
+            gain.gain.setValueAtTime(0.35, now + startOffset);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + startOffset + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + startOffset);
+            osc.stop(now + startOffset + duration);
+          };
+
+          if (high) {
+            // Double whistle-like beep for work/session end
+            playTone(0, 880, 0.22);
+            playTone(0.26, 1046.5, 0.35);
+          } else {
+            // Crisp two-tone signal for transition to rest
+            playTone(0, 660, 0.2);
+            playTone(0.24, 523.25, 0.28);
+          }
+        }
+      } catch {
+        // Ignore audio errors if blocked by browser autoplay policy
+      }
+    }
+    if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+      navigator.vibrate(high ? [250, 100, 250] : [200]);
+    }
+  }
 
   // Fullscreen Chalkboard modal state
   const [chalkboardOpen, setChalkboardOpen] = useState(false);
@@ -209,10 +301,61 @@ export function HallLiveMode({
   useEffect(() => {
     if (!timerRunning) return;
     const id = window.setInterval(() => {
-      setRemainingSeconds((prev) => (prev > 0 ? prev - 1 : 0));
+      const current = remainingSecondsRef.current;
+      if (current <= 1) {
+        remainingSecondsRef.current = 0;
+        setRemainingSeconds(0);
+        setTimerRunning(false);
+        triggerAlertSignal(true);
+      } else {
+        remainingSecondsRef.current = current - 1;
+        setRemainingSeconds(current - 1);
+      }
     }, 1000);
     return () => window.clearInterval(id);
-  }, [timerRunning]);
+  }, [timerRunning, soundEnabled]);
+
+  // Interval / Circuit Timer loop
+  useEffect(() => {
+    if (!intervalRunning) return;
+    const id = window.setInterval(() => {
+      const current = intervalSecLeftRef.current;
+      if (current > 1) {
+        intervalSecLeftRef.current = current - 1;
+        setIntervalSecLeft(current - 1);
+        return;
+      }
+
+      if (intervalPhase === 'WORK') {
+        if (intervalCurrentRound >= intervalRounds) {
+          intervalSecLeftRef.current = 0;
+          setIntervalSecLeft(0);
+          setIntervalRunning(false);
+          triggerAlertSignal(true);
+        } else {
+          intervalSecLeftRef.current = intervalRestSec;
+          setIntervalPhase('REST');
+          setIntervalSecLeft(intervalRestSec);
+          triggerAlertSignal(false);
+        }
+      } else {
+        intervalSecLeftRef.current = intervalWorkSec;
+        setIntervalCurrentRound((r) => r + 1);
+        setIntervalPhase('WORK');
+        setIntervalSecLeft(intervalWorkSec);
+        triggerAlertSignal(true);
+      }
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [
+    intervalRunning,
+    intervalPhase,
+    intervalCurrentRound,
+    intervalRounds,
+    intervalWorkSec,
+    intervalRestSec,
+    soundEnabled
+  ]);
 
   // Stopwatch interval
   useEffect(() => {
@@ -338,6 +481,36 @@ export function HallLiveMode({
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
+              onClick={() => {
+                unlockAudio();
+                setSoundEnabled((s) => !s);
+              }}
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold transition ${
+                soundEnabled
+                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-300'
+                  : 'border-slate-700 bg-slate-800 text-slate-400'
+              }`}
+              title="Audio-/Vibrations-Signal bei Timer-Ablauf"
+            >
+              {soundEnabled ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
+              <span className="hidden sm:inline">{soundEnabled ? 'Signal an' : 'Stumm'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowScoreboard((s) => !s)}
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold transition ${
+                showScoreboard
+                  ? 'border-blue-500 bg-blue-600 text-white'
+                  : 'border-blue-500/40 bg-blue-950/40 text-blue-300 hover:bg-blue-900/50'
+              }`}
+            >
+              <Trophy className="h-4 w-4" />
+              Punkte ({scoreA}:{scoreB})
+            </button>
+
+            <button
+              type="button"
               onClick={() => setShowPackingList((prev) => !prev)}
               className={`inline-flex min-h-[44px] items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition ${
                 showPackingList
@@ -387,6 +560,84 @@ export function HallLiveMode({
           </div>
         </div>
 
+        {/* Live-Punktezähler (Team A vs. Team B) */}
+        {showScoreboard && (
+          <div className="mt-4 rounded-xl border border-blue-500/40 bg-slate-950 p-4">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-xs font-bold text-blue-300 uppercase">
+                Live-Punktezähler (Wettkampf-Spielform)
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setScoreA(0);
+                  setScoreB(0);
+                }}
+                className="min-h-[36px] rounded-lg bg-slate-800 px-3 text-xs font-bold text-slate-300 hover:bg-slate-700"
+              >
+                Reset 0:0
+              </button>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="flex items-center justify-between rounded-xl border border-blue-500/30 bg-blue-950/30 p-3">
+                <input
+                  type="text"
+                  value={teamAName}
+                  onChange={(e) => setTeamAName(e.target.value)}
+                  className="w-28 rounded bg-transparent text-sm font-bold text-blue-200 focus:bg-slate-900 focus:px-2 focus:outline-none"
+                />
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setScoreA((s) => Math.max(0, s - 1))}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-slate-700"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="min-w-[40px] text-center font-mono text-3xl font-black text-white">
+                    {scoreA}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setScoreA((s) => s + 1)}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white hover:bg-blue-500"
+                  >
+                    <Plus className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between rounded-xl border border-rose-500/30 bg-rose-950/30 p-3">
+                <input
+                  type="text"
+                  value={teamBName}
+                  onChange={(e) => setTeamBName(e.target.value)}
+                  className="w-28 rounded bg-transparent text-sm font-bold text-rose-200 focus:bg-slate-900 focus:px-2 focus:outline-none"
+                />
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setScoreB((s) => Math.max(0, s - 1))}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-white hover:bg-slate-700"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="min-w-[40px] text-center font-mono text-3xl font-black text-white">
+                    {scoreB}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setScoreB((s) => s + 1)}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-600 text-white hover:bg-rose-500"
+                  >
+                    <Plus className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Collapsible Equipment Room Packing Checklist */}
         {showPackingList && (
           <div className="mt-4 rounded-xl border border-amber-500/40 bg-slate-950 p-4">
@@ -422,81 +673,244 @@ export function HallLiveMode({
       {/* Timer & Step Navigation Bar (Touch-Optimized >= 48px) */}
       {activeBlock && activePhase && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-          {/* Countdown Timer for Active Block (8 Cols) */}
+          {/* Countdown Timer / Interval Timer Switchable Card (8 Cols) */}
           <div
-            className={`flex flex-wrap items-center justify-between gap-4 rounded-2xl border p-5 lg:col-span-8 ${
-              remainingSeconds === 0
+            className={`rounded-2xl border p-5 lg:col-span-8 space-y-4 ${
+              (timerTab === 'SECTION' && remainingSeconds === 0) ||
+              (timerTab === 'INTERVAL' && intervalSecLeft === 0)
                 ? 'border-rose-500 bg-rose-950/40'
-                : timerRunning
+                : (timerTab === 'SECTION' && timerRunning) ||
+                    (timerTab === 'INTERVAL' && intervalRunning)
                   ? 'border-emerald-500/70 bg-emerald-950/20'
                   : 'border-slate-800 bg-slate-900'
             }`}
           >
-            <div className="flex items-center gap-4">
-              <div className="font-mono text-4xl font-black tracking-tight text-white sm:text-5xl">
-                {formatSeconds(remainingSeconds)}
+            {/* Timer Mode Tabs */}
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+              <div className="inline-flex rounded-xl border border-slate-700 bg-slate-950 p-0.5 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setTimerTab('SECTION')}
+                  className={`min-h-[36px] rounded-lg px-3 font-bold transition ${
+                    timerTab === 'SECTION'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  Abschnitts-Timer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimerTab('INTERVAL')}
+                  className={`min-h-[36px] rounded-lg px-3 font-bold transition ${
+                    timerTab === 'INTERVAL'
+                      ? 'bg-amber-500 text-slate-950'
+                      : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  Intervall / Zirkel
+                </button>
               </div>
-              <div>
-                <div className="text-xs font-bold text-blue-400 uppercase">
-                  Abschnitt {activeIndex + 1} / {visibleBlocksWithPhase.length} · {activePhase.name}
+
+              {timerTab === 'INTERVAL' && (
+                <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                  {[
+                    { label: 'Tabata 20/10×8', w: 20, r: 10, n: 8 },
+                    { label: '30/15×8', w: 30, r: 15, n: 8 },
+                    { label: '45/15×6', w: 45, r: 15, n: 6 }
+                  ].map((preset) => (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => {
+                        setIntervalRunning(false);
+                        setIntervalWorkSec(preset.w);
+                        setIntervalRestSec(preset.r);
+                        setIntervalRounds(preset.n);
+                        setIntervalCurrentRound(1);
+                        setIntervalPhase('WORK');
+                        setIntervalSecLeft(preset.w);
+                      }}
+                      className="rounded-lg bg-slate-800 px-2.5 py-1 font-semibold text-amber-300 hover:bg-slate-700"
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
                 </div>
-                <div className="text-sm font-bold text-white">
-                  {activeBlock.track_label} ({activeBlock.custom_duration_min} Min geplant)
-                </div>
-              </div>
+              )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setTimerRunning((prev) => !prev)}
-                className={`inline-flex min-h-[48px] items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition ${
-                  timerRunning
-                    ? 'bg-amber-600 hover:bg-amber-500'
-                    : 'bg-emerald-600 hover:bg-emerald-500'
-                }`}
-              >
-                {timerRunning ? (
-                  <>
-                    <Pause className="h-4 w-4" />
-                    Pause
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-4 w-4" />
-                    Timer Start
-                  </>
-                )}
-              </button>
+            {timerTab === 'SECTION' ? (
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="font-mono text-4xl font-black tracking-tight text-white sm:text-5xl">
+                    {formatSeconds(remainingSeconds)}
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-blue-400 uppercase">
+                      Abschnitt {activeIndex + 1} / {visibleBlocksWithPhase.length} · {activePhase.name}
+                    </div>
+                    <div className="text-sm font-bold text-white">
+                      {activeBlock.track_label} ({activeBlock.custom_duration_min} Min geplant)
+                    </div>
+                  </div>
+                </div>
 
-              <button
-                type="button"
-                onClick={() => setRemainingSeconds((prev) => prev + 60)}
-                className="min-h-[48px] rounded-xl bg-slate-800 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-700"
-              >
-                +1 Min
-              </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      unlockAudio();
+                      setTimerRunning((prev) => !prev);
+                    }}
+                    className={`inline-flex min-h-[48px] items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition ${
+                      timerRunning
+                        ? 'bg-amber-600 hover:bg-amber-500'
+                        : 'bg-emerald-600 hover:bg-emerald-500'
+                    }`}
+                  >
+                    {timerRunning ? (
+                      <>
+                        <Pause className="h-4 w-4" />
+                        Pause
+                      </>
+                    ) : (
+                      <>
+                        <Play className="h-4 w-4" />
+                        Timer Start
+                      </>
+                    )}
+                  </button>
 
-              <button
-                type="button"
-                onClick={() => setRemainingSeconds((prev) => prev + 120)}
-                className="min-h-[48px] rounded-xl bg-slate-800 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-700"
-              >
-                +2 Min
-              </button>
+                  <button
+                    type="button"
+                    onClick={() => setRemainingSeconds((prev) => prev + 60)}
+                    className="min-h-[48px] rounded-xl bg-slate-800 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-700"
+                  >
+                    +1 Min
+                  </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setTimerRunning(false);
-                  setRemainingSeconds((activeBlock.custom_duration_min || 15) * 60);
-                }}
-                className="min-h-[48px] rounded-xl bg-slate-800 p-3 text-slate-300 hover:bg-slate-700"
-                title="Timer zurücksetzen"
-              >
-                <RotateCcw className="h-4 w-4" />
-              </button>
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => setRemainingSeconds((prev) => prev + 120)}
+                    className="min-h-[48px] rounded-xl bg-slate-800 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-700"
+                  >
+                    +2 Min
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTimerRunning(false);
+                      setRemainingSeconds((activeBlock.custom_duration_min || 15) * 60);
+                    }}
+                    className="min-h-[48px] rounded-xl bg-slate-800 p-3 text-slate-300 hover:bg-slate-700"
+                    title="Timer zurücksetzen"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="font-mono text-4xl font-black tracking-tight text-white sm:text-5xl">
+                      {formatSeconds(intervalSecLeft)}
+                    </div>
+                    <div>
+                      <span
+                        className={`inline-block rounded-lg px-2.5 py-0.5 text-xs font-extrabold uppercase ${
+                          intervalPhase === 'WORK'
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-amber-500 text-slate-950'
+                        }`}
+                      >
+                        {intervalPhase === 'WORK' ? 'Belastung' : 'Pause'}
+                      </span>
+                      <div className="mt-1 text-sm font-bold text-white">
+                        Runde {intervalCurrentRound} / {intervalRounds}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        unlockAudio();
+                        setIntervalRunning((p) => !p);
+                      }}
+                      className={`inline-flex min-h-[48px] items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white ${
+                        intervalRunning
+                          ? 'bg-amber-600 hover:bg-amber-500'
+                          : 'bg-emerald-600 hover:bg-emerald-500'
+                      }`}
+                    >
+                      {intervalRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                      {intervalRunning ? 'Pause' : 'Intervall Start'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIntervalRunning(false);
+                        setIntervalCurrentRound(1);
+                        setIntervalPhase('WORK');
+                        setIntervalSecLeft(intervalWorkSec);
+                      }}
+                      className="min-h-[48px] rounded-xl bg-slate-800 p-3 text-slate-300 hover:bg-slate-700"
+                      title="Intervall zurücksetzen"
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300">
+                  <label className="flex items-center gap-1.5">
+                    Belastung (s):
+                    <input
+                      type="number"
+                      min={5}
+                      max={300}
+                      value={intervalWorkSec}
+                      onChange={(e) => {
+                        const v = Math.max(5, Number(e.target.value) || 30);
+                        setIntervalWorkSec(v);
+                        if (!intervalRunning && intervalPhase === 'WORK') setIntervalSecLeft(v);
+                      }}
+                      className="w-16 rounded-lg border border-slate-700 bg-slate-950 px-2 py-1 text-center font-bold text-white"
+                    />
+                  </label>
+                  <label className="flex items-center gap-1.5">
+                    Pause (s):
+                    <input
+                      type="number"
+                      min={5}
+                      max={300}
+                      value={intervalRestSec}
+                      onChange={(e) => {
+                        const v = Math.max(5, Number(e.target.value) || 15);
+                        setIntervalRestSec(v);
+                        if (!intervalRunning && intervalPhase === 'REST') setIntervalSecLeft(v);
+                      }}
+                      className="w-16 rounded-lg border border-slate-700 bg-slate-950 px-2 py-1 text-center font-bold text-white"
+                    />
+                  </label>
+                  <label className="flex items-center gap-1.5">
+                    Runden:
+                    <input
+                      type="number"
+                      min={1}
+                      max={30}
+                      value={intervalRounds}
+                      onChange={(e) => setIntervalRounds(Math.max(1, Number(e.target.value) || 8))}
+                      className="w-14 rounded-lg border border-slate-700 bg-slate-950 px-2 py-1 text-center font-bold text-white"
+                    />
+                  </label>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Interval Stopwatch & Prev/Next Block Step Controls (4 Cols) */}
@@ -555,6 +969,39 @@ export function HallLiveMode({
           </div>
         </div>
       )}
+
+      {/* Kompakte „Als Nächstes“-Vorschau */}
+      {(() => {
+        const nextItem = visibleBlocksWithPhase[activeIndex + 1];
+        if (!nextItem) return null;
+        const nextEx = nextItem.block.exercise_id
+          ? exercisesById.get(nextItem.block.exercise_id)
+          : undefined;
+        const nextTitle =
+          nextEx?.title ?? nextItem.block.quick_block_title ?? 'Nächster Trainingsblock';
+        const nextMaterials = nextEx?.materials ?? [];
+        return (
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-2.5 text-xs">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded bg-slate-800 px-2 py-0.5 font-bold text-amber-300 uppercase">
+                Als Nächstes
+              </span>
+              <span className="font-bold text-white">{nextTitle}</span>
+              <span className="text-slate-400">
+                ({nextItem.block.custom_duration_min} Min · {nextItem.phase.name})
+              </span>
+            </div>
+            {nextMaterials.length > 0 && (
+              <div className="text-slate-300">
+                Material:{' '}
+                {nextMaterials
+                  .map((m) => `${m.quantity}× ${MATERIAL_LABELS[m.type]}`)
+                  .join(', ')}
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Main Hall Split-View: Left TacticBoard + Fullscreen Chalkboard Trigger | Right Coaching Points, Quick-Swap & Live Notes */}
       {activeBlock && (

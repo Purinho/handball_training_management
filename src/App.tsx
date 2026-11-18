@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import {
+  ArrowLeft,
   BookOpen,
   Bot,
   Building2,
@@ -11,12 +12,15 @@ import {
   Edit3,
   ExternalLink as ExternalLinkIcon,
   FileDown,
+  Filter,
   GitBranch,
   LayoutDashboard,
   Play,
   Plus,
+  Printer,
   Search,
   Sparkles,
+  Star,
   Trash2,
   User,
   Wifi,
@@ -33,6 +37,7 @@ import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
 import { TrainingSessionPlanner } from './components/TrainingSessionPlanner';
 import { MultiWeekPlanManager } from './components/MultiWeekPlanManager';
 import { HallLiveMode } from './components/HallLiveMode';
+import { PrintExportModal, type PrintExportTarget } from './components/PrintExportModal';
 import {
   exportClubDatabaseSnapshot,
   syncWithSupabaseCloud
@@ -46,7 +51,14 @@ import {
   PHASE_CATEGORY_LABELS,
   VISIBILITY_LABELS
 } from './constants/handballLabels';
-import type { AgeGroup, Exercise, VisibilityLevel } from './types/domain';
+import type {
+  AgeGroup,
+  ComplexityLevel,
+  Exercise,
+  HandballFocusTag,
+  TrainingPhaseCategory,
+  VisibilityLevel
+} from './types/domain';
 
 type NavTab = 'DASHBOARD' | 'HALL_LIVE' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
 
@@ -66,7 +78,15 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [visibilityFilter, setVisibilityFilter] = useState<'ALL' | VisibilityLevel>('ALL');
   const [ageGroupFilter, setAgeGroupFilter] = useState<'ALL' | AgeGroup>('ALL');
+  const [phaseFilter, setPhaseFilter] = useState<'ALL' | TrainingPhaseCategory>('ALL');
+  const [focusFilter, setFocusFilter] = useState<'ALL' | HandballFocusTag>('ALL');
+  const [levelFilter, setLevelFilter] = useState<'ALL' | ComplexityLevel>('ALL');
+  const [playerCountFilter, setPlayerCountFilter] = useState<string>('');
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
+  const [printTarget, setPrintTarget] = useState<PrintExportTarget | null>(null);
   const [editorModalOpen, setEditorModalOpen] = useState(false);
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [variantParentExercise, setVariantParentExercise] = useState<Exercise | null>(null);
@@ -149,6 +169,9 @@ export function App() {
 
   function navigateToTab(nextTab: NavTab) {
     if (nextTab === activeTab) return;
+    if (nextTab !== 'EXERCISES') {
+      setMobileDetailOpen(false);
+    }
     window.history.pushState(
       { tab: nextTab },
       '',
@@ -197,34 +220,67 @@ export function App() {
   }, [exercises]);
 
   const filteredExercises = useMemo(() => {
-    return exercises.filter((ex) => {
-      if (visibilityFilter !== 'ALL' && ex.visibility !== visibilityFilter) {
-        return false;
-      }
-      if (
-        ageGroupFilter !== 'ALL' &&
-        !(ex.categories.age_groups ?? []).includes(ageGroupFilter)
-      ) {
-        return false;
-      }
-      if (
-        ex.visibility === 'TEAM' &&
-        ex.owner_team_id &&
-        activeTeam &&
-        ex.owner_team_id !== activeTeam.id
-      ) {
-        return false;
-      }
-      if (!searchQuery.trim()) return true;
-      const q = searchQuery.toLowerCase();
-      return (
-        ex.title.toLowerCase().includes(q) ||
-        ex.setup_description.toLowerCase().includes(q) ||
-        ex.flow_description.toLowerCase().includes(q) ||
-        ex.coaching_points.toLowerCase().includes(q)
-      );
-    });
-  }, [exercises, visibilityFilter, ageGroupFilter, searchQuery, activeTeam]);
+    const playerCountNum = Number(playerCountFilter);
+    const hasPlayerFilter = playerCountFilter.trim() !== '' && !Number.isNaN(playerCountNum) && playerCountNum > 0;
+
+    return exercises
+      .filter((ex) => {
+        if (favoritesOnly && !ex.is_favorite) return false;
+        if (visibilityFilter !== 'ALL' && ex.visibility !== visibilityFilter) {
+          return false;
+        }
+        if (
+          ageGroupFilter !== 'ALL' &&
+          !(ex.categories.age_groups ?? []).includes(ageGroupFilter)
+        ) {
+          return false;
+        }
+        if (phaseFilter !== 'ALL' && !ex.categories.phases.includes(phaseFilter)) {
+          return false;
+        }
+        if (focusFilter !== 'ALL' && !ex.categories.focus.includes(focusFilter)) {
+          return false;
+        }
+        if (levelFilter !== 'ALL' && ex.categories.level !== levelFilter) {
+          return false;
+        }
+        if (
+          hasPlayerFilter &&
+          (playerCountNum < ex.min_players || playerCountNum > ex.max_players)
+        ) {
+          return false;
+        }
+        if (
+          ex.visibility === 'TEAM' &&
+          ex.owner_team_id &&
+          activeTeam &&
+          ex.owner_team_id !== activeTeam.id
+        ) {
+          return false;
+        }
+        if (!searchQuery.trim()) return true;
+        const q = searchQuery.toLowerCase();
+        return (
+          ex.title.toLowerCase().includes(q) ||
+          ex.setup_description.toLowerCase().includes(q) ||
+          ex.flow_description.toLowerCase().includes(q) ||
+          ex.coaching_points.toLowerCase().includes(q) ||
+          (ex.variations_text ?? '').toLowerCase().includes(q)
+        );
+      })
+      .sort((a, b) => Number(Boolean(b.is_favorite)) - Number(Boolean(a.is_favorite)));
+  }, [
+    exercises,
+    favoritesOnly,
+    visibilityFilter,
+    ageGroupFilter,
+    phaseFilter,
+    focusFilter,
+    levelFilter,
+    playerCountFilter,
+    searchQuery,
+    activeTeam
+  ]);
 
   const activeExercise = useMemo(() => {
     if (selectedExerciseId && exercisesById.has(selectedExerciseId)) {
@@ -284,7 +340,18 @@ export function App() {
     await queueSyncOperation('exercises', updated.id, 'DELETE', updated);
     if (selectedExerciseId === ex.id) {
       setSelectedExerciseId(null);
+      setMobileDetailOpen(false);
     }
+  }
+
+  async function handleToggleFavorite(ex: Exercise) {
+    const updated: Exercise = {
+      ...ex,
+      is_favorite: !ex.is_favorite,
+      updated_at: new Date().toISOString()
+    };
+    await db.exercises.put(updated);
+    await queueSyncOperation('exercises', updated.id, 'UPSERT', updated);
   }
 
   async function handleManualCloudSync() {
@@ -354,7 +421,8 @@ export function App() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 lg:flex-row">
+    <>
+    <div className="no-print flex min-h-screen flex-col bg-slate-950 text-slate-100 lg:flex-row">
       {/* Linke Navigation (Desktop & Tablet Querformat) */}
       <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-800/90 bg-slate-900/90 p-5 lg:sticky lg:top-0 lg:flex lg:h-screen lg:overflow-y-auto">
         <div className="flex items-center gap-3 pb-5 border-b border-slate-800">
@@ -672,11 +740,28 @@ export function App() {
                 }}
                 onOpenExercise={(ex) => {
                   setSelectedExerciseId(ex.id);
+                  setMobileDetailOpen(true);
                   navigateToTab('EXERCISES');
                 }}
                 onStartHallMode={(sessionId) => {
                   setFocusedSessionId(sessionId);
                   navigateToTab('HALL_LIVE');
+                }}
+                onPrintSession={(session) => {
+                  const sessionPhases = phases.filter((p) => p.training_session_id === session.id);
+                  const linkedWeek = session.plan_week_id
+                    ? activePlanWeeks.find((pw) => pw.id === session.plan_week_id)
+                    : activePlanWeeks[1] ?? activePlanWeeks[0];
+                  setPrintTarget({
+                    kind: 'SESSION',
+                    team: activeTeam,
+                    session,
+                    phases: sessionPhases,
+                    blocks,
+                    exercisesById,
+                    members,
+                    focusTheme: linkedWeek?.focus_theme
+                  });
                 }}
               />
             </div>
@@ -736,68 +821,153 @@ export function App() {
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
                 <div className="space-y-4 lg:col-span-5">
                   <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 space-y-3">
-                    <div className="relative">
-                      <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="Übung, Schwerpunkt oder Coaching-Punkt suchen..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
-                      />
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5">
-                      {(['ALL', 'CLUB', 'TEAM'] as const).map((vis) => (
-                        <button
-                          key={vis}
-                          type="button"
-                          onClick={() => setVisibilityFilter(vis)}
-                          className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
-                            visibilityFilter === vis
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                          }`}
-                        >
-                          {vis === 'ALL'
-                            ? 'Alle Sichtbarkeiten'
-                            : vis === 'CLUB'
-                              ? 'Vereins-Pool (CLUB)'
-                              : 'Nur mein Team (TEAM)'}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="space-y-1.5 border-t border-slate-800 pt-3">
-                      <div className="text-[11px] font-semibold text-slate-400">
-                        Altersstufe
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1">
+                        <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="Übung, Schwerpunkt, Ablauf oder Variante suchen..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="min-h-[44px] w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
+                        />
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => setFavoritesOnly((f) => !f)}
+                        className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border px-3 text-xs font-bold transition ${
+                          favoritesOnly
+                            ? 'border-amber-400 bg-amber-500 text-slate-950'
+                            : 'border-slate-700 bg-slate-800 text-amber-300 hover:bg-slate-700'
+                        }`}
+                        title="Nur Favoriten anzeigen"
+                      >
+                        <Star className={`h-4 w-4 ${favoritesOnly ? 'fill-slate-950' : ''}`} />
+                        <span className="hidden sm:inline">Favoriten</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMobileFiltersOpen((o) => !o)}
+                        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs font-semibold text-slate-200 lg:hidden"
+                        title="Filter ein-/ausblenden"
+                      >
+                        <Filter className="h-4 w-4 text-blue-400" />
+                      </button>
+                    </div>
+
+                    <div className={`space-y-3 ${mobileFiltersOpen ? 'block' : 'hidden lg:block'}`}>
                       <div className="flex flex-wrap gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => setAgeGroupFilter('ALL')}
-                          className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
-                            ageGroupFilter === 'ALL'
-                              ? 'bg-indigo-600 text-white'
-                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                          }`}
-                        >
-                          Alle Altersstufen
-                        </button>
-                        {ALL_AGE_GROUPS.map((ag) => (
+                        {(['ALL', 'CLUB', 'TEAM'] as const).map((vis) => (
                           <button
-                            key={ag}
+                            key={vis}
                             type="button"
-                            onClick={() => setAgeGroupFilter(ag)}
+                            onClick={() => setVisibilityFilter(vis)}
                             className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
-                              ageGroupFilter === ag
+                              visibilityFilter === vis
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            }`}
+                          >
+                            {vis === 'ALL'
+                              ? 'Alle Sichtbarkeiten'
+                              : vis === 'CLUB'
+                                ? 'Vereins-Pool (CLUB)'
+                                : 'Nur mein Team (TEAM)'}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Kombinierbare Multi-Filter: Phase, Schwerpunkt, Level, Spielerzahl */}
+                      <div className="grid grid-cols-2 gap-2 border-t border-slate-800 pt-3">
+                        <select
+                          value={phaseFilter}
+                          onChange={(e) =>
+                            setPhaseFilter(e.target.value as 'ALL' | TrainingPhaseCategory)
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
+                        >
+                          <option value="ALL">Phase: Alle</option>
+                          {(Object.keys(PHASE_CATEGORY_LABELS) as TrainingPhaseCategory[]).map(
+                            (p) => (
+                              <option key={p} value={p}>
+                                {PHASE_CATEGORY_LABELS[p]}
+                              </option>
+                            )
+                          )}
+                        </select>
+
+                        <select
+                          value={focusFilter}
+                          onChange={(e) =>
+                            setFocusFilter(e.target.value as 'ALL' | HandballFocusTag)
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
+                        >
+                          <option value="ALL">Schwerpunkt: Alle</option>
+                          {(Object.keys(FOCUS_TAG_LABELS) as HandballFocusTag[]).map((f) => (
+                            <option key={f} value={f}>
+                              {FOCUS_TAG_LABELS[f]}
+                            </option>
+                          ))}
+                        </select>
+
+                        <select
+                          value={levelFilter}
+                          onChange={(e) =>
+                            setLevelFilter(e.target.value as 'ALL' | ComplexityLevel)
+                          }
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
+                        >
+                          <option value="ALL">Level: Alle</option>
+                          {(Object.keys(COMPLEXITY_LABELS) as ComplexityLevel[]).map((l) => (
+                            <option key={l} value={l}>
+                              {COMPLEXITY_LABELS[l]}
+                            </option>
+                          ))}
+                        </select>
+
+                        <input
+                          type="number"
+                          min={1}
+                          max={30}
+                          placeholder="Spielerzahl (z.B. 10)"
+                          value={playerCountFilter}
+                          onChange={(e) => setPlayerCountFilter(e.target.value)}
+                          className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5 border-t border-slate-800 pt-3">
+                        <div className="text-[11px] font-semibold text-slate-400">
+                          Altersstufe
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => setAgeGroupFilter('ALL')}
+                            className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
+                              ageGroupFilter === 'ALL'
                                 ? 'bg-indigo-600 text-white'
                                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                             }`}
                           >
-                            {AGE_GROUP_LABELS[ag]}
+                            Alle Altersstufen
                           </button>
-                        ))}
+                          {ALL_AGE_GROUPS.map((ag) => (
+                            <button
+                              key={ag}
+                              type="button"
+                              onClick={() => setAgeGroupFilter(ag)}
+                              className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
+                                ageGroupFilter === ag
+                                  ? 'bg-indigo-600 text-white'
+                                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                              }`}
+                            >
+                              {AGE_GROUP_LABELS[ag]}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -806,29 +976,61 @@ export function App() {
                     {filteredExercises.map((ex) => {
                       const isSelected = activeExercise?.id === ex.id;
                       return (
-                        <button
+                        <div
                           key={ex.id}
-                          type="button"
-                          onClick={() => setSelectedExerciseId(ex.id)}
-                          className={`w-full rounded-xl border p-4 text-left transition ${
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => {
+                            setSelectedExerciseId(ex.id);
+                            setMobileDetailOpen(true);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setSelectedExerciseId(ex.id);
+                              setMobileDetailOpen(true);
+                            }
+                          }}
+                          className={`w-full cursor-pointer rounded-xl border p-4 text-left transition ${
                             isSelected
                               ? 'border-blue-500 bg-blue-950/30 shadow-md'
                               : 'border-slate-800 bg-slate-900/80 hover:border-slate-700'
                           }`}
                         >
                           <div className="flex items-center justify-between gap-2 text-[11px]">
-                            <span
-                              className={`rounded px-2 py-0.5 font-semibold ${
-                                ex.visibility === 'CLUB'
-                                  ? 'bg-emerald-950 text-emerald-300'
-                                  : 'bg-amber-950 text-amber-300'
-                              }`}
-                            >
-                              {VISIBILITY_LABELS[ex.visibility]}
-                            </span>
-                            <span className="text-slate-400">
-                              {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp.
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span
+                                className={`rounded px-2 py-0.5 font-semibold ${
+                                  ex.visibility === 'CLUB'
+                                    ? 'bg-emerald-950 text-emerald-300'
+                                    : 'bg-amber-950 text-amber-300'
+                                }`}
+                              >
+                                {VISIBILITY_LABELS[ex.visibility]}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-slate-400">
+                                {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp.
+                              </span>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  void handleToggleFavorite(ex);
+                                }}
+                                className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-800"
+                                title={ex.is_favorite ? 'Favorit entfernen' : 'Als Favorit anheften'}
+                              >
+                                <Star
+                                  className={`h-4 w-4 ${
+                                    ex.is_favorite
+                                      ? 'fill-amber-400 text-amber-400'
+                                      : 'text-slate-500'
+                                  }`}
+                                />
+                              </button>
+                            </div>
                           </div>
 
                           <div className="mt-1.5 font-bold text-white text-sm">{ex.title}</div>
@@ -852,15 +1054,69 @@ export function App() {
                               Variante einer Grundübung
                             </div>
                           )}
-                        </button>
+                        </div>
                       );
                     })}
                   </div>
                 </div>
 
-                <div className="lg:col-span-7">
+                <div
+                  className={
+                    mobileDetailOpen && activeExercise
+                      ? 'fixed inset-0 z-40 overflow-y-auto bg-slate-950 lg:static lg:z-auto lg:col-span-7 lg:overflow-visible lg:bg-transparent'
+                      : 'hidden lg:block lg:col-span-7'
+                  }
+                >
                   {activeExercise ? (
-                    <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 space-y-5">
+                    <div className="min-h-full rounded-none border-0 bg-slate-900/90 p-4 space-y-5 lg:min-h-0 lg:rounded-2xl lg:border lg:border-slate-800 lg:p-6">
+                      {/* Sticky Smartphone Slide-Over Header (< 1024px) */}
+                      <div className="sticky top-0 z-10 -mx-4 -mt-4 flex items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/95 px-4 py-3 backdrop-blur-md lg:hidden">
+                        <button
+                          type="button"
+                          onClick={() => setMobileDetailOpen(false)}
+                          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-slate-800 px-3 text-xs font-bold text-white"
+                        >
+                          <ArrowLeft className="h-4 w-4" />
+                          Zurück zur Liste
+                        </button>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingExercise(activeExercise);
+                              setVariantParentExercise(null);
+                              setEditorModalOpen(true);
+                            }}
+                            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-slate-800 px-2.5 text-xs font-semibold text-white"
+                          >
+                            <Edit3 className="h-3.5 w-3.5 text-blue-400" />
+                            Bearbeiten
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
+                            }
+                            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-slate-800 px-2.5 text-xs font-semibold text-emerald-300"
+                          >
+                            <Printer className="h-3.5 w-3.5" />
+                            PDF
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingExercise(null);
+                              setVariantParentExercise(activeExercise);
+                              setEditorModalOpen(true);
+                            }}
+                            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-blue-600 px-2.5 text-xs font-semibold text-white"
+                          >
+                            <CopyPlus className="h-3.5 w-3.5" />
+                            Variante
+                          </button>
+                        </div>
+                      </div>
+
                       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-800 pb-4">
                         <div>
                           <div className="flex items-center gap-2 text-xs">
@@ -879,6 +1135,34 @@ export function App() {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => void handleToggleFavorite(activeExercise)}
+                            className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold ${
+                              activeExercise.is_favorite
+                                ? 'border-amber-400 bg-amber-500/20 text-amber-300'
+                                : 'border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            }`}
+                          >
+                            <Star
+                              className={`h-3.5 w-3.5 ${
+                                activeExercise.is_favorite ? 'fill-amber-400 text-amber-400' : ''
+                              }`}
+                            />
+                            Favorit
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
+                            }
+                            className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/50"
+                          >
+                            <Printer className="h-3.5 w-3.5" />
+                            PDF / Drucken
+                          </button>
+
                           <button
                             type="button"
                             onClick={() => {
@@ -1208,5 +1492,7 @@ export function App() {
         onImportExercises={handleImportAiExercises}
       />
     </div>
+    <PrintExportModal target={printTarget} onClose={() => setPrintTarget(null)} />
+    </>
   );
 }

@@ -15,7 +15,7 @@
 | **Phase 2 (v1.1)** *(Diese Spezifikation)* | **Trainer-Exzellenz & Mobile UX** | **Modul 1:** Animiertes Taktikboard (Keyframes, Spiegeln, Kurven-Handles, Zonen, Undo/Redo, Export, Glyphen)<br>**Modul 2:** Druck- & PDF-Export (Einzeltraining & Übungskarte)<br>**Modul 3:** Smartphone-UX (Slide-Over), Katalog/Planer-Komfort, Intervall-Timer & Live-Punktezähler |
 | **Phase 3 (v1.2)** *(Geplant)* | **Trainings-Analyse & Belastungssteuerung** | Trainingsfokus-Auswertung (Ist vs. Soll auf Basis `TrainingSession` + `SessionBlock` + `Exercise.categories.focus`, inkl. vergangener nicht-abgesagter Trainings), „Zuletzt trainiert am …“-Badge, Intensitäts-Level (*Locker / Mittel / Hoch / Spielnah*) |
 | **Phase 4 (v1.3)** *(Geplant)* | **Kader, Logins & Echtzeit-Kollaboration** | Kaderverwaltung, optionale Spieler-/Eltern-Logins (RSVP), 10s-Hallen-Check-In, Spielerzahl-Warnung & Quick-Swap-Filter, Trainerteam-Realtime-Sync (Supabase Realtime) & Konflikt-UI |
-| **Phase 5 (v2.0)** *(Geplant)* | **Video-Hosting, Sharing & SaaS** | Eigenes Video-Hosting (Supabase Storage + selektiver Offline-Cache), Slow-Motion-Player, Offline-Vollbackup & Übungspaket-Export/Import (`.json`), Abo-/Bezahlsystem für Fremdvereine |
+| **Phase 5 (v2.0)** *(Geplant)* | **Video-Hosting, Sharing & SaaS** | Eigenes Video-Hosting (Supabase Storage + selektiver Offline-Cache), Slow-Motion-Player, Offline-Vollbackup & Übungspaket-Export/Import (`.json`), **Öffentlicher Übungskatalog (`PUBLIC`, schreibgeschützte Kopiervorlagen für Fremdvereine inkl. Kuratierungs-/Freigabe-Workflow)**, Abo-/Bezahlsystem für Fremdvereine |
 
 ---
 
@@ -140,3 +140,11 @@ export interface TacticBoardAnimationSettings {
 1. **Timer-Signal & Vorschau:** Optionales Audio-/Vibrations-Signal bei Ablauf des Abschnitts-Timers sowie kompakte **„Als Nächstes“-Vorschau** (nächste Übung + Materialbedarf).
 2. **Intervall- / Zirkel-Timer:** Konfigurierbarer Belastungs-/Pausen-/Runden-Timer (z. B. `30s Belastung / 15s Pause × 8 Runden`, inkl. Schnell-Presets wie Tabata `20s/10s`) direkt als umschaltbarer Tab neben dem Abschnitts-Timer.
 3. **Live-Punktezähler (Team A vs. Team B):** Kompaktes Scoreboard-Widget (Teamnamen optional anpassbar, `+1` / `-1` / `Reset`) für Wettkampf-Spielformen in der Halle.
+
+---
+
+## 5. Vorgemerkte Erweiterung (Backlog, noch nicht umgesetzt)
+
+* **Mehrere Bälle im Taktikboard (gleichzeitig oder sequentiell):**
+  * **Anforderung:** Im Taktikboard-Editor und in der Animation sollen mehrere Bälle (z. B. Ball 1 bei `RL`, Ball 2 bei `RR` oder bei einem Trainer/Ballwagen) gleichzeitig oder zeitversetzt/sequentiell geführt und gepasst werden können (z. B. Parallel-Passübungen, Gegenstoß-Wellen mit zwei Bällen, Nachwurf-Übungen).
+  * **Technischer Ansatz:** Erweiterung von `TacticKeyframe` um `balls?: Array<{ id: string; holderNodeId?: string; x?: number; y?: number; visible?: boolean }>` (abwärtskompatibel zu `ballPosition`), Multi-Ball-Interpolation in `interpolateTacticBoardAtTime` sowie Zuordnung von `PASS_PATH` / `SHOT_PATH` zu einer Ball-ID.

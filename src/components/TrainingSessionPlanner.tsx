@@ -10,11 +10,13 @@ import {
   Clock,
   Copy,
   Edit3,
+  GripVertical,
   History,
   Layers,
   MessageSquarePlus,
   Package,
   Plus,
+  Printer,
   Search,
   Sparkles,
   Trash2,
@@ -74,6 +76,7 @@ interface TrainingSessionPlannerProps {
   onEditExercise: (exercise: Exercise) => void;
   onOpenExercise?: (exercise: Exercise) => void;
   onStartHallMode: (sessionId: string) => void;
+  onPrintSession?: (session: TrainingSession) => void;
 }
 
 const SESSION_STATUS_LABELS: Record<SessionStatus, string> = {
@@ -97,8 +100,11 @@ export function TrainingSessionPlanner({
   focusedSessionId,
   onEditExercise,
   onOpenExercise,
-  onStartHallMode
+  onStartHallMode,
+  onPrintSession
 }: TrainingSessionPlannerProps) {
+  const [draggedBlockId, setDraggedBlockId] = useState<string | null>(null);
+  const [dragOverPhaseId, setDragOverPhaseId] = useState<string | null>(null);
   const teamSessions = useMemo(
     () =>
       sessions
@@ -403,6 +409,54 @@ export function TrainingSessionPlanner({
     await queueSyncOperation('session_phases', updated.id, 'UPSERT', updated);
   }
 
+  async function handleUpdatePhaseTargetDuration(phase: SessionPhase, targetMin: number) {
+    const updated: SessionPhase = {
+      ...phase,
+      target_duration_min: Math.max(5, Math.min(90, targetMin || 15)),
+      updated_at: new Date().toISOString()
+    };
+    await db.sessionPhases.put(updated);
+    await queueSyncOperation('session_phases', updated.id, 'UPSERT', updated);
+  }
+
+  async function handleDropBlock(targetPhaseId: string, targetBlockId?: string) {
+    if (!draggedBlockId) return;
+    const dragged = currentBlocks.find((b) => b.id === draggedBlockId);
+    setDraggedBlockId(null);
+    setDragOverPhaseId(null);
+    if (!dragged || dragged.id === targetBlockId) return;
+
+    const now = new Date().toISOString();
+    if (dragged.session_phase_id !== targetPhaseId) {
+      await handleMoveBlockToPhase(dragged, targetPhaseId);
+      return;
+    }
+
+    if (!targetBlockId) return;
+    const phaseBlocks = currentBlocks
+      .filter((b) => b.session_phase_id === targetPhaseId)
+      .sort((a, b) => a.time_slot_index - b.time_slot_index);
+    const fromIdx = phaseBlocks.findIndex((b) => b.id === dragged.id);
+    const toIdx = phaseBlocks.findIndex((b) => b.id === targetBlockId);
+    if (fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return;
+
+    const reordered = [...phaseBlocks];
+    const [moved] = reordered.splice(fromIdx, 1);
+    reordered.splice(toIdx, 0, moved);
+    const updated = reordered.map((b, idx) => ({
+      ...b,
+      time_slot_index: idx,
+      updated_at: now
+    }));
+
+    await db.transaction('rw', [db.sessionBlocks, db.syncOutbox], async () => {
+      await db.sessionBlocks.bulkPut(updated);
+      for (const b of updated) {
+        await queueSyncOperation('session_blocks', b.id, 'UPSERT', b);
+      }
+    });
+  }
+
   async function handleMoveBlockInPhase(
     phaseId: string,
     blockId: string,
@@ -614,6 +668,18 @@ export function TrainingSessionPlanner({
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {currentSession && onPrintSession && (
+              <button
+                type="button"
+                onClick={() => onPrintSession(currentSession)}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                title="Einzeltraining als Hallen-Handout (A4 PDF) drucken"
+              >
+                <Printer className="h-3.5 w-3.5 text-emerald-400" />
+                Drucken / PDF
+              </button>
+            )}
+
             {currentSession && (
               <button
                 type="button"
@@ -904,10 +970,24 @@ export function TrainingSessionPlanner({
                 <div
                   key={phase.id}
                   onClick={() => setActivePhaseId(phase.id)}
+                  onDragOver={(e) => {
+                    if (!draggedBlockId) return;
+                    e.preventDefault();
+                    setDragOverPhaseId(phase.id);
+                  }}
+                  onDragLeave={() => {
+                    if (dragOverPhaseId === phase.id) setDragOverPhaseId(null);
+                  }}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    void handleDropBlock(phase.id);
+                  }}
                   className={`cursor-pointer rounded-2xl border p-5 transition ${
-                    isTargetPhase
-                      ? 'border-blue-500 bg-slate-900 shadow-lg shadow-blue-950/30'
-                      : 'border-slate-800 bg-slate-900/75 hover:border-slate-700'
+                    dragOverPhaseId === phase.id
+                      ? 'border-emerald-400 bg-emerald-950/20'
+                      : isTargetPhase
+                        ? 'border-blue-500 bg-slate-900 shadow-lg shadow-blue-950/30'
+                        : 'border-slate-800 bg-slate-900/75 hover:border-slate-700'
                   }`}
                 >
                   {/* Phase Header */}
@@ -927,9 +1007,32 @@ export function TrainingSessionPlanner({
                     </div>
 
                     <div className="flex items-center gap-1.5">
-                      <span className="rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-blue-300">
-                        Effektiv: {effectiveMin} Min
-                      </span>
+                      <div
+                        className={`inline-flex items-center gap-1 rounded-lg border px-2 py-0.5 text-xs font-semibold ${
+                          effectiveMin > phase.target_duration_min + 5
+                            ? 'border-rose-500/40 bg-rose-950/40 text-rose-300'
+                            : effectiveMin > phase.target_duration_min
+                              ? 'border-amber-500/40 bg-amber-950/40 text-amber-300'
+                              : 'border-emerald-500/40 bg-emerald-950/40 text-emerald-300'
+                        }`}
+                        onClick={(e) => e.stopPropagation()}
+                        title="Phasen-Zeitbudget: Ist-Dauer vs. Soll-Budget"
+                      >
+                        <span>Ist: {effectiveMin}</span>
+                        <span className="opacity-60">/</span>
+                        <span>Soll:</span>
+                        <input
+                          type="number"
+                          min={5}
+                          max={90}
+                          value={phase.target_duration_min}
+                          onChange={(e) =>
+                            void handleUpdatePhaseTargetDuration(phase, Number(e.target.value))
+                          }
+                          className="w-10 rounded bg-slate-900/80 px-1 text-center font-bold text-white focus:outline-none"
+                        />
+                        <span>Min</span>
+                      </div>
                       <button
                         type="button"
                         disabled={phaseIndex === 0}
@@ -1002,12 +1105,41 @@ export function TrainingSessionPlanner({
                                 return (
                                   <div
                                     key={block.id}
+                                    draggable
+                                    onDragStart={(e) => {
+                                      e.stopPropagation();
+                                      setDraggedBlockId(block.id);
+                                    }}
+                                    onDragEnd={() => {
+                                      setDraggedBlockId(null);
+                                      setDragOverPhaseId(null);
+                                    }}
+                                    onDragOver={(e) => {
+                                      if (!draggedBlockId || draggedBlockId === block.id) return;
+                                      e.preventDefault();
+                                    }}
+                                    onDrop={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      void handleDropBlock(phase.id, block.id);
+                                    }}
                                     onClick={(e) => e.stopPropagation()}
-                                    className="min-w-0 rounded-xl border border-slate-800 bg-slate-950/90 p-3.5 space-y-2.5"
+                                    className={`min-w-0 rounded-xl border bg-slate-950/90 p-3.5 space-y-2.5 transition ${
+                                      draggedBlockId === block.id
+                                        ? 'border-blue-500 opacity-50'
+                                        : 'border-slate-800'
+                                    }`}
                                   >
                                     {/* Track label, duration & coach selector */}
                                     <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                                      <input
+                                      <div className="flex items-center gap-1.5">
+                                        <span
+                                          className="cursor-grab text-slate-500 hover:text-slate-300"
+                                          title="Block per Drag & Drop verschieben"
+                                        >
+                                          <GripVertical className="h-4 w-4" />
+                                        </span>
+                                        <input
                                         type="text"
                                         value={block.track_label}
                                         onChange={(e) =>
@@ -1018,6 +1150,7 @@ export function TrainingSessionPlanner({
                                         className="min-w-0 w-full max-w-[160px] rounded bg-blue-950/80 px-2 py-0.5 text-[11px] font-semibold text-blue-300 focus:outline-none"
                                         title="Spur / Gruppe umbenennen"
                                       />
+                                      </div>
 
                                       <div className="flex flex-wrap items-center gap-1.5">
                                         <input

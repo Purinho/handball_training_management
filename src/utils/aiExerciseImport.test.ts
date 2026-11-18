@@ -71,4 +71,35 @@ describe('aiExerciseImport & tacticPresets', () => {
     expect(rlNode?.isQueue).toBe(true);
     expect(rlNode?.queueCount).toBe(3);
   });
+
+  it('normalizes v2 zones, controlPoint, and auto-generates animation keyframes when requested', () => {
+    const raw = JSON.stringify({
+      title: 'Bogenlauf mit Zielzone',
+      tactic_board_data: {
+        nodes: [
+          { id: 'rl', type: 'OFFENSE_PLAYER', label: 'RL', x: 0.24, y: 0.48, hasBall: true }
+        ],
+        paths: [
+          {
+            id: 'p1',
+            type: 'RUN_PATH',
+            stepNumber: 1,
+            fromNodeId: 'rl',
+            points: [{ x: 0.24, y: 0.48 }, { x: 0.45, y: 0.35 }],
+            controlPoint: { x: 0.22, y: 0.32 }
+          }
+        ],
+        zones: [
+          { id: 'z1', shape: 'ELLIPSE', x: 0.45, y: 0.3, width: 0.2, height: 0.15, color: '#22c55e', label: 'Ziel' }
+        ]
+      }
+    });
+
+    const result = parseAndNormalizeAiExerciseJson(raw, 'club-1', 'CLUB', undefined, true);
+    const board = result[0].tactic_board_data;
+    expect(board?.version).toBe(2);
+    expect(board?.zones).toHaveLength(1);
+    expect(board?.paths[0].controlPoint).toEqual({ x: 0.22, y: 0.32 });
+    expect(board?.keyframes?.length).toBeGreaterThanOrEqual(2);
+  });
 });
