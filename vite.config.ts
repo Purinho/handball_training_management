@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
-const basePath = isGitHubPages ? '/handball_training_management/' : '/';
+const basePath = isGitHubPages ? '/htm/' : '/';
 
 export default defineConfig({
   base: basePath,
@@ -16,7 +16,7 @@ export default defineConfig({
       includeAssets: ['icon.svg'],
       manifest: {
         name: 'Handball Trainings- & Planungs-App',
-        short_name: 'HandballPlaner',
+        short_name: 'HB Training Planer',
         description: 'Offline-fähige Handball Trainings-, Übungs- und Mehrwochenplanung für Vereine & Trainerteams',
         theme_color: '#1e3a8a',
         background_color: '#0f172a',
