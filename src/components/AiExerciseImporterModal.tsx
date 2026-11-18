@@ -26,7 +26,8 @@ const SAMPLE_AI_JSON = `[
     "categories": {
       "phases": ["GROUND_EXERCISE", "GROUND_GAME"],
       "focus": ["OFFENSE_GROUP", "DEFENSE_6_0"],
-      "level": "ADVANCED"
+      "level": "ADVANCED",
+      "age_groups": ["C_YOUTH", "B_YOUTH", "A_YOUTH", "ADULTS"]
     },
     "materials": [
       { "type": "BALL", "quantity": 6 },

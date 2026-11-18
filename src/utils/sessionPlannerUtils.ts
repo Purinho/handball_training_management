@@ -1,4 +1,5 @@
 import type {
+  AgeGroup,
   Exercise,
   HandballFocusTag,
   SessionBlock,
@@ -6,6 +7,7 @@ import type {
   SessionTemplate,
   TrainingSession
 } from '../types/domain';
+import { DEFAULT_AGE_GROUPS } from '../constants/handballLabels';
 import { calculateMinutesBetweenTimes } from './trainingCalculations';
 import { buildTacticBoardPreset } from './tacticPresets';
 
@@ -147,6 +149,7 @@ export function convertQuickBlockToCatalogExercise(params: {
   clubId: string;
   teamId: string;
   focusTags?: HandballFocusTag[];
+  ageGroups?: AgeGroup[];
 }): { exercise: Exercise; updatedBlock: SessionBlock } {
   const now = new Date().toISOString();
   const exerciseId = crypto.randomUUID();
@@ -167,7 +170,11 @@ export function convertQuickBlockToCatalogExercise(params: {
         params.focusTags && params.focusTags.length > 0
           ? params.focusTags
           : ['OFFENSE_GROUP'],
-      level: 'BASIC'
+      level: 'BASIC',
+      age_groups:
+        params.ageGroups && params.ageGroups.length > 0
+          ? params.ageGroups
+          : DEFAULT_AGE_GROUPS
     },
     materials: [{ type: 'BALL', quantity: 6 }],
     setup_description: 'Aus freiem Trainingsblock übernommen.',

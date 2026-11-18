@@ -1,4 +1,5 @@
 import type {
+  AgeGroup,
   ComplexityLevel,
   Exercise,
   HandballFocusTag,
@@ -10,6 +11,7 @@ import type {
   TrainingPhaseCategory,
   VisibilityLevel
 } from '../types/domain';
+import { ALL_AGE_GROUPS, DEFAULT_AGE_GROUPS } from '../constants/handballLabels';
 
 export const AI_EXERCISE_SYSTEM_PROMPT = `Du bist ein erfahrener DHB-Handball-Trainer und Daten-Assistent.
 Deine Aufgabe ist es, die vom Nutzer bereitgestellten Handball-Übungen (aus Screenshots, Skizzen-Bildern, PDF-Auszügen oder Web-Texten) in das exakte JSON-Format unserer Handball Trainings-App umzuwandeln.
@@ -31,6 +33,7 @@ Antworte AUSSCHLIESSLICH mit validem JSON (entweder ein einzelnes Objekt oder ei
 - phases: ["WARMUP", "SMALL_GAME", "GOALKEEPER_WARMUP", "GROUND_EXERCISE", "GROUND_GAME", "TARGET_GAME", "ATHLETICS_COORDINATION", "COOL_DOWN"]
 - focus: ["OFFENSE_INDIVIDUAL", "OFFENSE_GROUP", "OFFENSE_TEAM", "DEFENSE_INDIVIDUAL", "DEFENSE_GROUP", "DEFENSE_6_0", "DEFENSE_5_1", "DEFENSE_3_2_1", "FAST_BREAK_1ST_WAVE", "FAST_BREAK_2ND_WAVE", "RETREAT", "SHOOTING", "PASSING_CATCHING", "GOALKEEPER_TECHNIQUE"]
 - level: "BASIC" | "ADVANCED" | "PERFORMANCE"
+- age_groups (Altersstufen, mindestens 1 Wert): ["MINIS", "F_YOUTH", "E_YOUTH", "D_YOUTH", "C_YOUTH", "B_YOUTH", "A_YOUTH", "ADULTS"]
 - materials.type: "BALL" | "BALL_CART" | "CONE" | "BIBS" | "COORDINATION_LADDER" | "SOFT_MAT" | "POLE_AIRBODY" | "VAULTING_BOX" | "TARGET_CORNER" | "MINI_GOAL"
 - nodes.type: "OFFENSE_PLAYER" | "DEFENSE_PLAYER" | "GOALKEEPER" | "COACH_FEEDER" | "EQUIPMENT_CONE" | "EQUIPMENT_MAT" | "EQUIPMENT_GOAL_TARGET" | "WAYPOINT"
 - paths.type: "RUN_PATH" | "PASS_PATH" | "DRIBBLE_PATH" | "SHOT_PATH" | "SCREEN_BLOCK_PATH" | "FEINT_PATH"
@@ -47,7 +50,8 @@ Antworte AUSSCHLIESSLICH mit validem JSON (entweder ein einzelnes Objekt oder ei
     "categories": {
       "phases": ["GROUND_EXERCISE"],
       "focus": ["OFFENSE_GROUP", "PASSING_CATCHING"],
-      "level": "ADVANCED"
+      "level": "ADVANCED",
+      "age_groups": ["C_YOUTH", "B_YOUTH", "A_YOUTH", "ADULTS"]
     },
     "materials": [
       { "type": "BALL", "quantity": 6 },
@@ -198,6 +202,13 @@ export function parseAndNormalizeAiExerciseJson(
     const phases = (Array.isArray(rawCats.phases) ? rawCats.phases : ['GROUND_EXERCISE']) as TrainingPhaseCategory[];
     const focus = (Array.isArray(rawCats.focus) ? rawCats.focus : ['OFFENSE_GROUP']) as HandballFocusTag[];
     const level = (typeof rawCats.level === 'string' ? rawCats.level : 'BASIC') as ComplexityLevel;
+    const validAgeGroups = new Set<string>(ALL_AGE_GROUPS);
+    const parsedAgeGroups = Array.isArray(rawCats.age_groups)
+      ? (rawCats.age_groups.filter(
+          (ag): ag is AgeGroup => typeof ag === 'string' && validAgeGroups.has(ag)
+        ) as AgeGroup[])
+      : [];
+    const age_groups = parsedAgeGroups.length > 0 ? parsedAgeGroups : DEFAULT_AGE_GROUPS;
 
     const rawMaterials = Array.isArray(item.materials) ? item.materials : [];
     const materials: MaterialItem[] = rawMaterials
@@ -225,7 +236,7 @@ export function parseAndNormalizeAiExerciseJson(
         typeof item.max_players === 'number' && item.max_players > 0 ? item.max_players : 14,
       goalkeepers:
         typeof item.goalkeepers === 'number' && item.goalkeepers >= 0 ? item.goalkeepers : 1,
-      categories: { phases, focus, level },
+      categories: { phases, focus, level, age_groups },
       materials,
       setup_description:
         typeof item.setup_description === 'string' ? item.setup_description : '',

@@ -30,6 +30,16 @@ export type HandballFocusTag =
 
 export type ComplexityLevel = 'BASIC' | 'ADVANCED' | 'PERFORMANCE';
 
+export type AgeGroup =
+  | 'MINIS'
+  | 'F_YOUTH'
+  | 'E_YOUTH'
+  | 'D_YOUTH'
+  | 'C_YOUTH'
+  | 'B_YOUTH'
+  | 'A_YOUTH'
+  | 'ADULTS';
+
 export type MaterialType =
   | 'BALL'
   | 'BALL_CART'
@@ -168,6 +178,7 @@ export interface ExerciseCategories {
   phases: TrainingPhaseCategory[];
   focus: HandballFocusTag[];
   level: ComplexityLevel;
+  age_groups: AgeGroup[];
 }
 
 export interface Exercise {

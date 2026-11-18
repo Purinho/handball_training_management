@@ -1,5 +1,7 @@
 import { db } from './database';
+import { DEFAULT_AGE_GROUPS } from '../constants/handballLabels';
 import type {
+  AgeGroup,
   Club,
   ClubMember,
   Exercise,
@@ -14,9 +16,35 @@ import type {
   TrainingSession
 } from '../types/domain';
 
+const SEEDED_AGE_GROUPS_BY_ID: Record<string, AgeGroup[]> = {
+  'ex-warmup-parteiball': ['E_YOUTH', 'D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS'],
+  'ex-tw-einwerfen': ['D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS'],
+  'ex-stossen-grund': ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS'],
+  'ex-stossen-variante': ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS'],
+  'ex-abwehr-321': ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
+};
+
+async function ensureExerciseAgeGroups(): Promise<void> {
+  const allExercises = await db.exercises.toArray();
+  const updates = allExercises
+    .filter((ex) => !Array.isArray(ex.categories?.age_groups) || ex.categories.age_groups.length === 0)
+    .map((ex) => ({
+      ...ex,
+      categories: {
+        ...ex.categories,
+        age_groups: SEEDED_AGE_GROUPS_BY_ID[ex.id] ?? DEFAULT_AGE_GROUPS
+      }
+    }));
+
+  if (updates.length > 0) {
+    await db.exercises.bulkPut(updates);
+  }
+}
+
 export async function seedInitialDataIfEmpty(): Promise<void> {
   const existingClubsCount = await db.clubs.count();
   if (existingClubsCount > 0) {
+    await ensureExerciseAgeGroups();
     return;
   }
 
@@ -154,7 +182,8 @@ export async function seedInitialDataIfEmpty(): Promise<void> {
       categories: {
         phases: ['WARMUP', 'SMALL_GAME'],
         focus: ['PASSING_CATCHING', 'OFFENSE_GROUP'],
-        level: 'BASIC'
+        level: 'BASIC',
+        age_groups: ['E_YOUTH', 'D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
       },
       materials: [
         { type: 'BALL', quantity: 2 },
@@ -224,7 +253,8 @@ export async function seedInitialDataIfEmpty(): Promise<void> {
       categories: {
         phases: ['GOALKEEPER_WARMUP'],
         focus: ['GOALKEEPER_TECHNIQUE', 'SHOOTING'],
-        level: 'BASIC'
+        level: 'BASIC',
+        age_groups: ['D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
       },
       materials: [
         { type: 'BALL_CART', quantity: 1 },
@@ -290,7 +320,8 @@ export async function seedInitialDataIfEmpty(): Promise<void> {
       categories: {
         phases: ['GROUND_EXERCISE'],
         focus: ['OFFENSE_GROUP', 'PASSING_CATCHING'],
-        level: 'ADVANCED'
+        level: 'ADVANCED',
+        age_groups: ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
       },
       materials: [
         { type: 'BALL', quantity: 6 },
@@ -384,7 +415,8 @@ export async function seedInitialDataIfEmpty(): Promise<void> {
       categories: {
         phases: ['GROUND_GAME'],
         focus: ['OFFENSE_GROUP', 'DEFENSE_6_0'],
-        level: 'ADVANCED'
+        level: 'ADVANCED',
+        age_groups: ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
       },
       materials: [
         { type: 'BALL', quantity: 6 },
@@ -451,7 +483,8 @@ export async function seedInitialDataIfEmpty(): Promise<void> {
       categories: {
         phases: ['GROUND_GAME', 'TARGET_GAME'],
         focus: ['DEFENSE_3_2_1', 'DEFENSE_GROUP'],
-        level: 'PERFORMANCE'
+        level: 'PERFORMANCE',
+        age_groups: ['C_YOUTH', 'B_YOUTH', 'A_YOUTH', 'ADULTS']
       },
       materials: [
         { type: 'BALL', quantity: 4 },

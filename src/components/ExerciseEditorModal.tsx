@@ -10,6 +10,7 @@ import {
   X
 } from 'lucide-react';
 import type {
+  AgeGroup,
   ComplexityLevel,
   Exercise,
   ExternalLink,
@@ -21,7 +22,10 @@ import type {
   VisibilityLevel
 } from '../types/domain';
 import {
+  AGE_GROUP_LABELS,
+  ALL_AGE_GROUPS,
   COMPLEXITY_LABELS,
+  DEFAULT_AGE_GROUPS,
   FOCUS_TAG_LABELS,
   MATERIAL_LABELS,
   PHASE_CATEGORY_LABELS
@@ -81,6 +85,8 @@ export function ExerciseEditorModal({
   const [maxPlayers, setMaxPlayers] = useState(14);
   const [goalkeepers, setGoalkeepers] = useState(1);
   const [level, setLevel] = useState<ComplexityLevel>('BASIC');
+  const [ageGroups, setAgeGroups] = useState<AgeGroup[]>(DEFAULT_AGE_GROUPS);
+  const [ageGroupError, setAgeGroupError] = useState<string | null>(null);
   const [phases, setPhases] = useState<TrainingPhaseCategory[]>(['GROUND_EXERCISE']);
   const [focusTags, setFocusTags] = useState<HandballFocusTag[]>(['OFFENSE_GROUP']);
   const [materials, setMaterials] = useState<MaterialItem[]>([
@@ -120,6 +126,10 @@ export function ExerciseEditorModal({
       setMaxPlayers(source.max_players);
       setGoalkeepers(source.goalkeepers);
       setLevel(source.categories.level);
+      setAgeGroups(
+        source.categories.age_groups?.length ? source.categories.age_groups : DEFAULT_AGE_GROUPS
+      );
+      setAgeGroupError(null);
       setPhases(source.categories.phases);
       setFocusTags(source.categories.focus);
       setMaterials(source.materials);
@@ -148,6 +158,8 @@ export function ExerciseEditorModal({
       setMaxPlayers(14);
       setGoalkeepers(1);
       setLevel('BASIC');
+      setAgeGroups(DEFAULT_AGE_GROUPS);
+      setAgeGroupError(null);
       setPhases(['GROUND_EXERCISE']);
       setFocusTags(['OFFENSE_GROUP']);
       setMaterials([
@@ -190,6 +202,11 @@ export function ExerciseEditorModal({
   }, [isOpen]);
 
   if (!isOpen) return null;
+
+  function toggleAgeGroup(ag: AgeGroup) {
+    setAgeGroupError(null);
+    setAgeGroups((prev) => (prev.includes(ag) ? prev.filter((x) => x !== ag) : [...prev, ag]));
+  }
 
   function togglePhase(p: TrainingPhaseCategory) {
     setPhases((prev) => (prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p]));
@@ -238,6 +255,10 @@ export function ExerciseEditorModal({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim()) return;
+    if (ageGroups.length === 0) {
+      setAgeGroupError('Bitte wähle mindestens eine Altersstufe aus.');
+      return;
+    }
 
     const now = new Date().toISOString();
     const exerciseToSave: Exercise = {
@@ -255,7 +276,8 @@ export function ExerciseEditorModal({
       categories: {
         phases: phases.length ? phases : ['GROUND_EXERCISE'],
         focus: focusTags.length ? focusTags : ['OFFENSE_GROUP'],
-        level
+        level,
+        age_groups: ageGroups
       },
       materials,
       setup_description: setupDesc.trim(),
@@ -599,6 +621,69 @@ export function ExerciseEditorModal({
                   )}
                 </div>
               )}
+
+              {/* Altersstufen (Pflichtfeld, Mehrfachauswahl) */}
+              <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-3.5">
+                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                  <div className="text-xs font-bold text-slate-300">
+                    Altersstufen * <span className="font-normal text-slate-400">(Mehrfachauswahl möglich)</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgeGroupError(null);
+                        setAgeGroups(ALL_AGE_GROUPS);
+                      }}
+                      className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-slate-700"
+                    >
+                      Alle
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgeGroupError(null);
+                        setAgeGroups(['E_YOUTH', 'D_YOUTH', 'C_YOUTH', 'B_YOUTH', 'A_YOUTH']);
+                      }}
+                      className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-slate-700"
+                    >
+                      Jugend (E–A)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAgeGroupError(null);
+                        setAgeGroups(DEFAULT_AGE_GROUPS);
+                      }}
+                      className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-slate-700"
+                    >
+                      Ab D-Jugend
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {ALL_AGE_GROUPS.map((ag) => {
+                    const active = ageGroups.includes(ag);
+                    return (
+                      <button
+                        key={ag}
+                        type="button"
+                        onClick={() => toggleAgeGroup(ag)}
+                        className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition ${
+                          active
+                            ? 'bg-indigo-600 text-white'
+                            : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                        }`}
+                      >
+                        {AGE_GROUP_LABELS[ag]}
+                      </button>
+                    );
+                  })}
+                </div>
+                {ageGroupError && (
+                  <p className="mt-2 text-xs font-medium text-rose-400">{ageGroupError}</p>
+                )}
+              </div>
 
               {/* Kategorien: Trainingsphasen & Handball-Schwerpunkte */}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

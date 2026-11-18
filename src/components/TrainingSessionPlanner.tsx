@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { db, queueSyncOperation } from '../db/database';
 import type {
+  AgeGroup,
   ClubMember,
   Exercise,
   HandballFocusTag,
@@ -35,7 +36,12 @@ import type {
   Team,
   TrainingSession
 } from '../types/domain';
-import { FOCUS_TAG_LABELS, MATERIAL_LABELS } from '../constants/handballLabels';
+import {
+  AGE_GROUP_LABELS,
+  ALL_AGE_GROUPS,
+  FOCUS_TAG_LABELS,
+  MATERIAL_LABELS
+} from '../constants/handballLabels';
 import {
   aggregateSessionMaterials,
   calculateMinutesBetweenTimes,
@@ -153,6 +159,7 @@ export function TrainingSessionPlanner({
   // Right catalog panel state
   const [catalogTab, setCatalogTab] = useState<'SMART_FOCUS' | 'ALL' | 'RECENT'>('SMART_FOCUS');
   const [catalogSearch, setCatalogSearch] = useState('');
+  const [catalogAgeGroup, setCatalogAgeGroup] = useState<'ALL' | AgeGroup>('ALL');
   const [previewExerciseId, setPreviewExerciseId] = useState<string | null>(null);
 
   // Quick-Block input state
@@ -222,6 +229,13 @@ export function TrainingSessionPlanner({
         return false;
       }
 
+      if (
+        catalogAgeGroup !== 'ALL' &&
+        !(ex.categories.age_groups ?? []).includes(catalogAgeGroup)
+      ) {
+        return false;
+      }
+
       if (catalogSearch.trim()) {
         const q = catalogSearch.toLowerCase();
         const matchesText =
@@ -239,7 +253,7 @@ export function TrainingSessionPlanner({
       }
       return true;
     });
-  }, [exercises, linkedPlanWeek, blocks, activeTeam.id, catalogSearch, catalogTab]);
+  }, [exercises, linkedPlanWeek, blocks, activeTeam.id, catalogAgeGroup, catalogSearch, catalogTab]);
 
   async function saveSessionBundleToDb(bundle: {
     session: TrainingSession;
@@ -1447,16 +1461,39 @@ export function TrainingSessionPlanner({
                 </div>
               )}
 
-              {/* Search */}
-              <div className="relative">
-                <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Übung im Katalog filtern..."
-                  value={catalogSearch}
-                  onChange={(e) => setCatalogSearch(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
-                />
+              {/* Search & Altersstufe Filter */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute top-2.5 left-3 h-4 w-4 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Übung im Katalog filtern..."
+                    value={catalogSearch}
+                    onChange={(e) => setCatalogSearch(e.target.value)}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor="planner-age-group-filter"
+                    className="shrink-0 text-[11px] font-semibold text-slate-400"
+                  >
+                    Altersstufe:
+                  </label>
+                  <select
+                    id="planner-age-group-filter"
+                    value={catalogAgeGroup}
+                    onChange={(e) => setCatalogAgeGroup(e.target.value as 'ALL' | AgeGroup)}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-xs text-white focus:border-blue-500 focus:outline-none"
+                  >
+                    <option value="ALL">Alle Altersstufen</option>
+                    {ALL_AGE_GROUPS.map((ag) => (
+                      <option key={ag} value={ag}>
+                        {AGE_GROUP_LABELS[ag]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {/* Exercise Cards */}
@@ -1487,6 +1524,18 @@ export function TrainingSessionPlanner({
                             {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp. +{' '}
                             {ex.goalkeepers} TW
                           </div>
+                          {(ex.categories.age_groups ?? []).length > 0 && (
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {(ex.categories.age_groups ?? []).map((ag) => (
+                                <span
+                                  key={ag}
+                                  className="rounded bg-indigo-950/90 border border-indigo-700/40 px-1.5 py-0.5 text-[10px] font-medium text-indigo-200"
+                                >
+                                  {AGE_GROUP_LABELS[ag]}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
 
                         <div className="flex shrink-0 items-center gap-1">

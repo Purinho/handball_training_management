@@ -39,12 +39,14 @@ import {
 } from './services/cloudSyncService';
 import { getSupabaseClient, isSupabaseConfigured } from './services/supabaseClient';
 import {
+  AGE_GROUP_LABELS,
+  ALL_AGE_GROUPS,
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
   PHASE_CATEGORY_LABELS,
   VISIBILITY_LABELS
 } from './constants/handballLabels';
-import type { Exercise, VisibilityLevel } from './types/domain';
+import type { AgeGroup, Exercise, VisibilityLevel } from './types/domain';
 
 type NavTab = 'DASHBOARD' | 'HALL_LIVE' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
 
@@ -63,6 +65,7 @@ export function App() {
   // Exercise filter & modal states
   const [searchQuery, setSearchQuery] = useState('');
   const [visibilityFilter, setVisibilityFilter] = useState<'ALL' | VisibilityLevel>('ALL');
+  const [ageGroupFilter, setAgeGroupFilter] = useState<'ALL' | AgeGroup>('ALL');
   const [selectedExerciseId, setSelectedExerciseId] = useState<string | null>(null);
   const [editorModalOpen, setEditorModalOpen] = useState(false);
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
@@ -199,6 +202,12 @@ export function App() {
         return false;
       }
       if (
+        ageGroupFilter !== 'ALL' &&
+        !(ex.categories.age_groups ?? []).includes(ageGroupFilter)
+      ) {
+        return false;
+      }
+      if (
         ex.visibility === 'TEAM' &&
         ex.owner_team_id &&
         activeTeam &&
@@ -215,7 +224,7 @@ export function App() {
         ex.coaching_points.toLowerCase().includes(q)
       );
     });
-  }, [exercises, visibilityFilter, searchQuery, activeTeam]);
+  }, [exercises, visibilityFilter, ageGroupFilter, searchQuery, activeTeam]);
 
   const activeExercise = useMemo(() => {
     if (selectedExerciseId && exercisesById.has(selectedExerciseId)) {
@@ -758,6 +767,39 @@ export function App() {
                         </button>
                       ))}
                     </div>
+
+                    <div className="space-y-1.5 border-t border-slate-800 pt-3">
+                      <div className="text-[11px] font-semibold text-slate-400">
+                        Altersstufe
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setAgeGroupFilter('ALL')}
+                          className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
+                            ageGroupFilter === 'ALL'
+                              ? 'bg-indigo-600 text-white'
+                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                          }`}
+                        >
+                          Alle Altersstufen
+                        </button>
+                        {ALL_AGE_GROUPS.map((ag) => (
+                          <button
+                            key={ag}
+                            type="button"
+                            onClick={() => setAgeGroupFilter(ag)}
+                            className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
+                              ageGroupFilter === ag
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            }`}
+                          >
+                            {AGE_GROUP_LABELS[ag]}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="space-y-2.5">
@@ -790,6 +832,19 @@ export function App() {
                           </div>
 
                           <div className="mt-1.5 font-bold text-white text-sm">{ex.title}</div>
+
+                          {(ex.categories.age_groups ?? []).length > 0 && (
+                            <div className="mt-1.5 flex flex-wrap gap-1">
+                              {(ex.categories.age_groups ?? []).map((ag) => (
+                                <span
+                                  key={ag}
+                                  className="rounded bg-indigo-950/90 border border-indigo-700/40 px-1.5 py-0.5 text-[10px] font-medium text-indigo-200"
+                                >
+                                  {AGE_GROUP_LABELS[ag]}
+                                </span>
+                              ))}
+                            </div>
+                          )}
 
                           {ex.parent_exercise_id && (
                             <div className="mt-1 flex items-center gap-1 text-[11px] text-blue-400">
@@ -933,6 +988,14 @@ export function App() {
                       </div>
 
                       <div className="flex flex-wrap gap-1.5">
+                        {(activeExercise.categories.age_groups ?? []).map((ag) => (
+                          <span
+                            key={ag}
+                            className="rounded-md bg-indigo-950/90 border border-indigo-600/40 px-2.5 py-1 text-xs font-medium text-indigo-200"
+                          >
+                            {AGE_GROUP_LABELS[ag]}
+                          </span>
+                        ))}
                         {activeExercise.categories.phases.map((p) => (
                           <span
                             key={p}

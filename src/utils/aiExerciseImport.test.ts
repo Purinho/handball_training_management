@@ -34,8 +34,31 @@ describe('aiExerciseImport & tacticPresets', () => {
     const result = parseAndNormalizeAiExerciseJson(raw, 'club-1', 'CLUB');
     expect(result).toHaveLength(1);
     expect(result[0].title).toBe('Kreuzen RM-RL mit Kreisanspiel');
+    expect(result[0].categories.age_groups).toEqual([
+      'D_YOUTH',
+      'C_YOUTH',
+      'B_YOUTH',
+      'A_YOUTH',
+      'ADULTS'
+    ]);
     expect(result[0].tactic_board_data?.nodes).toHaveLength(1);
     expect(result[0].tactic_board_data?.paths[0].stepNumber).toBe(1);
+  });
+
+  it('preserves explicit age_groups (e.g. specific E-Jugend 3:3) and filters invalid values', () => {
+    const raw = JSON.stringify({
+      title: '3:3-Spielform E-Jugend',
+      categories: {
+        phases: ['SMALL_GAME'],
+        focus: ['OFFENSE_GROUP'],
+        level: 'BASIC',
+        age_groups: ['E_YOUTH', 'INVALID_VALUE']
+      }
+    });
+
+    const result = parseAndNormalizeAiExerciseJson(raw, 'club-1', 'CLUB');
+    expect(result).toHaveLength(1);
+    expect(result[0].categories.age_groups).toEqual(['E_YOUTH']);
   });
 
   it('builds complete handball tactic presets (e.g., 6:0 vs 3:3 and 3:2:1 defense)', () => {

@@ -1,4 +1,5 @@
 import type {
+  AgeGroup,
   ComplexityLevel,
   HandballFocusTag,
   MaterialType,
@@ -39,6 +40,36 @@ export const COMPLEXITY_LABELS: Record<ComplexityLevel, string> = {
   ADVANCED: 'Fortgeschritten',
   PERFORMANCE: 'Leistung / Wettkampf'
 };
+
+export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
+  MINIS: 'Minis',
+  F_YOUTH: 'F-Jugend',
+  E_YOUTH: 'E-Jugend',
+  D_YOUTH: 'D-Jugend',
+  C_YOUTH: 'C-Jugend',
+  B_YOUTH: 'B-Jugend',
+  A_YOUTH: 'A-Jugend',
+  ADULTS: 'Erwachsene'
+};
+
+export const ALL_AGE_GROUPS: AgeGroup[] = [
+  'MINIS',
+  'F_YOUTH',
+  'E_YOUTH',
+  'D_YOUTH',
+  'C_YOUTH',
+  'B_YOUTH',
+  'A_YOUTH',
+  'ADULTS'
+];
+
+export const DEFAULT_AGE_GROUPS: AgeGroup[] = [
+  'D_YOUTH',
+  'C_YOUTH',
+  'B_YOUTH',
+  'A_YOUTH',
+  'ADULTS'
+];
 
 export const MATERIAL_LABELS: Record<MaterialType, string> = {
   BALL: 'Handbälle',
