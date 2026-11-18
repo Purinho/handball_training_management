@@ -556,10 +556,11 @@ sequenceDiagram
 
 ## 7. Abgrenzung (Out-of-Scope für das MVP)
 
-Folgende Themen sind bewusst für spätere Ausbaustufen (v1.1 / v2.0) zurückgestellt:
-1. **Spieler-Accounts & Anwesenheits-/Kaderlisten:** Im MVP arbeiten ausschließlich Trainer in der App.
-2. **Schlüsselbild-Animationen im Taktikboard & eigenes Video-Hosting:** Im MVP werden Abläufe über statische Skizzen mit nummerierten Aktionsketten (`1` $\rightarrow$ `2` $\rightarrow$ `3`), eingefügte Referenz-Bilder (`Strg+V`) und externe Video-Links (YouTube/Instagram/Web) abgebildet.
-3. **Automatisches Abo-/Bezahlsystem für Fremdvereine:** Die Multi-Tenant-Datenbankstruktur (`CLUB`) wird im MVP bereits vollständig angelegt, ein Bezahlsystem folgt erst bei Bedarf.
+Folgende Themen sind bewusst für spätere Ausbaustufen zurückgestellt (siehe auch [Phase-2-Spezifikation](SPECIFICATION_PHASE2.md)):
+1. **Schlüsselbild-Animationen im Taktikboard, PDF-Export & Smartphone-UX (Phase 2 / v1.1):** Im MVP werden Abläufe über statische Skizzen mit nummerierten Aktionsketten (`1` $\rightarrow$ `2` $\rightarrow$ `3`), eingefügte Referenz-Bilder (`Strg+V`) und externe Video-Links abgebildet.
+2. **Trainings-Analyse & Belastungssteuerung (Phase 3 / v1.2):** Auswertung der Trainingsfoki und Intensitäten über Zeiträume.
+3. **Spieler-Accounts, Anwesenheits-/Kaderlisten & Echtzeit-Kollaboration (Phase 4 / v1.3):** Im MVP arbeiten ausschließlich Trainer mit Offline-Sync-Outbox in der App.
+4. **Eigenes Video-Hosting, Paket-Sharing & Abo-/Bezahlsystem (Phase 5 / v2.0):** Die Multi-Tenant-Datenbankstruktur (`CLUB`) wird im MVP bereits vollständig angelegt, Video-Storage und Billing folgen später.
 
 ---
 
