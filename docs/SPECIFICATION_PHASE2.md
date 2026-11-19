@@ -143,7 +143,21 @@ export interface TacticBoardAnimationSettings {
 
 ---
 
-## 5. Vorgemerkte Erweiterung (Backlog, noch nicht umgesetzt)
+## 5. Modul 4: UI-Vereinfachung, Konfigurations-Menü & Guided-Config-Tour
+
+* **Ziel:** Trainer können nicht benötigte Bereiche, Buttons und Filter gezielt abschalten, um das UI auf ihren konkreten Trainingsalltag zu reduzieren.
+* **Konfigurierbare Funktionen ([uiPreferences.ts](../src/utils/uiPreferences.ts)):**
+  * *Hauptbereiche & Navigation:* `hallLiveMode` (Sporthallen-Modus), `multiWeekPlans` (Mehrwochenplan), `clubAdmin` (Verein, Teams & Trainer)
+  * *Werkzeuge & Aktionen:* `aiImport` (KI-JSON Import), `printExport` (Druck- & PDF-Export), `exerciseVariants` (Varianten ableiten), `tacticAnimation` (Animiertes Taktikboard)
+  * *Datenbank & Filter:* `advancedFilters` (Detailfilter), `favorites` (Favoriten-Sterne)
+  * *System & Sync:* `cloudSync` (Cloud-Sync & Login), `backupExport` (JSON-Vollbackup), `pwaInstall` (PWA-Installationshilfe)
+* **Schnell-Profile (Presets):** *Fokus / Minimal*, *Standard (Trainer & Jugend)* und *Alle Funktionen (Profi / Admin)*.
+* **Konfigurations-Menü ([UiConfigModal.tsx](../src/components/UiConfigModal.tsx)):** Über *„UI anpassen“* in Sidebar und Topbar jederzeit erreichbar; automatischer Fallback auf `DASHBOARD`, falls der aktuell geöffnete Tab deaktiviert wird.
+* **Guided-Config-Tour ([UiConfigTourModal.tsx](../src/components/UiConfigTourModal.tsx)):** 4-schrittiger Einrichtungs-Assistent für neue / neu angemeldete Nutzer (und jederzeit über das Konfigurations-Menü erneut startbar).
+
+---
+
+## 6. Vorgemerkte Erweiterung (Backlog, noch nicht umgesetzt)
 
 * **Mehrere Bälle im Taktikboard (gleichzeitig oder sequentiell):**
   * **Anforderung:** Im Taktikboard-Editor und in der Animation sollen mehrere Bälle (z. B. Ball 1 bei `RL`, Ball 2 bei `RR` oder bei einem Trainer/Ballwagen) gleichzeitig oder zeitversetzt/sequentiell geführt und gepasst werden können (z. B. Parallel-Passübungen, Gegenstoß-Wellen mit zwei Bällen, Nachwurf-Übungen).

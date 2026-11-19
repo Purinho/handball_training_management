@@ -42,7 +42,9 @@ import {
   AGE_GROUP_LABELS,
   ALL_AGE_GROUPS,
   FOCUS_TAG_LABELS,
-  MATERIAL_LABELS
+  MATERIAL_LABELS,
+  TACTIC_FOCUS_TAGS,
+  TECHNIQUE_FOCUS_TAGS
 } from '../constants/handballLabels';
 import {
   aggregateSessionMaterials,
@@ -75,7 +77,7 @@ interface TrainingSessionPlannerProps {
   focusedSessionId?: string;
   onEditExercise: (exercise: Exercise) => void;
   onOpenExercise?: (exercise: Exercise) => void;
-  onStartHallMode: (sessionId: string) => void;
+  onStartHallMode?: (sessionId: string) => void;
   onPrintSession?: (session: TrainingSession) => void;
 }
 
@@ -166,6 +168,7 @@ export function TrainingSessionPlanner({
   const [catalogTab, setCatalogTab] = useState<'SMART_FOCUS' | 'ALL' | 'RECENT'>('SMART_FOCUS');
   const [catalogSearch, setCatalogSearch] = useState('');
   const [catalogAgeGroup, setCatalogAgeGroup] = useState<'ALL' | AgeGroup>('ALL');
+  const [catalogFocusTag, setCatalogFocusTag] = useState<'ALL' | HandballFocusTag>('ALL');
   const [previewExerciseId, setPreviewExerciseId] = useState<string | null>(null);
 
   // Quick-Block input state
@@ -242,12 +245,24 @@ export function TrainingSessionPlanner({
         return false;
       }
 
+      if (
+        catalogFocusTag !== 'ALL' &&
+        !ex.categories.focus.includes(catalogFocusTag)
+      ) {
+        return false;
+      }
+
       if (catalogSearch.trim()) {
         const q = catalogSearch.toLowerCase();
+        const focusText = ex.categories.focus
+          .map((f) => FOCUS_TAG_LABELS[f])
+          .join(' ')
+          .toLowerCase();
         const matchesText =
           ex.title.toLowerCase().includes(q) ||
           ex.flow_description.toLowerCase().includes(q) ||
-          ex.coaching_points.toLowerCase().includes(q);
+          ex.coaching_points.toLowerCase().includes(q) ||
+          focusText.includes(q);
         if (!matchesText) return false;
       }
 
@@ -259,7 +274,7 @@ export function TrainingSessionPlanner({
       }
       return true;
     });
-  }, [exercises, linkedPlanWeek, blocks, activeTeam.id, catalogAgeGroup, catalogSearch, catalogTab]);
+  }, [exercises, linkedPlanWeek, blocks, activeTeam.id, catalogAgeGroup, catalogFocusTag, catalogSearch, catalogTab]);
 
   async function saveSessionBundleToDb(bundle: {
     session: TrainingSession;
@@ -680,7 +695,7 @@ export function TrainingSessionPlanner({
               </button>
             )}
 
-            {currentSession && (
+            {currentSession && onStartHallMode && (
               <button
                 type="button"
                 onClick={() => onStartHallMode(currentSession.id)}
@@ -1625,6 +1640,36 @@ export function TrainingSessionPlanner({
                         {AGE_GROUP_LABELS[ag]}
                       </option>
                     ))}
+                  </select>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor="planner-focus-filter"
+                    className="shrink-0 text-[11px] font-semibold text-slate-400"
+                  >
+                    Tag / Technik:
+                  </label>
+                  <select
+                    id="planner-focus-filter"
+                    value={catalogFocusTag}
+                    onChange={(e) => setCatalogFocusTag(e.target.value as 'ALL' | HandballFocusTag)}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-1.5 text-xs text-white focus:border-blue-500 focus:outline-none"
+                  >
+                    <option value="ALL">Alle Schwerpunkte & Techniken</option>
+                    <optgroup label="Taktik & Spielphasen">
+                      {TACTIC_FOCUS_TAGS.map((f) => (
+                        <option key={f} value={f}>
+                          {FOCUS_TAG_LABELS[f]}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Techniken">
+                      {TECHNIQUE_FOCUS_TAGS.map((f) => (
+                        <option key={f} value={f}>
+                          {FOCUS_TAG_LABELS[f]}
+                        </option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
               </div>

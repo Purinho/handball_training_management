@@ -11,7 +11,11 @@ import {
 } from 'lucide-react';
 import type { TacticBoardData } from '../types/domain';
 import { TacticBoardPreview } from './TacticBoardPreview';
-import { getTotalAnimationDurationMs, interpolateTacticBoardAtTime } from '../utils/tacticBoardUtils';
+import {
+  generateKeyframesFromPaths,
+  getTotalAnimationDurationMs,
+  interpolateTacticBoardAtTime
+} from '../utils/tacticBoardUtils';
 
 interface FullScreenChalkboardModalProps {
   isOpen: boolean;
@@ -42,11 +46,24 @@ export function FullScreenChalkboardModal({
   const [chalkColor, setChalkColor] = useState('#facc15');
   const [isDrawing, setIsDrawing] = useState(false);
 
+  const effectiveBoardData = useMemo(() => {
+    if (!tacticBoardData) return undefined;
+    if (tacticBoardData.keyframes && tacticBoardData.keyframes.length > 1) {
+      return tacticBoardData;
+    }
+    if (tacticBoardData.paths.length > 0) {
+      return generateKeyframesFromPaths(tacticBoardData);
+    }
+    return tacticBoardData;
+  }, [tacticBoardData]);
+
   // 60-FPS Animation Playback state (combines seamlessly with Live Chalk Pen)
-  const hasAnimation = Boolean(tacticBoardData?.keyframes && tacticBoardData.keyframes.length > 1);
+  const hasAnimation = Boolean(
+    effectiveBoardData?.keyframes && effectiveBoardData.keyframes.length > 1
+  );
   const totalDurationMs = useMemo(
-    () => (hasAnimation ? getTotalAnimationDurationMs(tacticBoardData?.keyframes) : 0),
-    [hasAnimation, tacticBoardData?.keyframes]
+    () => (hasAnimation ? getTotalAnimationDurationMs(effectiveBoardData?.keyframes) : 0),
+    [hasAnimation, effectiveBoardData?.keyframes]
   );
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeMs, setTimeMs] = useState(0);
@@ -93,18 +110,18 @@ export function FullScreenChalkboardModal({
   }, [isOpen, isPlaying, hasAnimation, totalDurationMs, speed, loop]);
 
   const jumpToKeyframe = (direction: -1 | 1) => {
-    if (!tacticBoardData?.keyframes || tacticBoardData.keyframes.length <= 1) return;
+    if (!effectiveBoardData?.keyframes || effectiveBoardData.keyframes.length <= 1) return;
     setIsPlaying(false);
-    const frame = interpolateTacticBoardAtTime(tacticBoardData, timeMs);
+    const frame = interpolateTacticBoardAtTime(effectiveBoardData, timeMs);
     const targetIdx = Math.max(
       0,
-      Math.min(tacticBoardData.keyframes.length - 1, frame.currentKeyframeIndex + direction)
+      Math.min(effectiveBoardData.keyframes.length - 1, frame.currentKeyframeIndex + direction)
     );
     let targetTime = 0;
     for (let i = 1; i <= targetIdx; i++) {
       targetTime +=
-        (tacticBoardData.keyframes[i].durationMs || 1400) +
-        (tacticBoardData.keyframes[i].pauseAfterMs ?? 300);
+        (effectiveBoardData.keyframes[i].durationMs || 1400) +
+        (effectiveBoardData.keyframes[i].pauseAfterMs ?? 300);
     }
     setTimeMs(Math.min(totalDurationMs, targetTime));
   };
@@ -246,7 +263,7 @@ export function FullScreenChalkboardModal({
               />
             ) : (
               <TacticBoardPreview
-                data={tacticBoardData}
+                data={effectiveBoardData}
                 hideControls
                 externalTimeMs={hasAnimation ? timeMs : undefined}
                 className="h-full w-full border-0"

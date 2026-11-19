@@ -15,7 +15,12 @@ import type {
   TrainingPhaseCategory,
   VisibilityLevel
 } from '../types/domain';
-import { ALL_AGE_GROUPS, DEFAULT_AGE_GROUPS } from '../constants/handballLabels';
+import {
+  ALL_AGE_GROUPS,
+  DEFAULT_AGE_GROUPS,
+  TACTIC_FOCUS_TAGS,
+  TECHNIQUE_FOCUS_TAGS
+} from '../constants/handballLabels';
 import { generateKeyframesFromPaths } from './tacticBoardUtils';
 
 export const AI_EXERCISE_SYSTEM_PROMPT = `Du bist ein erfahrener DHB-Handball-Trainer und Daten-Assistent.
@@ -37,7 +42,7 @@ Antworte AUSSCHLIESSLICH mit validem JSON (entweder ein einzelnes Objekt oder ei
 
 ### Erlaubte Enum-Werte:
 - phases: ["WARMUP", "SMALL_GAME", "GOALKEEPER_WARMUP", "GROUND_EXERCISE", "GROUND_GAME", "TARGET_GAME", "ATHLETICS_COORDINATION", "COOL_DOWN"]
-- focus: ["OFFENSE_INDIVIDUAL", "OFFENSE_GROUP", "OFFENSE_TEAM", "DEFENSE_INDIVIDUAL", "DEFENSE_GROUP", "DEFENSE_6_0", "DEFENSE_5_1", "DEFENSE_3_2_1", "FAST_BREAK_1ST_WAVE", "FAST_BREAK_2ND_WAVE", "RETREAT", "SHOOTING", "PASSING_CATCHING", "GOALKEEPER_TECHNIQUE"]
+- focus: ["OFFENSE_INDIVIDUAL", "OFFENSE_GROUP", "OFFENSE_TEAM", "DEFENSE_INDIVIDUAL", "DEFENSE_GROUP", "DEFENSE_6_0", "DEFENSE_5_1", "DEFENSE_3_2_1", "FAST_BREAK_1ST_WAVE", "FAST_BREAK_2ND_WAVE", "RETREAT", "SHOOTING", "PASSING_CATCHING", "GOALKEEPER_TECHNIQUE", "DRIBBLING", "PASSING", "CATCHING", "JUMP_SHOT", "STANDING_THROW", "HIP_UNDERARM_SHOT", "FALLING_SHOT", "LOB_SPIN_SHOT", "FEINT_1V1", "CROSSING_SCREEN", "FOOTWORK_DEFENSE"]
 - level: "BASIC" | "ADVANCED" | "PERFORMANCE"
 - age_groups (Altersstufen, mindestens 1 Wert): ["MINIS", "F_YOUTH", "E_YOUTH", "D_YOUTH", "C_YOUTH", "B_YOUTH", "A_YOUTH", "ADULTS"]
 - materials.type: "BALL" | "BALL_CART" | "CONE" | "BIBS" | "COORDINATION_LADDER" | "SOFT_MAT" | "POLE_AIRBODY" | "VAULTING_BOX" | "TARGET_CORNER" | "MINI_GOAL"
@@ -291,7 +296,19 @@ export function parseAndNormalizeAiExerciseJson(
 
     const rawCats = (item.categories ?? {}) as Record<string, unknown>;
     const phases = (Array.isArray(rawCats.phases) ? rawCats.phases : ['GROUND_EXERCISE']) as TrainingPhaseCategory[];
-    const focus = (Array.isArray(rawCats.focus) ? rawCats.focus : ['OFFENSE_GROUP']) as HandballFocusTag[];
+    const validFocus = new Set<string>([...TACTIC_FOCUS_TAGS, ...TECHNIQUE_FOCUS_TAGS]);
+    const rawFocus = Array.isArray(rawCats.focus) ? rawCats.focus : ['OFFENSE_GROUP'];
+    const legacyTechniques = Array.isArray(rawCats.techniques)
+      ? rawCats.techniques.map((t) => (t === 'GOALKEEPER_SAVE' ? 'GOALKEEPER_TECHNIQUE' : t))
+      : [];
+    const focus = Array.from(
+      new Set(
+        [...rawFocus, ...legacyTechniques].filter(
+          (f): f is HandballFocusTag => typeof f === 'string' && validFocus.has(f)
+        )
+      )
+    );
+    if (focus.length === 0) focus.push('OFFENSE_GROUP');
     const level = (typeof rawCats.level === 'string' ? rawCats.level : 'BASIC') as ComplexityLevel;
     const validAgeGroups = new Set<string>(ALL_AGE_GROUPS);
     const parsedAgeGroups = Array.isArray(rawCats.age_groups)

@@ -15,10 +15,12 @@ import {
   Filter,
   GitBranch,
   LayoutDashboard,
+  Maximize2,
   Play,
   Plus,
   Printer,
   Search,
+  SlidersHorizontal,
   Sparkles,
   Star,
   Trash2,
@@ -37,7 +39,16 @@ import { AiExerciseImporterModal } from './components/AiExerciseImporterModal';
 import { TrainingSessionPlanner } from './components/TrainingSessionPlanner';
 import { MultiWeekPlanManager } from './components/MultiWeekPlanManager';
 import { HallLiveMode } from './components/HallLiveMode';
+import { FullScreenChalkboardModal } from './components/FullScreenChalkboardModal';
 import { PrintExportModal, type PrintExportTarget } from './components/PrintExportModal';
+import { UiConfigModal } from './components/UiConfigModal';
+import { UiConfigTourModal } from './components/UiConfigTourModal';
+import {
+  getFallbackTabIfDisabled,
+  loadUiPreferences,
+  saveUiPreferences,
+  type UiPreferences
+} from './utils/uiPreferences';
 import {
   exportClubDatabaseSnapshot,
   syncWithSupabaseCloud
@@ -49,6 +60,8 @@ import {
   COMPLEXITY_LABELS,
   FOCUS_TAG_LABELS,
   PHASE_CATEGORY_LABELS,
+  TACTIC_FOCUS_TAGS,
+  TECHNIQUE_FOCUS_TAGS,
   VISIBILITY_LABELS
 } from './constants/handballLabels';
 import type {
@@ -91,7 +104,22 @@ export function App() {
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [variantParentExercise, setVariantParentExercise] = useState<Exercise | null>(null);
   const [aiImporterOpen, setAiImporterOpen] = useState(false);
+  const [chalkboardOpen, setChalkboardOpen] = useState(false);
   const [confirmDeleteExerciseId, setConfirmDeleteExerciseId] = useState<string | null>(null);
+  const [uiPreferences, setUiPreferences] = useState<UiPreferences>(() => loadUiPreferences());
+  const [uiConfigModalOpen, setUiConfigModalOpen] = useState(false);
+  const [uiTourModalOpen, setUiTourModalOpen] = useState(() => !loadUiPreferences().tourCompleted);
+
+  const uiFeatures = uiPreferences.features;
+
+  function handleUpdateUiPreferences(next: UiPreferences) {
+    const saved = saveUiPreferences(next);
+    setUiPreferences(saved);
+    const safeTab = getFallbackTabIfDisabled(activeTab, saved.features);
+    if (safeTab !== activeTab) {
+      setActiveTab(safeTab);
+    }
+  }
 
   useEffect(() => {
     const supabase = getSupabaseClient();
@@ -260,12 +288,17 @@ export function App() {
         }
         if (!searchQuery.trim()) return true;
         const q = searchQuery.toLowerCase();
+        const focusText = ex.categories.focus
+          .map((f) => FOCUS_TAG_LABELS[f])
+          .join(' ')
+          .toLowerCase();
         return (
           ex.title.toLowerCase().includes(q) ||
           ex.setup_description.toLowerCase().includes(q) ||
           ex.flow_description.toLowerCase().includes(q) ||
           ex.coaching_points.toLowerCase().includes(q) ||
-          (ex.variations_text ?? '').toLowerCase().includes(q)
+          (ex.variations_text ?? '').toLowerCase().includes(q) ||
+          focusText.includes(q)
         );
       })
       .sort((a, b) => Number(Boolean(b.is_favorite)) - Number(Boolean(a.is_favorite)));
@@ -468,36 +501,40 @@ export function App() {
             Trainings-Editor & Tag
           </button>
 
-          <button
-            type="button"
-            onClick={() => navigateToTab('HALL_LIVE')}
-            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
-              activeTab === 'HALL_LIVE'
-                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'text-emerald-300 hover:bg-slate-800/70'
-            }`}
-          >
-            <span className="flex items-center gap-3">
-              <Play className="h-4 w-4" />
-              Sporthallen-Modus (Live)
-            </span>
-            <span className="rounded bg-emerald-950 px-1.5 py-0.5 text-[10px] font-bold text-emerald-300">
-              Timer
-            </span>
-          </button>
+          {uiFeatures.hallLiveMode && (
+            <button
+              type="button"
+              onClick={() => navigateToTab('HALL_LIVE')}
+              className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                activeTab === 'HALL_LIVE'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  : 'text-emerald-300 hover:bg-slate-800/70'
+              }`}
+            >
+              <span className="flex items-center gap-3">
+                <Play className="h-4 w-4" />
+                Sporthallen-Modus (Live)
+              </span>
+              <span className="rounded bg-emerald-950 px-1.5 py-0.5 text-[10px] font-bold text-emerald-300">
+                Timer
+              </span>
+            </button>
+          )}
 
-          <button
-            type="button"
-            onClick={() => navigateToTab('PLANS')}
-            className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
-              activeTab === 'PLANS'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
-                : 'text-slate-300 hover:bg-slate-800/70'
-            }`}
-          >
-            <CalendarRange className="h-4 w-4" />
-            Mehrwochenplan (Mesozyklus)
-          </button>
+          {uiFeatures.multiWeekPlans && (
+            <button
+              type="button"
+              onClick={() => navigateToTab('PLANS')}
+              className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                activeTab === 'PLANS'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                  : 'text-slate-300 hover:bg-slate-800/70'
+              }`}
+            >
+              <CalendarRange className="h-4 w-4" />
+              Mehrwochenplan (Mesozyklus)
+            </button>
+          )}
 
           <button
             type="button"
@@ -517,86 +554,113 @@ export function App() {
             </span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => navigateToTab('CLUB_ADMIN')}
-            className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
-              activeTab === 'CLUB_ADMIN'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
-                : 'text-slate-300 hover:bg-slate-800/70'
-            }`}
-          >
-            <Building2 className="h-4 w-4" />
-            Verein, Teams & Trainer
-          </button>
+          {uiFeatures.clubAdmin && (
+            <button
+              type="button"
+              onClick={() => navigateToTab('CLUB_ADMIN')}
+              className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                activeTab === 'CLUB_ADMIN'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                  : 'text-slate-300 hover:bg-slate-800/70'
+              }`}
+            >
+              <Building2 className="h-4 w-4" />
+              Verein, Teams & Trainer
+            </button>
+          )}
         </nav>
 
         {/* Offline / Sync Status & Store-freie PWA Hilfe */}
         <div className="mt-6 space-y-2.5 border-t border-slate-800 pt-4">
-          <div className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/80 px-3 py-2 text-xs">
-            <span className="flex items-center gap-2 font-medium">
-              {isOnline ? (
-                <>
-                  <Wifi className="h-4 w-4 text-emerald-400" />
-                  <span className="text-emerald-300">Offline-DB bereit</span>
-                </>
-              ) : (
-                <>
-                  <WifiOff className="h-4 w-4 text-amber-400" />
-                  <span className="text-amber-300">Hallen-Offline aktiv</span>
-                </>
+          {uiFeatures.cloudSync && (
+            <>
+              <div className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/80 px-3 py-2 text-xs">
+                <span className="flex items-center gap-2 font-medium">
+                  {isOnline ? (
+                    <>
+                      <Wifi className="h-4 w-4 text-emerald-400" />
+                      <span className="text-emerald-300">Offline-DB bereit</span>
+                    </>
+                  ) : (
+                    <>
+                      <WifiOff className="h-4 w-4 text-amber-400" />
+                      <span className="text-amber-300">Hallen-Offline aktiv</span>
+                    </>
+                  )}
+                </span>
+                {authUserEmail ? (
+                  <button
+                    type="button"
+                    onClick={() => void handleManualCloudSync()}
+                    className="inline-flex items-center gap-1 rounded bg-blue-950 px-2 py-0.5 text-[10px] font-semibold text-blue-300 hover:bg-blue-900"
+                    title="Outbox synchronisieren"
+                  >
+                    <CloudUpload className="h-3 w-3" />
+                    {pendingSyncCount} Sync
+                  </button>
+                ) : (
+                  <span className="rounded bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-400">
+                    Demo / Lokal
+                  </span>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowAuthModal(true)}
+                className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-xs font-semibold transition ${
+                  authUserEmail
+                    ? 'border-emerald-500/40 bg-emerald-950/30 text-emerald-200 hover:bg-emerald-900/40'
+                    : 'border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700'
+                }`}
+              >
+                <span className="flex items-center gap-2 truncate">
+                  <User className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">
+                    {authUserEmail ? authUserEmail : isSupabaseConfigured() ? 'Cloud-Login' : 'Konto / Sync'}
+                  </span>
+                </span>
+                <span className="text-[10px] opacity-80">
+                  {authUserEmail ? 'Aktiv' : 'Lokal'}
+                </span>
+              </button>
+            </>
+          )}
+
+          {(uiFeatures.pwaInstall || uiFeatures.backupExport) && (
+            <div className="grid grid-cols-2 gap-2">
+              {uiFeatures.pwaInstall && (
+                <button
+                  type="button"
+                  onClick={() => setShowInstallModal(true)}
+                  className="flex items-center justify-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-2.5 py-2 text-[11px] font-semibold text-blue-300 hover:bg-blue-900/50"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  PWA App
+                </button>
               )}
-            </span>
-            <button
-              type="button"
-              onClick={() => void handleManualCloudSync()}
-              className="inline-flex items-center gap-1 rounded bg-blue-950 px-2 py-0.5 text-[10px] font-semibold text-blue-300 hover:bg-blue-900"
-              title="Outbox synchronisieren"
-            >
-              <CloudUpload className="h-3 w-3" />
-              {pendingSyncCount} Sync
-            </button>
-          </div>
+              {uiFeatures.backupExport && (
+                <button
+                  type="button"
+                  onClick={() => void handleDownloadBackupJson()}
+                  className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-2.5 py-2 text-[11px] font-semibold text-slate-200 hover:bg-slate-700"
+                  title="Komplettes Vereins-Backup als JSON herunterladen"
+                >
+                  <FileDown className="h-3.5 w-3.5 text-emerald-400" />
+                  Backup
+                </button>
+              )}
+            </div>
+          )}
 
           <button
             type="button"
-            onClick={() => setShowAuthModal(true)}
-            className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-xs font-semibold transition ${
-              authUserEmail
-                ? 'border-emerald-500/40 bg-emerald-950/30 text-emerald-200 hover:bg-emerald-900/40'
-                : 'border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700'
-            }`}
+            onClick={() => setUiConfigModalOpen(true)}
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-700/80 bg-slate-800/60 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-white"
           >
-            <span className="flex items-center gap-2 truncate">
-              <User className="h-3.5 w-3.5 shrink-0" />
-              <span className="truncate">
-                {authUserEmail ? authUserEmail : isSupabaseConfigured() ? 'Cloud-Login' : 'Konto / Sync'}
-              </span>
-            </span>
-            <span className="text-[10px] opacity-80">
-              {authUserEmail ? 'Aktiv' : 'Lokal'}
-            </span>
+            <SlidersHorizontal className="h-3.5 w-3.5 text-blue-400" />
+            UI anpassen
           </button>
-
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => setShowInstallModal(true)}
-              className="flex items-center justify-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-2.5 py-2 text-[11px] font-semibold text-blue-300 hover:bg-blue-900/50"
-            >
-              <Download className="h-3.5 w-3.5" />
-              PWA App
-            </button>
-            <button
-              type="button"
-              onClick={() => void handleDownloadBackupJson()}
-              className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-2.5 py-2 text-[11px] font-semibold text-slate-200 hover:bg-slate-700"
-              title="Komplettes Vereins-Backup als JSON herunterladen"
-            >
-              <FileDown className="h-3.5 w-3.5 text-emerald-400" />
-              Backup
-            </button>
-          </div>
         </div>
       </aside>
 
@@ -626,14 +690,16 @@ export function App() {
               ))}
             </select>
 
-            <button
-              type="button"
-              onClick={() => navigateToTab('HALL_LIVE')}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-500"
-            >
-              <Play className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Hallen-Modus</span>
-            </button>
+            {uiFeatures.hallLiveMode && (
+              <button
+                type="button"
+                onClick={() => navigateToTab('HALL_LIVE')}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-500"
+              >
+                <Play className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Hallen-Modus</span>
+              </button>
+            )}
 
             <button
               type="button"
@@ -648,36 +714,52 @@ export function App() {
               Neue Übung
             </button>
 
-            <button
-              type="button"
-              onClick={() => setAiImporterOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-purple-500/40 bg-purple-950/50 px-3 py-1.5 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
-            >
-              <Bot className="h-3.5 w-3.5 text-purple-400" />
-              <span className="hidden sm:inline">KI-JSON Import</span>
-            </button>
+            {uiFeatures.aiImport && (
+              <button
+                type="button"
+                onClick={() => setAiImporterOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-purple-500/40 bg-purple-950/50 px-3 py-1.5 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
+              >
+                <Bot className="h-3.5 w-3.5 text-purple-400" />
+                <span className="hidden sm:inline">KI-JSON Import</span>
+              </button>
+            )}
+
+            {uiFeatures.cloudSync && (
+              <button
+                type="button"
+                onClick={() => setShowAuthModal(true)}
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium ${
+                  authUserEmail
+                    ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/50'
+                    : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+                }`}
+                title="Cloud-Sync & Anmeldung"
+              >
+                <User className="h-3.5 w-3.5 text-emerald-400" />
+                <span className="hidden md:inline">{authUserEmail ? 'Cloud' : 'Login'}</span>
+              </button>
+            )}
+
+            {uiFeatures.pwaInstall && (
+              <button
+                type="button"
+                onClick={() => setShowInstallModal(true)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700"
+              >
+                <Download className="h-3.5 w-3.5 text-blue-400" />
+                <span className="hidden md:inline">Installieren</span>
+              </button>
+            )}
 
             <button
               type="button"
-              onClick={() => setShowAuthModal(true)}
-              className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium ${
-                authUserEmail
-                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/50'
-                  : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
-              }`}
-              title="Cloud-Sync & Anmeldung"
+              onClick={() => setUiConfigModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-2.5 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700"
+              title="UI vereinfachen & Funktionen konfigurieren"
             >
-              <User className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="hidden md:inline">{authUserEmail ? 'Cloud' : 'Login'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setShowInstallModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-700"
-            >
-              <Download className="h-3.5 w-3.5 text-blue-400" />
-              <span className="hidden md:inline">Installieren</span>
+              <SlidersHorizontal className="h-3.5 w-3.5 text-blue-400" />
+              <span className="hidden xl:inline">UI</span>
             </button>
           </div>
         </header>
@@ -743,26 +825,36 @@ export function App() {
                   setMobileDetailOpen(true);
                   navigateToTab('EXERCISES');
                 }}
-                onStartHallMode={(sessionId) => {
-                  setFocusedSessionId(sessionId);
-                  navigateToTab('HALL_LIVE');
-                }}
-                onPrintSession={(session) => {
-                  const sessionPhases = phases.filter((p) => p.training_session_id === session.id);
-                  const linkedWeek = session.plan_week_id
-                    ? activePlanWeeks.find((pw) => pw.id === session.plan_week_id)
-                    : activePlanWeeks[1] ?? activePlanWeeks[0];
-                  setPrintTarget({
-                    kind: 'SESSION',
-                    team: activeTeam,
-                    session,
-                    phases: sessionPhases,
-                    blocks,
-                    exercisesById,
-                    members,
-                    focusTheme: linkedWeek?.focus_theme
-                  });
-                }}
+                onStartHallMode={
+                  uiFeatures.hallLiveMode
+                    ? (sessionId) => {
+                        setFocusedSessionId(sessionId);
+                        navigateToTab('HALL_LIVE');
+                      }
+                    : undefined
+                }
+                onPrintSession={
+                  uiFeatures.printExport
+                    ? (session) => {
+                        const sessionPhases = phases.filter(
+                          (p) => p.training_session_id === session.id
+                        );
+                        const linkedWeek = session.plan_week_id
+                          ? activePlanWeeks.find((pw) => pw.id === session.plan_week_id)
+                          : activePlanWeeks[1] ?? activePlanWeeks[0];
+                        setPrintTarget({
+                          kind: 'SESSION',
+                          team: activeTeam,
+                          session,
+                          phases: sessionPhases,
+                          blocks,
+                          exercisesById,
+                          members,
+                          focusTheme: linkedWeek?.focus_theme
+                        });
+                      }
+                    : undefined
+                }
               />
             </div>
           )}
@@ -795,14 +887,16 @@ export function App() {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setAiImporterOpen(true)}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-purple-500/40 bg-purple-950/50 px-3.5 py-2 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
-                  >
-                    <Bot className="h-4 w-4 text-purple-400" />
-                    KI-JSON Import & Prompt-Generator
-                  </button>
+                  {uiFeatures.aiImport && (
+                    <button
+                      type="button"
+                      onClick={() => setAiImporterOpen(true)}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-purple-500/40 bg-purple-950/50 px-3.5 py-2 text-xs font-semibold text-purple-200 hover:bg-purple-900/60"
+                    >
+                      <Bot className="h-4 w-4 text-purple-400" />
+                      KI-JSON Import & Prompt-Generator
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => {
@@ -832,29 +926,34 @@ export function App() {
                           className="min-h-[44px] w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
                         />
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => setFavoritesOnly((f) => !f)}
-                        className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border px-3 text-xs font-bold transition ${
-                          favoritesOnly
-                            ? 'border-amber-400 bg-amber-500 text-slate-950'
-                            : 'border-slate-700 bg-slate-800 text-amber-300 hover:bg-slate-700'
-                        }`}
-                        title="Nur Favoriten anzeigen"
-                      >
-                        <Star className={`h-4 w-4 ${favoritesOnly ? 'fill-slate-950' : ''}`} />
-                        <span className="hidden sm:inline">Favoriten</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setMobileFiltersOpen((o) => !o)}
-                        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs font-semibold text-slate-200 lg:hidden"
-                        title="Filter ein-/ausblenden"
-                      >
-                        <Filter className="h-4 w-4 text-blue-400" />
-                      </button>
+                      {uiFeatures.favorites && (
+                        <button
+                          type="button"
+                          onClick={() => setFavoritesOnly((f) => !f)}
+                          className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border px-3 text-xs font-bold transition ${
+                            favoritesOnly
+                              ? 'border-amber-400 bg-amber-500 text-slate-950'
+                              : 'border-slate-700 bg-slate-800 text-amber-300 hover:bg-slate-700'
+                          }`}
+                          title="Nur Favoriten anzeigen"
+                        >
+                          <Star className={`h-4 w-4 ${favoritesOnly ? 'fill-slate-950' : ''}`} />
+                          <span className="hidden sm:inline">Favoriten</span>
+                        </button>
+                      )}
+                      {uiFeatures.advancedFilters && (
+                        <button
+                          type="button"
+                          onClick={() => setMobileFiltersOpen((o) => !o)}
+                          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs font-semibold text-slate-200 lg:hidden"
+                          title="Filter ein-/ausblenden"
+                        >
+                          <Filter className="h-4 w-4 text-blue-400" />
+                        </button>
+                      )}
                     </div>
 
+                    {uiFeatures.advancedFilters && (
                     <div className={`space-y-3 ${mobileFiltersOpen ? 'block' : 'hidden lg:block'}`}>
                       <div className="flex flex-wrap gap-1.5">
                         {(['ALL', 'CLUB', 'TEAM'] as const).map((vis) => (
@@ -903,12 +1002,21 @@ export function App() {
                           }
                           className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-xs text-white"
                         >
-                          <option value="ALL">Schwerpunkt: Alle</option>
-                          {(Object.keys(FOCUS_TAG_LABELS) as HandballFocusTag[]).map((f) => (
-                            <option key={f} value={f}>
-                              {FOCUS_TAG_LABELS[f]}
-                            </option>
-                          ))}
+                          <option value="ALL">Schwerpunkt / Technik: Alle</option>
+                          <optgroup label="Taktik & Spielphasen">
+                            {TACTIC_FOCUS_TAGS.map((f) => (
+                              <option key={f} value={f}>
+                                {FOCUS_TAG_LABELS[f]}
+                              </option>
+                            ))}
+                          </optgroup>
+                          <optgroup label="Techniken">
+                            {TECHNIQUE_FOCUS_TAGS.map((f) => (
+                              <option key={f} value={f}>
+                                {FOCUS_TAG_LABELS[f]}
+                              </option>
+                            ))}
+                          </optgroup>
                         </select>
 
                         <select
@@ -970,6 +1078,7 @@ export function App() {
                         </div>
                       </div>
                     </div>
+                    )}
                   </div>
 
                   <div className="space-y-2.5">
@@ -1013,23 +1122,25 @@ export function App() {
                               <span className="text-slate-400">
                                 {ex.default_duration_min} Min · {ex.min_players}–{ex.max_players} Sp.
                               </span>
-                              <button
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  void handleToggleFavorite(ex);
-                                }}
-                                className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-800"
-                                title={ex.is_favorite ? 'Favorit entfernen' : 'Als Favorit anheften'}
-                              >
-                                <Star
-                                  className={`h-4 w-4 ${
-                                    ex.is_favorite
-                                      ? 'fill-amber-400 text-amber-400'
-                                      : 'text-slate-500'
-                                  }`}
-                                />
-                              </button>
+                              {uiFeatures.favorites && (
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    void handleToggleFavorite(ex);
+                                  }}
+                                  className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-800"
+                                  title={ex.is_favorite ? 'Favorit entfernen' : 'Als Favorit anheften'}
+                                >
+                                  <Star
+                                    className={`h-4 w-4 ${
+                                      ex.is_favorite
+                                        ? 'fill-amber-400 text-amber-400'
+                                        : 'text-slate-500'
+                                    }`}
+                                  />
+                                </button>
+                              )}
                             </div>
                           </div>
 
@@ -1092,28 +1203,32 @@ export function App() {
                             <Edit3 className="h-3.5 w-3.5 text-blue-400" />
                             Bearbeiten
                           </button>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
-                            }
-                            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-slate-800 px-2.5 text-xs font-semibold text-emerald-300"
-                          >
-                            <Printer className="h-3.5 w-3.5" />
-                            PDF
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingExercise(null);
-                              setVariantParentExercise(activeExercise);
-                              setEditorModalOpen(true);
-                            }}
-                            className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-blue-600 px-2.5 text-xs font-semibold text-white"
-                          >
-                            <CopyPlus className="h-3.5 w-3.5" />
-                            Variante
-                          </button>
+                          {uiFeatures.printExport && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
+                              }
+                              className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-slate-800 px-2.5 text-xs font-semibold text-emerald-300"
+                            >
+                              <Printer className="h-3.5 w-3.5" />
+                              PDF
+                            </button>
+                          )}
+                          {uiFeatures.exerciseVariants && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setEditingExercise(null);
+                                setVariantParentExercise(activeExercise);
+                                setEditorModalOpen(true);
+                              }}
+                              className="inline-flex min-h-[44px] items-center gap-1 rounded-xl bg-blue-600 px-2.5 text-xs font-semibold text-white"
+                            >
+                              <CopyPlus className="h-3.5 w-3.5" />
+                              Variante
+                            </button>
+                          )}
                         </div>
                       </div>
 
@@ -1135,33 +1250,37 @@ export function App() {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => void handleToggleFavorite(activeExercise)}
-                            className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold ${
-                              activeExercise.is_favorite
-                                ? 'border-amber-400 bg-amber-500/20 text-amber-300'
-                                : 'border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700'
-                            }`}
-                          >
-                            <Star
-                              className={`h-3.5 w-3.5 ${
-                                activeExercise.is_favorite ? 'fill-amber-400 text-amber-400' : ''
+                          {uiFeatures.favorites && (
+                            <button
+                              type="button"
+                              onClick={() => void handleToggleFavorite(activeExercise)}
+                              className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold ${
+                                activeExercise.is_favorite
+                                  ? 'border-amber-400 bg-amber-500/20 text-amber-300'
+                                  : 'border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700'
                               }`}
-                            />
-                            Favorit
-                          </button>
+                            >
+                              <Star
+                                className={`h-3.5 w-3.5 ${
+                                  activeExercise.is_favorite ? 'fill-amber-400 text-amber-400' : ''
+                                }`}
+                              />
+                              Favorit
+                            </button>
+                          )}
 
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
-                            }
-                            className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/50"
-                          >
-                            <Printer className="h-3.5 w-3.5" />
-                            PDF / Drucken
-                          </button>
+                          {uiFeatures.printExport && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setPrintTarget({ kind: 'EXERCISE', exercise: activeExercise })
+                              }
+                              className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/40 px-3 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/50"
+                            >
+                              <Printer className="h-3.5 w-3.5" />
+                              PDF / Drucken
+                            </button>
+                          )}
 
                           <button
                             type="button"
@@ -1176,18 +1295,20 @@ export function App() {
                             Bearbeiten
                           </button>
 
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingExercise(null);
-                              setVariantParentExercise(activeExercise);
-                              setEditorModalOpen(true);
-                            }}
-                            className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-3 py-1.5 text-xs font-semibold text-blue-300 hover:bg-blue-900/50"
-                          >
-                            <CopyPlus className="h-3.5 w-3.5" />
-                            Als Variante duplizieren
-                          </button>
+                          {uiFeatures.exerciseVariants && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setEditingExercise(null);
+                                setVariantParentExercise(activeExercise);
+                                setEditorModalOpen(true);
+                              }}
+                              className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/40 px-3 py-1.5 text-xs font-semibold text-blue-300 hover:bg-blue-900/50"
+                            >
+                              <CopyPlus className="h-3.5 w-3.5" />
+                              Als Variante duplizieren
+                            </button>
+                          )}
 
                           {confirmDeleteExerciseId === activeExercise.id ? (
                             <div className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/50 bg-rose-950/70 px-2.5 py-1 text-xs">
@@ -1246,15 +1367,28 @@ export function App() {
 
                       <div className="space-y-4">
                         <div>
-                          <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
+                          <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
                             <span className="font-semibold text-slate-200 uppercase">
                               Handball-Taktikboard (Vektor-Skizze)
                             </span>
-                            <span>
-                              Blau = Angriff · Rot = Abwehr · Grün = TW · ((RL)) = Anstellreihe
-                            </span>
+                            <div className="flex items-center gap-3">
+                              <span className="hidden sm:inline">
+                                Blau = Angriff · Rot = Abwehr · Grün = TW · ((RL)) = Anstellreihe
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => setChalkboardOpen(true)}
+                                className="inline-flex items-center gap-1 rounded-lg border border-blue-500/40 bg-blue-950/50 px-2.5 py-1 text-[11px] font-semibold text-blue-200 hover:bg-blue-900/60"
+                              >
+                                <Maximize2 className="h-3 w-3" />
+                                Vollbild
+                              </button>
+                            </div>
                           </div>
-                          <TacticBoardPreview data={activeExercise.tactic_board_data} />
+                          <TacticBoardPreview
+                            data={activeExercise.tactic_board_data}
+                            hideControls={!uiFeatures.tacticAnimation}
+                          />
                         </div>
 
                         {activeExercise.reference_image_data && (
@@ -1288,14 +1422,21 @@ export function App() {
                             {PHASE_CATEGORY_LABELS[p]}
                           </span>
                         ))}
-                        {activeExercise.categories.focus.map((f) => (
-                          <span
-                            key={f}
-                            className="rounded-md bg-blue-950/80 border border-blue-700/40 px-2.5 py-1 text-xs text-blue-300"
-                          >
-                            #{FOCUS_TAG_LABELS[f]}
-                          </span>
-                        ))}
+                        {activeExercise.categories.focus.map((f) => {
+                          const isTechnique = TECHNIQUE_FOCUS_TAGS.includes(f);
+                          return (
+                            <span
+                              key={f}
+                              className={
+                                isTechnique
+                                  ? 'rounded-md bg-amber-950/80 border border-amber-600/40 px-2.5 py-1 text-xs font-medium text-amber-200'
+                                  : 'rounded-md bg-blue-950/80 border border-blue-700/40 px-2.5 py-1 text-xs text-blue-300'
+                              }
+                            >
+                              #{FOCUS_TAG_LABELS[f]}
+                            </span>
+                          );
+                        })}
                       </div>
 
                       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -1412,26 +1553,30 @@ export function App() {
           <LayoutDashboard className="h-5 w-5" />
           Planer
         </button>
-        <button
-          type="button"
-          onClick={() => navigateToTab('HALL_LIVE')}
-          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-bold ${
-            activeTab === 'HALL_LIVE' ? 'text-emerald-400' : 'text-slate-400'
-          }`}
-        >
-          <Play className="h-5 w-5" />
-          Halle Live
-        </button>
-        <button
-          type="button"
-          onClick={() => navigateToTab('PLANS')}
-          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
-            activeTab === 'PLANS' ? 'text-blue-400' : 'text-slate-400'
-          }`}
-        >
-          <CalendarRange className="h-5 w-5" />
-          Wochenplan
-        </button>
+        {uiFeatures.hallLiveMode && (
+          <button
+            type="button"
+            onClick={() => navigateToTab('HALL_LIVE')}
+            className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-bold ${
+              activeTab === 'HALL_LIVE' ? 'text-emerald-400' : 'text-slate-400'
+            }`}
+          >
+            <Play className="h-5 w-5" />
+            Halle Live
+          </button>
+        )}
+        {uiFeatures.multiWeekPlans && (
+          <button
+            type="button"
+            onClick={() => navigateToTab('PLANS')}
+            className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
+              activeTab === 'PLANS' ? 'text-blue-400' : 'text-slate-400'
+            }`}
+          >
+            <CalendarRange className="h-5 w-5" />
+            Wochenplan
+          </button>
+        )}
         <button
           type="button"
           onClick={() => navigateToTab('EXERCISES')}
@@ -1442,16 +1587,18 @@ export function App() {
           <BookOpen className="h-5 w-5" />
           Übungen
         </button>
-        <button
-          type="button"
-          onClick={() => navigateToTab('CLUB_ADMIN')}
-          className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
-            activeTab === 'CLUB_ADMIN' ? 'text-blue-400' : 'text-slate-400'
-          }`}
-        >
-          <Building2 className="h-5 w-5" />
-          Verein
-        </button>
+        {uiFeatures.clubAdmin && (
+          <button
+            type="button"
+            onClick={() => navigateToTab('CLUB_ADMIN')}
+            className={`flex flex-col items-center gap-1 px-2 py-1 text-[10px] font-medium ${
+              activeTab === 'CLUB_ADMIN' ? 'text-blue-400' : 'text-slate-400'
+            }`}
+          >
+            <Building2 className="h-5 w-5" />
+            Verein
+          </button>
+        )}
       </nav>
 
       <PwaInstallGuideModal
@@ -1493,6 +1640,35 @@ export function App() {
       />
     </div>
     <PrintExportModal target={printTarget} onClose={() => setPrintTarget(null)} />
+
+    <FullScreenChalkboardModal
+      isOpen={chalkboardOpen && Boolean(activeExercise)}
+      title={activeExercise?.title ?? 'Taktiktafel'}
+      coachingPoints={activeExercise?.coaching_points}
+      tacticBoardData={activeExercise?.tactic_board_data}
+      referenceImageData={activeExercise?.reference_image_data}
+      onClose={() => setChalkboardOpen(false)}
+    />
+
+    <UiConfigModal
+      isOpen={uiConfigModalOpen}
+      preferences={uiPreferences}
+      onChangePreferences={handleUpdateUiPreferences}
+      onOpenTour={() => setUiTourModalOpen(true)}
+      onClose={() => setUiConfigModalOpen(false)}
+    />
+
+    {uiTourModalOpen && !showAuthModal && (
+      <UiConfigTourModal
+        isOpen={uiTourModalOpen}
+        initialPreferences={uiPreferences}
+        onComplete={(next) => {
+          handleUpdateUiPreferences(next);
+          setUiTourModalOpen(false);
+        }}
+        onSkip={() => setUiTourModalOpen(false)}
+      />
+    )}
     </>
   );
 }

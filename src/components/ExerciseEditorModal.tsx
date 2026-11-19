@@ -28,7 +28,9 @@ import {
   DEFAULT_AGE_GROUPS,
   FOCUS_TAG_LABELS,
   MATERIAL_LABELS,
-  PHASE_CATEGORY_LABELS
+  PHASE_CATEGORY_LABELS,
+  TACTIC_FOCUS_TAGS,
+  TECHNIQUE_FOCUS_TAGS
 } from '../constants/handballLabels';
 import { TacticBoardEditor } from './TacticBoardEditor';
 import { buildTacticBoardPreset } from '../utils/tacticPresets';
@@ -722,28 +724,59 @@ export function ExerciseEditorModal({
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-3.5">
-                  <div className="mb-2 text-xs font-bold text-slate-300">
-                    Handball-Schwerpunkte (für Smart-Filter)
+                <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-3.5 space-y-3">
+                  <div className="text-xs font-bold text-slate-300">
+                    Handball-Schwerpunkte & Techniken (für Smart-Filter)
                   </div>
-                  <div className="flex max-h-36 flex-wrap gap-1.5 overflow-y-auto">
-                    {(Object.keys(FOCUS_TAG_LABELS) as HandballFocusTag[]).map((f) => {
-                      const active = focusTags.includes(f);
-                      return (
-                        <button
-                          key={f}
-                          type="button"
-                          onClick={() => toggleFocus(f)}
-                          className={`rounded-lg px-2 py-1 text-[11px] font-medium transition ${
-                            active
-                              ? 'bg-emerald-600 text-white'
-                              : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
-                          }`}
-                        >
-                          #{FOCUS_TAG_LABELS[f]}
-                        </button>
-                      );
-                    })}
+
+                  <div>
+                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                      Taktik & Spielphasen
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {TACTIC_FOCUS_TAGS.map((f) => {
+                        const active = focusTags.includes(f);
+                        return (
+                          <button
+                            key={f}
+                            type="button"
+                            onClick={() => toggleFocus(f)}
+                            className={`rounded-lg px-2 py-1 text-[11px] font-medium transition ${
+                              active
+                                ? 'bg-emerald-600 text-white'
+                                : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                            }`}
+                          >
+                            #{FOCUS_TAG_LABELS[f]}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-slate-800/80 pt-2.5">
+                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-amber-300/90">
+                      Techniken
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {TECHNIQUE_FOCUS_TAGS.map((f) => {
+                        const active = focusTags.includes(f);
+                        return (
+                          <button
+                            key={f}
+                            type="button"
+                            onClick={() => toggleFocus(f)}
+                            className={`rounded-lg px-2 py-1 text-[11px] font-medium transition ${
+                              active
+                                ? 'bg-amber-600 text-white'
+                                : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                            }`}
+                          >
+                            #{FOCUS_TAG_LABELS[f]}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -26,7 +26,18 @@ export type HandballFocusTag =
   | 'RETREAT'
   | 'SHOOTING'
   | 'PASSING_CATCHING'
-  | 'GOALKEEPER_TECHNIQUE';
+  | 'GOALKEEPER_TECHNIQUE'
+  | 'DRIBBLING'
+  | 'PASSING'
+  | 'CATCHING'
+  | 'JUMP_SHOT'
+  | 'STANDING_THROW'
+  | 'HIP_UNDERARM_SHOT'
+  | 'FALLING_SHOT'
+  | 'LOB_SPIN_SHOT'
+  | 'FEINT_1V1'
+  | 'CROSSING_SCREEN'
+  | 'FOOTWORK_DEFENSE';
 
 export type ComplexityLevel = 'BASIC' | 'ADVANCED' | 'PERFORMANCE';
 

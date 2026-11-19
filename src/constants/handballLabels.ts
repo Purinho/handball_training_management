@@ -32,8 +32,50 @@ export const FOCUS_TAG_LABELS: Record<HandballFocusTag, string> = {
   RETREAT: 'Rückzugsverhalten',
   SHOOTING: 'Wurftraining & Wurfvarianten',
   PASSING_CATCHING: 'Passen, Fangen & Stoßbewegung',
-  GOALKEEPER_TECHNIQUE: 'Torwart-Technik & Stellungsspiel'
+  GOALKEEPER_TECHNIQUE: 'Torwart-Technik & Stellungsspiel',
+  DRIBBLING: 'Technik: Prellen',
+  PASSING: 'Technik: Passen',
+  CATCHING: 'Technik: Fangen',
+  JUMP_SHOT: 'Technik: Sprungwurf',
+  STANDING_THROW: 'Technik: Schlagwurf',
+  HIP_UNDERARM_SHOT: 'Technik: Hüft- / Unterarmwurf',
+  FALLING_SHOT: 'Technik: Fallwurf',
+  LOB_SPIN_SHOT: 'Technik: Heber / Dreher',
+  FEINT_1V1: 'Technik: Täuschung (1gg1)',
+  CROSSING_SCREEN: 'Technik: Kreuzen & Sperren',
+  FOOTWORK_DEFENSE: 'Technik: Beinarbeit & Abwehr'
 };
+
+export const TACTIC_FOCUS_TAGS: HandballFocusTag[] = [
+  'OFFENSE_INDIVIDUAL',
+  'OFFENSE_GROUP',
+  'OFFENSE_TEAM',
+  'DEFENSE_INDIVIDUAL',
+  'DEFENSE_GROUP',
+  'DEFENSE_6_0',
+  'DEFENSE_5_1',
+  'DEFENSE_3_2_1',
+  'FAST_BREAK_1ST_WAVE',
+  'FAST_BREAK_2ND_WAVE',
+  'RETREAT',
+  'SHOOTING',
+  'PASSING_CATCHING',
+  'GOALKEEPER_TECHNIQUE'
+];
+
+export const TECHNIQUE_FOCUS_TAGS: HandballFocusTag[] = [
+  'DRIBBLING',
+  'PASSING',
+  'CATCHING',
+  'JUMP_SHOT',
+  'STANDING_THROW',
+  'HIP_UNDERARM_SHOT',
+  'FALLING_SHOT',
+  'LOB_SPIN_SHOT',
+  'FEINT_1V1',
+  'CROSSING_SCREEN',
+  'FOOTWORK_DEFENSE'
+];
 
 export const COMPLEXITY_LABELS: Record<ComplexityLevel, string> = {
   BASIC: 'Basis / Grundlagen',

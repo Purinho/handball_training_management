@@ -1091,16 +1091,26 @@ export function HallLiveMode({
               )}
 
               {/* Large TacticBoard / Reference Image */}
-              <div
-                onClick={() => setChalkboardOpen(true)}
-                className="cursor-pointer transition hover:opacity-95"
-                title="Antippen für Vollbild-Taktiktafel mit temporärem Live-Zeichenstift"
-              >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    Taktiktafel & Animation
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setChalkboardOpen(true)}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/40 bg-blue-950/50 px-3 py-1.5 text-xs font-semibold text-blue-200 hover:bg-blue-900/60"
+                  >
+                    <Maximize2 className="h-3.5 w-3.5" />
+                    Vollbild & Live-Stift
+                  </button>
+                </div>
                 {activeExercise?.reference_image_data && !activeExercise.tactic_board_data ? (
                   <img
                     src={activeExercise.reference_image_data}
                     alt={activeExercise.title}
-                    className="mx-auto max-h-96 rounded-xl border border-slate-700 object-contain"
+                    onClick={() => setChalkboardOpen(true)}
+                    className="mx-auto max-h-96 cursor-pointer rounded-xl border border-slate-700 object-contain"
                   />
                 ) : (
                   <TacticBoardPreview data={activeExercise?.tactic_board_data} />
