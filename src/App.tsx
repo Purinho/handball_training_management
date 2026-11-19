@@ -109,8 +109,32 @@ export function App() {
   const [uiPreferences, setUiPreferences] = useState<UiPreferences>(() => loadUiPreferences());
   const [uiConfigModalOpen, setUiConfigModalOpen] = useState(false);
   const [uiTourModalOpen, setUiTourModalOpen] = useState(() => !loadUiPreferences().tourCompleted);
+  const [isInstalledPwa, setIsInstalledPwa] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const nav = window.navigator as Navigator & { standalone?: boolean };
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      nav.standalone === true ||
+      document.referrer.startsWith('android-app://')
+    );
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(display-mode: standalone)');
+    const handleDisplayModeChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsInstalledPwa(true);
+    };
+    const handleAppInstalled = () => setIsInstalledPwa(true);
+    mediaQuery.addEventListener('change', handleDisplayModeChange);
+    window.addEventListener('appinstalled', handleAppInstalled);
+    return () => {
+      mediaQuery.removeEventListener('change', handleDisplayModeChange);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
 
   const uiFeatures = uiPreferences.features;
+  const showPwaInstallButton = uiFeatures.pwaInstall && !isInstalledPwa;
 
   function handleUpdateUiPreferences(next: UiPreferences) {
     const saved = saveUiPreferences(next);
@@ -627,9 +651,13 @@ export function App() {
             </>
           )}
 
-          {(uiFeatures.pwaInstall || uiFeatures.backupExport) && (
-            <div className="grid grid-cols-2 gap-2">
-              {uiFeatures.pwaInstall && (
+          {(showPwaInstallButton || uiFeatures.backupExport) && (
+            <div
+              className={`grid gap-2 ${
+                showPwaInstallButton && uiFeatures.backupExport ? 'grid-cols-2' : 'grid-cols-1'
+              }`}
+            >
+              {showPwaInstallButton && (
                 <button
                   type="button"
                   onClick={() => setShowInstallModal(true)}
@@ -741,7 +769,7 @@ export function App() {
               </button>
             )}
 
-            {uiFeatures.pwaInstall && (
+            {showPwaInstallButton && (
               <button
                 type="button"
                 onClick={() => setShowInstallModal(true)}
