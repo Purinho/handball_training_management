@@ -24,6 +24,7 @@ import type {
   TeamScheduleSlot
 } from '../types/domain';
 import { WEEKDAY_OPTIONS } from '../constants/handballLabels';
+import { generateSecureInviteCode } from '../utils/securityUtils';
 
 interface ClubTeamManagerProps {
   club: Club;
@@ -90,16 +91,9 @@ export function ClubTeamManager({
   }
 
   async function handleRegenerateInviteCode() {
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const prefix = club.name
-      .split(' ')
-      .map((w) => w[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 4);
     const updated: Club = {
       ...club,
-      invite_code: `${prefix || 'CLUB'}-${randomSuffix}`,
+      invite_code: generateSecureInviteCode(club.name),
       updated_at: new Date().toISOString()
     };
     await db.clubs.put(updated);

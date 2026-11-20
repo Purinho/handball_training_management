@@ -22,6 +22,7 @@ import {
   TECHNIQUE_FOCUS_TAGS
 } from '../constants/handballLabels';
 import { generateKeyframesFromPaths } from './tacticBoardUtils';
+import { sanitizeHttpUrl } from './securityUtils';
 
 export const AI_EXERCISE_SYSTEM_PROMPT = `Du bist ein erfahrener DHB-Handball-Trainer und Daten-Assistent.
 Deine Aufgabe ist es, die vom Nutzer bereitgestellten Handball-Übungen (aus Screenshots, Skizzen-Bildern, PDF-Auszügen oder Web-Texten) in das exakte JSON-Format unserer Handball Trainings-App umzuwandeln.
@@ -354,7 +355,7 @@ export function parseAndNormalizeAiExerciseJson(
         typeof item.coaching_points === 'string' ? item.coaching_points : '',
       variations_text:
         typeof item.variations_text === 'string' ? item.variations_text : '',
-      source_url: typeof item.source_url === 'string' ? item.source_url : undefined,
+      source_url: typeof item.source_url === 'string' ? sanitizeHttpUrl(item.source_url) : undefined,
       external_links: [],
       tactic_board_data: (() => {
         const board = normalizeTacticBoard(item.tactic_board_data);

@@ -54,6 +54,7 @@ import {
   syncWithSupabaseCloud
 } from './services/cloudSyncService';
 import { getSupabaseClient, isSupabaseConfigured } from './services/supabaseClient';
+import { isSafeHttpUrl } from './utils/securityUtils';
 import {
   AGE_GROUP_LABELS,
   ALL_AGE_GROUPS,
@@ -77,6 +78,13 @@ type NavTab = 'DASHBOARD' | 'HALL_LIVE' | 'EXERCISES' | 'PLANS' | 'CLUB_ADMIN';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('DASHBOARD');
+  const [activeClubId, setActiveClubId] = useState<string>(() => {
+    try {
+      return localStorage.getItem('handball_active_club_id') ?? '';
+    } catch {
+      return '';
+    }
+  });
   const [activeTeamId, setActiveTeamId] = useState<string>('team-mb');
   const [focusedSessionId, setFocusedSessionId] = useState<string | undefined>(undefined);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
@@ -247,11 +255,11 @@ export function App() {
   }, []);
 
   const clubs = useLiveQuery(() => db.clubs.toArray(), []) ?? [];
-  const teams = useLiveQuery(() => db.teams.toArray(), []) ?? [];
-  const members = useLiveQuery(() => db.clubMembers.toArray(), []) ?? [];
+  const allTeams = useLiveQuery(() => db.teams.toArray(), []) ?? [];
+  const allMembers = useLiveQuery(() => db.clubMembers.toArray(), []) ?? [];
   const teamMembers = useLiveQuery(() => db.teamMembers.toArray(), []) ?? [];
-  const exercises = useLiveQuery(() => db.exercises.filter((e) => !e.is_deleted).toArray(), []) ?? [];
-  const templates = useLiveQuery(() => db.sessionTemplates.toArray(), []) ?? [];
+  const allExercises = useLiveQuery(() => db.exercises.filter((e) => !e.is_deleted).toArray(), []) ?? [];
+  const allTemplates = useLiveQuery(() => db.sessionTemplates.toArray(), []) ?? [];
   const multiWeekPlans = useLiveQuery(() => db.multiWeekPlans.toArray(), []) ?? [];
   const planWeeks = useLiveQuery(() => db.planWeeks.toArray(), []) ?? [];
   const sessions = useLiveQuery(() => db.trainingSessions.toArray(), []) ?? [];
@@ -260,7 +268,48 @@ export function App() {
   const notes = useLiveQuery(() => db.sessionNotes.toArray(), []) ?? [];
   const pendingSyncCount = useLiveQuery(() => db.syncOutbox.where('synced').equals(0).count(), []) ?? 0;
 
-  const activeClub = clubs[0];
+  const activeClub = useMemo(
+    () => clubs.find((c) => c.id === activeClubId) ?? clubs[0],
+    [clubs, activeClubId]
+  );
+
+  function handleSelectClub(clubId: string) {
+    setActiveClubId(clubId);
+    try {
+      localStorage.setItem('handball_active_club_id', clubId);
+    } catch {
+      // Ignore storage errors
+    }
+  }
+
+  const teams = useMemo(
+    () => (activeClub ? allTeams.filter((t) => t.club_id === activeClub.id) : allTeams),
+    [allTeams, activeClub]
+  );
+  const members = useMemo(
+    () => (activeClub ? allMembers.filter((m) => m.club_id === activeClub.id) : allMembers),
+    [allMembers, activeClub]
+  );
+  const exercises = useMemo(
+    () =>
+      activeClub
+        ? allExercises.filter((e) => e.club_id === activeClub.id || e.visibility === 'PUBLIC')
+        : allExercises,
+    [allExercises, activeClub]
+  );
+  const templates = useMemo(
+    () => (activeClub ? allTemplates.filter((st) => st.club_id === activeClub.id) : allTemplates),
+    [allTemplates, activeClub]
+  );
+  const isAnyClubAdmin = useMemo(
+    () =>
+      Boolean(
+        authUserId &&
+          allMembers.some((m) => m.user_id === authUserId && m.club_role === 'CLUB_ADMIN')
+      ),
+    [allMembers, authUserId]
+  );
+
   const activeTeam = useMemo(
     () => teams.find((t) => t.id === activeTeamId) ?? teams[0],
     [teams, activeTeamId]
@@ -375,6 +424,8 @@ export function App() {
     await db.exercises.put(exercise);
     await queueSyncOperation('exercises', exercise.id, 'UPSERT', exercise);
     setSelectedExerciseId(exercise.id);
+    setSyncStatusBanner(`✓ Übung „${exercise.title}“ in der Datenbank gespeichert.`);
+    setTimeout(() => setSyncStatusBanner(null), 3500);
   }
 
   async function handleImportAiExercises(importedList: Exercise[]) {
@@ -385,6 +436,8 @@ export function App() {
     if (importedList[0]) {
       setSelectedExerciseId(importedList[0].id);
     }
+    setSyncStatusBanner(`✓ ${importedList.length} Übung(en) erfolgreich in die Datenbank importiert.`);
+    setTimeout(() => setSyncStatusBanner(null), 3500);
   }
 
   async function handleDeleteExercise(ex: Exercise) {
@@ -491,6 +544,26 @@ export function App() {
             <div className="text-[11px] text-blue-400 font-medium">Offline-First Vereins-PWA</div>
           </div>
         </div>
+
+        {/* Vereins-Umschalter (falls Nutzer in mehreren Vereinen ist) */}
+        {clubs.length > 1 && (
+          <div className="mt-4">
+            <label className="mb-1.5 block text-[11px] font-semibold tracking-wider text-blue-400 uppercase">
+              Aktiver Verein ({clubs.length})
+            </label>
+            <select
+              value={activeClub.id}
+              onChange={(e) => handleSelectClub(e.target.value)}
+              className="w-full rounded-xl border border-blue-500/50 bg-slate-950 px-3 py-2 text-xs font-bold text-white focus:border-blue-400 focus:outline-none"
+            >
+              {clubs.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         {/* Mannschafts-Umschalter */}
         <div className="mt-5">
@@ -1202,12 +1275,12 @@ export function App() {
                 <div
                   className={
                     mobileDetailOpen && activeExercise
-                      ? 'fixed inset-0 z-40 overflow-y-auto bg-slate-950 lg:static lg:z-auto lg:col-span-7 lg:overflow-visible lg:bg-transparent'
+                      ? 'fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-slate-950 lg:static lg:z-auto lg:col-span-7 lg:overflow-visible lg:bg-transparent'
                       : 'hidden lg:block lg:col-span-7'
                   }
                 >
                   {activeExercise ? (
-                    <div className="min-h-full rounded-none border-0 bg-slate-900/90 p-4 space-y-5 lg:min-h-0 lg:rounded-2xl lg:border lg:border-slate-800 lg:p-6">
+                    <div className="rounded-none border-0 bg-slate-900/90 p-4 pb-28 space-y-5 lg:rounded-2xl lg:border lg:border-slate-800 lg:p-6">
                       {/* Sticky Smartphone Slide-Over Header (< 1024px) */}
                       <div className="sticky top-0 z-10 -mx-4 -mt-4 flex items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/95 px-4 py-3 backdrop-blur-md lg:hidden">
                         <button
@@ -1496,35 +1569,49 @@ export function App() {
                         </p>
                       </div>
 
-                      {(activeExercise.source_url || activeExercise.external_links.length > 0) && (
+                      {activeExercise.variations_text && (
+                        <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
+                          <h4 className="text-xs font-bold tracking-wider text-emerald-400 uppercase">
+                            Variationen & Steigerungen
+                          </h4>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-200 whitespace-pre-line">
+                            {activeExercise.variations_text}
+                          </p>
+                        </div>
+                      )}
+
+                      {(isSafeHttpUrl(activeExercise.source_url) ||
+                        activeExercise.external_links.some((lnk) => isSafeHttpUrl(lnk.url))) && (
                         <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4 space-y-2">
                           <h4 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
                             Web-Referenzen & Weiterführende Links
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {activeExercise.source_url && (
+                            {isSafeHttpUrl(activeExercise.source_url) && (
                               <a
                                 href={activeExercise.source_url}
                                 target="_blank"
-                                rel="noreferrer"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-blue-400 hover:underline"
                               >
                                 <ExternalLinkIcon className="h-3.5 w-3.5" />
                                 Original-Quelle öffnen
                               </a>
                             )}
-                            {activeExercise.external_links.map((lnk, idx) => (
-                              <a
-                                key={idx}
-                                href={lnk.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-blue-300 hover:underline"
-                              >
-                                <ExternalLinkIcon className="h-3.5 w-3.5" />
-                                {lnk.title}
-                              </a>
-                            ))}
+                            {activeExercise.external_links
+                              .filter((lnk) => isSafeHttpUrl(lnk.url))
+                              .map((lnk, idx) => (
+                                <a
+                                  key={idx}
+                                  href={lnk.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-blue-300 hover:underline"
+                                >
+                                  <ExternalLinkIcon className="h-3.5 w-3.5" />
+                                  {lnk.title}
+                                </a>
+                              ))}
                           </div>
                         </div>
                       )}
@@ -1638,8 +1725,11 @@ export function App() {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         userEmail={authUserEmail}
+        clubs={clubs}
         activeClub={activeClub}
+        onSelectClub={handleSelectClub}
         currentMember={members.find((m) => m.user_id && m.user_id === authUserId)}
+        isAnyClubAdmin={isAnyClubAdmin}
         needsClubOnboarding={needsClubOnboarding}
         onNeedsOnboarding={() => setNeedsClubOnboarding(true)}
         onSyncCompleted={(msg) => {

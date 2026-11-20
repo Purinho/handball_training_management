@@ -34,6 +34,7 @@ import {
 } from '../constants/handballLabels';
 import { TacticBoardEditor } from './TacticBoardEditor';
 import { buildTacticBoardPreset } from '../utils/tacticPresets';
+import { isSafeHttpUrl, sanitizeHttpUrl } from '../utils/securityUtils';
 
 interface ExerciseEditorModalProps {
   isOpen: boolean;
@@ -114,9 +115,13 @@ export function ExerciseEditorModal({
   const [newMatQty, setNewMatQty] = useState(4);
   const [newLinkTitle, setNewLinkTitle] = useState('');
   const [newLinkUrl, setNewLinkUrl] = useState('');
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
+    setFormError(null);
+    setIsSaving(false);
     const source = initialExercise ?? parentExercise;
     if (source) {
       setTitle(
@@ -230,6 +235,11 @@ export function ExerciseEditorModal({
 
   function handleAddExternalLink() {
     if (!newLinkUrl.trim()) return;
+    if (!isSafeHttpUrl(newLinkUrl)) {
+      setFormError('Bitte eine gültige http:// oder https:// Web-URL für den Link eingeben.');
+      return;
+    }
+    setFormError(null);
     setExternalLinks((prev) => [
       ...prev,
       {
@@ -254,49 +264,67 @@ export function ExerciseEditorModal({
     setGraphicTab('REFERENCE_IMAGE');
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!title.trim()) return;
+  async function handleSubmit(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    setFormError(null);
+    if (!title.trim()) {
+      setFormError('Bitte gib oben links einen Übungstitel ein.');
+      return;
+    }
     if (ageGroups.length === 0) {
-      setAgeGroupError('Bitte wähle mindestens eine Altersstufe aus.');
+      const msg = 'Bitte wähle mindestens eine Altersstufe aus.';
+      setAgeGroupError(msg);
+      setFormError(msg);
       return;
     }
 
-    const now = new Date().toISOString();
-    const exerciseToSave: Exercise = {
-      id: initialExercise?.id ?? crypto.randomUUID(),
-      club_id: clubId,
-      parent_exercise_id:
-        initialExercise?.parent_exercise_id ?? parentExercise?.id ?? undefined,
-      visibility,
-      owner_team_id: visibility === 'TEAM' ? activeTeamId : undefined,
-      title: title.trim(),
-      default_duration_min: durationMin,
-      min_players: minPlayers,
-      max_players: maxPlayers,
-      goalkeepers,
-      categories: {
-        phases: phases.length ? phases : ['GROUND_EXERCISE'],
-        focus: focusTags.length ? focusTags : ['OFFENSE_GROUP'],
-        level,
-        age_groups: ageGroups
-      },
-      materials,
-      setup_description: setupDesc.trim(),
-      flow_description: flowDesc.trim(),
-      coaching_points: coachingPoints.trim(),
-      variations_text: variationsText.trim(),
-      source_url: sourceUrl.trim() || undefined,
-      reference_image_data: referenceImageData,
-      external_links: externalLinks,
-      tactic_board_data: tacticBoard,
-      is_deleted: false,
-      created_at: initialExercise?.created_at ?? now,
-      updated_at: now
-    };
+    setIsSaving(true);
+    try {
+      const now = new Date().toISOString();
+      const exerciseToSave: Exercise = {
+        id: initialExercise?.id ?? crypto.randomUUID(),
+        club_id: clubId,
+        parent_exercise_id:
+          initialExercise?.parent_exercise_id ?? parentExercise?.id ?? undefined,
+        visibility,
+        owner_team_id: visibility === 'TEAM' ? activeTeamId : undefined,
+        title: title.trim(),
+        default_duration_min: Number(durationMin) || 15,
+        min_players: Number(minPlayers) || 1,
+        max_players: Number(maxPlayers) || 14,
+        goalkeepers: Number(goalkeepers) || 0,
+        categories: {
+          phases: phases.length ? phases : ['GROUND_EXERCISE'],
+          focus: focusTags.length ? focusTags : ['OFFENSE_GROUP'],
+          level,
+          age_groups: ageGroups
+        },
+        materials,
+        setup_description: setupDesc.trim(),
+        flow_description: flowDesc.trim(),
+        coaching_points: coachingPoints.trim(),
+        variations_text: variationsText.trim(),
+        source_url: sanitizeHttpUrl(sourceUrl),
+        reference_image_data: referenceImageData,
+        external_links: externalLinks.filter((lnk) => isSafeHttpUrl(lnk.url)),
+        tactic_board_data: tacticBoard,
+        is_favorite: initialExercise?.is_favorite,
+        is_deleted: false,
+        created_at: initialExercise?.created_at ?? now,
+        updated_at: now
+      };
 
-    await onSave(exerciseToSave);
-    onClose();
+      await onSave(exerciseToSave);
+      onClose();
+    } catch (err) {
+      setFormError(
+        err instanceof Error
+          ? `Fehler beim Speichern: ${err.message}`
+          : 'Die Übung konnte nicht gespeichert werden.'
+      );
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
@@ -327,7 +355,13 @@ export function ExerciseEditorModal({
         </div>
 
         {/* Scrollable Content */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6">
+        <form onSubmit={handleSubmit} noValidate className="flex min-h-0 flex-1 flex-col">
+          <div className="flex-1 overflow-y-auto p-6">
+          {formError && (
+            <div className="mb-4 rounded-xl border border-rose-500/50 bg-rose-950/60 px-4 py-2.5 text-xs font-semibold text-rose-200">
+              {formError}
+            </div>
+          )}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* Linke Spalte (5 Cols): Metadaten, Textfelder, Material & Web-Links */}
             <div className="space-y-4 lg:col-span-5">
@@ -839,23 +873,38 @@ export function ExerciseEditorModal({
               </div>
             </div>
           </div>
+          </div>
 
-          {/* Modal Footer */}
-          <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-800 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700"
-            >
-              Abbrechen
-            </button>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-500"
-            >
-              <Check className="h-4 w-4" />
-              Übung in Datenbank speichern
-            </button>
+          {/* Modal Footer (Fixed at bottom of modal) */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-slate-900 px-6 py-4">
+            <span className="text-xs text-slate-400">
+              {formError ? (
+                <span className="font-semibold text-rose-400">{formError}</span>
+              ) : (
+                'Änderungen werden erst mit Klick auf „Übung in Datenbank speichern“ übernommen.'
+              )}
+            </span>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700"
+              >
+                Abbrechen
+              </button>
+              <button
+                type="submit"
+                disabled={isSaving}
+                onClick={(e) => {
+                  e.preventDefault();
+                  void handleSubmit();
+                }}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-500 disabled:opacity-50"
+              >
+                <Check className="h-4 w-4" />
+                {isSaving ? 'Speichere...' : 'Übung in Datenbank speichern'}
+              </button>
+            </div>
           </div>
         </form>
       </div>

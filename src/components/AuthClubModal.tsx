@@ -5,6 +5,7 @@ import {
   KeyRound,
   LogIn,
   LogOut,
+  PlusCircle,
   RefreshCw,
   ShieldCheck,
   UserPlus,
@@ -17,14 +18,18 @@ import {
   syncWithSupabaseCloud
 } from '../services/cloudSyncService';
 import { seedInitialDataIfEmpty } from '../db/seedData';
+import { isValidInviteCodeFormat } from '../utils/securityUtils';
 import type { Club, ClubMember } from '../types/domain';
 
 interface AuthClubModalProps {
   isOpen: boolean;
   onClose: () => void;
   userEmail: string | null;
+  clubs: Club[];
   activeClub?: Club;
+  onSelectClub: (clubId: string) => void;
   currentMember?: ClubMember;
+  isAnyClubAdmin: boolean;
   needsClubOnboarding: boolean;
   onNeedsOnboarding: () => void;
   onSyncCompleted: (message: string) => void;
@@ -34,8 +39,11 @@ export function AuthClubModal({
   isOpen,
   onClose,
   userEmail,
+  clubs,
   activeClub,
+  onSelectClub,
   currentMember,
+  isAnyClubAdmin,
   needsClubOnboarding,
   onNeedsOnboarding,
   onSyncCompleted
@@ -43,11 +51,15 @@ export function AuthClubModal({
   const [authMode, setAuthMode] = useState<'LOGIN' | 'SIGNUP'>('LOGIN');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [signupInviteCode, setSignupInviteCode] = useState('');
+  const [signupDisplayName, setSignupDisplayName] = useState('');
+  // Anti-bot honeypot field (must remain empty)
+  const [honeypotWebsite, setHoneypotWebsite] = useState('');
 
-  const [onboardingMode, setOnboardingMode] = useState<'JOIN' | 'CREATE'>('JOIN');
   const [inviteCode, setInviteCode] = useState('');
   const [clubName, setClubName] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [showAdminCreateClub, setShowAdminCreateClub] = useState(false);
 
   const [isBusy, setIsBusy] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -60,6 +72,12 @@ export function AuthClubModal({
 
   async function handleAuthSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Silent bot trap if honeypot is filled
+    if (honeypotWebsite.trim() !== '') {
+      setErrorMsg('Anfrage konnte nicht verarbeitet werden.');
+      return;
+    }
+
     const supabase = getSupabaseClient();
     if (!supabase) return;
 
@@ -89,25 +107,55 @@ export function AuthClubModal({
           }
         }
       } else {
+        const normalizedCode = signupInviteCode.trim().toUpperCase();
+        if (!isValidInviteCodeFormat(normalizedCode)) {
+          setErrorMsg(
+            'Registrierung ist nur mit einem gültigen Vereins-Freischaltcode möglich (z. B. TSVH-9F3A7C2E1B).'
+          );
+          return;
+        }
+        if (!signupDisplayName.trim()) {
+          setErrorMsg('Bitte gib deinen Namen ein.');
+          return;
+        }
+
         const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL}`;
         const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
-            emailRedirectTo: redirectTo
+            emailRedirectTo: redirectTo,
+            data: {
+              invite_code: normalizedCode,
+              display_name: signupDisplayName.trim()
+            }
           }
         });
         if (error) {
           setErrorMsg(error.message);
         } else if (data.session) {
+          // Ensure membership link (idempotent with DB trigger)
+          const { error: joinErr } = await supabase.rpc('join_club_by_invite_code', {
+            p_invite_code: normalizedCode,
+            p_display_name: signupDisplayName.trim(),
+            p_email: email.trim()
+          });
+          if (joinErr) {
+            setErrorMsg(joinErr.message);
+            return;
+          }
           const syncRes = await syncWithSupabaseCloud();
           if (syncRes.mode === 'NO_CLUB') {
             onNeedsOnboarding();
+          } else {
+            onSyncCompleted(
+              `Konto erstellt & mit Verein verbunden (${syncRes.pulledCount} Datensätze geladen).`
+            );
+            onClose();
           }
-          setInfoMsg('Konto erstellt! Bitte jetzt einem Verein beitreten oder einen neuen Verein anlegen.');
         } else {
           setInfoMsg(
-            'Registrierung erfolgreich! Bitte bestätige ggf. deine E-Mail-Adresse und melde dich danach an.'
+            'Registrierung mit Freischaltcode erfolgreich! Bitte bestätige deine E-Mail-Adresse und melde dich danach an.'
           );
           setAuthMode('LOGIN');
         }
@@ -117,36 +165,30 @@ export function AuthClubModal({
     }
   }
 
-  async function handleOnboardingSubmit(e: React.FormEvent) {
+  async function handleJoinByCodeSubmit(e: React.FormEvent) {
     e.preventDefault();
     const supabase = getSupabaseClient();
     if (!supabase) return;
+
+    const normalizedCode = inviteCode.trim().toUpperCase();
+    if (!isValidInviteCodeFormat(normalizedCode)) {
+      setErrorMsg('Bitte gib einen gültigen Vereins-Freischaltcode ein.');
+      return;
+    }
 
     setIsBusy(true);
     setErrorMsg(null);
     setInfoMsg(null);
 
     try {
-      if (onboardingMode === 'JOIN') {
-        const { error } = await supabase.rpc('join_club_by_invite_code', {
-          p_invite_code: inviteCode.trim(),
-          p_display_name: displayName.trim() || userEmail?.split('@')[0] || 'Trainer',
-          p_email: userEmail
-        });
-        if (error) {
-          setErrorMsg(error.message);
-          return;
-        }
-      } else {
-        const { error } = await supabase.rpc('create_club_with_admin', {
-          p_club_name: clubName.trim(),
-          p_display_name: displayName.trim() || userEmail?.split('@')[0] || 'Vereins-Admin',
-          p_email: userEmail
-        });
-        if (error) {
-          setErrorMsg(error.message);
-          return;
-        }
+      const { error } = await supabase.rpc('join_club_by_invite_code', {
+        p_invite_code: normalizedCode,
+        p_display_name: displayName.trim() || userEmail?.split('@')[0] || 'Trainer',
+        p_email: userEmail
+      });
+      if (error) {
+        setErrorMsg(error.message);
+        return;
       }
 
       const syncRes = await syncWithSupabaseCloud();
@@ -154,6 +196,49 @@ export function AuthClubModal({
         `Verein verbunden & synchronisiert (${syncRes.pulledCount} Datensätze geladen).`
       );
       onClose();
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  async function handleCreateAdditionalClubSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const supabase = getSupabaseClient();
+    if (!supabase || !clubName.trim()) return;
+
+    setIsBusy(true);
+    setErrorMsg(null);
+    setInfoMsg(null);
+
+    try {
+      const { data, error } = await supabase.rpc('create_club_with_admin', {
+        p_club_name: clubName.trim(),
+        p_display_name:
+          currentMember?.display_name ||
+          displayName.trim() ||
+          userEmail?.split('@')[0] ||
+          'Vereins-Admin',
+        p_email: userEmail
+      });
+      if (error) {
+        setErrorMsg(error.message);
+        return;
+      }
+
+      const createdClubId =
+        data && typeof data === 'object' && 'club_id' in data
+          ? String((data as { club_id: string }).club_id)
+          : undefined;
+
+      const syncRes = await syncWithSupabaseCloud();
+      if (createdClubId) {
+        onSelectClub(createdClubId);
+      }
+      setClubName('');
+      setShowAdminCreateClub(false);
+      onSyncCompleted(
+        `Neuer Verein angelegt & synchronisiert (${syncRes.pulledCount} Datensätze geladen).`
+      );
     } finally {
       setIsBusy(false);
     }
@@ -202,7 +287,7 @@ export function AuthClubModal({
             <div>
               <h2 className="text-lg font-bold text-white">Cloud-Sync & Vereins-Konto</h2>
               <p className="text-xs text-slate-400">
-                Geräteübergreifend zwischen Windows & Android synchronisieren
+                Geschützter Vereinszugang (Registrierung nur mit Freischaltcode)
               </p>
             </div>
           </div>
@@ -259,9 +344,64 @@ export function AuthClubModal({
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                Neu registrieren
+                Mit Freischaltcode registrieren
               </button>
             </div>
+
+            {/* Anti-Bot Honeypot (hidden from human users) */}
+            <div className="hidden" aria-hidden="true">
+              <label>
+                Website
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypotWebsite}
+                  onChange={(e) => setHoneypotWebsite(e.target.value)}
+                />
+              </label>
+            </div>
+
+            {authMode === 'SIGNUP' && (
+              <>
+                <div className="rounded-xl border border-blue-500/30 bg-blue-950/30 p-3 text-xs text-blue-200">
+                  Neue Trainer-Konten können ausschließlich mit einem gültigen{' '}
+                  <strong>Vereins-Freischaltcode</strong> des Vereins-Administrators erstellt werden.
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-xs font-medium text-slate-300">
+                    Vereins-Freischaltcode *
+                  </label>
+                  <div className="relative">
+                    <KeyRound className="absolute top-2.5 left-3 h-4 w-4 text-blue-400" />
+                    <input
+                      type="text"
+                      required
+                      value={signupInviteCode}
+                      onChange={(e) => setSignupInviteCode(e.target.value.toUpperCase())}
+                      placeholder="z. B. TSVH-9F3A7C2E1B"
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 font-mono text-sm uppercase text-white focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-xs font-medium text-slate-300">
+                    Dein Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={signupDisplayName}
+                    onChange={(e) => setSignupDisplayName(e.target.value)}
+                    placeholder="z. B. Max Mustermann"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+              </>
+            )}
 
             <div>
               <label className="mb-1 block text-xs font-medium text-slate-300">E-Mail</label>
@@ -280,10 +420,10 @@ export function AuthClubModal({
               <input
                 type="password"
                 required
-                minLength={6}
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Mindestens 6 Zeichen"
+                placeholder="Mindestens 8 Zeichen"
                 className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
               />
             </div>
@@ -312,7 +452,7 @@ export function AuthClubModal({
               ) : (
                 <>
                   <UserPlus className="h-4 w-4" />
-                  {isBusy ? 'Registriere...' : 'Konto erstellen'}
+                  {isBusy ? 'Prüfe Code & registriere...' : 'Mit Freischaltcode registrieren'}
                 </>
               )}
             </button>
@@ -320,41 +460,10 @@ export function AuthClubModal({
         )}
 
         {configured && userEmail && needsClubOnboarding && (
-          <form onSubmit={handleOnboardingSubmit} className="mt-5 space-y-4">
+          <form onSubmit={handleJoinByCodeSubmit} className="mt-5 space-y-4">
             <div className="rounded-xl border border-blue-500/30 bg-blue-950/30 p-3 text-xs text-blue-200">
-              Angemeldet als <strong>{userEmail}</strong>. Verbinde dein Konto jetzt mit einem
-              Verein:
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 rounded-xl bg-slate-950 p-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setOnboardingMode('JOIN');
-                  setErrorMsg(null);
-                }}
-                className={`rounded-lg py-2 text-xs font-semibold transition ${
-                  onboardingMode === 'JOIN'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Verein beitreten
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setOnboardingMode('CREATE');
-                  setErrorMsg(null);
-                }}
-                className={`rounded-lg py-2 text-xs font-semibold transition ${
-                  onboardingMode === 'CREATE'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Neuen Verein gründen
-              </button>
+              Angemeldet als <strong>{userEmail}</strong>. Bitte gib den{' '}
+              <strong>Vereins-Freischaltcode</strong> ein, um deinem Verein beizutreten:
             </div>
 
             <div>
@@ -369,41 +478,22 @@ export function AuthClubModal({
               />
             </div>
 
-            {onboardingMode === 'JOIN' ? (
-              <div>
-                <label className="mb-1 block text-xs font-medium text-slate-300">
-                  Vereins-Einladungscode
-                </label>
-                <div className="relative">
-                  <KeyRound className="absolute top-2.5 left-3 h-4 w-4 text-slate-500" />
-                  <input
-                    type="text"
-                    required
-                    value={inviteCode}
-                    onChange={(e) => setInviteCode(e.target.value)}
-                    placeholder="z. B. SGH-2026"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-sm uppercase text-white focus:border-blue-500 focus:outline-none"
-                  />
-                </div>
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">
+                Vereins-Freischaltcode *
+              </label>
+              <div className="relative">
+                <KeyRound className="absolute top-2.5 left-3 h-4 w-4 text-slate-500" />
+                <input
+                  type="text"
+                  required
+                  value={inviteCode}
+                  onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+                  placeholder="z. B. TSVH-9F3A7C2E1B"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 font-mono text-sm uppercase text-white focus:border-blue-500 focus:outline-none"
+                />
               </div>
-            ) : (
-              <div>
-                <label className="mb-1 block text-xs font-medium text-slate-300">
-                  Name des Vereins
-                </label>
-                <div className="relative">
-                  <Building2 className="absolute top-2.5 left-3 h-4 w-4 text-slate-500" />
-                  <input
-                    type="text"
-                    required
-                    value={clubName}
-                    onChange={(e) => setClubName(e.target.value)}
-                    placeholder="z. B. TSV Handball Musterstadt"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pr-3 pl-9 text-sm text-white focus:border-blue-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-            )}
+            </div>
 
             {errorMsg && (
               <div className="rounded-xl border border-red-500/40 bg-red-950/40 p-3 text-xs text-red-200">
@@ -417,11 +507,7 @@ export function AuthClubModal({
                 disabled={isBusy}
                 className="flex-1 rounded-xl bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-500 disabled:opacity-50"
               >
-                {isBusy
-                  ? 'Verbinde...'
-                  : onboardingMode === 'JOIN'
-                    ? 'Mit Code beitreten'
-                    : 'Verein anlegen'}
+                {isBusy ? 'Verbinde...' : 'Mit Freischaltcode beitreten'}
               </button>
               <button
                 type="button"
@@ -444,9 +530,9 @@ export function AuthClubModal({
               <div className="grid grid-cols-2 gap-y-1 text-slate-300">
                 <span className="text-slate-400">Konto:</span>
                 <span className="font-medium text-white truncate">{userEmail}</span>
-                <span className="text-slate-400">Verein:</span>
+                <span className="text-slate-400">Aktiver Verein:</span>
                 <span className="font-medium text-white">{activeClub?.name ?? '–'}</span>
-                <span className="text-slate-400">Einladungscode:</span>
+                <span className="text-slate-400">Freischaltcode:</span>
                 <span className="font-mono font-semibold text-blue-300">
                   {activeClub?.invite_code ?? '–'}
                 </span>
@@ -460,6 +546,76 @@ export function AuthClubModal({
                 </span>
               </div>
             </div>
+
+            {/* Vereins-Umschalter bei mehreren Vereinen */}
+            {clubs.length > 1 && activeClub && (
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-3 space-y-1.5">
+                <label className="block text-[11px] font-semibold tracking-wider text-blue-400 uppercase">
+                  Aktiven Verein wechseln ({clubs.length} Vereine)
+                </label>
+                <select
+                  value={activeClub.id}
+                  onChange={(e) => onSelectClub(e.target.value)}
+                  className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-semibold text-white focus:border-blue-500 focus:outline-none"
+                >
+                  {clubs.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} (Code: {c.invite_code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Exklusiv für den Administrator: Zweiten / weiteren Verein gründen */}
+            {isAnyClubAdmin && (
+              <div className="rounded-xl border border-slate-800 bg-slate-950/80 p-3.5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-slate-200">
+                    Admin-Funktion: Weiteren Verein anlegen
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAdminCreateClub((v) => !v);
+                      setErrorMsg(null);
+                    }}
+                    className="inline-flex items-center gap-1 rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-blue-300 hover:bg-slate-700"
+                  >
+                    <PlusCircle className="h-3.5 w-3.5" />
+                    {showAdminCreateClub ? 'Schließen' : 'Neuen Verein gründen'}
+                  </button>
+                </div>
+
+                {showAdminCreateClub && (
+                  <form onSubmit={handleCreateAdditionalClubSubmit} className="space-y-2.5 pt-1">
+                    <div>
+                      <label className="mb-1 block text-[11px] text-slate-400">
+                        Name des neuen (zweiten) Vereins *
+                      </label>
+                      <div className="relative">
+                        <Building2 className="absolute top-2.5 left-3 h-4 w-4 text-slate-500" />
+                        <input
+                          type="text"
+                          required
+                          value={clubName}
+                          onChange={(e) => setClubName(e.target.value)}
+                          placeholder="z. B. HSG Musterstadt 2"
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900 py-2 pr-3 pl-9 text-xs text-white focus:border-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isBusy}
+                      className="w-full rounded-xl bg-emerald-600 py-2 text-xs font-bold text-white hover:bg-emerald-500 disabled:opacity-50"
+                    >
+                      {isBusy ? 'Lege Verein an...' : 'Verein jetzt anlegen & wechseln'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            )}
 
             {errorMsg && (
               <div className="rounded-xl border border-red-500/40 bg-red-950/40 p-3 text-xs text-red-200">
