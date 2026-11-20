@@ -1,0 +1,832 @@
+[
+  {
+    "title": "Aufsetzerball (3 gegen 3)",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/aufwaermen/kleine-spiele/aufsetzerball",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Auf einem abgegrenzten Hallendrittel (ca. 15 x 12 m) spielen zwei Teams im 3 gegen 3 gegeneinander. An beiden Grundlinien wird mit Hütchen eine 2 Meter tiefe Punktzone markiert.",
+    "flow_description": "1. Team A startet in Ballbesitz und versucht sich durch Freilaufen und sauberes Passen Richtung gegnerischer Punktzone vorzuarbeiten.\n2. Gespielt wird mit maximal 3 Schritten ohne Prellen; Körperkontakt ist nicht erlaubt.\n3. Ein Punkt wird erzielt, wenn der Ball so auf den Boden aufgesetzt wird, dass ein Mitspieler ihn in der gegnerischen Zone sicher fängt.\n4. Nach einem Punkt oder Ballverlust wechselt das Angriffsrecht sofort.",
+    "coaching_points": "- Ständig in freie Räume lösen und Blickkontakt zum Ballbesitzer halten\n- Aufsetzerpässe gezielt in den Lauf des Mitspielers spielen\n- In der Abwehr eng am Gegenspieler bleiben und Passwege zustellen",
+    "variations_text": "- Aufsetzer muss mit der schwachen Hand geworfen werden\n- Vor dem Punktgewinn müssen mindestens 3 Pässe gespielt worden sein\n- Einmaliges Prellen erlauben, um das 1-gegen-1 zu fördern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.30, "y": 0.56, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.68, "y": 0.52 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.46, "y": 0.34 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.48 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.62, "y": 0.44 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.50, "y": 0.28 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.20, "y": 0.20 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.80, "y": 0.20 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.60, "y": 0.16 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.30, "y": 0.56 }, { "x": 0.68, "y": 0.52 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a3", "toWaypointId": "w1", "points": [{ "x": 0.46, "y": 0.34 }, { "x": 0.60, "y": 0.16 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.68, "y": 0.52 }, { "x": 0.60, "y": 0.16 }] }
+      ]
+    }
+  },
+  {
+    "title": "10er-Ball (Parteiball nach Handballregeln)",
+    "default_duration_min": 12,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.sportunterricht.de/handball/parteiball.html",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_TEAM",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei gleich große Teams (4 gegen 4 bis 8 gegen 8) verteilen sich frei in einer Hallenhälfte. Eine Mannschaft trägt Leibchen.",
+    "flow_description": "1. Die angreifende Mannschaft versucht, sich den Ball zehnmal hintereinander ohne Unterbrechung zuzuspielen und zählt die Pässe laut mit.\n2. Gespielt wird ohne Prellen und mit maximal 3 Schritten pro Ballbesitz.\n3. Fängt die Abwehr den Ball ab oder berührt ihn, wechselt der Ballbesitz und der Zähler beginnt bei null.\n4. Schafft ein Team 10 aufeinanderfolgende Pässe, erhält es einen Punkt und der Ball geht an den Gegner.",
+    "coaching_points": "- Nach dem eigenen Pass sofort wieder aktiv freilaufen (Pass-and-Go)\n- Kurze, scharfe Druckpässe statt langsamer Bogenlampen spielen\n- Verteidiger orientieren sich zum Ball und zum direkten Gegenspieler",
+    "variations_text": "- Kein direkter Rückpass zum vorherigen Passgeber erlaubt\n- Jeden zweiten Pass als Bodenpass spielen\n- Nach 5 Pässen muss ein Spieler im Sprung gefangen werden, um den Punkt zu sichern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.45, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.55, "y": 0.35 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.76, "y": 0.50 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.42, "y": 0.65 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.30, "y": 0.41 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.52, "y": 0.31 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.71, "y": 0.47 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.46, "y": 0.60 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.35, "y": 0.26 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.25, "y": 0.45 }, { "x": 0.55, "y": 0.35 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.25, "y": 0.45 }, { "x": 0.35, "y": 0.26 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.55, "y": 0.35 }, { "x": 0.35, "y": 0.26 }] }
+      ]
+    }
+  },
+  {
+    "title": "Mattenball (Ablegespiel auf Weichbodenmatten)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/aufwaermen/kleine-spiele/mattenball",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_GROUP",
+        "PASSING_CATCHING",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "An den beiden Grundlinien des Spielfelds liegt jeweils eine große Weichbodenmatte. Zwei Mannschaften spielen auf das gesamte Feld oder eine Hallenhälfte gegeneinander.",
+    "flow_description": "1. Die Mannschaft in Ballbesitz versucht, den Ball kontrolliert auf der gegnerischen Weichbodenmatte abzulegen.\n2. Gespielt wird nach Handballregeln (3 Schritte, Prellen erlaubt oder verboten nach Ansage).\n3. Die Verteidiger dürfen die eigene Matte nicht betreten, sondern müssen den Zugang im 1-gegen-1 verhindern.\n4. Nach einem erfolgreichen Ablegen erhält das Team 1 Punkt und die andere Mannschaft startet direkt von der eigenen Matte in den Gegenangriff.",
+    "coaching_points": "- Breite des Spielfelds nutzen, um die Abwehr auseinanderzuziehen\n- Nach Ballgewinn sofort schnell umschalten (Tempogegenstoß-Gedanke)\n- Sauberes, kontrolliertes Ablegen mit beiden Händen (kein Werfen auf die Matte)",
+    "variations_text": "- Vier Matten in den Hallenecken auslegen (zwei Ziele pro Team)\n- Punkt zählt doppelt, wenn der Ball zuvor von einem Spieler im Sprung auf der Matte gefangen wird\n- Ohne Prellen spielen, um das Pass- und Laufspiel zu intensivieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "Matte A", "x": 0.10, "y": 0.50 },
+        { "id": "m2", "type": "EQUIPMENT_MAT", "label": "Matte B", "x": 0.90, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.45, "y": 0.32, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.62, "y": 0.66 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.72, "y": 0.34 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.52, "y": 0.36 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.70, "y": 0.60 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.80, "y": 0.46 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.87, "y": 0.50 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.45, "y": 0.32 }, { "x": 0.62, "y": 0.66 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a3", "toWaypointId": "w1", "points": [{ "x": 0.72, "y": 0.34 }, { "x": 0.87, "y": 0.50 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.62, "y": 0.66 }, { "x": 0.87, "y": 0.50 }] }
+      ]
+    }
+  },
+  {
+    "title": "Kastenball (Zielspiel auf Turnkästen)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/kleine-spiele/kastenball/",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "An beiden Enden des Spielfelds steht je ein kleiner Turnkasten (2–3 Teile hoch). Auf jedem Kasten steht ein Mitspieler der angreifenden Mannschaft als Kastenmann.",
+    "flow_description": "1. Zwei Teams spielen im freien Feld gegeneinander und versuchen, ihren eigenen Kastenmann gezielt anzuspielen.\n2. Fängt der Kastenmann den Ball sicher, ohne vom Kasten zu fallen, erhält sein Team einen Punkt.\n3. Danach tauscht der Passgeber sofort die Position mit dem Kastenmann, und der Ballbesitz wechselt an das gegnerische Team.\n4. Die Abwehr darf den Kastenmann nicht berühren, wohl aber den Passweg im Abstand von mindestens 1 Meter zustellen.",
+    "coaching_points": "- Blick frühzeitig heben und den Kastenmann nicht aus den Augen verlieren\n- Hohe, fangbare Pässe auf Kopfhöhe des Kastenmanns spielen\n- Schneller Positionswechsel nach dem Punkt, um den Konter des Gegners zu verteidigen",
+    "variations_text": "- Zwei Kästen pro Grundlinie aufstellen, zwischen denen der Kastenmann wechseln darf\n- Kastenmann muss den Ball direkt zu einem einlaufenden Mitspieler zurücklegen (Doppelpass)\n- Mit zwei Bällen gleichzeitig spielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "KM A", "x": 0.88, "y": 0.50 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.58, "y": 0.30, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.64, "y": 0.68 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.64, "y": 0.36 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.72, "y": 0.60 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "KM B", "x": 0.12, "y": 0.50 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a2", "toNodeId": "a3", "points": [{ "x": 0.58, "y": 0.30 }, { "x": 0.64, "y": 0.68 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a3", "toNodeId": "a1", "points": [{ "x": 0.64, "y": 0.68 }, { "x": 0.88, "y": 0.50 }] }
+      ]
+    }
+  },
+  {
+    "title": "Hütchen-Abwerfen im Parteiball",
+    "default_duration_min": 12,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/kleine-spiele/huetchen-abwerfen/",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "SHOOTING",
+        "PASSING_CATCHING",
+        "OFFENSE_TEAM",
+        "STANDING_THROW"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "An den beiden Grundlinien stehen jeweils 3 große Hütchen (oder kleine Kästen mit Hütchen darauf) in einem markierten 3-Meter-Schutzkreis, den kein Spieler betreten darf.",
+    "flow_description": "1. Zwei Teams spielen nach Handballregeln gegeneinander.\n2. Ziel ist es, durch geschicktes Passspiel in eine gute Wurfposition zu kommen und die gegnerischen Hütchen gezielt abzuwerfen.\n3. Fällt ein Hütchen um, bleibt es liegen (oder bringt 1 Punkt und wird wieder aufgestellt).\n4. Die verteidigende Mannschaft darf die Hütchen außerhalb des Schutzkreises durch Blocken sichern.",
+    "coaching_points": "- Wurfarm hochhalten und aus dem sauberen Schlagwurf heraus zielen\n- Durch schnelles Verlagern der Seite freie Schussbahnen schaffen\n- Verteidiger arbeiten aktiv mit Beinarbeit und Blockhänden",
+    "variations_text": "- Nur Würfe aus dem Sprungwurf zählen\n- Abgeworfene Hütchen wechseln die Seite und müssen vom Gegner verteidigt werden\n- Spiel ohne Prellen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "c1", "type": "EQUIPMENT_CONE", "label": "H1", "x": 0.30, "y": 0.14 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "label": "H2", "x": 0.50, "y": 0.14 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "label": "H3", "x": 0.70, "y": 0.14 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.28, "y": 0.48, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.56, "y": 0.52 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.74, "y": 0.42 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.32 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.54, "y": 0.30 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.30 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.28, "y": 0.48 }, { "x": 0.56, "y": 0.52 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a2", "toNodeId": "a3", "points": [{ "x": 0.56, "y": 0.52 }, { "x": 0.74, "y": 0.42 }] },
+        { "id": "p3", "type": "SHOT_PATH", "stepNumber": 3, "fromNodeId": "a3", "toNodeId": "c3", "points": [{ "x": 0.74, "y": 0.42 }, { "x": 0.70, "y": 0.14 }] }
+      ]
+    }
+  },
+  {
+    "title": "Endzonen-Handball (Zonenspiel)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.dhb-trainercenter.de/kleine-spiele/endzonen-handball",
+    "categories": {
+      "phases": [
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING_CATCHING",
+        "FAST_BREAK_1ST_WAVE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 8
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Auf dem Großfeld oder einer Hallenhälfte wird an beiden Grundlinien eine 3 Meter tiefe Endzone über die gesamte Hallenbreite mit Hütchen abmarkiert.",
+    "flow_description": "1. Zwei Teams spielen im 4 gegen 4 bis 7 gegen 7 ohne Prellen gegeneinander.\n2. Ein Punkt wird erzielt, wenn ein Angreifer in die gegnerische Endzone einläuft und dort einen Pass sauber fängt.\n3. Nach dem Punktgewinn legt der Fänger den Ball auf die Endzonenlinie und das andere Team eröffnet sofort das Spiel in die Gegenrichtung.\n4. In der Endzone selbst darf sich kein Angreifer länger als 3 Sekunden aufhalten.",
+    "coaching_points": "- Timing zwischen Passgeber und einlaufendem Mitspieler genau abstimmen\n- Tiefenlauf erst starten, wenn der Passgeber anspielbereit ist\n- Abwehrspieler verteidigen zwischen Gegenspieler und Endzone",
+    "variations_text": "- Maximal 1x Prellen pro Ballbesitz erlauben\n- Vor dem Endzonenpass muss der Ball beide Außenbahnen berührt haben\n- Ein neutraler Joker spielt immer mit der ballbesitzenden Mannschaft",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.16, "y": 0.12 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.16, "y": 0.88 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "x": 0.84, "y": 0.12 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "x": 0.84, "y": 0.88 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.56, "y": 0.45, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.72, "y": 0.25 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.70, "y": 0.72 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.64, "y": 0.45 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.78, "y": 0.30 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.77, "y": 0.68 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.90, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.72, "y": 0.25 }, { "x": 0.90, "y": 0.28 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.56, "y": 0.45 }, { "x": 0.90, "y": 0.28 }] }
+      ]
+    }
+  },
+  {
+    "title": "Bankaufsetzerball",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 0,
+    "source_url": "https://www.sportunterricht.de/handball/aufsetzerball.html",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "SHOOTING",
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "STANDING_THROW"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Auf beiden Seiten eines Kleinfelds steht mittig eine umgekippte Turnbank oder ein flacher Kasten als Zielbande. Davor wird ein 4-Meter-Halbkreis als Sperrzone markiert.",
+    "flow_description": "1. Zwei Teams spielen im 3 gegen 3 bis 6 gegen 6 nach vereinfachten Handballregeln gegeneinander.\n2. Ein Tor wird erzielt, wenn der Ball mit einem Aufsetzer vor der Bank so gegen die Bankfläche geworfen wird, dass er regulär abprallt.\n3. Die Abwehr darf den Sperrkreis nicht betreten, versucht aber die Würfe von außen zu blocken.\n4. Nach einem Treffer startet das gegnerische Team direkt vor der eigenen Bank.",
+    "coaching_points": "- Zielgenauen Schlagwurf mit klarer Auftaktbewegung ausführen\n- Den Ball vor der Bank flach und kräftig aufsetzen lassen\n- Nach dem Wurf sofort auf Abpraller achten und umschalten",
+    "variations_text": "- Direktwürfe ohne Aufsetzer zählen ebenfalls, Aufsetzer zählen doppelt\n- Mit einem neutralen Torwart vor jeder Bank spielen\n- Schwache Wurfhand für doppelte Punktzahl belohnen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "Bank", "x": 0.50, "y": 0.10 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.30, "y": 0.46, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.54, "y": 0.48 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.72, "y": 0.42 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.36, "y": 0.30 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.52, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.68, "y": 0.30 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.30, "y": 0.46 }, { "x": 0.54, "y": 0.48 }] },
+        { "id": "p2", "type": "SHOT_PATH", "stepNumber": 2, "fromNodeId": "a2", "toNodeId": "m1", "points": [{ "x": 0.54, "y": 0.48 }, { "x": 0.50, "y": 0.10 }] }
+      ]
+    }
+  },
+  {
+    "title": "Ball treiben (Zielwurf-Wettkampf)",
+    "default_duration_min": 10,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.sportunterricht.de/handball/kleine-spiele.html",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "SHOOTING",
+        "STANDING_THROW",
+        "PASSING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Mannschaften stehen sich hinter zwei parallelen Wurflinien im Abstand von 12–16 Metern gegenüber. Auf der Mittellinie liegen 2 bis 3 größere Zielbälle (z. B. Basket- oder Medizinbälle). Jeder Spieler hat einen Handball.",
+    "flow_description": "1. Auf Pfiff werfen beide Teams mit ihren Handbällen gezielt auf die Zielbälle in der Mitte.\n2. Ziel ist es, die Zielbälle durch Treffer über die gegnerische Grundlinie zu treiben.\n3. Die Wurflinie darf beim Werfen nicht übertreten werden; liegengebliebene Handbälle im Feld dürfen nur auf Kommando oder blitzschnell aufgesammelt werden.\n4. Sobald ein Zielball die gegnerische Linie überquert, erhält das angreifende Team 1 Punkt und alle Bälle starten wieder in der Mitte.",
+    "coaching_points": "- Saubere Schlagwurf-Technik mit Gegenschritt und Körperstreckung\n- Bälle nicht blind wegwerfen, sondern gezielt auf den unteren Schwerpunkt des Zielballs zielen\n- Hohe Wurffrequenz und schnelles Einsammeln der freien Bälle hinter der eigenen Linie",
+    "variations_text": "- Nur mit der schwachen Hand werfen\n- Würfe müssen aus dem 3-Schritt-Anlauf erfolgen\n- Nur ein Zielball in der Mitte für intensives Team-Zielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.80, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.50, "y": 0.80, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.75, "y": 0.80, "hasBall": true },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.25, "y": 0.20, "hasBall": true },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.50, "y": 0.20, "hasBall": true },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "B3", "x": 0.75, "y": 0.20, "hasBall": true },
+        { "id": "t1", "type": "EQUIPMENT_CONE", "label": "Ziel 1", "x": 0.35, "y": 0.50 },
+        { "id": "t2", "type": "EQUIPMENT_CONE", "label": "Ziel 2", "x": 0.65, "y": 0.50 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "SHOT_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "t1", "points": [{ "x": 0.25, "y": 0.80 }, { "x": 0.35, "y": 0.50 }] },
+        { "id": "p2", "type": "SHOT_PATH", "stepNumber": 1, "fromNodeId": "a3", "toNodeId": "t2", "points": [{ "x": 0.75, "y": 0.80 }, { "x": 0.65, "y": 0.50 }] },
+        { "id": "p3", "type": "SHOT_PATH", "stepNumber": 2, "fromNodeId": "d2", "toNodeId": "t1", "points": [{ "x": 0.50, "y": 0.20 }, { "x": 0.35, "y": 0.50 }] }
+      ]
+    }
+  },
+  {
+    "title": "Einhändiger Parteiball (Fangschulung)",
+    "default_duration_min": 12,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/aufwaermen/kleine-spiele/einhaendiger-parteiball",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 14
+      }
+    ],
+    "setup_description": "Zwei Teams spielen auf einer Hallenhälfte Parteiball. Jeder Spieler hält in seiner Nicht-Wurfhand ein zusammengerolltes Leibchen oder einen kleinen Zusatzball fest, sodass nur eine Hand frei bleibt.",
+    "flow_description": "1. Beide Teams spielen Parteiball mit dem Ziel, 8 Pässe in Folge zu erreichen.\n2. Der Ball darf ausschließlich mit der freien Hand gefangen und gepasst werden.\n3. Fällt der Ball zu Boden oder wird die zweite Hand zu Hilfe genommen, wechselt der Ballbesitz.\n4. Nach der Hälfte der Zeit wechseln alle Spieler das Leibchen in die Wurfhand, um die schwache Hand zu schulen.",
+    "coaching_points": "- Handgelenk und Finger beim Fangen aktiv nachgeben lassen (Abfedern)\n- Präzise, weiche Pässe in die freie Hand des Mitspielers spielen\n- Frühzeitige Körperpositionierung zum Ball, um ihn sicher zu sichern",
+    "variations_text": "- Nach 5 Pässen darf ein Abschluss auf ein Minitor erfolgen\n- Mit einem etwas kleineren Ball (Größe 1 oder 2) starten, falls der Grip nicht ausreicht\n- Fangen nur aus der Bewegung (kein Standfang)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.28, "y": 0.42, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.64, "y": 0.36 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.48, "y": 0.62 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.74, "y": 0.60 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.40 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.60, "y": 0.39 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.50, "y": 0.56 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.70, "y": 0.56 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.28, "y": 0.42 }, { "x": 0.64, "y": 0.36 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a2", "toNodeId": "a4", "points": [{ "x": 0.64, "y": 0.36 }, { "x": 0.74, "y": 0.60 }] }
+      ]
+    }
+  },
+  {
+    "title": "Linienball (Überqueren der Grundlinie)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.dhb-trainercenter.de/kleine-spiele/linienball",
+    "categories": {
+      "phases": [
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "FEINT_1V1",
+        "OFFENSE_INDIVIDUAL",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE",
+        "DRIBBLING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Teams spielen im 4 gegen 4 bis 7 gegen 7 auf einer Hallenhälfte oder einem markierten Rechteck (20 x 15 m). Die beiden gegenüberliegenden Grundlinien dienen als Ziellinien.",
+    "flow_description": "1. Die angreifende Mannschaft versucht, den Ball per Dribbling oder durch einen Pass an einen durchbrechenden Mitspieler kontrolliert über die gegnerische Grundlinie zu bringen.\n2. Ein Punkt zählt, wenn der Ball mit der Hand direkt auf der gegnerischen Grundlinie abgetippt wird.\n3. Die Verteidiger agieren in offensiver Manndeckung und versuchen Durchbrüche durch saubere Beinarbeit zu stoppen.\n4. Nach jedem Punkt wechselt der Ballbesitz an der jeweiligen Linie.",
+    "coaching_points": "- Durch klare 1-gegen-1-Täuschungen Lücken zwischen zwei Verteidigern aufreißen\n- Nicht im Pulk spielen, sondern das gesamte Spielfeld in der Breite besetzen\n- Verteidiger bleiben tief in den Knien und lenken den Angreifer nach außen",
+    "variations_text": "- Prellen komplett verbieten (nur 3 Schritte und Passspiel)\n- Wenn ein Verteidiger den Ballbesitzer mit beiden Händen kontrolliert stoppt, gibt es Freiwurf\n- Punkt zählt doppelt nach einem Kreuzen zweier Angreifer",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.32, "y": 0.52, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.65, "y": 0.48 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.50, "y": 0.64 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.40 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.62, "y": 0.38 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.48, "y": 0.46 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.24, "y": 0.14 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "FEINT_PATH", "stepNumber": 1, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.32, "y": 0.52 }, { "x": 0.24, "y": 0.14 }] }
+      ]
+    }
+  },
+  {
+    "title": "Reifenball (Zielzonen im Feld)",
+    "default_duration_min": 12,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/kleine-spiele/reifenball/",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "In der Hallenhälfte werden 4 bis 6 kleine Zielzonen (Gymnastikreifen oder Hütchenquadrate) verteilt auf dem Boden ausgelegt. Zwei Teams spielen gegeneinander.",
+    "flow_description": "1. Die angreifende Mannschaft versucht, durch schnelles Passspiel einen Mitspieler anzuspielen, der mit beiden Füßen in einem freien Zielreifen steht.\n2. Fängt der Spieler den Ball im Reifen sauber, erhält sein Team 1 Punkt und darf denselben Reifen im nächsten Spielzug nicht erneut nutzen.\n3. Verteidiger dürfen die Reifen selbst nicht betreten, sondern müssen die Lauf- und Passwege dorthin stören.\n4. Bei Ballverlust wechselt das Angriffsrecht sofort.",
+    "coaching_points": "- Durch Blicktäuschungen Verteidiger auf einen Reifen binden und einen anderen anspielen\n- Erst kurz vor dem Pass in den Reifen sprinten, nicht statisch darin warten\n- Hohe Kommunikation in der Abwehr zur Raumaufteilung",
+    "variations_text": "- Maximal 2 Sekunden Aufenthalt pro Reifen erlaubt\n- Nach 3 Punkten in verschiedenen Reifen darf ein Abschluss aufs Handballtor erfolgen\n- Mit 2 Bällen gleichzeitig spielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "c1", "type": "EQUIPMENT_CONE", "label": "R1", "x": 0.22, "y": 0.25 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "label": "R2", "x": 0.78, "y": 0.25 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "label": "R3", "x": 0.26, "y": 0.66 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "label": "R4", "x": 0.74, "y": 0.66 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.48, "y": 0.48, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.64, "y": 0.34 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.52, "y": 0.42 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.70, "y": 0.30 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a2", "toNodeId": "c2", "points": [{ "x": 0.64, "y": 0.34 }, { "x": 0.78, "y": 0.25 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a1", "toNodeId": "c2", "points": [{ "x": 0.48, "y": 0.48 }, { "x": 0.78, "y": 0.25 }] }
+      ]
+    }
+  },
+  {
+    "title": "Handball-Rugby (Körperkontakt & Freilaufen)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/aufwaermen/kleine-spiele/handball-rugby",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "DEFENSE_INDIVIDUAL",
+        "OFFENSE_TEAM",
+        "FEINT_1V1",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen auf dem Handballfeld mit je einer Weichbodenmatte in beiden 6-Meter-Räumen. Gespielt wird ohne Prellen mit kontrolliertem Körperkontakt.",
+    "flow_description": "1. Die angreifende Mannschaft versucht, den Ball durch Laufen und Passen bis auf die gegnerische Matte zu tragen und dort abzulegen.\n2. Jeder Spieler darf nur so lange laufen, bis er von einem Verteidiger fair mit beiden Händen an Hüfte oder Oberkörper festgehalten wird (kein Reißen oder Stoßen).\n3. Sobald der Ballbesitzer festgemacht ist, hat er maximal 3 Sekunden Zeit, den Ball zu einem freien Mitspieler zu passen.\n4. Bei Regelverstoß, Zeitüberschreitung oder Ballverlust wechselt der Ballbesitz sofort.",
+    "coaching_points": "- Nach dem Festmachen stabil stehen bleiben, den Ball schützen und den freien Mitspieler suchen\n- Mitspieler müssen sich sofort aktiv nach vorne und seitlich anbieten\n- Verteidiger arbeiten kontrolliert mit Körperspannung und sauberem Zupacken von vorne",
+    "variations_text": "- Pässe dürfen wie im Rugby nur quer oder nach hinten gespielt werden\n- Nach 3 erfolgreichen Festmach-Aktionen wechselt der Ballbesitz automatisch\n- Statt Matten werden die regulären Tore (mit Ablegen im Torraum) genutzt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "Ziel A", "x": 0.12, "y": 0.50 },
+        { "id": "m2", "type": "EQUIPMENT_MAT", "label": "Ziel B", "x": 0.88, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.52, "y": 0.50, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.48, "y": 0.26 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.60, "y": 0.72 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.56, "y": 0.50 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.64, "y": 0.34 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.64 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.76, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.48, "y": 0.26 }, { "x": 0.76, "y": 0.28 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.52, "y": 0.50 }, { "x": 0.76, "y": 0.28 }] }
+      ]
+    }
+  },
+  {
+    "title": "Drei-Tore-Minispiel (Umschalten & Raumwahrnehmung)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.dhb-trainercenter.de/kleine-spiele/drei-tore-spiel",
+    "categories": {
+      "phases": [
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_GROUP",
+        "RETREAT",
+        "FAST_BREAK_1ST_WAVE",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "MINI_GOAL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "In der Hallenhälfte werden 3 Minitore (oder Hütchentore von 2 m Breite) im großen Dreieck mit mindestens 12 Metern Abstand zueinander aufgestellt. Zwei Teams (4 gegen 4 bis 6 gegen 6) spielen gegeneinander.",
+    "flow_description": "1. Beide Teams dürfen auf alle 3 Minitore angreifen und müssen gleichzeitig alle 3 Tore verteidigen.\n2. Gespielt wird nach Handballregeln (max. 3 Schritte, einmal Prellen erlaubt).\n3. Nach einem Torerfolg erhält das erzielende Team 1 Punkt und darf nicht sofort auf dasselbe Tor erneut werfen.\n4. Bei Ballgewinn kann blitzschnell auf das nächstgelegene ungedeckte Minitor umgeschaltet werden.",
+    "coaching_points": "- Kopf oben halten und ständig alle drei Tore im Blick behalten\n- Schnelle Seitenverlagerung erzwingt weite Wege für die Abwehr\n- In der Abwehr laut kommunizieren und freie Tore rechtzeitig absichern",
+    "variations_text": "- Tore zählen nur nach einem Flachwurf (Aufsetzer)\n- Vor jedem Torabschluss müssen mindestens 3 Pässe gespielt worden sein\n- Ein Spieler pro Team darf als fliegender Torwart vor einem beliebigen Minitor agieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "g1", "type": "EQUIPMENT_GOAL_TARGET", "label": "Tor 1", "x": 0.50, "y": 0.12 },
+        { "id": "g2", "type": "EQUIPMENT_GOAL_TARGET", "label": "Tor 2", "x": 0.16, "y": 0.72 },
+        { "id": "g3", "type": "EQUIPMENT_GOAL_TARGET", "label": "Tor 3", "x": 0.84, "y": 0.72 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.42, "y": 0.45, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.70, "y": 0.54 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.34, "y": 0.62 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.48, "y": 0.32 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.60, "y": 0.50 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.30, "y": 0.66 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a2", "points": [{ "x": 0.42, "y": 0.45 }, { "x": 0.70, "y": 0.54 }] },
+        { "id": "p2", "type": "SHOT_PATH", "stepNumber": 2, "fromNodeId": "a2", "toNodeId": "g3", "points": [{ "x": 0.70, "y": 0.54 }, { "x": 0.84, "y": 0.72 }] }
+      ]
+    }
+  }
+]

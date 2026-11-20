@@ -34,6 +34,10 @@ import type {
 } from '../types/domain';
 import { MATERIAL_LABELS } from '../constants/handballLabels';
 import { aggregateSessionMaterials } from '../utils/trainingCalculations';
+import {
+  selectDefaultSession,
+  sortSessionsChronologically
+} from '../utils/sessionPlannerUtils';
 import { TacticBoardPreview } from './TacticBoardPreview';
 import { FullScreenChalkboardModal } from './FullScreenChalkboardModal';
 
@@ -66,10 +70,7 @@ export function HallLiveMode({
   initialSessionId
 }: HallLiveModeProps) {
   const teamSessions = useMemo(
-    () =>
-      sessions
-        .filter((s) => s.team_id === activeTeam.id)
-        .sort((a, b) => a.session_date.localeCompare(b.session_date)),
+    () => sortSessionsChronologically(sessions.filter((s) => s.team_id === activeTeam.id)),
     [sessions, activeTeam.id]
   );
 
@@ -86,7 +87,7 @@ export function HallLiveMode({
       const found = teamSessions.find((s) => s.id === selectedSessionId);
       if (found) return found;
     }
-    return teamSessions[0] ?? null;
+    return selectDefaultSession(teamSessions);
   }, [teamSessions, selectedSessionId]);
 
   const currentPhases = useMemo(
@@ -466,6 +467,7 @@ export function HallLiveMode({
             >
               {teamSessions.map((s) => (
                 <option key={s.id} value={s.id}>
+                  {s.status === 'COMPLETED' ? '✓ ' : s.status === 'CANCELLED' ? '[Ausgefallen] ' : ''}
                   {s.session_date} ({s.start_time}–{s.end_time}) · {s.title}
                 </option>
               ))}

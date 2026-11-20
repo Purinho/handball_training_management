@@ -1,0 +1,2160 @@
+[
+  {
+    "title": "Fall- und Abrollschule ohne Ball auf der Weichbodenmatte",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.owayo.de/magazin/handball-fallwurf-richtig-fallen.htm",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Zwei bis drei große Weichbodenmatten (oder dicke Turnmatten) werden rutschfest im Bereich der 6-Meter-Linie ausgelegt. Die Spieler stellen sich in zwei Reihen ohne Ball davor auf.",
+    "flow_description": "1. Aus der tiefen Hocke lassen sich die Spieler kontrolliert nach vorne-seitlich auf die Matte fallen und federn den Sturz über Unterschenkel, Oberschenkel und Rumpf (große Landefläche) ab.\n2. Im zweiten Durchgang erfolgt das Fallen aus dem langsamen Gehen mit anschließendem flächigen Durchgleiten bzw. Abrollen über die Schulter (Judo-Fallschule).\n3. Im dritten Durchgang simulieren die Spieler kurz vor dem Mattenkontakt eine trockene Schlagwurfbewegung mit dem Wurfarm.\n4. Kein Spieler startet, bevor der Vordermann die Matte komplett verlassen hat.",
+    "coaching_points": "- Kein 'Stürzen wie ein gefällter Baum' – Körperspannung aktiv halten\n- Nicht punktuell auf Ellbogen, Handgelenken oder Hüftknochen landen, sondern über die gesamte Körperseite abrollen\n- Kinn leicht zur Brust ziehen, um den Kopf zu schützen\n- Angst vor dem Fallen durch weiche Unterlage systematisch abbauen",
+    "variations_text": "- Fallen abwechselnd zur linken und zur rechten Körperseite üben\n- Aus einer halben Körperdrehung (Kreisläufer-Absetzen) weich auf die Matte fallen\n- Mit einem Softball in der Hand die Wurfbewegung kurz vor der Landung andeuten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.34,
+          "y": 0.48,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.66,
+          "y": 0.48,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte 1",
+          "x": 0.34,
+          "y": 0.28
+        },
+        {
+          "id": "m2",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte 2",
+          "x": 0.66,
+          "y": 0.28
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "m1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.48
+            },
+            {
+              "x": 0.34,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "m2",
+          "points": [
+            {
+              "x": 0.66,
+              "y": 0.48
+            },
+            {
+              "x": 0.66,
+              "y": 0.28
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fallwurf-Kreis-Intervall nach akustischem Signal",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/kreislaufer-fallwurf-kreis-intervall/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "CATCHING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Der äußere Rand des 6-Meter-Kreises wird im Torraum mit rutschfesten Turn- oder Weichbodenmatten ausgelegt. Ein Zuspieler (oder Trainer) steht mit Ballwagen zentral auf Rückraum-Mitte. Der Kreisläufer startet auf Höhe Linksaußen am Kreis.",
+    "flow_description": "1. Der Kreisläufer läuft in mittlerem Tempo im Bogen entlang der 6-Meter-Linie von links nach rechts (und zurück).\n2. Auf ein plötzliches akustisches Signal des Trainers ('Stopp!' oder Pfiff) stoppt der Kreisläufer abrupt ab und dreht sich zum Rückraum auf.\n3. Er erhält sofort einen präzisen Pass von RM, lässt sich kontrolliert in den 6-Meter-Raum auf die Matten fallen und schließt im Fallen auf das Tor ab.\n4. Nach 5 direkten Abschlüssen in Folge wechselt der nächste Kreisläufer ein.",
+    "coaching_points": "- Schnelle Koordination aus dem Lauf in den abrupten Stopp und die sofortige Ballannahme\n- Wurf muss während der Fallbewegung erfolgen, nicht erst im Liegen\n- Sicheres, flächiges Abfangen des Körpers auf den Matten\n- Trotz steigender Belastung präzise in die Ecken werfen",
+    "variations_text": "- Zuspiele variieren: hoch, halbhoch und als flacher Bodenpass\n- Akustisches Signal durch optisches Handzeichen ersetzen\n- Ein passiver Verteidiger begleitet den Kreisläufer am Kreis",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "coach1",
+          "type": "COACH_FEEDER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.2,
+          "y": 0.24
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matten",
+          "x": 0.5,
+          "y": 0.22
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.2,
+              "y": 0.24
+            },
+            {
+              "x": 0.35,
+              "y": 0.31
+            },
+            {
+              "x": 0.5,
+              "y": 0.3
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "coach1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.5,
+              "y": 0.3
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.3
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Blickdichte Barriere: Reaktions-Fallwurf für Kreisläufer",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/kreislaufer-reaktionstraining-barriere-fallwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "CATCHING",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Auf ca. 8 Metern wird eine große Weichbodenmatte hochkant (von zwei Mitspielern gehalten) als blickdichte Barriere aufgestellt. Direkt hinter der Barriere am 6-Meter-Kreis steht der Kreisläufer; im 6-Meter-Raum liegen Landematten.",
+    "flow_description": "1. Der Rückraumspieler startet hinter der Barriere mit Ball und läuft verdeckt auf die Matte zu.\n2. Er spielt den Ball überraschend entweder als hohes Zuspiel über die Matte hinweg oder als scharfe Tippvorlage (Bodenpass) links oder rechts an der Matte vorbei.\n3. Der Kreisläufer hat nur minimalen Reaktionsspielraum, fängt den Ball in engster Bedrängnis, dreht sich blitzschnell zum Tor und schließt per Fallwurf auf die Matte ab.\n4. Nach 6 Bällen wird gewechselt.",
+    "coaching_points": "- Hohe Grundspannung und aktive, fangbereite Hände vor dem Körper\n- Schnelles Erfassen der Ballflugbahn trotz extrem kurzer Sichtzeit\n- Fließende Verbindung aus Fangen, Körperdrehung und Fallwurf ohne Zeitverlust\n- Kontrolliertes Abrollen nach dem Abschluss",
+    "variations_text": "- Zusätzlicher Abwehrspieler steht neben dem Kreisläufer und gibt leichten Körperkontakt\n- Zwei Bälle in schneller Folge (Doppelreaktion)\n- Torhüter versucht, den sehr späten Abwurf zu lesen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.64,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Barriere",
+          "x": 0.5,
+          "y": 0.44
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "id": "m2",
+          "type": "EQUIPMENT_MAT",
+          "label": "Landung",
+          "x": 0.5,
+          "y": 0.2
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.64
+            },
+            {
+              "x": 0.6,
+              "y": 0.44
+            },
+            {
+              "x": 0.5,
+              "y": 0.3
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.3
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Grundübung: Fallwurf zur Wurfhand auf die Weichbodenmatte",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballecke.de/fallwurf-methodische-grunduebung/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Weichbodenmatten liegen links und rechts halbschräg im 6-Meter-Kreis. Ein Zuspieler steht auf Rückraum-Mitte; die Werfer stehen in zwei Reihen am 6-Meter-Kreis mit Blick zum Rückraum.",
+    "flow_description": "1. Der Spieler erhält einen flachen Pass von RM und dreht sich über die Wurfhandseite zum Tor auf.\n2. Ohne hoch abzuspringen, verlagert er den Körperschwerpunkt aktiv nach vorne-seitlich zur Wurfhand in Richtung Weichbodenmatte.\n3. Während des Fallens zieht der Spieler den Wurfarm wie beim Schlagwurf über Kopf durch und platziert den Ball am Torwart vorbei.\n4. Unmittelbar nach dem Abwurf erfolgt die weiche, flächige Landung auf der Matte.",
+    "coaching_points": "- Wurfarm bleibt oben und zieht explosiv durch, während der Körper absinkt\n- Ball verlässt die Hand zwingend vor dem Bodenkontakt\n- Blick bleibt bis zum Abwurf auf dem Torwart (nicht auf die Matte schauen!)\n- Erst wenn der Vordermann die Matte geräumt hat, startet der nächste Spieler",
+    "variations_text": "- Ein passiver Verteidiger (oder Airbody) steht als Hindernis neben der Matte\n- Abschluss gezielt flach ins lange Eck oder als Aufsetzer\n- Zuspiel kommt aus der Bewegung von RL oder RR",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.36,
+          "y": 0.32,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.42,
+          "y": 0.22
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ecke",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.36,
+              "y": 0.32
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.32
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fallwurf gegen die Wurfhand aus der Körperdrehung",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.erima.de/magazin/handball-fallwurf-drehung",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Ein Airbody steht zentral auf der 6-Meter-Linie als Innenverteidiger. Links und rechts dahinter liegen Weichbodenmatten im Kreis. Zuspieler steht auf RM.",
+    "flow_description": "1. Der Kreisläufer sperrt kurz am Airbody, setzt sich gegen die Wurfhand (Rechtshänder nach links) ab und fängt den scharfen Pass von RM.\n2. Mit einer schnellen 180-Grad-Drehung über die Nicht-Wurfhand-Schulter öffnet er den Winkel zum Tor.\n3. Er lässt sich kontrolliert gegen die Wurfhand in Richtung Matte fallen und zieht den Ball im Fallen mit hoher Handgelenkskontrolle ins kurze oder lange Eck.\n4. Wechsel zwischen beiden Seiten des Airbodies.",
+    "coaching_points": "- Schneller erster Schritt nach der Ballannahme weg vom Verteidiger\n- Oberkörper während des Fallens so weit aufdrehen, dass der Wurfarm freien Zug zum Tor hat\n- Sauberes Abrollen über die freie Schulter bzw. Seite\n- Torwart durch späten Abwurfzeitpunkt täuschen",
+    "variations_text": "- Airbody durch einen halbpaktiven Abwehrspieler ersetzen\n- Zuspiel kommt als halbhoher Pass über die Schulter des Verteidigers\n- Vorgabe: Abschluss zwingend als Dreher oder flacher Aufsetzer",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Airbody",
+          "x": 0.52,
+          "y": 0.32
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.34,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.38,
+          "y": 0.22
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.28
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.34
+            },
+            {
+              "x": 0.4,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.4,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.4,
+              "y": 0.28
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außenspieler-Fallwurf zur Winkelvergrößerung am 6-Meter-Eck",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/aussenspieler-fallwurf-spitzer-winkel/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf beiden Außenpositionen (LA und RA) liegen flache Turnmatten parallel zur Torauslinie im 6-Meter-Raum. Zuspieler stehen auf RL und RR.",
+    "flow_description": "1. Der Außenspieler erhält ein flaches Zuspiel von der Halbposition und greift im spitzen Winkel die 6-Meter-Linie an.\n2. Statt hoch nach oben abzuspringen, lässt sich der Spieler flach und weit parallel zur Torauslinie Richtung Tormitte fallen.\n3. Durch das flache Fallen öffnet sich der Winkel zum Tor und der Torwart wird durch die tiefere Abwurfhöhe überrascht.\n4. Abschluss erfolgt kurz vor dem Aufsetzen auf der Matte wahlweise flach ins lange Eck oder als Aufsetzer ins kurze Eck.",
+    "coaching_points": "- Körperachse tief halten und weit Richtung Tormitte hineinfallen\n- Handgelenk aktiv einsetzen, um aus spitzem Winkel präzise abzuschließen\n- Nicht auf die Schulter stürzen, sondern weich durchgleiten\n- Torwart durch kurzes Verzögern zu einer frühen Reaktion zwingen",
+    "variations_text": "- Ein passiver Außenverteidiger verengt den Anlaufwinkel von außen\n- Vorgabe: Ball muss im langen unteren Eck einschlagen\n- Wechsel zwischen normalem Außensprungwurf und überraschendem Fallwurf",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.45,
+          "y": 0.08
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.24,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.48,
+          "hasBall": true
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.28,
+          "y": 0.14
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.18,
+          "y": 0.16
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Lang",
+          "x": 0.56,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.48
+            },
+            {
+              "x": 0.18,
+              "y": 0.16
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.08,
+              "y": 0.24
+            },
+            {
+              "x": 0.18,
+              "y": 0.16
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.18,
+              "y": 0.16
+            },
+            {
+              "x": 0.56,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "1-gegen-1 am Kreis unter Körperkontakt mit Fallwurf-Abschluss",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/1gegen1-am-kreis-fallwurf-koerperkontakt/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "OFFENSE_INDIVIDUAL",
+        "SHOOTING",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein Kreisläufer kämpft an der 6-Meter-Linie gegen einen aktiven Innenverteidiger um Position. Im 6-Meter-Raum liegen flache Matten. Zwei Rückraumspieler auf RL und RR dienen als Anspieler.",
+    "flow_description": "1. RL und RR passen sich den Ball zu, während der Kreisläufer aktiv versucht, den Verteidiger auf seinen Rücken zu sperren.\n2. Sobald der Kreisläufer ein klares Handzeichen gibt, erfolgt der scharfe Steck- oder Bodenpass an den Kreis.\n3. Der Verteidiger darf fair, aber physisch stören und den Kreisläufer beim Drehen bedrängen.\n4. Der Kreisläufer nutzt maximale Körperspannung, dreht sich in die freie Lücke und schließt trotz Körperkontakt per Fallwurf ab.",
+    "coaching_points": "- Ball beim Fangen sofort mit dem Körper gegen den Verteidiger abschirmen\n- Kurze, kompakte Ausholbewegung, da unter Bedrängnis keine Zeit für einen großen Sprung bleibt\n- Wurfarm sauber durchziehen und erst danach sicher abrollen\n- Faire Verteidigung ohne Griff in den Wurfarm",
+    "variations_text": "- Bei klarem Foul des Verteidigers erhält der Angriff einen Siebenmeter\n- Zweiter Verteidiger steht seitlich als Hilfsblock\n- Nach 5 Aktionen wechseln Kreisläufer und Verteidiger die Rollen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.72,
+          "y": 0.54
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.5,
+          "y": 0.2
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.54
+            },
+            {
+              "x": 0.5,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.34
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Seitfallwurf unter dem herausstürzenden Abwehrblock hindurch",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/seitfallwurf-unter-block/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei passive Blockspieler stehen auf 7 Metern leicht versetzt vor dem 6-Meter-Raum. Seitlich daneben liegen Weichbodenmatten. Die Angreifer starten aus dem Rückraum (ca. 11 Meter).",
+    "flow_description": "1. Der Angreifer läuft mit Ball auf die 7-Meter-Linie zu und täuscht einen oberen Wurf an.\n2. Der Blockspieler reißt die Arme hoch.\n3. Der Angreifer neigt den Körper extrem tief zur Seite, lässt sich seitlich auf die Matte fallen (Seitfallwurf) und zieht den Ball unter dem Arm des Blockspielers hindurch ins Tor.\n4. Kontrolliertes Abfedern und Abrollen über die Körperseite auf der Matte.",
+    "coaching_points": "- Bewusstes seitliches Kippen des Körperschwerpunkts am Block vorbei\n- Explosiver Armzug im Moment des Fallens\n- Blick bleibt durchgehend unter dem Blockarm hindurch am Ziel\n- Auf sicheren Abstand zur Blockperson achten",
+    "variations_text": "- Blockspieler bewegt sich leicht seitlich auf den Werfer zu\n- Abschluss muss flach im langen unteren Eck landen\n- Seitfallwurf sowohl links als auch rechts am Block vorbei üben",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.42,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.36,
+          "y": 0.62,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.52,
+          "y": 0.3
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Flach",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.62
+            },
+            {
+              "x": 0.44,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.42
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2-gegen-2 am Kreis: Sperren, Absetzen und Fallwurf",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/2gegen2-sperren-absetzen-fallwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein Rückraumspieler (RL oder RM) und ein Kreisläufer spielen gegen zwei Abwehrspieler am 6-Meter-Kreis. Flache Landematten liegen sicherheitshalber im mittleren Torraum.",
+    "flow_description": "1. Der Kreisläufer sperrt einen der beiden Verteidiger sauber ab.\n2. Der Rückraumspieler greift eng an der Sperre vorbei an und bindet dadurch den zweiten Verteidiger.\n3. Sobald der Verteidiger heraustritt, setzt sich der Kreisläufer blitzschnell in den freien Raum ab, fängt das Anspiel und schließt unter Zeitdruck per Fallwurf ab.\n4. Nach 5 Angriffen wechseln Angreifer und Verteidiger.",
+    "coaching_points": "- Timing zwischen Sperre lösen und Pass des Rückraumspielers abstimmen\n- Kreisläufer fängt den Ball in Bewegung Richtung Tor und fällt sofort in die Lücke\n- Schneller, entschlossener Abschluss, bevor die Abwehr wieder schließen kann\n- Rückraumspieler strahlt echte eigene Torgefahr aus",
+    "variations_text": "- Tore des Kreisläufers per Fallwurf zählen doppelt\n- Verteidiger wechseln aktiv (Übergeben/Übernehmen)\n- Erweiterung auf 3 gegen 3 mit zweitem Rückraumspieler",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.4,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.56,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.36,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.33
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.48,
+          "y": 0.44
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.26
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "d1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.33
+            },
+            {
+              "x": 0.41,
+              "y": 0.31
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.58
+            },
+            {
+              "x": 0.48,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.33
+            },
+            {
+              "x": 0.46,
+              "y": 0.26
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.48,
+              "y": 0.44
+            },
+            {
+              "x": 0.46,
+              "y": 0.26
+            }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.46,
+              "y": 0.26
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Mismatch-Situation Außen & Kreis mit Entscheidungs-Fallwurf",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/druckaufbau-ueber-aussen-und-zusammenspiel-mit-dem-kreislaeufer/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "OFFENSE_GROUP",
+        "PASSING",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf der linken Angriffsseite spielen RL, LA und KM gegen zwei Abwehrspieler (Halb- und Außenverteidiger). Der Kreisläufer positioniert sich breit zwischen Halb- und Außenverteidiger.",
+    "flow_description": "1. RL greift mit Tempo nach außen an und zieht den Halbverteidiger auf sich, wodurch der Kreisläufer im Mismatch gegen den Außenverteidiger isoliert wird.\n2. RL spielt den Ball präzise an den breiten Kreisläufer.\n3. Kommt der Außenverteidiger zu spät oder steht hinter dem KM, dreht sich der Kreisläufer auf und schließt sofort per Fallwurf ab.\n4. Ziehen beide Verteidiger auf den Kreisläufer zusammen, leitet dieser den Ball blitzschnell weiter auf den freien Außenspieler (LA).",
+    "coaching_points": "- Schnelles Erkennen der Überzahl- bzw. Mismatch-Situation am Kreis\n- Kreisläufer nutzt seine Körperbreite, um sich sofort freie Wurfbahn für den Fallwurf zu verschaffen\n- Wenn die Abwehr doppelt, keine erzwungene Aktion, sondern klarer Weiterpass auf Außen\n- Nach 8 Minuten Wechsel auf die rechte Angriffsseite",
+    "variations_text": "- Zusätzlicher Mittelblock-Spieler darf nach 2 Sekunden zur Hilfe kommen\n- Pass zum Kreisläufer muss zwingend als Bodenpass erfolgen\n- Wettkampfmodus: 1 Punkt pro Tor, 2 Punkte für direkten Fallwurf-Treffer",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.48,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "AL",
+          "x": 0.22,
+          "y": 0.24
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.34,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.32,
+          "y": 0.56,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.26,
+          "y": 0.28
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.22
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.32,
+              "y": 0.56
+            },
+            {
+              "x": 0.26,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.28
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.28
+            },
+            {
+              "x": 0.08,
+              "y": 0.22
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wurfserie mit optischem Signal: Sprungwurf, Heber oder Fallwurf",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/wurfserie-variable-abschluesse-fallwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "JUMP_SHOT",
+        "LOB_SPIN_SHOT",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Der Trainer steht seitlich neben dem Tor mit drei verschiedenfarbigen Hütchen (z. B. Rot = Fallwurf, Gelb = Heber, Grün = Sprungwurf). Im 6-Meter-Kreis liegen zwei flache Matten; die Spieler starten zentral vor 9 Metern.",
+    "flow_description": "1. Der Spieler erhält ein Zuspiel von der Halbposition und läuft dynamisch auf die 6-Meter-Linie zu.\n2. Erst beim Überschreiten der 9-Meter-Linie hebt der Trainer eines der farbigen Hütchen hoch.\n3. Bei Rot senkt der Spieler sofort den Schwerpunkt und schließt per überraschendem Fallwurf auf die Matte ab; bei Gelb folgt ein Heber, bei Grün ein hoher Sprungwurf.\n4. Der Torhüter kennt das Farbsignal nicht und muss aktiv auf die Körperbewegung reagieren.",
+    "coaching_points": "- Blitzschnelle Wahrnehmung und saubere technische Umstellung im vollen Lauf\n- Beim Signal 'Fallwurf' sofort tief in die Fallbewegung gehen ohne Zögern\n- Hohe Konzentration auf das sichere Abrollen nach dem Fallwurf\n- Keine Vorab-Ankündigung der Wurftechnik durch die Körperhaltung",
+    "variations_text": "- Signal kommt direkt durch das Torwartverhalten (TW stürzt raus -> Heber, TW bleibt groß stehen -> Fallwurf flach)\n- Start aus der Kreisläufer-Drehung statt aus dem Anlauf\n- Punktewertung: 2 Punkte für jeden Treffer in der korrekten Technik",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "coach1",
+          "type": "COACH_FEEDER",
+          "label": "Signal",
+          "x": 0.72,
+          "y": 0.14
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.5,
+          "y": 0.22
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.32
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.64
+            },
+            {
+              "x": 0.5,
+              "y": 0.32
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.54
+            },
+            {
+              "x": 0.5,
+              "y": 0.32
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.32
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tiefes Durchgleiten im 6-Meter-Raum nach Bodenpass",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballecke.de/fallwurf-durchgleiten-kreislaufer/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei glatte Turnmatten liegen am vorderen Rand des 6-Meter-Kreises. Ein Zuspieler steht auf RL, ein zweiter auf RR. Die Kreisläufer starten zentral am Kreis.",
+    "flow_description": "1. Der Kreisläufer startet einen kurzen Antritt in die Lücke am 6-Meter-Kreis.\n2. RL spielt einen sehr flachen, schnellen Bodenpass tief in den Lauf des Kreisläufers.\n3. Da der Ball sehr tief ankommt, geht der Kreisläufer bereits beim Fangen in eine flache Vorwärts-Fallbewegung über, zieht den Ball blitzschnell Richtung Tor und gleitet anschließend über die Matte durch.\n4. Wechselweise Zuspiel von RL und RR.",
+    "coaching_points": "- Vertikale Fallenergie sauber in horizontale Gleitenergie umwandeln\n- Ball sicher mit beiden Händen knapp über dem Boden aufnehmen\n- Sofortiger Abschluss aus tiefer Körperposition ohne unnötiges Aufrichten\n- Flächige, gelenkschonende Gleitlandung",
+    "variations_text": "- Zuspiele etwas weiter in die Breite legen, um das Strecken beim Fangen zu schulen\n- Ein passiver Verteidiger hält einen Arm im Passweg\n- Abschluss muss gezielt hoch über die Schulter des abtauchenden Torwarts erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.54,
+          "y": 0.34,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.44,
+          "y": 0.22
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.29
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.34
+            },
+            {
+              "x": 0.44,
+              "y": 0.29
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.52
+            },
+            {
+              "x": 0.44,
+              "y": 0.29
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.29
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Methodische Progression: Fallwurf aus der tiefen Hocke",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb.de/de/service/trainingshilfen/fallwurf-einsteiger-progression/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei dicke Weichbodenmatten liegen unmittelbar vor der 6-Meter-Linie im Torraum. Die Spieler stehen mit eigenem Ball frontal an der Mattenkante in tiefer Kniebeuge.",
+    "flow_description": "1. Stufe 1 (4 Min.): Aus dem Kniestand bzw. der tiefen Hocke kippen die Spieler langsam nach vorne auf die Matte, führen dabei eine saubere Schlagwurfbewegung auf das Tor aus und fangen sich mit der freien Hand bzw. dem Körper weich ab.\n2. Stufe 2 (4 Min.): Gleicher Ablauf aus dem aufrechten Stand mit leicht gebeugten Knien (geringfügig größere Fallhöhe).\n3. Stufe 3 (4 Min.): Nach einem kurzen Auftaktschritt an die Mattenkante in den kontrollierten Fallwurf übergehen.\n4. Jeder Spieler achtet auf den exakten Moment des Ballabwurfs vor dem Aufprall.",
+    "coaching_points": "- Durch die geringe Fallhöhe aus der Hocke verlieren Jugendliche sofort die Angst vor dem Bodenkontakt\n- Ellbogen bleibt beim Abwurf oben auf Schulterhöhe\n- Blick bleibt am Torhüter, Kopf nicht auf die Matte senken\n- Saubere Steigerung erst, wenn die vorherige Stufe technisch sicher sitzt",
+    "variations_text": "- Zielhütchen in den unteren Torecken aufstellen\n- Ball wird vor dem Fallen vom Partner kurz zugeworfen\n- Seitliches Kippen statt rein frontalem Fallen üben",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "W1",
+          "x": 0.36,
+          "y": 0.34,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "W2",
+          "x": 0.64,
+          "y": 0.34,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte 1",
+          "x": 0.38,
+          "y": 0.24
+        },
+        {
+          "id": "m2",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte 2",
+          "x": 0.62,
+          "y": 0.24
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.5,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.34
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.64,
+              "y": 0.34
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnellangriff 2. Welle: Kreisläufer-Pass mit Fallwurf-Abschluss",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/zweite-welle-kreislaeufer-fallwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Gespielt wird im 3 gegen 2 (RM, RL und nachrückender KM gegen 2 zurücklaufende Verteidiger) ab der Mittellinie Richtung Tor.",
+    "flow_description": "1. Der eigene Torhüter eröffnet schnell auf den startenden RM an der Mittellinie.\n2. RM treibt mit hohem Tempo zentral Richtung 9-Meter-Linie, während der Kreisläufer im Vollsprint in die Lücke zwischen den beiden zurückeilenden Verteidigern stößt.\n3. Sobald die Verteidiger auf RM und RL reagieren, steckt RM den Ball scharf in den Lauf des Kreisläufers durch.\n4. Da der Verteidiger dem Kreisläufer im Nacken sitzt, schließt dieser direkt aus dem Vollsprint per dynamischem Fallwurf in den 6-Meter-Raum ab.",
+    "coaching_points": "- Hohes Tempo im Übergang ohne die Passpräzision zu verlieren\n- Kreisläufer läuft eine klare, tiefe Bahn in die Nahtstelle und fordert den Ball sichtbar\n- Im Vollsprint sauber in den Fallwurf übergehen und weich abrollen\n- Rückraumspieler müssen bei abgedecktem Kreis selbst konsequent abschließen",
+    "variations_text": "- Dritter Verteidiger startet mit 3 Metern Rückstand zur Erhöhung des Zeitdrucks\n- Nach dem Abschluss sofortiges Umschalten in den Rückzug\n- Wertung: 2 Punkte für erfolgreichen Fallwurf-Abschluss des Kreisläufers",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.38,
+          "y": 0.36
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.62,
+          "y": 0.36
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.84,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.78
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.66,
+          "y": 0.72
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.52
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.84
+            },
+            {
+              "x": 0.46,
+              "y": 0.52
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.66,
+              "y": 0.72
+            },
+            {
+              "x": 0.5,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.46,
+              "y": 0.52
+            },
+            {
+              "x": 0.5,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.28
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kleingruppenspiel 4 gegen 4 mit Kreisläufer-Fallwurf-Bonus",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/kleingruppenspiel-fallwurf-kreis/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FALLING_SHOT",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei 4er-Teams (3 Rückraum/Außen + 1 Kreisläufer) spielen auf ein Tor in einer Hallenhälfte. Die Abwehr agiert offensiv auf 7–8 Metern, um Raum am Kreis zu öffnen.",
+    "flow_description": "1. Die Angreifer spielen im 4 gegen 4 gezielt ihre Kreisläufer und einlaufenden Außenspieler frei.\n2. Sonderwertung: Jedes normale Tor zählt 1 Punkt; jedes Tor, das durch einen technisch sauberen Fallwurf am 6-Meter-Kreis erzielt wird, zählt 3 Punkte.\n3. Nach jeweils 5 Angriffen wechseln Angriff und Abwehr die Rollen.\n4. Das Team mit den meisten Punkten nach 3 Durchgängen gewinnt.",
+    "coaching_points": "- Rückraumspieler müssen tief stoßen, um den Kreisläufer freizuspielen\n- Fallwurf aktiv als Waffe unter engem Zeit- und Gegnerdruck einsetzen\n- Sauberes Abrollen auch im freien Spiel ohne Matten beachten\n- Hohe Aufmerksamkeit beim Zusammenspiel zwischen Rückraum und Kreis",
+    "variations_text": "- Zwei Kreisläufer gleichzeitig im 5 gegen 5 (Doppelkreis-Spiel)\n- Jeder Spieler muss mindestens einmal während des Spiels am Kreis agieren\n- Nach Fehlwurf sofortiger Ballbesitzwechsel",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.28,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.44,
+          "y": 0.32
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.56,
+          "y": 0.32
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.72,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.58
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.62,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.72,
+          "y": 0.58
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "3 Pkt",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "a4",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.62
+            },
+            {
+              "x": 0.5,
+              "y": 0.28
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a4",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.28
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

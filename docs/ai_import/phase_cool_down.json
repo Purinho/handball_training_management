@@ -1,0 +1,742 @@
+[
+  {
+    "title": "Lockeres Auslaufen mit Schulter- und Armkreisen",
+    "default_duration_min": 6,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.com/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "RETREAT",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [],
+    "setup_description": "Alle Spieler verteilen sich locker an den Außenlinien des gesamten Handballfelds.",
+    "flow_description": "1. Die Mannschaft trabt 3 Minuten im sehr langsamen, lockeren Tempo rund um das Spielfeld, um die Herzfrequenz schrittweise abzusenken.\n2. Auf den Längsseiten werden die Arme und Schultern locker vorwärts und rückwärts gekreist sowie ausgeschüttelt.\n3. In den letzten 2 Minuten gehen alle in zügiges, entspanntes Gehen über und atmen bewusst tief durch die Nase ein und langsam durch den Mund aus.\n4. Zum Abschluss versammelt sich das Team im Mittelkreis für das nachfolgende Dehnen.",
+    "coaching_points": "- Tempo deutlich reduzieren: Jeder Spieler sollte sich dabei problemlos unterhalten können\n- Schultern bewusst hängen lassen und die Wurfarm-Muskulatur aktiv ausschütteln\n- Kein abruptes Stehenbleiben nach intensiven Zielspielen, um den Laktatabbau zu unterstützen",
+    "variations_text": "- In Zweiergruppen nebeneinander auslaufen und dabei die Trainingseinheit reflektieren\n- Barfuß auf dem Hallenboden auslaufen (fördert die Fußmuskulatur-Entspannung)\n- Mit ruhiger, langsamer Musik im Hintergrund",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.20, "y": 0.14 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.50, "y": 0.14 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.80, "y": 0.14 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.80, "y": 0.86 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.20, "y": 0.86 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [
+            { "x": 0.20, "y": 0.14 },
+            { "x": 0.86, "y": 0.14 },
+            { "x": 0.86, "y": 0.86 },
+            { "x": 0.14, "y": 0.86 },
+            { "x": 0.14, "y": 0.14 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Statisches Dehnen im Mannschaftskreis (Bein- und Hüftkette)",
+    "default_duration_min": 8,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "FOOTWORK_DEFENSE",
+        "JUMP_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Die gesamte Mannschaft bildet einen großen Kreis um den Mittelkreis, der Trainer oder Kapitän leitet die Dehnsequenz aus der Mitte an.",
+    "flow_description": "1. Waden-Dehnung (Runner's Stretch): Ausfallschritt nach vorn, hintere Ferse fest am Boden, 25 Sekunden pro Seite ruhig halten.\n2. Hüftbeuger-Dehnung: Tiefer Ausfallschritt, hinteres Knie sanft ablegen, Becken nach vorn-unten schieben (25 Sek. pro Seite).\n3. Oberschenkelvorderseite: Im Stand oder in Seitenlage Ferse locker zum Gesäß ziehen, Hüfte gestreckt halten (25 Sek. pro Seite).\n4. Oberschenkelrückseite & Adduktoren: Im Grätschsitz mit geradem Rücken kontrolliert nach vorn neigen (30 Sek.).",
+    "coaching_points": "- Sanfter, angenehmer Dehnreiz ohne Schmerz und ohne hektisches Wippen\n- Ruhig und tief in die gedehnte Muskulatur ausatmen, um den Muskeltonus zu senken\n- Gleichzeitig für kurzes, konstruktives Trainingsfeedback nutzen",
+    "variations_text": "- Ein Spieler übernimmt reihum die Anleitung der Dehnübungen\n- Mit eigenem Körpergewicht im Liegen (Rückenlage, Bein mit Handtuch heranziehen)\n- Kombination mit leichter Brustwirbelsäulen-Mobilisation",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "tr", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.50, "y": 0.24 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.72, "y": 0.36 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.72, "y": 0.64 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.50, "y": 0.76 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.28, "y": 0.64 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "S6", "x": 0.28, "y": 0.36 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Wurfschulter- und Brustmuskulatur-Dehnung an Wand oder Torpfosten",
+    "default_duration_min": 6,
+    "min_players": 2,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "SHOOTING",
+        "STANDING_THROW",
+        "JUMP_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [],
+    "setup_description": "Alle Spieler verteilen sich entlang der Hallenwände oder nutzen die Torpfosten mit ca. 1,5 m Abstand zueinander.",
+    "flow_description": "1. Brust- und vordere Schulterdehnung: Unterarm im 90°-Winkel an die Hallenwand anlegen, Oberkörper langsam von der Wand wegdrehen und 25–30 Sekunden halten.\n2. Seitenwechsel: Beide Seiten gleichmäßig dehnen, die Wurfarmseite bei Bedarf ein zweites Mal.\n3. Hintere Schulterkapsel (Sleeper-Stretch-Alternative im Stand): Wurfarm gestreckt vor der Brust zur Gegenseite führen und mit dem anderen Arm sanft heranziehen (25 Sek.).\n4. Abschluss: Lockere Pendelbewegungen des leicht nach vorn gebeugten Wurfarms (30 Sek.).",
+    "coaching_points": "- Nach wurfintensiven Einheiten essenziell, um Verkürzungen der Brust- und Innenrotatoren vorzubeugen\n- Schulter dabei bewusst tief lassen (nicht Richtung Ohr hochziehen)\n- Bei stechendem Schmerz im Schultergelenk sofort abbrechen und Winkel verkleinern",
+    "variations_text": "- Ellbogenhöhe an der Wand variieren (etwas höher als Schulterhöhe für untere Brustfasern)\n- Partnerdehnung im Stand: Partner greift sanft beide zurückgeführten Handgelenke\n- Kombination mit Nacken-Dehnung (Kopf sanft zur Seite neigen)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.20, "y": 0.14 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.40, "y": 0.14 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.60, "y": 0.14 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.80, "y": 0.14 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Faszien-Regeneration (Foam Rolling) für Waden und Oberschenkel",
+    "default_duration_min": 8,
+    "min_players": 2,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.vbg.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "FOOTWORK_DEFENSE",
+        "FAST_BREAK_1ST_WAVE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Alle Spieler sitzen oder liegen locker verteilt auf Matten oder dem Hallenboden; jeder Spieler hat eine Faszienrolle (oder einen festen Handball als Alternative für lokale Punkte).",
+    "flow_description": "1. Waden ausrollen: Einen Unterschenkel auf die Rolle legen, Gesäß leicht anheben und sehr langsam von der Achillessehne bis unterhalb der Kniekehle rollen (ca. 60 Sek. pro Bein).\n2. Oberschenkelrückseite (Hamstrings): Im Sitz die Rolle unter den hinteren Oberschenkel legen und langsam bis zum Gesäßansatz rollen (ca. 60 Sek. pro Bein).\n3. Oberschenkelvorderseite (Quads): Im Unterarmstütz in Bauchlage langsam von oberhalb der Kniescheibe bis zur Hüfte ausrollen (60 Sek.).\n4. Gesäßmuskulatur (Piriformis): Auf die Rolle setzen, ein Bein überschlagen und langsam über die Gesäßmuskulatur rollen.",
+    "coaching_points": "- Sehr langsam und kontrolliert rollen (wie Zeitlupe), nicht hektisch hin- und herrollen\n- Im Cool-down eher Richtung Körpermitte (venöser Rückfluss) arbeiten\n- Niemals direkt über Gelenke, Knochenvorsprünge oder akute Verletzungen/Entzündungen rollen",
+    "variations_text": "- Auf schmerzhaften Triggerpunkten für 15–20 Sekunden ruhig verharren und tief atmen\n- Zusätzlich die Brustwirbelsäule sanft über die Rolle mobilisieren\n- Bei begrenzter Rollenanzahl in Zweiergruppen abwechselnd rollen und statisch dehnen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "M1", "x": 0.30, "y": 0.35 },
+        { "id": "m2", "type": "EQUIPMENT_MAT", "label": "M2", "x": 0.70, "y": 0.35 },
+        { "id": "m3", "type": "EQUIPMENT_MAT", "label": "M3", "x": 0.30, "y": 0.65 },
+        { "id": "m4", "type": "EQUIPMENT_MAT", "label": "M4", "x": 0.70, "y": 0.65 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.30, "y": 0.35 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.70, "y": 0.35 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.30, "y": 0.65 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.70, "y": 0.65 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Ruhiges Pass-Auslaufen im Gehen (Ball-Cool-Down)",
+    "default_duration_min": 6,
+    "min_players": 6,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.com/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Jeweils zwei Spieler gehen locker mit einem Handball nebeneinander (Abstand ca. 4–5 m) über das gesamte Handballfeld.",
+    "flow_description": "1. Die Paare gehen oder traben ganz locker von Grundlinie zu Grundlinie und spielen sich dabei entspannte, weiche Pässe zu.\n2. Bahn 1: Lockere Brustpässe und beidhändige Überkopfpässe.\n3. Bahn 2: Bodenpässe mit der schwachen Hand und weiche einhändige Zuspielvarianten.\n4. Bahn 3: Im ruhigen Gehen lockere Ball-Kreise um den Körper und Abschluss mit kurzem Ausschütteln der Arme.",
+    "coaching_points": "- Kein Leistungsdruck, keine harten Pässe: Fokus liegt auf lockerer Motorik und Pulsberuhigung\n- Lockeres Durchatmen und entspannte Atmosphäre zum Trainingsende fördern\n- Ideal für Jugendmannschaften, die reines Auslaufen ohne Ball oft unruhig absolvieren",
+    "variations_text": "- In Dreiergruppen locker passen und Namen rufen\n- Im Mittelkreis im Sitzen den Ball ruhig herumgeben und dabei ein Trainings-Highlight nennen\n- Mit weichem Schaumstoffball für noch sanfteres Fangen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.16, "y": 0.25, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "B1", "x": 0.16, "y": 0.42 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.16, "y": 0.62, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "B2", "x": 0.16, "y": 0.78 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.16, "y": 0.25 }, { "x": 0.84, "y": 0.25 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.16, "y": 0.25 }, { "x": 0.16, "y": 0.42 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.16, "y": 0.42 }, { "x": 0.84, "y": 0.42 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wirbelsäulen-Mobilisation: Katze-Kuh, Child's Pose & Krokodil",
+    "default_duration_min": 8,
+    "min_players": 2,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.ergotopia.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "OFFENSE_INDIVIDUAL",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Alle Spieler verteilen sich entspannt auf Matten oder dem Hallenboden mit ausreichend Bewegungsraum zu den Seiten.",
+    "flow_description": "1. Katze-Kuh im Vierfüßlerstand: Im langsamen Atemrhythmus den Rücken rund machen (Ausatmen) und sanft durchhängen lassen (Einatmen), 8 Wiederholungen.\n2. Child's Pose (Kindeshaltung): Gesäß auf die Fersen absenken, Arme lang nach vorn ausstrecken, Stirn Richtung Boden legen und 40 Sekunden tief in den unteren Rücken atmen.\n3. Krokodil-Drehung in Rückenlage: Ein Bein angewinkelt zur Gegenseite ablegen, beide Schultern bleiben locker am Boden, Blick zur anderen Hand (30 Sek. pro Seite).\n4. Zum Abschluss beide Knie sanft zur Brust ziehen und leicht über den unteren Rücken kreisen.",
+    "coaching_points": "- Entlastet die durch Sprünge, Würfe und Zweikämpfe stark gestauchte Lenden- und Brustwirbelsäule\n- Alle Übergänge sehr langsam und im eigenen Atemrhythmus ausführen\n- Bei der Krokodil-Drehung keine Gewalt anwenden: Schwerkraft arbeiten lassen",
+    "variations_text": "- In der Kindeshaltung die Arme erst nach links, dann nach rechts wandern lassen (Flankendehnung)\n- Ergänzung durch 'Thread the Needle' (Arm unter dem Körper durchschieben) für die Brustwirbelsäule\n- Ruhige, geführte Atemzählung (4 Sek. ein, 6 Sek. aus) durch den Trainer",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.25, "y": 0.35 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.50, "y": 0.35 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.75, "y": 0.35 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.25, "y": 0.65 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.50, "y": 0.65 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "S6", "x": 0.75, "y": 0.65 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Entspannungs- und Atemübung in Rückenlage (Beine hochlagern)",
+    "default_duration_min": 6,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.com/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "RETREAT",
+        "GOALKEEPER_TECHNIQUE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Alle Spieler legen sich in Rückenlage nahe der Hallenwand (oder auf Matten vor einer Langbank) ab und lagern die Beine entspannt im 90°-Winkel nach oben an.",
+    "flow_description": "1. Die Spieler schließen die Augen, legen eine Hand auf den Bauch und eine auf die Brust.\n2. Geführte Bauchatmung: 4 Sekunden ruhig durch die Nase in den Bauch einatmen, 2 Sekunden halten, 6 Sekunden lang und geräuschlos durch den Mund ausatmen.\n3. Nach 10 ruhigen Atemzügen schütteln alle die hochgelagerten Beine und Waden sanft aus, um den venösen Rückfluss zu fördern.\n4. Langsames Aufrichten über die Seite (nicht ruckartig aufspringen).",
+    "coaching_points": "- Aktiviert gezielt den Parasympathikus (Regenerationsmodus) nach intensiven Trainingseinheiten\n- Das Hochlagern der Beine entlastet schwere Waden und unterstützt den Abtransport von Stoffwechselprodukten\n- Ruhige, klare Stimme des Trainers schafft eine fokussierte Erholungsatmosphäre",
+    "variations_text": "- Kombination mit kurzer mentaler Visualisierung (z. B. erfolgreicher Wurf oder saubere Abwehraktion)\n- Progressive Muskelentspannung (kurzes Anspannen und bewusstes Loslassen von Fäusten, Schultern und Beinen)\n- Ideal nach sehr harten Vorbereitungs- oder Athletikeinheiten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.20, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.40, "y": 0.22 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.60, "y": 0.22 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.80, "y": 0.22 },
+        { "id": "tr", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.65 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Partner-Dehnung & Lockerung für Beine und Schultern",
+    "default_duration_min": 8,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "SHOOTING",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Die Mannschaft findet sich paarweise zusammen und verteilt sich locker im Mittelbereich der Halle.",
+    "flow_description": "1. Oberschenkelrückseite: Spieler A liegt auf dem Rücken, ein Bein gestreckt am Boden, das andere gestreckt nach oben. Spieler B stützt das obere Bein an Ferse/Unterschenkel und schiebt es vorsichtig in die Dehnung bis zum 'Stopp'-Signal von A (25 Sek. pro Bein).\n2. Brust- und Schulteröffnung: Spieler A sitzt im Schneidersitz und verschränkt die Hände locker hinter dem Kopf. Spieler B kniet dahinter und zieht die Ellbogen sanft nach hinten (25 Sek.).\n3. Sanftes Ausschütteln: Spieler A liegt entspannt, Spieler B hebt nacheinander die Beine leicht an und schüttelt die Waden- und Oberschenkelmuskulatur locker aus.\n4. Anschließend kompletter Rollenwechsel.",
+    "coaching_points": "- Kommunikation ist Pflicht: Der gedehnte Spieler gibt jederzeit das klare 'Stopp'-Signal\n- Niemals ruckartig drücken oder nachfedern, sondern extrem sanft und gleichmäßig arbeiten\n- Stärkt neben der Regeneration auch das Vertrauen und den Teamzusammenhalt",
+    "variations_text": "- Sanfte Nacken- und Schulterausstreichung im Sitzen am Ende\n- PNF-Variante (Anspannen-Entspannen: 5 Sek. leicht gegenhalten, dann locker lassen und minimal weiterdehnen) für Aktive\n- Im Anschluss kurzes Partner-Feedback zur eigenen Trainingsleistung",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.35 },
+        { "id": "b1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.25, "y": 0.45 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.50, "y": 0.35 },
+        { "id": "b2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.50, "y": 0.45 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.75, "y": 0.35 },
+        { "id": "b3", "type": "DEFENSE_PLAYER", "label": "B3", "x": 0.75, "y": 0.45 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Handball-Ballmassage im Paar (Rücken, Schulter und Waden)",
+    "default_duration_min": 6,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.sportunterricht.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_TEAM"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      }
+    ],
+    "setup_description": "Jeweils zwei Spieler bilden ein Paar und haben einen Handball (für jüngere Jahrgänge idealerweise einen weichen Ball). Ein Spieler liegt entspannt in Bauchlage.",
+    "flow_description": "1. Spieler A liegt entspannt auf dem Bauch, Kopf ruht seitlich auf den Händen.\n2. Spieler B rollt den Handball mit sanftem, gleichmäßigem Druck in langsamen Bahnen über den Rücken (links und rechts neben der Wirbelsäule), die Schultern, Oberschenkelrückseiten und Waden (ca. 2,5 Minuten).\n3. Spieler A gibt Rückmeldung, ob der Druck angenehm ist ('etwas fester' / 'etwas leichter').\n4. Nach 2,5 Minuten erfolgt der Rollenwechsel.",
+    "coaching_points": "- Niemals direkt mit Druck auf die Wirbelsäule oder in die Kniekehlen rollen\n- Ruhige, entspannte Atmosphäre in der Halle schaffen (kein Herumalbern)\n- Besonders im Kinder- und Jugendhandball ein beliebter, wirkungsvoller Trainingsabschluss",
+    "variations_text": "- 'Wetterbericht'-Massage für Minis/E-Jugend (Regen = leichtes Tippen, Sonne = kreisendes Rollen)\n- Selbstmassage der Fußsohlen: Im Stand langsam die Fußsohle über einen Handball oder Tennisball abrollen\n- Im Sitzen auf der Langbank hintereinander in der Gruppe ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.50 },
+        { "id": "b1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.32, "y": 0.50, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.65, "y": 0.50 },
+        { "id": "b2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.72, "y": 0.50, "hasBall": true }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Hüft- und Adduktoren-Cool-Down (90/90-Sitz & Schmetterling)",
+    "default_duration_min": 8,
+    "min_players": 2,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.ergotopia.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "GOALKEEPER_TECHNIQUE",
+        "FOOTWORK_DEFENSE",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Alle Spieler sitzen mit ausreichend Abstand auf dem Hallenboden oder auf Matten im Kreis.",
+    "flow_description": "1. Schmetterlings-Sitz: Fußsohlen aneinanderlegen, Knie locker nach außen sinken lassen, Rücken aufrichten und 30 Sekunden ruhig halten.\n2. 90/90-Hüftsitz: Vorderes und hinteres Bein jeweils im 90°-Winkel am Boden ablegen, Oberkörper gerade leicht über das vordere Schienbein neigen (30 Sek. pro Seite).\n3. Langsamer, kontrollierter Seitenwechsel im 90/90-Sitz ohne Zuhilfenahme der Hände (6 Wechsel).\n4. Tiefe Hocke (Squat Hold) zum Ausklang: Fersen am Boden, Ellbogen drücken sanft die Knie nach außen, 30 Sekunden ruhig atmen.",
+    "coaching_points": "- Besonders wertvoll für Torhüter sowie Abwehr- und 1-gegen-1-Spieler mit hoher Adduktoren-Belastung\n- Aufrechter Rücken im Schmetterlingssitz (kein Rundrücken)\n- Ruhig und gleichmäßig durchatmen, Knie nicht gewaltsam nach unten drücken",
+    "variations_text": "- Tauben-Dehnung (Pigeon Stretch) als intensive Alternative für das Gesäß\n- Mit leichtem Vorbeugen im Grätschsitz kombinieren\n- Direkt mit einer kurzen Feedback-Runde verbinden",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.30, "y": 0.35 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.50, "y": 0.35 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.70, "y": 0.35 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.30, "y": 0.65 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.50, "y": 0.65 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "S6", "x": 0.70, "y": 0.65 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Unterarm-, Handgelenk- und Finger-Mobilisation nach Wurftraining",
+    "default_duration_min": 5,
+    "min_players": 2,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.vbg.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "SHOOTING",
+        "PASSING_CATCHING",
+        "LOB_SPIN_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [],
+    "setup_description": "Alle Spieler stehen oder sitzen locker im Mittelkreis.",
+    "flow_description": "1. Unterarmbeuger dehnen: Rechten Arm nach vorn strecken, Handfläche zeigt nach vorn/oben, mit der linken Hand die Finger sanft Richtung Körper ziehen (25 Sek. pro Seite).\n2. Unterarmstrecker dehnen: Arm gestreckt nach vorn, Handrücken zeigt nach vorn, Finger sanft nach unten Richtung Unterarm ziehen (25 Sek. pro Seite).\n3. Im Vierfüßlerstand: Hände mit Fingern Richtung Knie aufsetzen und Gewicht sanft nach hinten verlagern (20 Sek.).\n4. Abschluss: Lockere Handgelenkskreise und sanftes Ausschütteln beider Hände und Finger.",
+    "coaching_points": "- Entlastet die stark beanspruchte Unterarm- und Handgelenksmuskulatur nach vielen Würfen, Drehern und Harz-Einsatz\n- Ellbogen bei den stehenden Varianten gestreckt, aber nicht überstreckt halten\n- Dehnung dosiert aufbauen, keine Schmerzen im Handgelenk provozieren",
+    "variations_text": "- Kombination mit Schulter- und Brustdehnung für einen kompletten Oberkörper-Cool-down\n- Finger einzeln sanft strecken und spreizen\n- Besonders nach intensivem Torwart-Einwerfen oder Techniktraining Dreher/Heber einsetzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.35, "y": 0.40 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.65, "y": 0.40 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.35, "y": 0.65 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.65, "y": 0.65 }
+      ],
+      "paths": []
+    }
+  },
+  {
+    "title": "Cool-Down-Feedback-Kreis mit leichtem Dehnen",
+    "default_duration_min": 8,
+    "min_players": 6,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_GROUP"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Die gesamte Mannschaft sitzt im Mittelkreis. Ein Handball dient als 'Redeball'.",
+    "flow_description": "1. Während die Spieler eine entspannte Dehnposition im Sitzen einnehmen (z. B. Grätschsitz, Hürdensitz, Schulterdehnung), startet der Trainer das gemeinsame Reflexionsgespräch.\n2. Der Ball wird reihum oder gezielt weitergerollt: Wer den Ball erhält, nennt kurz einen Punkt, der heute gut gelungen ist, und ggf. einen Wunsch für das nächste Training.\n3. Nach jeweils 30–40 Sekunden wechselt das Team gemeinsam in die nächste Dehnposition (z. B. Wechsel auf das andere Bein, Oberkörperdrehung).\n4. Der Trainer fasst die 2 wichtigsten Lernpunkte der Einheit kompakt zusammen und beendet das Training mit dem Team-Ruf.",
+    "coaching_points": "- Spart wertvolle Hallenzeit und garantiert, dass weder Cool-down noch Reflexion wegfallen\n- Wertschätzende, ruhige Gesprächskultur pflegen; jeder hört aktiv zu\n- Fokus auf positive Verstärkung und konkrete nächste Schritte für das kommende Spiel",
+    "variations_text": "- Kurze Blitzlicht-Skala (1–5 Finger hochhalten) zur gefühlten Trainingsintensität (RPE-Monitoring)\n- Spieler wählen den 'Teamplayer der Einheit'\n- Ohne Ball: Zwei Spieler geben je ein kurzes Fazit aus Angriffs- und Abwehrperspektive",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "tr", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.24, "hasBall": true },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.72, "y": 0.34 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.78, "y": 0.56 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.62, "y": 0.74 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.38, "y": 0.74 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.22, "y": 0.56 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "S6", "x": 0.28, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "tr",
+          "toNodeId": "a1",
+          "points": [{ "x": 0.50, "y": 0.24 }, { "x": 0.72, "y": 0.34 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Barfuß-Fußgewölbe-Lockerung und Sprunggelenk-Cool-Down",
+    "default_duration_min": 6,
+    "min_players": 4,
+    "max_players": 20,
+    "goalkeepers": 0,
+    "source_url": "https://www.vbg.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN"
+      ],
+      "focus": [
+        "FOOTWORK_DEFENSE",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [],
+    "setup_description": "Alle Spieler ziehen die Hallenschuhe aus und gehen barfuß oder auf Socken locker über eine Hallenhälfte.",
+    "flow_description": "1. 2 Minuten langsames, bewusstes Abrollen im Gehen (Ferse -> Außenkante -> Großzehenballen).\n2. Je 20 Meter langsames Gehen auf den Fersen (Zehen hochziehen) und anschließend auf den Zehenspitzen.\n3. Im Sitzen: Beide Sprunggelenke 10x langsam nach außen und 10x nach innen kreisen.\n4. Abschluss: Zehen fest einkrallen (5 Sek.) und weit auseinanderspreizen (5 Sek.), 5 Wiederholungen.",
+    "coaching_points": "- Nach harten Stopp- und Drehbewegungen in engen Hallenschuhen eine ideale Entlastung für Füße und Achillessehnen\n- Halle vorab kurz auf Sauberkeit (keine spitzen Gegenstände) prüfen\n- Langsame, bewusste Ausführung ohne Hektik",
+    "variations_text": "- Fußsohle im Stand sanft über einen Tennisball oder eine Faszienrolle ausrollen\n- Zehen-Greifübungen mit einem kleinen Handtuch oder Leibchen\n- Kombination mit sanfter Waden- und Achillessehnendehnung an einer Stufe/Langbank",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.25, "y": 0.72 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.50, "y": 0.72 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.75, "y": 0.72 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.25, "y": 0.72 }, { "x": 0.25, "y": 0.38 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.50, "y": 0.72 }, { "x": 0.50, "y": 0.38 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.75, "y": 0.72 }, { "x": 0.75, "y": 0.38 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Ruhiges Zielwerfen-Ausklangspiel (Lattenschießen / Hütchentreffen)",
+    "default_duration_min": 6,
+    "min_players": 6,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "COOL_DOWN",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "SHOOTING",
+        "STANDING_THROW"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf dem leeren Handballtor liegen 4 Hütchen verteilt auf der Torlinie (oder die Querlatte dient als Ziel). Die Spieler stehen entspannt an der 9-Meter-Linie.",
+    "flow_description": "1. Jeder Spieler wirft nacheinander aus dem ruhigen Stand (ohne maximalen Krafteinsatz) Richtung Querlatte oder Hütchen.\n2. Ziel ist Präzision und lockeres Auswerfen des Wurfarms, nicht Härte.\n3. Wer ein Hütchen trifft oder die Querlatte berührt, darf sich direkt entspannt auf die Matten zum Ausdehnen begeben (oder sammelt einen Punkt für das Team).\n4. Nach 3–4 lockeren Würfen pro Spieler wird das Material gemeinsam abgebaut.",
+    "coaching_points": "- Bewusst nur mit 50–60 % Wurfkraft werfen (Gefühl und Kontrolle statt Gewaltwürfe)\n- Sorgt für einen positiven, motivierenden Abschluss mit niedriger Herzfrequenz\n- Keine Torhüter ins Tor stellen, damit wirklich entspannt auf Ziele geworfen wird",
+    "variations_text": "- Ausführung mit der schwachen Hand für zusätzlichen Spaßfaktor\n- Als Bodenpass-Zielwerfen auf Hütchen in der 6-Meter-Linie\n- Team-Challenge: Gemeinsam 5 Lattentreffer erzielen, bevor die Einheit endet",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.42, "y": 0.08 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.58, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.38, "y": 0.44, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.50, "y": 0.46, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.62, "y": 0.44, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c1",
+          "points": [{ "x": 0.38, "y": 0.44 }, { "x": 0.42, "y": 0.08 }]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "c2",
+          "points": [{ "x": 0.62, "y": 0.44 }, { "x": 0.58, "y": 0.08 }]
+        }
+      ]
+    }
+  }
+]

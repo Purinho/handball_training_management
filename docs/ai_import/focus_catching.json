@@ -1,0 +1,1913 @@
+[
+  {
+    "title": "W-Form und Trichter-Fangen im Zweier-Rhythmus",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.com/fangtechnik-oberes-und-unteres-fangen",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Die Spieler bilden Paare und stehen sich im Abstand von 5 bis 7 Metern gegenüber. Jedes Paar hat einen Handball.",
+    "flow_description": "1. Die Partner passen sich den Ball zunächst auf Brust- und Kopfhöhe zu.\n2. Der Fänger streckt die leicht angewinkelten Arme dem Ball entgegen und bildet mit gespreizten Fingern und zueinander zeigenden Daumen ein stabiles „W“ (Trichterform).\n3. Im Moment des Ballkontakts gibt er elastisch nach und zieht den Ball kontrolliert zum Oberkörper („Ansaugen“).\n4. Nach 2 Minuten werden gezielt tiefe Pässe unterhalb der Hüfte gespielt: Der Fänger geht in die Knie, bildet mit den kleinen Fingern zueinander eine „Schale“ und sichert den Ball weich nach oben.\n5. Im dritten Durchgang wechseln hohe und tiefe Pässe unangekündigt ab.",
+    "coaching_points": "- Daumen beim oberen Fangen unbedingt hinter den Ball bringen, damit er nicht ins Gesicht prallen kann\n- Ball aktiv mit den Händen greifen, niemals passiv gegen die Brust prallen lassen\n- Beim unteren Fangen tief in die Knie gehen und die kleinen Finger zueinander drehen\n- Blick bis in die Hände hinein auf dem Ball halten",
+    "variations_text": "- Abstand verkürzen und Passhärte schrittweise steigern\n- Absichtlich leicht ungenaue Pässe seitlich neben den Körper werfen\n- Vor dem Fangen einmal kurz in die Hände klatschen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.25,
+          "y": 0.35,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.75,
+          "y": 0.35
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.25,
+          "y": 0.65,
+          "hasBall": true
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.75,
+          "y": 0.65
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.35
+            },
+            {
+              "x": 0.75,
+              "y": 0.35
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.75,
+              "y": 0.35
+            },
+            {
+              "x": 0.25,
+              "y": 0.35
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Reaktions-Fangen an der Hallenwand",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/ballannahme-reaktionszeit-wand",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zweiergruppen stehen vor einer freien Hallenwand. Spieler A (Fänger) steht ca. 2 Meter vor der Wand mit dem Gesicht zur Wand. Spieler B (Werfer) steht 2 bis 3 Meter hinter A mit einem Ball.",
+    "flow_description": "1. Spieler B wirft den Ball unvorhersehbar über oder neben der Schulter von A in verschiedenen Höhen und Härten gegen die Hallenwand.\n2. Spieler A sieht den Ball erst beim Auftreffen bzw. Abprallen von der Wand.\n3. Er reagiert blitzschnell, passt seine Handhaltung (oberes W-Fangen oder unteres Schalen-Fangen) an die Abprallhöhe an und sichert den Ball sauber.\n4. Direkt nach dem Fangen spielt A den Ball über Kopf oder seitlich zurück an B.\n5. Nach 15 Abprallern tauschen Werfer und Fänger die Positionen.",
+    "coaching_points": "- Aktive, leicht gebeugte Grundstellung mit gehobenen, fangbereiten Händen vor der Brust halten\n- Schnelle Fußkorrektur bei seitlichen Abprallern nutzen, nicht nur nach dem Ball greifen\n- Ball auch bei sehr kurzen Reaktionszeiten weich abfedern\n- Hohe visuelle Konzentration auf die Wandfläche bewahren",
+    "variations_text": "- Abstand von Spieler A zur Wand auf 1,5 Meter verkürzen\n- B wirft den Ball als Aufsetzer vor der Wand an, sodass der Abprallwinkel flacher wird\n- Nur einhändiges Fangen (links und rechts im Wechsel) fordern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "wp_wall",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.08
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "Fänger",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "Werfer",
+          "x": 0.5,
+          "y": 0.66,
+          "hasBall": true
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_wall",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.66
+            },
+            {
+              "x": 0.44,
+              "y": 0.08
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_wall",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.08
+            },
+            {
+              "x": 0.5,
+              "y": 0.34
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Akustisches Reaktions-Fangen im Kreis",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/akustische-orientierung-fangen",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      }
+    ],
+    "setup_description": "Vierergruppen bilden einen Kreis (Durchmesser ca. 6 bis 8 Meter). Drei Spieler stehen mit jeweils einem Ball außen, ein Spieler steht als Fänger in der Kreismitte.",
+    "flow_description": "1. Der mittlere Spieler dreht sich locker auf den Fußballen in der Kreismitte.\n2. Einer der drei Außenspieler gibt ein kurzes akustisches Signal (z. B. Name des Fängers oder „Hopp!“) und passt den Ball unmittelbar danach straff in die Mitte.\n3. Der Fänger orientiert sich blitzschnell zum Ruf, streckt die Hände in Trichterform entgegen, fängt den Ball sauber und spielt ihn direkt zum selben Partner zurück.\n4. Sofort danach ruft der nächste Außenspieler aus einer anderen Richtung.\n5. Nach 45 Sekunden intensiver Fangarbeit wechselt der Spieler in der Mitte.",
+    "coaching_points": "- Nach jedem Rückpass sofort wieder neutral und reaktionsbereit auf den Vorfüßen stehen\n- Drehbewegung über die Hüfte explosiv einleiten, Hände früh vor den Körper nehmen\n- Ball erst vollständig sichern, bevor der Rückpass gespielt wird\n- Außenspieler variieren den Zeitpunkt und die Passhöhe",
+    "variations_text": "- Außenspieler rufen zwei verschiedene Kommandos: „Direkt!“ (Brustpass) oder „Boden!“ (Aufsetzer)\n- Mit vier Außenspielern und kürzerem Abstand (4 m) arbeiten\n- Der Fänger muss nach jedem Fang eine 180-Grad-Drehung ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a0",
+          "type": "OFFENSE_PLAYER",
+          "label": "F",
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "P1",
+          "x": 0.5,
+          "y": 0.16,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "P2",
+          "x": 0.8,
+          "y": 0.72,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "P3",
+          "x": 0.2,
+          "y": 0.72,
+          "hasBall": true
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a0",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.16
+            },
+            {
+              "x": 0.5,
+              "y": 0.5
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a0",
+          "points": [
+            {
+              "x": 0.8,
+              "y": 0.72
+            },
+            {
+              "x": 0.5,
+              "y": 0.5
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toNodeId": "a0",
+          "points": [
+            {
+              "x": 0.2,
+              "y": 0.72
+            },
+            {
+              "x": 0.5,
+              "y": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Einhändiges Fangen mit fixiertem Gegenarm",
+    "default_duration_min": 14,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/einhaendiges-fangen-methodik",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zweiergruppen stehen sich im Abstand von 5 bis 7 Metern gegenüber. Jeder Spieler fixiert zunächst eine Hand hinter dem Rücken.",
+    "flow_description": "1. Die Spieler passen sich den Ball locker zu und fangen ausschließlich einhändig mit der starken Hand.\n2. Beim Ballkontakt spreizen sich die Finger weit auf, während der Arm weich nach hinten-unten mit der Flugbahn mitgeht, um den Ball elastisch abzufedern und zu sichern.\n3. Nach 15 erfolgreichen Fängen wird die Seite gewechselt: Jetzt fangen beide Spieler ausschließlich mit der schwachen Hand.\n4. Danach werden die Pässe gezielt etwas höher, tiefer oder leicht seitlich außerhalb der Körperachse gespielt, um die einhändige Reichweite zu vergrößern.\n5. Abschließend erfolgt das einhändige Fangen aus dem lockeren Parallel-Lauf.",
+    "coaching_points": "- Finger weit spreizen und Spannung in den Fingerspitzen halten, um den Ball sicher zu greifen\n- Flugenergie durch nachgebende Bewegung von Handgelenk und Ellenbogen weich abfangen (kein steifer Arm)\n- Sofort nach dem einhändigen Greifen den Ball sicher an die Körpermitte heranziehen\n- Beide Hände konsequent gleich viel trainieren",
+    "variations_text": "- In der freien Hand ein Leibchen oder einen zweiten Ball halten statt den Arm hinter den Rücken zu nehmen\n- Pässe härter und als Aufsetzer spielen\n- Einhändiges Fangen im Sprung (Vorbereitung für Außen- und Kempa-Anspiele)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.25,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.75,
+          "y": 0.5
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.5
+            },
+            {
+              "x": 0.75,
+              "y": 0.5
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.75,
+              "y": 0.5
+            },
+            {
+              "x": 0.25,
+              "y": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kreisläufer-Spezial: Rückpass links – Wurf rechts",
+    "default_duration_min": 15,
+    "min_players": 4,
+    "max_players": 10,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/kreislaufer/einhaendiges-fangen-pylonentor",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Ein Anspieler steht mit einem Ballwagen bei 8 bis 9 Metern. Am 6-Meter-Kreis stehen zwei Hütchen im Abstand von ca. 1,2 Metern als kleines Pylonentor. Der Kreisläufer agiert zwischen den Hütchen.",
+    "flow_description": "1. Der Anspieler passt den Ball scharf links am Pylonentor vorbei (direkt oder als Bodenpass).\n2. Der Kreisläufer löst sich seitlich aus dem Tor, erlauft den Ball, fängt ihn sicher (je nach Reichweite beidhändig oder einhändig) und spielt ihn direkt wieder zum Anspieler zurück.\n3. Unmittelbar nach der Rückkehr ins Tor folgt das zweite Anspiel rechts am Pylonentor vorbei.\n4. Der Kreisläufer fängt diesen Ball sauber aus der Bewegung, dreht sich explosiv zum Tor und schließt per Sprung- oder Fallwurf gegen den Torwart ab.\n5. Nach 4 Doppelaktionen wechseln die Kreisläufer.",
+    "coaching_points": "- Dem unpräzisen oder weiten Anspiel aktiv entgegengehen und den Ball sicher greifen\n- Beim einhändigen Pflücken den Ball sofort mit der zweiten Hand sichern, bevor gedreht wird\n- Saubere Beinarbeit um die Pylonen herum ohne den 6-Meter-Kreis zu übertreten\n- Passschärfe und Passart (Bodenpass, Direktpass) konsequent variieren",
+    "variations_text": "- Seiten tauschen: Rückpass rechts – Wurf links\n- Anspieler entscheidet spontan ohne Ansage, welcher Ball direkt abgeschlossen werden muss (Zuruf „Wurf!“)\n- Mit passivem Abwehrspieler am Rücken des Kreisläufers ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "tr1",
+          "type": "COACH_FEEDER",
+          "label": "AN",
+          "x": 0.5,
+          "y": 0.64,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "P1",
+          "x": 0.44,
+          "y": 0.34
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "P2",
+          "x": 0.56,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.34
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.66,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "tr1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.64
+            },
+            {
+              "x": 0.34,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "tr1",
+          "toWaypointId": "wp2",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.64
+            },
+            {
+              "x": 0.66,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp2",
+          "toNodeId": "gk1",
+          "points": [
+            {
+              "x": 0.66,
+              "y": 0.34
+            },
+            {
+              "x": 0.5,
+              "y": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Reaktions-Fallübung für Griffkraft und Hand-Auge-Koordination",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/griffkraft-reaktions-falluebung",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      }
+    ],
+    "setup_description": "Die Spieler stehen paarweise dicht voreinander. Partner A hält zwei Handbälle mit nach vorne ausgestreckten Armen auf Schulterhöhe (Handrücken zeigen nach oben). Partner B positioniert seine Hände wenige Zentimeter über den Bällen.",
+    "flow_description": "1. Partner A lässt ohne Vorankündigung einen der beiden Bälle (links oder rechts) plötzlich los.\n2. Partner B muss blitzschnell reagieren und den fallenden Ball noch in der Luft mit einer Hand von oben greifen, bevor er den Boden berührt.\n3. Nach 10 Versuchen lässt Partner A vereinzelt auch beide Bälle gleichzeitig fallen, sodass B beide einhändig fangen muss.\n4. Im Anschluss tauschen A und B die Rollen.\n5. Als Steigerung kniet Partner B oder steht auf einem Bein.",
+    "coaching_points": "- Finger weit geöffnet und leicht vorgespannt halten, um sofort zugreifen zu können\n- Blick zentral zwischen beiden Bällen fixieren (peripheres Sehen)\n- Reaktionsbewegung tief aus den Knien begleiten, um den Ball sicher zu packen\n- Keine falsche Antizipation, erst auf das echte Loslassen reagieren",
+    "variations_text": "- Partner B hält seine Hände zunächst hinter dem Rücken und schnellt erst beim Loslassen nach vorne\n- Bälle in unterschiedlicher Höhe (einer höher, einer tiefer) halten\n- Mit einem Handball und einem kleineren Tennisball ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A",
+          "x": 0.42,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B",
+          "x": 0.58,
+          "y": 0.5
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.5
+            },
+            {
+              "x": 0.58,
+              "y": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen im Vollsprint über die Schulter (Gegenstoß-Annahme)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/gegenstoss/fangen-im-vollsprint",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "FAST_BREAK_1ST_WAVE",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Der Torwart oder Trainer steht mit Ballwagen im eigenen Torraum. Die Außenspieler starten an den Seitenlinien auf Höhe der eigenen 9-Meter-Linie.",
+    "flow_description": "1. Der Außenspieler startet im maximalen Sprint in Richtung gegnerisches Tor und orientiert sich mit dem Kopf über die innere Schulter zum Passgeber.\n2. Der Torwart wirft einen langen Gegenstoßpass in den freien Raum vor den Sprinter.\n3. Der Spieler beobachtet die Flugbahn im Lauf, passt sein Tempo minimal an und fängt den Ball über die Schulter mit weichen Händen ohne abzubremsen.\n4. Direkt nach der sicheren Ballannahme folgen 3 dynamische Schritte (oder 1x Prellen) und der Sprungwurf auf das gegnerische Tor.\n5. Abwechselnd über die linke (Blick über rechte Schulter) und rechte Bahn (Blick über linke Schulter) trainieren.",
+    "coaching_points": "- Laufgeschwindigkeit beim Blick über die Schulter nicht drosseln und geradeaus in der Bahn bleiben\n- Hände frühzeitig nach oben-vorne anbieten, wenn der Ball sich nähert\n- Ball weich abfedern, damit er bei hohem Eigentempo nicht wegspringt\n- Erst den Ball sicher fixieren, dann den Blick zum gegnerischen Torwart richten",
+    "variations_text": "- Pass bewusst etwas zu kurz oder leicht seitlich werfen, um flexible Ballannahme zu erzwingen\n- Einen verfolgenden Abwehrspieler mit leichtem Rückstand mitsprinten lassen\n- Zwei Sprinter starten gleichzeitig, Torwart wirft erst nach der Mittellinie einen der beiden an",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.26,
+          "y": 0.16,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.26,
+          "y": 0.84,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.72,
+          "y": 0.24
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.16
+            },
+            {
+              "x": 0.72,
+              "y": 0.24
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.08,
+              "y": 0.5
+            },
+            {
+              "x": 0.72,
+              "y": 0.24
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toNodeId": "gk2",
+          "points": [
+            {
+              "x": 0.72,
+              "y": 0.24
+            },
+            {
+              "x": 0.92,
+              "y": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen im Sprung (Nullschritt-Ballannahme)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.knsu.de/handball/fangtechnik-nullschritt-sprung",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Anspieler stehen auf RM (oder Trainerposition), die übenden Angreifer starten auf RL und RR bei 11 Metern. Hütchen auf 9 Metern markieren die Zone für die Ballannahme im Sprung.",
+    "flow_description": "1. Der Angreifer auf RL startet explosiv schräg Richtung Hütchen bei 9 Metern.\n2. Kurz vor dem Zuspiel drückt er sich zu einem flachen, raumgewinnenden Einsprung (Nullschritt) ab.\n3. Genau in der Flugphase fängt er den scharfen Pass von RM mit sicherer W-Handhaltung und landet gleichzeitig beidbeinig (oder mit dem ersten Kontakt) stabil in der tiefen Angriffsstellung.\n4. Dadurch stehen ihm nach der Landung noch alle drei regulären Schritte für Täuschung und Durchbruch zur Verfügung.\n5. Nach der Landung folgt sofort ein dynamischer Zug zum Tor mit Abschluss.",
+    "coaching_points": "- Ball zwingend in der Luft fangen, bevor die Füße wieder den Boden berühren\n- Flacher, weiter Einsprung nach vorne statt hohem, langsamem Sprung auf der Stelle\n- Bei der Landung tief im Schwerpunkt stehen, um sofort explosiv weiterstarten zu können\n- Arme bereits beim Absprung klar in Richtung Ballgeber anbieten",
+    "variations_text": "- Nach der Nullschritt-Landung eine Körpertäuschung gegen ein Hütchen oder einen Verteidiger ausführen\n- Pässe bewusst hoch und flach variieren\n- Spiegelbildlich über RR ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.68,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.22,
+          "y": 0.72,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "NS",
+          "x": 0.34,
+          "y": 0.52
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "c1",
+          "points": [
+            {
+              "x": 0.22,
+              "y": 0.72
+            },
+            {
+              "x": 0.34,
+              "y": 0.52
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.68
+            },
+            {
+              "x": 0.34,
+              "y": 0.52
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.52
+            },
+            {
+              "x": 0.42,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp1",
+          "toNodeId": "gk1",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.34
+            },
+            {
+              "x": 0.5,
+              "y": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zwei-Bälle-Hochwerfen und Fangen in Bewegung",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/zwei-baelle-koordination-fangen",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      }
+    ],
+    "setup_description": "Jeder Spieler nimmt zwei Handbälle (einen in jede Hand) und bewegt sich frei im lockeren Lauftempo innerhalb einer Hallenhälfte.",
+    "flow_description": "1. Im Vorwärtslaufen werfen die Spieler abwechselnd den rechten und den linken Ball etwa einen halben Meter hoch und fangen ihn einhändig wieder sicher auf.\n2. Nach 2 Minuten werden beide Bälle gleichzeitig hochgeworfen und parallel einhändig gefangen.\n3. Als nächste Stufe werfen die Spieler beide Bälle überkreuz (rechter Ball fliegt in die linke Hand und umgekehrt) und fangen sie sauber im Weiterlaufen.\n4. Zwischendurch auf Pfiff des Trainers einen Ball hochwerfen, eine schnelle 360-Grad-Drehung ausführen und ihn vor dem Bodenkontakt wieder fangen.\n5. Ziel ist maximale Ballkontrolle bei gleichzeitiger Orientierung im Raum.",
+    "coaching_points": "- Bälle kontrolliert aus dem Handgelenk gerade nach oben werfen, nicht wegstoßen\n- Beim Fangen weich mit den Fingern nachgeben\n- Blick weit genug halten, um Zusammenstöße mit Mitspielern zu vermeiden\n- Beide Hände gleichmäßig präzise einsetzen",
+    "variations_text": "- Im Sitzen auf dem Hallenboden beginnen, einen Ball hochwerfen, aufstehen und im Stand fangen\n- Einen Ball prellen, während der andere Ball immer wieder kurz hochgeworfen und gefangen wird\n- Paarweise gegenüberstehen und zeitgleich beide Bälle tauschen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.24,
+          "y": 0.34,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.7,
+          "y": 0.32,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.48,
+          "y": 0.68,
+          "hasBall": true
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.24
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.62
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.24,
+              "y": 0.34
+            },
+            {
+              "x": 0.42,
+              "y": 0.24
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp2",
+          "points": [
+            {
+              "x": 0.7,
+              "y": 0.32
+            },
+            {
+              "x": 0.64,
+              "y": 0.62
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen unter Zweikampfdruck am Kreis (Gegnerkontakt)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/kreislaufer/fangen-unter-gegnerdruck",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "OFFENSE_INDIVIDUAL",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein Rückraum-Anspieler steht bei 9 Metern. Am 6-Meter-Kreis steht ein Kreisläufer, der von einem aktiven Abwehrspieler mit fairem Körperkontakt (Halten/Sperren an der Hüfte oder einem Arm) bedrängt wird.",
+    "flow_description": "1. Der Kreisläufer sperrt den Verteidiger mit dem Rücken und einem Arm ab und bietet dem Anspieler mit der freien Hand (oder beiden Händen) eine klare Zielzone an.\n2. Der Rückraumspieler spielt scharfe direkte Pässe oder flache Bodenpässe in die angebotene Seite des Kreisläufers.\n3. Trotz des direkten Körperkontakts hält der Kreisläufer Körperspannung, fängt den Ball sicher ein- oder beidhändig und schützt ihn sofort vor dem Zugriff des Verteidigers.\n4. Nach dem sicheren Fangen dreht sich der Kreisläufer über die freie Schulter zum Tor und schließt ab.\n5. Nach 5 Anspielen wechseln Kreisläufer und Verteidiger.",
+    "coaching_points": "- Mit breitem, tiefem Stand eine stabile Basis gegen den Druck des Verteidigers aufbauen\n- Den Ball auf der verteidigerfernen Seite annehmen und sofort an die Brust ziehen\n- Auch bei leichtem Armkontakt ruhig bleiben und die Finger stabil um den Ball schließen\n- Blickkontakt zum Anspieler bis zur Ballabgabe halten",
+    "variations_text": "- Verteidiger darf aktiv nach dem Ball schlagen, sobald der Pass unterwegs ist\n- Zwei Anspieler auf RL und RR, sodass der Kreisläufer sich schnell umorientieren muss\n- Anspiele gezielt über den Kopf des Verteidigers als hohe Bälle einstreuen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.64,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.52,
+          "y": 0.34
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.48,
+          "y": 0.3
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.48,
+              "y": 0.64
+            },
+            {
+              "x": 0.52,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "gk1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.34
+            },
+            {
+              "x": 0.5,
+              "y": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Gassen-Fangen mit Zusatzaufgaben und Mehrfachbällen",
+    "default_duration_min": 12,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.lehrerfortbildung-bw.de/sport/handball-fangen-mehrfachbelastung",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Alle Spieler bewegen sich frei in einer Hallenhälfte. Drei bis vier Bälle sind gleichzeitig im Umlauf. Vier Hütchen markieren Zusatz-Stationen an den Ecken.",
+    "flow_description": "1. Die Spieler laufen durcheinander durch die Hallenhälfte und passen sich die Bälle über kurze bis mittlere Distanzen zu.\n2. Jeder Spieler, der einen Ball gefangen und weitergespielt hat, muss sofort eine kurze Zusatzaufgabe ausführen (z. B. ein Eckhütchen antippen, eine 360-Grad-Drehung oder zwei Strecksprünge), bevor er den nächsten Ball annehmen darf.\n3. Durch die Mehrfachbälle müssen die Spieler permanent ihre Umgebung scannen und auch überraschende Pässe aus verschiedenen Winkeln blitzschnell fangen.\n4. Kein Ball darf zu Boden fallen; bei einem Fangfehler macht die gesamte Gruppe 3 gemeinsame Strecksprünge.\n5. Nach 4 Minuten wird ein zusätzlicher Ball ins Spiel gebracht.",
+    "coaching_points": "- Nach der Zusatzaufgabe sofort wieder den Kopf heben und Blickkontakt zu Ballbesitzern suchen\n- Hände beim Laufen stets fangbereit halten\n- Klare Rufe vor dem Pass verhindern Überraschungen im Rücken\n- Saubere Trichter-Fangtechnik auch unter Zeitdruck beibehalten",
+    "variations_text": "- Ein andersfarbiger Ball darf ausschließlich einhändig gefangen werden\n- Ein weiterer Ball darf nur nach einmaligem Aufsetzen (Bodenpass) gefangen werden\n- Spielfeld schrittweise auf den 9-Meter-Raum verkleinern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.22,
+          "y": 0.42,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.68,
+          "y": 0.36
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.38,
+          "y": 0.72,
+          "hasBall": true
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "A4",
+          "x": 0.78,
+          "y": 0.7
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "E1",
+          "x": 0.14,
+          "y": 0.24
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "E2",
+          "x": 0.86,
+          "y": 0.84
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.22,
+              "y": 0.42
+            },
+            {
+              "x": 0.68,
+              "y": 0.36
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [
+            {
+              "x": 0.38,
+              "y": 0.72
+            },
+            {
+              "x": 0.78,
+              "y": 0.7
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen aus der Gegenbewegung (Rückraum-Verlagerung)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/technik/ballannahme-gegenbewegung",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf RL und RR stehen Anspieler mit Bällen. Die übenden Spieler starten auf RM bei 11 Metern. Zwei Hütchen auf 9 Metern markieren die seitlichen Täuschungs- und Annahmepunkte.",
+    "flow_description": "1. Der Mittelspieler läuft zunächst explosiv nach links an, bremst am linken Hütchen scharf ab und startet sofort in der Gegenbewegung nach rechts.\n2. Genau in diesem Richtungswechsel erhält er von RR einen scharfen, leicht in den Rücken oder seitlich gespielten Pass.\n3. Der Spieler dreht den Oberkörper schnell zum Ball, fängt ihn trotz Gegenbewegung sicher (beidhändig oder einhändig) und nimmt sofort Tempo Richtung 6-Meter-Kreis auf.\n4. Ohne den Rhythmus zu verlieren schließt er per Sprungwurf gegen den Torwart ab.\n5. Beim nächsten Versuch erfolgt der Ablauf spiegelbildlich mit Start nach rechts und Pass von RL.",
+    "coaching_points": "- Durch tiefes Abbremsen am Hütchen die Kontrolle über den Körperschwerpunkt behalten\n- Oberkörper und Hände frühzeitig zum Passgeber öffnen, während die Füße bereits die neue Richtung einschlagen\n- Auch leicht ungenaue Pässe aktiv mit den Armen erlaufen und sichern\n- Nach dem Fangen sofort stabil in den 3-Schritt-Anlauf übergehen",
+    "variations_text": "- Passgeber variiert zwischen hartem Direktpass und flachem Aufsetzer\n- Nach der Ballannahme einen weiteren Pass auf den einlaufenden Außen spielen\n- Mit einem passiven Abwehrspieler zwischen beiden Hütchen ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.22,
+          "y": 0.62,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.78,
+          "y": 0.62,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.78,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "L",
+          "x": 0.38,
+          "y": 0.54
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "R",
+          "x": 0.62,
+          "y": 0.54
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.58,
+          "y": 0.36
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "c1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.78
+            },
+            {
+              "x": 0.38,
+              "y": 0.54
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c1",
+          "toNodeId": "c2",
+          "points": [
+            {
+              "x": 0.38,
+              "y": 0.54
+            },
+            {
+              "x": 0.62,
+              "y": 0.54
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "c2",
+          "points": [
+            {
+              "x": 0.78,
+              "y": 0.62
+            },
+            {
+              "x": 0.62,
+              "y": 0.54
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "c2",
+          "toNodeId": "gk1",
+          "points": [
+            {
+              "x": 0.62,
+              "y": 0.54
+            },
+            {
+              "x": 0.5,
+              "y": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sichtbehinderungs-Fangen durch den Vorhang (Doppelreihe)",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.kuebler-sport.de/blog/handball-fangen-reaktion-sichtbehinderung",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Dreiergruppen stehen in einer Linie: Spieler A (Werfer) und Spieler C (Fänger) stehen ca. 6 bis 7 Meter auseinander. Spieler B steht mittig dazwischen als Sichtbehinderung (oder ein Airbody wird dazwischengestellt).",
+    "flow_description": "1. Spieler B bewegt sich locker seitlich hin und her und hebt die Arme, ohne den Ball abzufangen.\n2. Spieler A passt den Ball überraschend links, rechts, über den Kopf oder als Bodenpass zwischen den Beinen von B hindurch zu Spieler C.\n3. Spieler C sieht den Ball erst sehr spät hinter dem Sichthindernis auftauchen und muss blitzschnell reagieren.\n4. Mit sauberer oberer oder unterer Fangtechnik sichert C den Ball und passt ihn seinerseits überraschend an B vorbei zurück zu A.\n5. Nach 12 Pässen wechseln die Positionen im Uhrzeigersinn.",
+    "coaching_points": "- Tiefen, aktiven Stand halten, um schnell nach links oder rechts verschieben zu können\n- Hände dauerhaft auf Brusthöhe bereithalten, um keine wertvollen Millisekunden zu verlieren\n- Bei späten Bodenpässen schnell tief in die Knie gehen und die Schale formen\n- Ruhe bewahren und den Ball sauber an den Körper heranziehen",
+    "variations_text": "- Abstand zwischen B und C auf 2 Meter verkürzen (extrem kurze Reaktionszeit)\n- Mit zwei Bällen spielen, die kurz nacheinander geworfen werden\n- Spieler C muss vor dem Fangen kurz in die Hände klatschen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A",
+          "x": 0.2,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "B",
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "C",
+          "x": 0.8,
+          "y": 0.5
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.2,
+              "y": 0.5
+            },
+            {
+              "x": 0.8,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.8,
+              "y": 0.42
+            },
+            {
+              "x": 0.2,
+              "y": 0.58
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen im Fallen und aus der Bodenlage (Ballrettung)",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 12,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/fangen-aus-der-bodenlage-matte",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Weichbodenmatten werden quer in der Halle ausgelegt. Je ein Fänger kniet oder steht vor einer Matte, sein Partner steht mit Bällen im Abstand von 5 Metern davor.",
+    "flow_description": "1. Der Partner wirft den Ball bewusst weit zur linken oder rechten Seite der Matte, sodass der Fänger ihn nur im dynamischen Ausfallschritt oder kontrollierten Hechten erreichen kann.\n2. Der Fänger streckt sich aktiv dem Ball entgegen, fängt ihn sicher mit beiden Händen (oder einhändig) und rollt kontrolliert über Schulter und Hüfte auf der Matte ab.\n3. Während des Abrollens bleibt der Ball fest an der Brust gesichert.\n4. Direkt nach dem Aufstehen wirft der Fänger den Ball zurück und macht sich sofort für den nächsten Ball auf der Gegenseite bereit.\n5. Nach 8 Aktionen tauschen Werfer und Fänger die Rollen.",
+    "coaching_points": "- Ball beim Hechten mit beiden Händen sicher fixieren, bevor der Körper die Matte berührt\n- Kopf beim Abrollen geschützt einziehen, niemals unkontrolliert auf die Ellenbogen fallen\n- Explosives Aufstehen direkt in die aktive Grundstellung trainieren\n- Mutig nach schwer erreichbaren Bällen greifen (Kampf um lose Bälle im Spiel)",
+    "variations_text": "- Fänger startet aus der Bauchlage, drückt sich auf Zuruf hoch und fängt den Ball\n- Im Anschluss an das Fangen auf der Matte direkt aus der Drehung einen Pass zu einem dritten Spieler spielen\n- Ohne Matte auf glattem Boden nur bis in den tiefen Ausfallschritt arbeiten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "F",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "W",
+          "x": 0.5,
+          "y": 0.72,
+          "hasBall": true
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.3
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.72
+            },
+            {
+              "x": 0.34,
+              "y": 0.3
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.34
+            },
+            {
+              "x": 0.34,
+              "y": 0.3
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Flugball-Fangen im Kreis (Kempa-Vorform)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/technik/flugball-fangen-kempa-vorform",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Ein Anspieler steht auf RA (oder RL). Die übenden Fänger starten auf der gegenüberliegenden Außenposition LA (bzw. RA) und laufen Richtung 6-Meter-Kreis an. Im Torraum liegt zur Sicherheit optional eine flache Matte.",
+    "flow_description": "1. Der startende Außenspieler läuft dynamisch auf den 6-Meter-Kreis zu und springt kräftig weit in den Torraum ab.\n2. Genau im richtigen Timing spielt der Anspieler einen mittelhohen, gefühlvollen Flugball diagonal in den Torraum.\n3. Der springende Spieler fixiert den Ball in der Luft, fängt ihn am höchsten Punkt sicher mit beiden Händen (oder einhändig mit der Wurfhand) und schließt noch vor der Landung auf das Tor ab.\n4. Zu Beginn erfolgt das Fangen im Sprung ohne Torwurf (Ball fangen und vor der Landung einfach zum Anspieler zurückwerfen), bevor der Abschluss ergänzt wird.\n5. Nach jedem Versuch wechseln die Seiten.",
+    "coaching_points": "- Blick beim Absprung voll auf den Ball richten, nicht zu früh zum Torwart schauen\n- Ball sauber am höchsten Punkt der Flugkurve greifen und sofort in die Wurfbewegung überleiten\n- Timing zwischen Anlauf und Pass klar absprechen (Absprung erst, wenn der Ball die Hand verlässt)\n- Kontrollierte Landung nach dem Abschluss im Torraum",
+    "variations_text": "- Zuspiel von RM über einen passiven Block hinweg\n- Einhändiges Fangen und direktes Weiterleiten (Kempa-Wurf) ausführen\n- Im 2 gegen 1 mit einem Abwehrspieler am 6-Meter-Kreis anwenden",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.88,
+          "y": 0.24,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.12,
+          "y": 0.26,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.22
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.12,
+              "y": 0.26
+            },
+            {
+              "x": 0.44,
+              "y": 0.22
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            {
+              "x": 0.88,
+              "y": 0.24
+            },
+            {
+              "x": 0.44,
+              "y": 0.22
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toNodeId": "gk1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.22
+            },
+            {
+              "x": 0.5,
+              "y": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fangen harter Druckpässe im engen Korridor",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/technik/harte-paesse-sicher-fangen",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CATCHING",
+        "PASSING",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Paare stehen sich in einem markierten Korridor im kurzen Abstand von 4 bis 5 Metern gegenüber. Jedes Paar hat einen gut aufgepumpten Handball.",
+    "flow_description": "1. Die Spieler passen sich den Ball mit stetig steigender Passhärte direkt auf Brust- und Schulterhöhe zu.\n2. Durch die kurze Distanz bleibt nur minimale Zeit zum Reagieren und Abfedern.\n3. Der Fänger nimmt den Ball mit stabiler W-Handhaltung an, federt die hohe Wucht durch elastisches Zurückführen der Arme ab und verhindert jedes laute Abklatschen.\n4. Nach 20 harten Brustpässen wechseln die Partner auf scharfe Bodenpässe aus gleicher Distanz.\n5. Ziel ist ein leises, weiches und absolut fehlerfreies Fangen trotz maximalem Balltempo.",
+    "coaching_points": "- Geräuschloses Fangen anstreben: Je leiser das Fanggeräusch, desto weicher wurde der Ball abgefedert\n- Daumen hinter dem Ball stabil halten, um die eigene Sicherheit zu gewährleisten\n- Ausgeglichene Schrittstellung einnehmen, um den Druck des harten Balls stabil aufzunehmen\n- Keine Angst vor harten Zuspielen – aktiv dem Ball entgegenarbeiten",
+    "variations_text": "- Abstand auf 3,5 Meter verkürzen und Tempo weiter erhöhen\n- Nach dem Fangen sofort ohne Zwischenschritt im gleichen Tempo zurückpassen\n- Jedes Paar spielt mit zwei Bällen im schnellen Wechsel (ein hoher, ein flacher Pass)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.34,
+          "y": 0.35,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.66,
+          "y": 0.35
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.34,
+          "y": 0.65,
+          "hasBall": true
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.66,
+          "y": 0.65
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.35
+            },
+            {
+              "x": 0.66,
+              "y": 0.35
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [
+            {
+              "x": 0.66,
+              "y": 0.35
+            },
+            {
+              "x": 0.34,
+              "y": 0.35
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

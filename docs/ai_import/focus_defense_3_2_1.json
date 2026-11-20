@@ -1,0 +1,1203 @@
+[
+  {
+    "title": "3:2:1-Grundaufstellung und Dreiecks-Staffelung (Verschiebespiel)",
+    "default_duration_min": 12,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://sportsflow.de/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Sechs Abwehrspieler besetzen die drei gestaffelten Linien der 3:2:1-Abwehr: Vorne Mitte (VM/Spitze auf 9–10 m), die beiden Halbverteidiger (HL, HR auf 8 m) sowie Hinten Mitte (HM) und die Außenverteidiger (AL, AR) am 6-Meter-Kreis. Fünf bis sechs Angreifer stehen mit einem Ball im Rückraum und auf Außen.",
+    "flow_description": "1. Die Angreifer lassen den Ball zunächst ruhig von Außen über die Halben und die Mitte zirkulieren.\n2. Bei jeder Ballstation verschiebt die 3:2:1-Formation synchron als geschlossenes Dreieck zur Ballseite: Der ballnahe Halbe tritt aggressiv heraus, die Spitze sichert Richtung Mitte ab, der ballferne Halbe sinkt zum Kreis ab und unterstützt HM.\n3. Auf Pfiff des Trainers halten alle Abwehrspieler kurz inne, um die dreieckige Tiefenstaffelung (keine flache Linie) zu prüfen.\n4. Danach steigern die Angreifer das Passtempo und dürfen auf Zuruf „Frei!“ ein freies 6 gegen 6 ausspielen.\n5. Alle 3 Minuten rotieren die Spieler durch die drei Linien der 3:2:1.",
+    "coaching_points": "- Ständige Dreiecksbildung am Ballort: ein Spieler attackiert, zwei Nachbarn sichern versetzt ab\n- Ballorientiertes Verschieben beginnt bereits mit dem Abwurf des Passes\n- Tiefenstaffelung der drei Linien (1–2–3) konsequent einhalten, nicht in eine flache 6:0 abrutschen\n- Aktive Fußarbeit und offene Körperstellung zur Ballseite",
+    "variations_text": "- Mit Hütchen die Zielzonen für den heraustretenden und den absinkenden Halbverteidiger markieren\n- Angreifer spielen gelegentlich lange Diagonalpässe, um schnelles Umschalten der gesamten 3:2:1 zu erzwingen\n- Ohne Prellen im Angriff, um das Verschiebetempo hochzuhalten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.42 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.42 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.16, "y": 0.25 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.31 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.84, "y": 0.25 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.60, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.65 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.60 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.26, "y": 0.51 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.58, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.30, "y": 0.42 }, { "x": 0.26, "y": 0.51 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d2",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.70, "y": 0.42 }, { "x": 0.58, "y": 0.34 }]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.24, "y": 0.60 }, { "x": 0.50, "y": 0.65 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3 gegen 3 auf einer Halbseite in der 3:2:1 (Spitze, Halb, Hinten-Mitte)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "CONE",
+        "quantity": 4
+      },
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Das Spielfeld wird mittig durch eine Hütchenlinie in zwei Hälften geteilt. Auf einer Halbseite spielen 3 Angreifer (RL, RM, KM) gegen 3 Abwehrspieler der 3:2:1 (VM/Spitze, HL, HM).",
+    "flow_description": "1. Der Angriff versucht über schnelle 1-gegen-1-Aktionen im Rückraum oder durch Anspiel an den Kreisläufer zum Torerfolg zu kommen.\n2. VM (Spitze) und HL verteidigen offensiv und raumorientiert in ihrem Sektor, nehmen dem Ballhalter früh den Anlaufraum und lenken ihn in die gegenseitige Hilfe.\n3. Hinten-Mitte (HM) liest das Angriffsspiel, behält permanent den Kreisläufer im Blick und dirigiert lautstark die beiden Vorderleute.\n4. Wird VM oder HL im 1 gegen 1 geschlagen, hilft der jeweils andere sofort mit, während HM den Raum zum 6-Meter-Kreis verdichtet.\n5. Nach fünf Angriffen wechseln die Dreiergruppen sowie die Spielfeldseite (rechts mit VM, HR, HM).",
+    "coaching_points": "- Konsequentes „Helfen und Sichern“: Niemand steht isoliert im 1 gegen 1\n- HM übernimmt aktiv die Rolle des Abwehrchefs und kommuniziert ununterbrochen („Links zu!“, „Kreis innen!“)\n- Saubere Beinarbeit statt Klammern oder Fouls am 9-Meter-Kreis\n- Nach abgewehrtem Angriff sofortige Rückkehr in die gestaffelte 3:2:1-Grundposition",
+    "variations_text": "- Vorgabe „Kein Prellen erlaubt“ im Angriff, um das Pass- und Verschiebespiel zu intensivieren\n- Feste Passanzahl (z. B. maximal 4 Pässe bis zum Abschluss)\n- Kreuzbewegungen zunächst verbieten und in der zweiten Runde gezielt erlauben",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.56, "y": 0.28 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.56, "y": 0.66 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.46, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.28, "y": 0.42 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.42, "y": 0.31 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.22, "y": 0.58, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.48, "y": 0.64 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.38, "y": 0.36 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.24, "y": 0.50 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.38, "y": 0.48 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.28, "y": 0.42 }, { "x": 0.24, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d0",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.46, "y": 0.52 }, { "x": 0.38, "y": 0.48 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Pendelprinzip der Halbverteidiger: Heraustreten und Einrücken",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Der Angriff besetzt den gesamten Rückraum (RL, RM, RR) plus einen Kreisläufer (KM). Die Abwehr stellt den Kern der 3:2:1-Deckung: Spitze (VM), die beiden Halbverteidiger (HL, HR) und Hinten-Mitte (HM). Die Außen bleiben unbesetzt.",
+    "flow_description": "1. Der Ball wird im Rückraum zwischen RL, RM und RR zügig hin- und hergespielt.\n2. Sobald der Ball auf RL gespielt wird, tritt HL sofort aggressiv nach vorne heraus und setzt RL unter Druck.\n3. Gleichzeitig rückt der gegenüberliegende Halbverteidiger (HR) tief nach innen ab und unterstützt HM eng bei der Absicherung des Kreisläufers („Pendelbewegung“).\n4. Bei einem schnellen Querpass über RM auf RR schaltet das System blitzschnell um: HR sprintet nach vorne auf RR heraus, während HL ins Zentrum einrückt.\n5. Auf Trainerpfiff darf der Angriff die Pendelbewegung durch ein freies 4 gegen 4 ausspielen.",
+    "coaching_points": "- Beide Halbverteidiger bewegen sich wie an einer unsichtbaren Stange verbunden: Geht einer raus, rückt der andere sofort tief ein\n- Der einrückende Halbe orientiert sich direkt am Kreisläufer und schließt die Passlinie\n- Explosive Richtungswechsel beim Umschalten von Einrücken auf Heraustreten\n- VM sichert beim Querpass immer die zentrale Achse gegen RM ab",
+    "variations_text": "- Lange direkte Wechselpässe von RL direkt zu RR einbauen, um die Sprintgeschwindigkeit der Halbverteidiger zu testen\n- Kreisläufer darf sich aktiv auf die ballnahe oder ballferne Seite verlagern\n- Mit beiden Außenspielern (AL, AR) zum 6 gegen 6 erweitern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.42 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.42 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.31 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.60, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.65 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.60 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.52, "y": 0.36 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.26, "y": 0.52 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.58, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.30, "y": 0.42 }, { "x": 0.26, "y": 0.52 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d2",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.70, "y": 0.42 }, { "x": 0.58, "y": 0.34 }]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.24, "y": 0.60 }, { "x": 0.50, "y": 0.65 }]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.50, "y": 0.65 }, { "x": 0.76, "y": 0.60 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Spitze (VM) und Halbverteidiger: Stören im Aufbau (3 gegen 2)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Drei Rückraumspieler (RL, RM, RR) spielen im Aufbau gegen zwei Abwehrspieler der 3:2:1: die Spitze (VM) und einen Halbverteidiger (HL oder HR). Die Übung findet zwischen 8 und 12 Metern statt.",
+    "flow_description": "1. Die drei Angreifer versuchen, den Spielaufbau flüssig durchzubringen und innerhalb von 10 Sekunden einen Durchbruch über die 9-Meter-Linie zu erzielen.\n2. Die Spitze (VM) begleitet den Ballhalter aktiv im Querpassweg, stellt direkte Passlinien zu und zwingt den Aufbau zu weiten Rückzügen oder hohen Bogenpässen.\n3. Der Halbverteidiger (HL) sichert versetzt auf der linken Seite ab und übernimmt sofort, falls RM oder RL an der Spitze vorbeiziehen.\n4. Entkommt ein Angreifer im 1 gegen 1 an der Spitze, setzt VM sofort von hinten nach („Abfangen“), während HL den Angreifer frontal stoppt.\n5. Nach jeweils 60 Sekunden oder drei gestoppten Aktionen wechseln die beiden Verteidiger.",
+    "coaching_points": "- Spitze arbeitet ständig mit aktiven Armen, um den Sicht- und Passkorridor des Aufbauspielers zu verkleinern\n- Kein resigniertes Stehenbleiben nach einem verlorenen 1 gegen 1 – sofortiges Nachsetzen hilft dem Halbverteidiger\n- Klare Absprache, wann VM und HL den Ballhalter gemeinsam an der Seitenlinie festmachen\n- Hohe Laufbereitschaft in kurzen, intensiven Belastungsphasen",
+    "variations_text": "- Zweiten Halbverteidiger (HR) für ein 3 gegen 3 im Rückraum hinzunehmen\n- Punktewertung: Jeder erzwungene Rückzug hinter die 12-Meter-Linie bringt der Abwehr 1 Punkt\n- Bei Ballgewinn sofortiger Sprint-Abschluss auf das gegenüberliegende Tor",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.54 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.44 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.62 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.66, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.62 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.36, "y": 0.54 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.38, "y": 0.48 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "FEINT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.50, "y": 0.66 }, { "x": 0.38, "y": 0.48 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.30, "y": 0.44 }, { "x": 0.36, "y": 0.48 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d0",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.50, "y": 0.54 }, { "x": 0.36, "y": 0.54 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Rolle des Hinten-Mitte (Libero): Dirigieren und Kreisläufer sichern",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Im 4 gegen 4 (RL, RM, RR, KM gegen VM, HL, HR, HM) steht die Kommunikation und Raumkontrolle des Hinten-Mitte (HM / Libero) im absoluten Mittelpunkt.",
+    "flow_description": "1. Der Angriff spielt frei im Rückraum und versucht, über den Kreisläufer oder zentrale Durchbrüche zum Torerfolg zu gelangen.\n2. HM muss jede Aktion seiner Vorderleute und des Kreisläufers lautstark ansagen (z. B. „HL raus!“, „HR sinken!“, „Kreis läuft nach links!“, „Sperre rechts!“).\n3. Gleichzeitig hält HM selbst optimalen Abstand zum 6-Meter-Kreis, blockiert den direkten Passweg zum KM und hilft als letzter Mann, wenn ein Rückraumspieler durchbricht.\n4. Schafft es der Angriff nicht innerhalb von 12 Sekunden zu einem freien Wurf, erhält die Abwehr einen Punkt.\n5. Nach fünf Angriffen übernimmt ein anderer Spieler die Libero-Position auf HM.",
+    "coaching_points": "- HM ist der „Dirigent“ der 3:2:1 – kurzes, klares und rechtzeitiges Rufen entlastet VM, HL und HR enorm\n- Nie passiv am 6-Meter-Kreis kleben, sondern aktiv um den Kreisläufer herum auf die Ballseite arbeiten\n- Bei einem Durchbruch aus dem Rückraum rechtzeitig entgegentreten und Wurfwinkel verkleinern\n- Enge Abstimmung mit dem Torhüter über Block- und Wurfzonen",
+    "variations_text": "- Zusätzliche Erschwernis: Nur HM darf sprechen, alle anderen Verteidiger müssen sich blind auf seine Kommandos verlassen\n- Zweiten Kreisläufer als Übergangsspieler einsetzen\n- Mit beiden Außenpositionen zum 6 gegen 6 ausbauen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.53 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.43 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.43 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.30 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.25, "y": 0.60 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.65, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.75, "y": 0.60 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.44, "y": 0.35 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.42, "y": 0.32 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d3",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.50, "y": 0.30 }, { "x": 0.42, "y": 0.32 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a1",
+          "points": [{ "x": 0.50, "y": 0.65 }, { "x": 0.25, "y": 0.60 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Überzahl am Ballort: Doppeln auf der Halbposition (4 gegen 4)",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Vier Angreifer (RL, RM, RR, KM) spielen gegen vier Abwehrspieler der 3:2:1-Deckung (VM, HL, HR, HM). Fokus ist das Erzeugen einer kurzzeitigen Überzahl (2 gegen 1 bzw. 3 gegen 1) direkt am Ballort.",
+    "flow_description": "1. Sobald der Ball von RM auf einen Halbspieler (z. B. RL) gepasst wird, tritt HL offensiv auf den Wurfarm von RL heraus und zwingt ihn zum Abstoppen.\n2. Gleichzeitig schließt VM von innen den Weg Richtung RM zu, sodass RL in einer engen Zange („Doppeln“) gefangen ist.\n3. Im Rücken sichert HM den Kreisläufer, während der ballferne HR tief einrückt und den langen Pass auf RR im Auge behält.\n4. Erzwingt die Abwehr durch das Doppeln einen Fehlpass, ein Zeitspiel oder einen Notwurf, erhält sie 2 Punkte.\n5. Nach fünf Angriffen wechseln die Teams.",
+    "coaching_points": "- Beim Doppeln konsequent den inneren Passweg zu RM zustellen, um keinen einfachen Seitenwechsel zuzulassen\n- HL und VM dürfen beim Doppeln nicht zusammenprallen, sondern bilden einen geschlossenen Winkel\n- Ballferner HR muss extrem wach sein, um einen riskanten langen Diagonalpass abzufangen\n- Sofortiges Auflösen der Zange, falls der Ball doch verlagert wird",
+    "variations_text": "- Mit Außenpositionen (6 gegen 6) spielen, wobei AL ebenfalls am äußeren Flügel mitdoppeln kann\n- Angreifer dürfen maximal dreimal prellen pro Ballbesitz\n- Nach einem Steal durch HR sofortiger Gegenstoß",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.46, "y": 0.54 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.28, "y": 0.46 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.62, "y": 0.36 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.44, "y": 0.31 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.58, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.52, "y": 0.64 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.78, "y": 0.58 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.42, "y": 0.36 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.26, "y": 0.53 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.34, "y": 0.56 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.28, "y": 0.46 }, { "x": 0.26, "y": 0.53 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d0",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.46, "y": 0.54 }, { "x": 0.34, "y": 0.56 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Abwehr gegen Kreuzbewegungen der vorderen Reihe (4 gegen 4)",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "CROSSING_SCREEN"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Vier Abwehrspieler (VM, HL, HR, HM) verteidigen in der 3:2:1-Ordnung gegen drei Rückraumspieler (RL, RM, RR) und einen Kreisläufer (KM). Der Angriff leitet gezielt Kreuzbewegungen zwischen RM und einem Halbspieler ein.",
+    "flow_description": "1. RL zieht mit Ball druckvoll in die Mitte an und kreuzt eng mit RM vor der vorderen Linie.\n2. HL begleitet RL aggressiv bis zum Kreuzungspunkt, verhindert die freie Wurfmöglichkeit und übergibt RL lautstark („Wechsel!“) an die Spitze (VM).\n3. Gleichzeitig übernimmt HL den nach außen kreuzenden RM unmittelbar im Körperkontakt, ohne sich in die Tiefe drücken zu lassen.\n4. HM und der ballferne HR sichern das Zentrum ab, falls ein Angreifer das Kreuzen nur antäuscht und steil durchstößt.\n5. Nach fünf Durchgängen wechseln die Angriffsseite und die Rollen.",
+    "coaching_points": "- Übergabe zwischen VM und HL/HR erfolgt genau auf Höhe des Kreuzungspunktes, nicht zu früh\n- Beim Übernehmen sofort wieder offensiv auf den neuen Ballhalter heraustreten\n- Hoher Druck direkt auf die Ballübergabe stört das Timing des Kreuzens\n- HM bleibt ruhig am Kreis und lässt sich nicht durch das Kreuzen aus dem Zentrum locken",
+    "variations_text": "- Doppelkreuz (erst RL/RM, dann sofort RM/RR) verteidigen\n- Angriff darf frei zwischen echtem Kreuzen und Täuschung wählen\n- Auf 6 gegen 6 mit Außenpositionen ausdehnen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.53 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.44 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.68, "y": 0.42 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.31 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.60, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.52, "y": 0.65 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.60 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.54, "y": 0.36 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.48, "y": 0.58 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.32, "y": 0.54 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.24, "y": 0.60 }, { "x": 0.48, "y": 0.58 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.52, "y": 0.65 }, { "x": 0.32, "y": 0.54 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1 gegen Sperren des Kreisläufers (Helfen und Lösen)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "CROSSING_SCREEN"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Im 4 gegen 4 (RL, RM, RR, KM gegen VM, HL, HR, HM) trainiert die 3:2:1-Abwehr das koordinierte Auflösen von Sperren, die der Kreisläufer gezielt gegen den Halbverteidiger oder die Spitze stellt.",
+    "flow_description": "1. Der Kreisläufer (KM) verlässt den 6-Meter-Kreis und stellt eine hohe Sperre seitlich an HL (oder im Rücken von VM).\n2. HM folgt dem Kreisläufer bis auf 7–8 Meter, ruft laut „Sperre rechts/links!“ und nimmt kurzzeitig den durchbrechenden Rückraumspieler auf.\n3. Der gesperrte Verteidiger (HL) taucht aktiv um die Sperre herum oder drückt sich vor dem KM vorbei, um beim anschließenden Absetzen sofort wieder zwischen Ball und KM zu stehen.\n4. Gleichzeitig rückt der ballferne Halbverteidiger (HR) tief an den 6-Meter-Kreis ein, um den freien Raum im Rücken von HM zu schließen.\n5. Nach fünf Angriffen werden die Positionen gewechselt.",
+    "coaching_points": "- Frühe akustische Warnung durch HM verhindert, dass HL oder VM unvorbereitet in die Sperre laufen\n- Nach dem Übernehmen durch HM sofort wieder sauber zurücktauschen oder stabil im neuen Verbund bleiben\n- Ballferner Halbverteidiger muss den leeren Raum am Kreis sofort absichern\n- Aktive Hände verhindern den schnellen Bodenpass an den absetzenden Kreisläufer",
+    "variations_text": "- Sperren gezielt abwechselnd gegen HL, HR und VM stellen lassen\n- Mit beiden Außenspielern (AL, AR) im 6 gegen 6 trainieren\n- Bonuspunkt für die Abwehr bei jedem abgefangenen Pass an den absetzenden KM",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.53 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.43 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.68, "y": 0.40 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.48, "y": 0.32 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.60, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.65 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.60 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.38, "y": 0.41 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.34, "y": 0.48 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.54, "y": 0.31 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a4",
+          "toNodeId": "d1",
+          "points": [{ "x": 0.38, "y": 0.41 }, { "x": 0.32, "y": 0.43 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.24, "y": 0.60 }, { "x": 0.34, "y": 0.48 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d2",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.68, "y": 0.40 }, { "x": 0.54, "y": 0.31 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Abwehr gegen Übergänge und Einläufer (Jugoslawische Variante)",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "CROSSING_SCREEN"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Volles 6 gegen 6 auf ein Tor. Die Abwehr verteidigt in der offensiven 3:2:1. Der Angriff spielt gezielt Übergänge von Außen (LA/RA) oder von Rückraum-Mitte an den 6-Meter-Kreis.",
+    "flow_description": "1. Der Angriff leitet nach dem Auftakt einen Übergang ein (z. B. LA läuft an den Kreis ein oder RM geht über).\n2. Wichtiges Prinzip der 3:2:1: Die Abwehr verfällt NICHT blind in eine passive 6:0-Deckung, sondern hält den offensiven Druck im Rückraum aufrecht (Übergangsform 4:2 oder 3:3 am Ballort).\n3. Bei einem Außen-Einläufer begleitet AL den Einläufer eng bis zum Kreis und übergibt ihn an HM/HR, während HL und VM weiterhin aggressiv gegen die verbliebenen Rückraumspieler herausrücken.\n4. Bei einem RM-Übergang übernimmt HM den neuen Kreisläufer, während VM offensiv auf einen der beiden Halbspieler verschiebt.\n5. Nach fünf Angriffen wechseln Angriff und Abwehr die Rollen.",
+    "coaching_points": "- Aktivität bewahren: Auch bei zwei Kreisläufern bleibt mindestens ein bis zwei Spieler offensiv gegen den Rückraum\n- Klare Übergabe des Einläufers mit lautem Kommando („Einläufer links!“ – „Ich hab ihn!“)\n- Die hinteren Spieler (AL, HM, AR) schließen den Kreisraum eng zusammen\n- Sobald der Übergangsspieler wieder ausläuft, sofort zurück in die normale 3:2:1-Staffelung",
+    "variations_text": "- Angriff darf erst nach einem erfolgreichen Übergang abschließen\n- Freie Wahl für den Angriff, ob RM, LA oder RA an den Kreis übergeht\n- Nach Ballgewinn direkter Gegenstoß über das gesamte Feld",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.53 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.43 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.43 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.16, "y": 0.25 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.31 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.84, "y": 0.25 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.08, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.60, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.64 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.60 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.92, "y": 0.22 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.58, "y": 0.36 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.36, "y": 0.36 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.08, "y": 0.22 }, { "x": 0.36, "y": 0.36 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.26, "y": 0.60 }, { "x": 0.50, "y": 0.64 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außenverteidiger in der 3:2:1: Tiefes Einrücken auf der Ballferne",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://tsgo-handball.rocks/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Im 6 gegen 6 (oder 5 gegen 5) liegt der spezielle Coaching-Fokus auf den beiden Außenverteidigern (AL, AR) in der 3:2:1-Abwehr. Zwei Hütchen markieren jeweils den Einrückpunkt nahe dem 7-Meter-Bereich.",
+    "flow_description": "1. Der Angriff spielt den Ball auf die rechte Angriffsseite (RR/RA), wo HR und AR aktiv verteidigen.\n2. Gleichzeitig rückt der ballferne Außenverteidiger (AL) konsequent bis zum markierten Hütchen am Kreis ein und unterstützt HM bei der Sicherung des Kreisläufers und der freien Mitte.\n3. Verlagert der Angriff den Ball schnell über RM auf RL und weiter auf LA, sprintet AL explosiv aus der eingerückten Position wieder nach außen und schließt den Wurfwinkel gegen LA.\n4. Gleichzeitig rückt nun AR tief in die Mitte ein.\n5. Nach jeweils sechs Seitenwechseln wechseln die Außenverteidiger mit den Halbverteidigern.",
+    "coaching_points": "- Ballferner Außenverteidiger schützt konsequent den offenen Raum hinter den hoch stehenden Halbverteidigern\n- Ständiger Blickkontakt sowohl zum Ball als auch zum eigenen Außenspieler (Dreieckssicht)\n- Beim Herauslaufen gegen den eigenen Außenspieler kontrolliert abbremsen, um keinen leichten Durchbruch zur Grundlinie zuzulassen\n- Hohe Laufbereitschaft beim Wechsel zwischen Einrücken und Außenverteidigung",
+    "variations_text": "- Angriff darf gelegentlich einen direkten langen Flugpass („Kempa“ oder Diagonalpass) auf den ballfernen Außen spielen, um das Timing von AL/AR zu prüfen\n- Ohne Hütchen als freie Raumorientierung spielen\n- Abgefangener Pass durch den einrückenden Außenverteidiger bringt 2 Bonuspunkte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.56, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.42, "y": 0.36 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.72, "y": 0.48 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.28, "y": 0.29 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.56, "y": 0.31 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.84, "y": 0.25 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.08, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.58 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.64 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.58, "hasBall": true },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.14, "y": 0.24 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a4",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.74, "y": 0.58 }, { "x": 0.50, "y": 0.64 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a1",
+          "points": [{ "x": 0.50, "y": 0.64 }, { "x": 0.08, "y": 0.22 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d3",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.28, "y": 0.29 }, { "x": 0.14, "y": 0.24 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Beinarbeit und Ausfallschritt-Parcours (Athletik & Koordination)",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://sportsflow.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "WARMUP"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "FOOTWORK_DEFENSE",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      },
+      {
+        "type": "BALL",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf einer Spielfeldhälfte werden zwei identische Beinarbeits-Parcours parallel aufgebaut: Eine Koordinationsleiter an der 6-Meter-Linie, drei Hütchen in Dreiecksform zwischen 7 und 10 Metern sowie ein Trainer/Zuspieler mit Ball auf 11 Metern.",
+    "flow_description": "1. Der Verteidiger durchläuft die Koordinationsleiter mit schnellen seitlichen Schritten (Fokus: schnelle Bodenkontakte).\n2. Direkt im Anschluss sprintet er schräg nach vorne zum ersten Hütchen (Simulation Heraustreten auf den Halben), bremst in tiefer Abwehrstellung sauber ab und berührt kurz das Hütchen.\n3. Danach weicht er im schnellen Gleit- und Rückwärtsschritt zum hinteren Hütchen zurück (Simulation Absinken zum Kreis) und startet sofort explosiv zum dritten Hütchen.\n4. Am Ende der Serie spielt der Zuspieler einen kurzen Ball oder gibt ein Richtungssignal für ein finales 1 gegen 1 über 3 Meter.\n5. Jede Gruppe absolviert 4 Durchgänge pro Spieler mit voller Intensität.",
+    "coaching_points": "- Körperschwerpunkt tief halten, Knie dauerhaft leicht gebeugt, Oberkörper stabil\n- Kein Überkreuzen der Beine bei den seitlichen Gleitschritten\n- Aktive Armhaltung (Hände auf Schulterhöhe) während des gesamten Parcours\n- Hohe Frequenz der Schritte beim Abbremsen vor dem Hütchen",
+    "variations_text": "- Als Staffel-Wettkampf zwischen zwei Teams durchführen\n- Zuspieler hebt farbige Hütchen statt fester Laufreihenfolge (reaktive Beinarbeit)\n- Am letzten Hütchen ein echtes 1 gegen 1 gegen einen anlaufenden Rückraumspieler anschließen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.25, "y": 0.30, "isQueue": true, "queueCount": 4 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "label": "H1", "x": 0.22, "y": 0.50 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "label": "H2", "x": 0.38, "y": 0.38 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "label": "H3", "x": 0.42, "y": 0.54 },
+        { "id": "t1", "type": "COACH_FEEDER", "label": "TR", "x": 0.34, "y": 0.66, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toNodeId": "c1",
+          "points": [{ "x": 0.25, "y": 0.30 }, { "x": 0.22, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c1",
+          "toNodeId": "c2",
+          "points": [{ "x": 0.22, "y": 0.50 }, { "x": 0.38, "y": 0.38 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "c2",
+          "toNodeId": "c3",
+          "points": [{ "x": 0.38, "y": 0.38 }, { "x": 0.42, "y": 0.54 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Steal und sofortiges Umschalten in den Gegenstoß (5 gegen 5)",
+    "default_duration_min": 16,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "FAST_BREAK_1ST_WAVE",
+        "DEFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 5
+      }
+    ],
+    "setup_description": "Auf dem gesamten Spielfeld spielen 5 gegen 5 plus Torhüter (Abwehr: VM, HL, HR, HM, AL bzw. AR in 3:2:1-Struktur). Fokus ist das offensive Herausfangen von Pässen und die sofortige Verwertung in der 1. Welle.",
+    "flow_description": "1. Der Angriff spielt im Positionsangriff gegen die extrem offensiv ausgerichtete 3:2:1-Deckung.\n2. VM, HL und HR attackieren frühzeitig die Passwege im Rückraum und versuchen aktiv, den Ball herauszuspitzeln oder abzufangen (ohne unnötige Fouls).\n3. Sobald ein Steal gelingt oder ein Fehlpass erzwungen wird, sprinten sofort mindestens zwei Abwehrspieler in vollem Tempo auf das gegenüberliegende Tor.\n4. Der bisherige Angriff muss sofort in den Rückzug umschalten, um den Tempogegenstoß noch zu verhindern.\n5. Nach Abschluss des Gegenstoßes startet die nächste Sequenz auf der anderen Hallenseite.",
+    "coaching_points": "- Mutiges Spekulieren auf lange oder schlampige Querpässe im Rückraum belohnen\n- Sauberes Ball-Herausspitzeln statt riskantem Greifen in den Wurfarm\n- Blitzschnelles Umschalten von Abwehr auf Angriff bei allen fünf Verteidigern\n- Hohe Pass- und Abschlussqualität im Vollsprint",
+    "variations_text": "- Auf komplettes 6 gegen 6 erweitern\n- Jeder Steal in der 3:2:1 zählt 1 Punkt, ein daraus resultierendes Kontertor weitere 2 Punkte\n- Zeitvorgabe: Nach Ballgewinn muss der Abschluss innerhalb von 6 Sekunden erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.50, "y": 0.92 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.50, "y": 0.08 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.64 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.28, "y": 0.70, "hasBall": true },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.72, "y": 0.70 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.78 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.58 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.56 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.50, "y": 0.26 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.28, "y": 0.42 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d0",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.50, "y": 0.64 }, { "x": 0.50, "y": 0.26 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.28, "y": 0.70 }, { "x": 0.50, "y": 0.26 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp1",
+          "toNodeId": "gk2",
+          "points": [{ "x": 0.50, "y": 0.26 }, { "x": 0.50, "y": 0.08 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 3:2:1-Abwehr über das ganze Feld (6 gegen 6)",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FAST_BREAK_1ST_WAVE",
+        "RETREAT"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei komplette Mannschaften spielen 6 gegen 6 mit Torhütern über die volle Spielfeldlänge. Beide Teams verteidigen im Positionsangriff konsequent im 3:2:1-System.",
+    "flow_description": "1. Gespielt werden drei Drittel à 6 Minuten, um die hohe konditionelle Intensität der 3:2:1-Abwehr auf konstant starkem Niveau zu halten.\n2. Sonderwertung für die Defensive: Jeder erzwungene technische Fehler (Schrittfehler, Fehlpass, Stürmerfoul) bringt 1 Bonuspunkt; jeder Steal mit direktem Kontertor bringt 2 Bonuspunkte.\n3. Nach jedem eigenen Torabschluss organisieren sich die Teams im Rückzug sofort wieder in der dreireihigen 3:2:1-Grundordnung.\n4. In den kurzen Drittelpausen gibt der Trainer gezieltes Feedback zu Pendelbewegung, Absprachen von HM und Übergaben.\n5. Im letzten Drittel werden die Positionen VM, HL und HR rotiert.",
+    "coaching_points": "- Hohe Laufbereitschaft und gegenseitige Hilfsbereitschaft über alle Drittel aufrechterhalten\n- Ständige Kommunikation zwischen den drei Linien einfordern\n- Kein Zurückfallen in eine passive 6:0 bei aufkommender Müdigkeit\n- Saubere 1-gegen-1-Technik ohne unnötige Zeitstrafen",
+    "variations_text": "- Im zweiten Drittel darf der Angriff nur mit maximal 2x Prellen pro Spieler agieren\n- Bei Zeitstrafe (5 gegen 6) auf kompakte 3:2-Unterzahlformation umstellen\n- Torwartparaden nach bedrängten Fernwürfen zählen ebenfalls als Defensiv-Bonuspunkt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.53 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.43 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.43 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.16, "y": 0.25 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.31 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.84, "y": 0.25 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.08, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.60 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.65, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.60 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.92, "y": 0.22 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.46, "y": 0.36 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.50, "y": 0.65 }, { "x": 0.26, "y": 0.60 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Innenraum-Verdichtung gegen 1-gegen-1-starke Mitte (3 gegen 3)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 12,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "DEFENSE_INDIVIDUAL",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Drei zentrale Verteidiger der 3:2:1 (VM, HL, HR) bilden ein enges Dreieck gegen einen zentralen Spielmacher (RM) und zwei Halbspieler (RL, RR). Hütchen begrenzen das Zentrum auf ca. 10 Meter Breite.",
+    "flow_description": "1. RM startet mit Ball eine explosive Täuschung direkt gegen die Spitze (VM).\n2. VM versucht, RM aktiv nach links oder rechts abzudrängen, ohne die Mitte zu öffnen.\n3. Sobald RM sich für eine Seite entscheidet, schließt der jeweilige Halbverteidiger (HL oder HR) blitzschnell die Lücke, sodass RM in ein sofortiges 2 gegen 1 läuft.\n4. Passt RM rechtzeitig auf den freien Halben ab, sprintet der andere Verteidiger sofort herüber, um den Wurf zu blocken oder zu stören.\n5. Nach fünf Durchgängen wechseln die Positionen.",
+    "coaching_points": "- VM darf sich nicht auf der geraden Linie durch die Mitte schlagen lassen\n- HL und HR stehen leicht nach innen orientiert, um blitzschnell helfen zu können\n- Schnelle Übergabe bei Richtungswechsel des Spielmachers\n- Sauberes Abdrängen ohne Festhalten am Trikot",
+    "variations_text": "- Hinten-Mitte (HM) und einen Kreisläufer für ein 4 gegen 4 ergänzen\n- RM darf den Ball erst nach einer ausgeführten Körpertäuschung weiterspielen\n- Wettkampf: 5 Punkte für den Angriff (Tore) vs. 5 Punkte für die Abwehr (gestoppte Angriffe)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.10 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.34, "y": 0.41 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.66, "y": 0.41 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.58 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.64, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.58 },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.40, "y": 0.48 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.40, "y": 0.44 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "FEINT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.50, "y": 0.64 }, { "x": 0.40, "y": 0.48 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.34, "y": 0.41 }, { "x": 0.40, "y": 0.44 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "3:2:1-Rückzug aus dem Angriff in die geordnete Dreierstaffelung",
+    "default_duration_min": 14,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_3_2_1",
+        "RETREAT",
+        "DEFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Gespielt wird über das ganze Spielfeld. Team A startet im Positionsangriff auf Tor 1, Team B wartet nach dem Torabschluss auf den schnellen Gegenstoß (1./2. Welle) Richtung Tor 2.",
+    "flow_description": "1. Team A schließt den Angriff auf Tor 1 ab (oder verliert auf Trainersignal absichtlich den Ball).\n2. Team B schaltet sofort auf Tempospiel (schnelle Mitte / 2. Welle) in Richtung Tor 2 um.\n3. Team A sprintet im vollen Tempo zurück und muss sich vor der 9-Meter-Linie blitzschnell wieder in seiner 3:2:1-Grundordnung formieren.\n4. Wer zuerst am Kreis ankommt, sichert zunächst das Zentrum (HM), während die nachfolgenden Spieler sofort die Halb- und Spitzenpositionen besetzen und lautstark durchsortieren.\n5. Nach fünf Umschaltphasen wechseln die Mannschaften die Startrichtung.",
+    "coaching_points": "- Rückzug erfolgt immer im Vollsprint über die kürzeste Linie Richtung eigenes Tor\n- Erst das Zentrum (6-Meter-Raum) sichern, dann sofort offensiv die drei Linien der 3:2:1 aufbauen\n- Laute Positionsansagen beim Zurücklaufen („Ich Mitte!“, „Geh auf Spitze!“)\n- Kein starres Kleben an der Stammposition während der ersten Sekunden des Rückzugs",
+    "variations_text": "- Nach einem eigenen Fehlwurf muss der Werfer erst kurz die Torauslinie berühren (temporäre 5-gegen-6-Rückzugssituation)\n- Bonuspunkt für Team A, wenn Team B gezwungen wird, das Tempospiel abzubrechen und in den Positionsangriff zu gehen\n- Mit fliegendem Abwehr-Angriff-Wechsel an der Auswechselbank kombinieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.50, "y": 0.08 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.50, "y": 0.92 },
+        { "id": "d0", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.42 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.30, "y": 0.36 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.70, "y": 0.36 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.28 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.20, "hasBall": true },
+        { "id": "wp1", "type": "WAYPOINT", "x": 0.50, "y": 0.64 },
+        { "id": "wp2", "type": "WAYPOINT", "x": 0.32, "y": 0.70 },
+        { "id": "wp3", "type": "WAYPOINT", "x": 0.68, "y": 0.70 },
+        { "id": "wp4", "type": "WAYPOINT", "x": 0.50, "y": 0.78 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d3",
+          "toWaypointId": "wp4",
+          "points": [{ "x": 0.50, "y": 0.28 }, { "x": 0.50, "y": 0.78 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "toWaypointId": "wp2",
+          "points": [{ "x": 0.30, "y": 0.36 }, { "x": 0.32, "y": 0.70 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d2",
+          "toWaypointId": "wp3",
+          "points": [{ "x": 0.70, "y": 0.36 }, { "x": 0.68, "y": 0.70 }]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d0",
+          "toWaypointId": "wp1",
+          "points": [{ "x": 0.50, "y": 0.42 }, { "x": 0.50, "y": 0.64 }]
+        }
+      ]
+    }
+  }
+]

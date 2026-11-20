@@ -57,8 +57,12 @@ import {
   buildTemplateFromSession,
   cloneTrainingSessionBundle,
   convertQuickBlockToCatalogExercise,
+  getLocalDateIso,
   moveBlockInPhase,
   movePhaseInSession,
+  selectDefaultSession,
+  selectNextSessionAfterCompletion,
+  sortSessionsChronologically,
   toggleBlockParallelWithPrevious
 } from '../utils/sessionPlannerUtils';
 import { TacticBoardPreview } from './TacticBoardPreview';
@@ -108,10 +112,7 @@ export function TrainingSessionPlanner({
   const [draggedBlockId, setDraggedBlockId] = useState<string | null>(null);
   const [dragOverPhaseId, setDragOverPhaseId] = useState<string | null>(null);
   const teamSessions = useMemo(
-    () =>
-      sessions
-        .filter((s) => s.team_id === activeTeam.id)
-        .sort((a, b) => a.session_date.localeCompare(b.session_date)),
+    () => sortSessionsChronologically(sessions.filter((s) => s.team_id === activeTeam.id)),
     [sessions, activeTeam.id]
   );
 
@@ -122,7 +123,7 @@ export function TrainingSessionPlanner({
       const found = teamSessions.find((s) => s.id === targetId);
       if (found) return found;
     }
-    return teamSessions[0] ?? null;
+    return selectDefaultSession(teamSessions);
   }, [teamSessions, selectedSessionId, focusedSessionId]);
 
   const currentPhases = useMemo(
@@ -180,7 +181,7 @@ export function TrainingSessionPlanner({
 
   // New session / Template / Clone panels
   const [showNewSessionForm, setShowNewSessionForm] = useState(false);
-  const [newSessionDate, setNewSessionDate] = useState('2026-11-19');
+  const [newSessionDate, setNewSessionDate] = useState(() => getLocalDateIso());
   const [newSessionStart, setNewSessionStart] = useState(
     activeTeam.default_schedule[0]?.startTime ?? '18:30'
   );
@@ -371,6 +372,18 @@ export function TrainingSessionPlanner({
     };
     await db.trainingSessions.put(updated);
     await queueSyncOperation('training_sessions', updated.id, 'UPSERT', updated);
+
+    if (patch.status === 'COMPLETED' && currentSession.status !== 'COMPLETED') {
+      const nextSession = selectNextSessionAfterCompletion(teamSessions, currentSession.id);
+      if (nextSession) {
+        setSelectedSessionId(nextSession.id);
+        setActivePhaseId('');
+        setSavedTemplateBanner(
+          `Training „${currentSession.title}“ abgeschlossen – nächste Einheit (${nextSession.session_date}) ausgewählt.`
+        );
+        setTimeout(() => setSavedTemplateBanner(null), 3500);
+      }
+    }
   }
 
   async function handleAddPhase(e: React.FormEvent) {
@@ -544,7 +557,7 @@ export function TrainingSessionPlanner({
 
     setConfirmDeleteSessionId(null);
     const remaining = teamSessions.filter((s) => s.id !== sessionId);
-    setSelectedSessionId(remaining[0]?.id ?? '');
+    setSelectedSessionId(selectDefaultSession(remaining)?.id ?? '');
   }
 
   async function handleAddExerciseToPhase(exercise: Exercise, asParallelTrack: boolean) {
@@ -676,6 +689,7 @@ export function TrainingSessionPlanner({
             >
               {teamSessions.map((s) => (
                 <option key={s.id} value={s.id}>
+                  {s.status === 'COMPLETED' ? '✓ ' : s.status === 'CANCELLED' ? '[Ausgefallen] ' : ''}
                   {s.session_date} ({s.start_time}–{s.end_time}) · {s.title}
                 </option>
               ))}

@@ -1,0 +1,2880 @@
+[
+  {
+    "title": "Schnelle Mitte nach Gegentor – 3 gegen 0 Laufweg-Automatisierung",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 15,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/tempospiel/schnelle-mitte/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Gespielt wird auf dem ganzen Spielfeld. Ein Torwart steht im eigenen Tor mit Bällen, ein zweiter im gegenüberliegenden Tor. Drei Angreifer starten auf Höhe der eigenen 9m-Linie (RL, RM, RR). Hütchen markieren die Anwurfzone an der Mittellinie sowie die beiden Laufkorridore im Rückraum.",
+    "flow_description": "1. Der Torwart simuliert ein Gegentor, holt den Ball sofort aus dem Tor und passt scharf auf RM, der im Vollsprint zur Mittellinie startet.\n2. RM führt regelkonform den schnellen Anwurf aus und spielt direkt weiter auf den mit hohem Tempo anlaufenden RL.\n3. RL stößt dynamisch Richtung gegnerische 9m-Linie, zieht nach innen und bedient den nachrückenden RM oder RR im Parallelstoß.\n4. Der Zielspieler schließt per Sprungwurf aus dem Rückraum ab; anschließend startet das nächste Trio.",
+    "coaching_points": "- Ball sofort ohne Zögern aus dem Netz holen und präzise in den Lauf des Anwurfspielers passen\n- Regelkonformer Anwurf (ein Fuß in der Anwurfzone, alle Mitspieler beim Anwurf in der eigenen Hälfte)\n- Hohes Grundtempo ohne Abbremsen bei der Ballannahme halten\n- Blick frühzeitig nach vorn richten, um Laufwege der Mitspieler wahrzunehmen",
+    "variations_text": "- Seitenwechsel einbauen: Anwurf nach rechts über RR mit Gegenstoß-Kreuzen auf RM\n- Zweiten Ball direkt nach dem Abschluss für einen Rückweg-Gegenstoß ins Spiel bringen\n- Zeitvorgabe von maximal 6 Sekunden vom Anwurf bis zum Torabschluss setzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.28,
+          "y": 0.5
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.25,
+          "y": 0.24
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.25,
+          "y": 0.76
+        },
+        {
+          "id": "wp_mid",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.72,
+          "y": 0.28
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.76,
+          "y": 0.62
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_mid",
+          "points": [
+            { "x": 0.28, "y": 0.5 },
+            { "x": 0.5, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toWaypointId": "wp_mid",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.5, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.25, "y": 0.24 },
+            { "x": 0.72, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_mid",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.5, "y": 0.5 },
+            { "x": 0.72, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.25, "y": 0.76 },
+            { "x": 0.76, "y": 0.62 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.72, "y": 0.28 },
+            { "x": 0.76, "y": 0.62 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.76, "y": 0.62 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tempospiel 2. Welle: 3 gegen 2 gegen ungeordnete Restabwehr",
+    "default_duration_min": 15,
+    "min_players": 5,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-one.com/2-welle-handball/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Gespielt wird auf eine Hallenhälfte. Drei Angreifer (LA, RM, RA) starten an der Mittellinie mit Ball bei RM. Zwei Abwehrspieler stehen zunächst versetzt auf 9m und 6m, um eine ungeordnete Restordnung nach gestoppter 1. Welle zu simulieren.",
+    "flow_description": "1. RM treibt den Ball mit hohem Tempo über die Mitte an und zwingt den vorderen Verteidiger zur Entscheidung.\n2. Die beiden Außenspieler halten die Breite und laufen erst auf Höhe der 9m-Linie steil Richtung Tor ein.\n3. Sobald der Verteidiger RM attackiert, spielt RM im Parallelstoß auf den freien Nebenmann weiter.\n4. Der angespielte Außenspieler entscheidet situativ zwischen eigenem Durchbruch oder Weiterpass auf die ballferne Seite, wenn der zweite Verteidiger heraustritt.",
+    "coaching_points": "- Nicht schneller laufen, sondern früher sehen und die Restordnung der Abwehr lesen\n- Breite bis zur 9m-Linie halten, um die zwei Verteidiger auseinanderzuziehen\n- Ballführender muss selbst Torgefahr ausstrahlen, damit ein Verteidiger gebunden wird\n- Maximal ein Prellen erlauben, um das Tempo hochzuhalten",
+    "variations_text": "- Ein dritter Abwehrspieler startet nach 2 Sekunden von der Mittellinie als Verfolger\n- Angreifer starten auf Pfiff mit Rücken zum Tor, um die Orientierungsfähigkeit zu schulen\n- Abschluss muss innerhalb von 5 Sekunden nach Überschreiten der Mittellinie erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.44,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.58,
+          "y": 0.24
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.85,
+          "hasBall": true
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.14,
+          "y": 0.82
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.86,
+          "y": 0.82
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.45
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.36
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.85 },
+            { "x": 0.46, "y": 0.45 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.86, "y": 0.82 },
+            { "x": 0.78, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.46, "y": 0.45 },
+            { "x": 0.78, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.78, "y": 0.36 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2. Welle mit Kreuzen und Parallelstoß im 3 gegen 3",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/tempospiel/2-welle/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Drei Rückraumangreifer (RL, RM, RR) starten hinter der Mittellinie, wobei RL und RR je eine Fahnenstange an der Mittellinie umlaufen müssen. Drei Abwehrspieler (HL, HM, HR) starten zeitversetzt von den Seitenlinien auf Höhe der 9m-Linie.",
+    "flow_description": "1. Der Torwart eröffnet schnell auf den zentral startenden RM, während RL und RR im Vollsprint über die Halbpositionen nachrücken.\n2. RM passt auf den anlaufenden RR und läuft eine enge Kreuzbewegung gegen den einrückenden Mittelblock (HM).\n3. RR bindet seinen direkten Gegenspieler, kreuzt mit RM und legt den Ball sauber im Lauf ab.\n4. RM stößt in die entstandene Nahtstelle und entscheidet zwischen eigenem Sprungwurf oder Parallelpass auf den tief einlaufenden RL.",
+    "coaching_points": "- Kreuzbewegung nicht zu früh und nicht zu weit vor der Abwehr ansetzen, um echte Bindung zu erzeugen\n- Pass beim Kreuzen weich und flach in die Vorwärtsbewegung ablegen\n- Nach dem Kreuzen sofort Tiefe Richtung Tor suchen, nicht quer laufen",
+    "variations_text": "- Kreuzung frei wählen (über links oder rechts) je nach Stellung des Mittelblocks\n- Einen Kreisläufer als vierte Anspielstation ergänzen (4 gegen 4)\n- Abwehr darf nach dem ersten Pass aktiv offensiv heraustreten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.25,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "HM",
+          "x": 0.52,
+          "y": 0.3
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "HR",
+          "x": 0.76,
+          "y": 0.34
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.2,
+          "y": 0.84
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.8,
+          "y": 0.84
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.62,
+          "y": 0.5
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.42
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.4
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.8, "y": 0.84 },
+            { "x": 0.62, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.5, "y": 0.86 },
+            { "x": 0.62, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.86 },
+            { "x": 0.56, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rr",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.62, "y": 0.5 },
+            { "x": 0.56, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.2, "y": 0.84 },
+            { "x": 0.34, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.56, "y": 0.42 },
+            { "x": 0.34, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.34, "y": 0.4 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Übergang 1. Welle zu 2. Welle – Abgebrochener Gegenstoß mit Nachrücken",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/tempospiel/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "FAST_BREAK_1ST_WAVE",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Ganzes Spielfeld. Ein Außenspieler (LA) startet die 1. Welle, wird jedoch von einem bereits an der 9m-Linie wartenden Verteidiger zugestellt. Zwei weitere Angreifer (RM, RL) und ein Kreisläufer rücken als 2. Welle nach, während zwei weitere Verteidiger von der Mittellinie zurücksprinten.",
+    "flow_description": "1. Der Torwart passt auf den gestarteten LA, der bis zur 9m-Linie sprintet, aber erkennt, dass der direkte Durchbruch durch V1 blockiert ist.\n2. LA stoppt ab, sichert den Ball und spielt einen sauberen Rückpass in den Lauf des zentral nachrückenden RM.\n3. RM übernimmt das Tempo, während KM direkt durch die Mitte an den Kreis sprintet und RL über die halblinke Bahn Druck macht.\n4. Es entsteht ein 4 gegen 3 in der 2. Welle, das ohne Tempoverlust bis zum klaren Torabschluss ausgespielt wird.",
+    "coaching_points": "- Kein erzwungener Wurf in der 1. Welle gegen einen stehenden Verteidiger – lieber sauber abbrechen\n- Rückpass von Außen muss scharf und sicher in den Lauf der 2. Welle erfolgen\n- Nachrückende Spieler müssen sofort die Lücken zwischen den noch nicht geordneten Verteidigern attackieren",
+    "variations_text": "- V1 darf auf Trainersignal auch passiv bleiben, sodass LA zwischen 1. Welle (Abschluss) und Abbruch (2. Welle) entscheiden muss\n- Gleicher Ablauf über die rechte Außenbahn (RA) mit Linkshänder- oder Rechtshänder-Einbindung",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.58,
+          "y": 0.16
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.34,
+          "y": 0.5
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.32,
+          "y": 0.76
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.78,
+          "y": 0.22
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.55,
+          "y": 0.52
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.56,
+          "y": 0.72
+        },
+        {
+          "id": "wp_la",
+          "type": "WAYPOINT",
+          "x": 0.74,
+          "y": 0.16
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.66,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.74,
+          "y": 0.7
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.74, "y": 0.16 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "la",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.58, "y": 0.16 },
+            { "x": 0.74, "y": 0.16 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.34, "y": 0.5 },
+            { "x": 0.66, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_la",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.74, "y": 0.16 },
+            { "x": 0.66, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.32, "y": 0.76 },
+            { "x": 0.74, "y": 0.7 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.66, "y": 0.48 },
+            { "x": 0.74, "y": 0.7 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.74, "y": 0.7 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnelle Mitte mit Doppelpass über die Außenbahn (4 gegen 3)",
+    "default_duration_min": 14,
+    "min_players": 7,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/tempospiel/schnelle-mitte/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "FEINT_1V1"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Halbfeld-Aufbau. Vier Angreifer (LA, RL, RM, RA) starten an der Mittellinie. Drei Verteidiger positionieren sich an der 9m-Linie, wobei ein Verteidiger zentral auf RM heraustreten muss.",
+    "flow_description": "1. RM führt den schnellen Anwurf aus und passt auf den seitlich anlaufenden RL.\n2. RL drückt Richtung 9m-Linie, spielt einen kurzen Doppelpass mit dem hochstehenden LA und zieht dadurch die Abwehr nach links.\n3. Nach dem Rückpass verlagert RL den Ball mit einem weiten, druckvollen Pass über RM auf die freie rechte Seite zu RA.\n4. RA nutzt den entstandenen Raum für einen Sprungwurf aus spitzem oder offenem Winkel.",
+    "coaching_points": "- Schnelle Ballverlagerung von der Ballseite auf die ballferne Seite trainieren\n- Doppelpass über Außen nur mit 1–2 Schritten, damit die Abwehr nicht verschieben kann\n- Klare Laufwege ohne gegenseitiges Blockieren im Rückraum",
+    "variations_text": "- Vierter Verteidiger rückt nach dem ersten Pass nach (4 gegen 4)\n- Abschluss auf Außen muss per Lob oder Heber erfolgen, wenn der Torwart herauskommt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.3,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.36
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.68,
+          "y": 0.32
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.1,
+          "y": 0.72
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.84
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.88,
+          "hasBall": true
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.88,
+          "y": 0.76
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.52
+        },
+        {
+          "id": "wp_la",
+          "type": "WAYPOINT",
+          "x": 0.12,
+          "y": 0.44
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.84,
+          "y": 0.28
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.28, "y": 0.84 },
+            { "x": 0.26, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.5, "y": 0.88 },
+            { "x": 0.26, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "la",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.1, "y": 0.72 },
+            { "x": 0.12, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.26, "y": 0.52 },
+            { "x": 0.12, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.88, "y": 0.76 },
+            { "x": 0.84, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_la",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.12, "y": 0.44 },
+            { "x": 0.84, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.84, "y": 0.28 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2. Welle aus der Balleroberung – 4 gegen 4 mit verspätetem Verteidiger",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://deinehandballuebung.de/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Ganzes Spielfeld. Vier Angreifer greifen auf Tor 1 an, vier Verteidiger stehen in der Abwehr. An der Seitenlinie bei 9m steht ein Hütchen. Ein Trainer gibt per Pfiff das Umschaltkommando.",
+    "flow_description": "1. Team A spielt ein kurzes 4 gegen 4 gegen Team B bis zum Wurf oder Pfiff des Trainers.\n2. Sofort nach Ballgewinn oder Torwartparade startet Team B die 2. Welle Richtung gegenüberliegendes Tor.\n3. Der Werfer von Team A muss nach seinem Wurf erst das Hütchen an der Seitenlinie berühren, bevor er in den Rückzug sprinten darf.\n4. Team B nutzt das temporäre 4 gegen 3 konsequent aus, bevor der vierte Verteidiger eingreifen kann.",
+    "coaching_points": "- Sofortiges Umschalten aller vier neuen Angreifer ohne auf den Ballbesitzer zu warten\n- Klare Tiefenstaffelung: Ein Spieler stößt an den Kreis, drei besetzen Rückraum und Außen\n- Temporäre Überzahl zielstrebig ausspielen, nicht abbremsen",
+    "variations_text": "- Zwei Spieler von Team A müssen vor dem Rückzug ein Hütchen berühren (4 gegen 2 Überzahl)\n- Wenn Team B nicht innerhalb von 7 Sekunden abschließt, zählt der Angriff als abgewehrt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.25,
+          "y": 0.08
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.26,
+          "y": 0.32
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.28,
+          "y": 0.52
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.26,
+          "y": 0.72
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "A4",
+          "x": 0.34,
+          "y": 0.86
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.38,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.4,
+          "y": 0.52
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.38,
+          "y": 0.74
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.65,
+          "y": 0.5
+        },
+        {
+          "id": "wp_a4",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.8
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toNodeId": "a2",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.28, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.28, "y": 0.52 },
+            { "x": 0.65, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a4",
+          "toWaypointId": "wp_a4",
+          "points": [
+            { "x": 0.34, "y": 0.86 },
+            { "x": 0.78, "y": 0.8 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_a2",
+          "toWaypointId": "wp_a4",
+          "points": [
+            { "x": 0.65, "y": 0.5 },
+            { "x": 0.78, "y": 0.8 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_a4",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.78, "y": 0.8 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tempospiel-Kontinuum: Welle auf Welle über das ganze Feld",
+    "default_duration_min": 15,
+    "min_players": 9,
+    "max_players": 18,
+    "goalkeepers": 2,
+    "source_url": "https://www.trainingsworld.com/sportarten/handball/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "BIBS",
+        "quantity": 9
+      }
+    ],
+    "setup_description": "Drei Dreiergruppen (Team A, B, C) teilen sich das ganze Spielfeld. Team A startet im Angriff gegen Team B auf Tor 2, Team C wartet hinter der eigenen Grundlinie bei Tor 1. Beide Torhüter haben Ersatzbälle im Tor.",
+    "flow_description": "1. Team A greift im 3 gegen 3 in der 2. Welle gegen Team B auf Tor 2 an und schließt ab.\n2. Sofort nach Abschluss (Tor oder Fehlwurf) übernimmt Team B den Ball von TW2 und startet sofort die 2. Welle Richtung Tor 1.\n3. Team A bleibt kurz stehen bzw. wechselt hinter Tor 2, während Team C von Tor 1 sofort auf 9m herausrückt, um Team B abzuwehren.\n4. Nach dem Abschluss von Team B startet Team C die nächste Welle gegen Team A – ein pausenloser Endlos-Zyklus entsteht.",
+    "coaching_points": "- Hohe Spielintensität und Belastungsverträglichkeit unter realistischer Ermüdung\n- Passqualität auch bei hohem Puls sauber halten\n- Klare Kommunikation der Abwehr beim Herausrücken gegen die anrollende Welle",
+    "variations_text": "- Als 4 gegen 4 mit Kreisläufer durchführen\n- Nach jedem Fehlwurf muss das angreifende Team sofort zurückverteidigen (kein Wechsel), um Konzentration beim Abschluss zu erzwingen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.72,
+          "y": 0.24
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.75,
+          "y": 0.5
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.72,
+          "y": 0.76
+        },
+        {
+          "id": "c1",
+          "type": "DEFENSE_PLAYER",
+          "label": "C1",
+          "x": 0.24,
+          "y": 0.28
+        },
+        {
+          "id": "c2",
+          "type": "DEFENSE_PLAYER",
+          "label": "C2",
+          "x": 0.22,
+          "y": 0.5
+        },
+        {
+          "id": "c3",
+          "type": "DEFENSE_PLAYER",
+          "label": "C3",
+          "x": 0.24,
+          "y": 0.72
+        },
+        {
+          "id": "wp_b2",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.5
+        },
+        {
+          "id": "wp_b1",
+          "type": "WAYPOINT",
+          "x": 0.28,
+          "y": 0.2
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk2",
+          "toNodeId": "b2",
+          "points": [
+            { "x": 0.92, "y": 0.5 },
+            { "x": 0.75, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "b2",
+          "toWaypointId": "wp_b2",
+          "points": [
+            { "x": 0.75, "y": 0.5 },
+            { "x": 0.42, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "b1",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.72, "y": 0.24 },
+            { "x": 0.28, "y": 0.2 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_b2",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.42, "y": 0.5 },
+            { "x": 0.28, "y": 0.2 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_b1",
+          "toNodeId": "gk1",
+          "points": [
+            { "x": 0.28, "y": 0.2 },
+            { "x": 0.08, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnelle Mitte mit Kreisläufer-Sperre gegen einlaufende Abwehr (4 gegen 4)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/tempospiel/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Halbfeld-Aufbau. Vier Angreifer (RL, RM, RR, KM) starten an der Mittellinie. Vier Abwehrspieler rücken aus einer ungeordneten Position (etwa 11m bis 7m) zurück in Richtung 6m-Raum.",
+    "flow_description": "1. KM sprintet beim Anwurf von RM zentral durch die Mitte direkt bis an die 7m-Linie und setzt eine saubere Sperre gegen einen der zurücklaufenden Innenblocker.\n2. RM spielt nach dem schnellen Anwurf auf RL, der im hohen Tempo an der Sperre vorbeizieht.\n3. RL prüft sofort den eigenen Wurf aus dem Lauf, das Absetzen an den abrollenden KM oder den Pass auf den nachrückenden RR.\n4. Die Abwehr muss blitzschnell entscheiden, ob sie übernimmt oder hinter der Sperre durchläuft.",
+    "coaching_points": "- KM muss die Sperre regelkonform im Stand setzen und nach dem Vorbeilaufen sofort Richtung Ball abrollen\n- Rückraumspieler laufen eng Schulter an Schulter an der Sperre vorbei\n- Timing zwischen Anwurf und Sprint des KM sauber abstimmen",
+    "variations_text": "- Sperre wahlweise nach links oder rechts setzen lassen\n- Zwei Außenspieler hinzunehmen, um auf 6 gegen 6 zu erweitern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.3,
+          "y": 0.36
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.48,
+          "y": 0.34
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.64,
+          "y": 0.36
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.78,
+          "y": 0.3
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.68
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.88,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.84
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.78,
+          "y": 0.84
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.32
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.4
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.44, "y": 0.68 },
+            { "x": 0.44, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.84 },
+            { "x": 0.38, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.5, "y": 0.88 },
+            { "x": 0.38, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.38, "y": 0.4 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2. Welle im 5 gegen 4 Überzahl-Umschalten",
+    "default_duration_min": 16,
+    "min_players": 9,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb.de/de/service/trainer/trainercenter/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_TEAM",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Fünf Angreifer (LA, RL, RM, RR, RA) starten an der Mittellinie gegen vier Verteidiger, die zwischen 7m und 9m eine ungeordnete 4er-Reihe bilden.",
+    "flow_description": "1. Der Trainer wirft einen Ball hoch in die Luft oder passt ihn auf einen beliebigen Angreifer an der Mittellinie.\n2. Sofort startet die gesamte 5er-Angriffslinie im hohen Tempo auf die vier Verteidiger zu.\n3. Die Angreifer nutzen die Breite des gesamten Feldes und spielen durch druckvolles Parallelstoßen die Überzahl konsequent bis auf die freie Position aus.\n4. Sobald ein Verteidiger zwei Angreifer abdecken muss, erfolgt der schnelle Weiterpass zum freien Mann für den klaren Torabschluss.",
+    "coaching_points": "- Keine unnötigen Kreuzungen in Überzahl – direktes Parallelstoßen ist schneller und effektiver\n- Tiefen- und Breitenstaffelung konsequent einhalten\n- Schnelle Ballzirkulation ohne Prellen forcieren",
+    "variations_text": "- Einen Verteidiger erst nach 3 Sekunden von der Seitenlinie einlaufen lassen (5 gegen 5 Übergang)\n- Maximal 4 Pässe bis zum Torabschluss erlauben",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.24,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.42,
+          "y": 0.32
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.58,
+          "y": 0.32
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.76,
+          "y": 0.34
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.1,
+          "y": 0.78
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.3,
+          "y": 0.84
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.88,
+          "hasBall": true
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.7,
+          "y": 0.84
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.9,
+          "y": 0.78
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.68,
+          "y": 0.46
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.88,
+          "y": 0.26
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.7, "y": 0.84 },
+            { "x": 0.68, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.5, "y": 0.88 },
+            { "x": 0.68, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.9, "y": 0.78 },
+            { "x": 0.88, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rr",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.68, "y": 0.46 },
+            { "x": 0.88, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.88, "y": 0.26 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnelle Mitte: Einwurf-Auslösehandlung über Halbrechts / Halblinks",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/tempospiel/schnelle-mitte/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_GROUP",
+        "JUMP_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Halbfeld mit zwei Hütchen an der Mittellinie als Anwurfzone. RM startet mit Ball in der Anwurfzone, RL und RR stehen je 3 Meter dahinter links und rechts. Zwei passive bzw. halbaktive Blockspieler stehen auf 8m.",
+    "flow_description": "1. RM ruft die Seite an („Links!“ oder „Rechts!“) und führt den Anwurf direkt in den Lauf des angesagten Rückraumspielers aus.\n2. Der angespielte Halbspieler (z. B. RL) nimmt den Ball im vollen Lauf an und zieht aggressiv auf die Nahtstelle zwischen Halb- und Mittelblock.\n3. RM läuft sofort hinter RL her und bietet sich für einen Rückpass oder eine Übergabe an, während RR auf der ballfernen Seite steil einläuft.\n4. RL entscheidet situativ zwischen eigenem Sprungwurf oder scharfem Pass auf RR.",
+    "coaching_points": "- Klare verbale Kommunikation beim Anwurf verhindert Missverständnisse\n- Halbspieler dürfen die Mittellinie erst nach dem Anwurf-Pfiff bzw. Ballabgabe übertreten\n- Dynamischer Dreischritt-Anlauf direkt aus der Ballannahme heraus",
+    "variations_text": "- Abwehrspieler dürfen aktiv auf den ersten Pass heraustreten\n- Trainer zeigt per Handzeichen die Angriffsseite an, damit der Blick oben bleibt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.62,
+          "y": 0.34
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.9
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.76,
+          "y": 0.9
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.44
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.7,
+          "y": 0.42
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.9 },
+            { "x": 0.38, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.5, "y": 0.86 },
+            { "x": 0.38, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.76, "y": 0.9 },
+            { "x": 0.7, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.38, "y": 0.44 },
+            { "x": 0.7, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.7, "y": 0.42 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tempospiel 2. Welle – Entscheidungs-Dreieck (Durchbruch, Kreis oder Außen)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-one.com/2-welle-handball/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_INDIVIDUAL",
+        "OFFENSE_GROUP",
+        "FEINT_1V1"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Drei Angreifer (RM, KM, RA) greifen aus der 2. Welle gegen zwei Verteidiger (HM, HR) auf ein Tor an. RM startet mit Ball an der Mittellinie, KM läuft leicht versetzt vorweg an den Kreis, RA hält die rechte Seitenlinie.",
+    "flow_description": "1. RM treibt das Tempo zentral an und attackiert die Nahtstelle zwischen HM und HR.\n2. KM läuft direkt in den Rücken von HM an den 6m-Kreis und bietet eine klare Hand als Ziel.\n3. RA läuft auf Höhe der 9m-Linie ein und zieht HR nach außen.\n4. RM liest das Verhalten der zwei Verteidiger: Bleiben beide tief, folgt der eigene Durchbruch; tritt HM heraus, folgt der Bodenpass an KM; rückt HR ein, erfolgt der weite Pass auf RA.",
+    "coaching_points": "- Kopf hoch beim Antreiben: Erst lesen, dann entscheiden\n- KM muss aktiv Sichtkontakt zum Ballführer halten und den Körper zwischen Verteidiger und Ball stellen\n- Keine überhasteten Alibi-Pässe – erst die Verteidiger zu einer Reaktion zwingen",
+    "variations_text": "- Spiegelverkehrt über die linke Seite (RM, KM, LA) spielen\n- Einen dritten Verteidiger als Störspieler aus dem Rückraum nachstarten lassen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "HM",
+          "x": 0.48,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "HR",
+          "x": 0.72,
+          "y": 0.32
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.84,
+          "hasBall": true
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.36,
+          "y": 0.66
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.88,
+          "y": 0.76
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.54,
+          "y": 0.46
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.24
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.84,
+          "y": 0.28
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.48, "y": 0.84 },
+            { "x": 0.54, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.36, "y": 0.66 },
+            { "x": 0.42, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.88, "y": 0.76 },
+            { "x": 0.84, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.54, "y": 0.46 },
+            { "x": 0.42, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_km",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.42, "y": 0.24 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "6 gegen 6 Überschlagsspiel mit Doppelwertung für die 2. Welle",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/tempospiel/2-welle/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_TEAM",
+        "RETREAT"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei komplette Mannschaften spielen 6 gegen 6 mit Torhütern auf das gesamte Handballfeld. Im Tor liegt jeweils ein Ersatzball für ultraschnelle Anwürfe.",
+    "flow_description": "1. Gespielt wird reguläres Handball 6 gegen 6 über die gesamte Spielfläche.\n2. Nach jedem Gegentor oder Ballgewinn zählt ein Torerfolg aus der Schnellen Mitte oder der 2. Welle (Abschluss innerhalb von 8 Sekunden nach Ballbesitzwechsel) doppelt (2 Punkte).\n3. Normale Tore aus dem stehenden Positionsangriff zählen 1 Punkt.\n4. Bei einem technischen Fehler im Positionsangriff hat das andere Team sofort freie Bahn für die 2. Welle.",
+    "coaching_points": "- Nach jedem eigenen Tor sofort die Schnelle Mitte des Gegners unterbinden\n- Konsequentes Nachrücken aller sechs Feldspieler beim eigenen Gegenstoß\n- Hohe Fehler- und Risikotoleranz im Training zulassen, um Mut zum Tempospiel zu fördern",
+    "variations_text": "- Bei Fehlwurf oder Ballverlust im Positionsangriff wird die Uhr für die 2. Welle auf 6 Sekunden verkürzt\n- Ein Tor nach gelungener Sperre in der 2. Welle zählt 3 Punkte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.42,
+          "y": 0.25
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.42,
+          "y": 0.75
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.62,
+          "y": 0.46
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.72,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.74,
+          "y": 0.52
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.72,
+          "y": 0.7
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.66,
+          "y": 0.28
+        },
+        {
+          "id": "wp_a4",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.46
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toNodeId": "a1",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.48, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.42, "y": 0.25 },
+            { "x": 0.66, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.48, "y": 0.5 },
+            { "x": 0.66, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a4",
+          "toWaypointId": "wp_a4",
+          "points": [
+            { "x": 0.62, "y": 0.46 },
+            { "x": 0.78, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_a2",
+          "toWaypointId": "wp_a4",
+          "points": [
+            { "x": 0.66, "y": 0.28 },
+            { "x": 0.78, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_a4",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.78, "y": 0.46 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnelle Mitte mit Torwart-Passkette und Seitenwechsel",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.knsu.de/individualsportarten-und-sportspiele/handball/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Gespielt wird über das gesamte Feld. Je eine Gruppe startet an der eigenen 6m-Linie (Mitte, Links, Rechts). Vier Hütchen markieren an der Mittellinie die Passzonen für den Seitenwechsel.",
+    "flow_description": "1. Der Torwart passt scharf auf den im Zentrum startenden Spieler (RM), der bis zur Mittellinie sprintet.\n2. RM passt auf den links startenden Mitspieler (RL), der nach dem Fangen sofort einen Diagonalpass auf den rechts durchstartenden Spieler (RR) spielt.\n3. RR nimmt den Ball im vollen Lauf an, prellt maximal einmal und schließt im Sprungwurf auf das gegenüberliegende Tor ab.\n4. Danach wechselt das Trio auf die Positionen für den Rückweg.",
+    "coaching_points": "- Pässe immer vor den Körper in den Lauf des Mitspielers spielen\n- Saubere Beinarbeit bei der Ballannahme im Vollsprint (keine Schrittfehler)\n- Blickkontakt zwischen Passgeber und Empfänger herstellen",
+    "variations_text": "- Ohne Prellen über das gesamte Feld spielen\n- Einen passiven Verteidiger als Hindernis an der gegnerischen 9m-Linie platzieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.24,
+          "y": 0.5
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.2
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.24,
+          "y": 0.8
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.48,
+          "y": 0.5
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.6,
+          "y": 0.22
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.72
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.48, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.24, "y": 0.5 },
+            { "x": 0.48, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.2 },
+            { "x": 0.6, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.48, "y": 0.5 },
+            { "x": 0.6, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.24, "y": 0.8 },
+            { "x": 0.78, "y": 0.72 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.6, "y": 0.22 },
+            { "x": 0.78, "y": 0.72 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.78, "y": 0.72 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2. Welle mit Einläufer von Außen gegen unformierte Abwehr (5 gegen 5)",
+    "default_duration_min": 16,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/tempospiel/2-welle/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_TEAM",
+        "CROSSING_SCREEN"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 5
+      },
+      {
+        "type": "BIBS",
+        "quantity": 10
+      }
+    ],
+    "setup_description": "Halbfeld-Aufbau 5 gegen 5. Fünf Angreifer (LA, RL, RM, RR, RA) starten an der Mittellinie. Fünf Verteidiger starten aus einer ungeordneten Ausgangslage zwischen 10m und 7m und müssen sich im Rückwärtslauf sortieren.",
+    "flow_description": "1. RM eröffnet den Angriff mit Tempo auf RL, während LA auf der linken Seite zunächst die Breite hält.\n2. Sobald die Abwehr nach links verschiebt, läuft RA im Rücken der noch nicht geordneten Abwehr als zweiter Kreisläufer an die 6m-Linie ein.\n3. RL verlagert den Ball blitzschnell über RM auf RR, der nun im 2 gegen 1 gegen den rechten Außenverteidiger steht oder den eingelaufenen RA am Kreis bedient.\n4. Der Angriff wird ohne Abstoppen in den stehenden Positionsangriff bis zum Abschluss durchgespielt.",
+    "coaching_points": "- Einläufer muss den exakten Moment nutzen, in dem der ballferne Verteidiger zum Ball schaut\n- Rückraumspieler müssen die Ballseite sauber binden, bevor die Verlagerung erfolgt\n- Schnelle Übergabe-Entscheidung zwischen Wurf aus dem Rückraum und Anspiel an den Einläufer",
+    "variations_text": "- Einläufer kommt abwechselnd von LA oder RA\n- Nach dem Torabschluss sofortiges Umschalten in die Abwehr gegen den Konter",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.2,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.52,
+          "y": 0.32
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.68,
+          "y": 0.34
+        },
+        {
+          "id": "d5",
+          "type": "DEFENSE_PLAYER",
+          "label": "V5",
+          "x": 0.82,
+          "y": 0.32
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.1,
+          "y": 0.76
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.84
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.88,
+          "hasBall": true
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.72,
+          "y": 0.84
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.9,
+          "y": 0.76
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.6,
+          "y": 0.24
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.74,
+          "y": 0.44
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.9, "y": 0.76 },
+            { "x": 0.6, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.72, "y": 0.84 },
+            { "x": 0.74, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.5, "y": 0.88 },
+            { "x": 0.74, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rr",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.74, "y": 0.44 },
+            { "x": 0.6, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.6, "y": 0.24 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2. Welle mit Kreisläufer als Zwischenstation (Dreieck-Tempospiel)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/tempospiel/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Ganzes Spielfeld. Ein Kreisläufer (KM) positioniert sich als zentrale Zwischenstation an der Mittellinie. Zwei Rückraumspieler (RL, RR) starten aus der eigenen 9m-Zone, zwei Verteidiger warten an der gegnerischen 9m-Linie.",
+    "flow_description": "1. Der Torwart eröffnet schnell auf RL, der sofort steil auf den an der Mittellinie entgegenkommenden KM passt.\n2. KM leitet den Ball mit maximal einem Schritt direkt auf den über die rechte Bahn im Vollsprint vorbeiziehenden RR weiter.\n3. Nach dem Weiterleiten sprintet KM sofort tief an den gegnerischen 6m-Kreis nach.\n4. RL, RR und KM spielen im 3 gegen 2 die 2. Welle konsequent bis zum freien Torabschluss aus.",
+    "coaching_points": "- KM muss sich beim Fangen bereits offen in Laufrichtung zum gegnerischen Tor orientieren\n- Kurze Ballkontaktzeit an der Mittellinie verhindert, dass die Abwehr sich ordnen kann\n- Nach dem Pass an der Mittellinie sofort tief nachstoßen",
+    "variations_text": "- Passfolge spiegelverkehrt über RR auf KM und weiter auf RL\n- Dritten Verteidiger von der Mittellinie nachstarten lassen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.26
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.24,
+          "y": 0.74
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.76,
+          "y": 0.36
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.76,
+          "y": 0.64
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.68,
+          "y": 0.72
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.8,
+          "y": 0.48
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toNodeId": "rl",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.24, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toNodeId": "km",
+          "points": [
+            { "x": 0.24, "y": 0.26 },
+            { "x": 0.5, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.24, "y": 0.74 },
+            { "x": 0.68, "y": 0.72 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.5, "y": 0.5 },
+            { "x": 0.68, "y": 0.72 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.5, "y": 0.5 },
+            { "x": 0.8, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.68, "y": 0.72 },
+            { "x": 0.8, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 5,
+          "fromWaypointId": "wp_km",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.8, "y": 0.48 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schnelle Mitte nach Ballverlust im 4 gegen 4 auf zwei Tore",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/de/service/trainer/trainercenter/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei Viererteams spielen auf dem ganzen Feld mit Torhütern. An der Mittellinie liegen zwei Zusatzbälle bereit, um nach einem Tor sofort die Schnelle Mitte auszulösen.",
+    "flow_description": "1. Team A greift im 4 gegen 4 auf Tor 2 an.\n2. Erzielt Team A ein Tor, sprintet ein Spieler von Team B sofort zum Zusatzball an der Mittellinie und führt die Schnelle Mitte ohne Verzögerung aus.\n3. Team B greift im vollen Tempo in der 2. Welle an, während Team A blitzschnell zurücklaufen und sich zuordnen muss.\n4. Bei einem Fehlwurf oder Ballgewinn eröffnet direkt der Torwart die 2. Welle.",
+    "coaching_points": "- Nach dem eigenen Tor sofortige Konzentration auf die Rückzugsbewegung\n- Schnelle Mitte nutzt konsequent die 2–3 Sekunden Unordnung nach dem Gegentor\n- Ständiger Wechsel zwischen Tempospiel und sofortiger Abwehrorganisation",
+    "variations_text": "- Ohne Prellen in der eigenen Hälfte spielen, um schnelle Passstafetten zu erzwingen\n- Treffer innerhalb von 7 Sekunden nach Anwurf zählen doppelt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.5,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.62,
+          "y": 0.24
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.62,
+          "y": 0.76
+        },
+        {
+          "id": "b4",
+          "type": "OFFENSE_PLAYER",
+          "label": "B4",
+          "x": 0.44,
+          "y": 0.38
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.32,
+          "y": 0.34
+        },
+        {
+          "id": "a2",
+          "type": "DEFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.3,
+          "y": 0.6
+        },
+        {
+          "id": "wp_b2",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.22
+        },
+        {
+          "id": "wp_b4",
+          "type": "WAYPOINT",
+          "x": 0.22,
+          "y": 0.48
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b2",
+          "toWaypointId": "wp_b2",
+          "points": [
+            { "x": 0.62, "y": 0.24 },
+            { "x": 0.24, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b1",
+          "toWaypointId": "wp_b2",
+          "points": [
+            { "x": 0.5, "y": 0.5 },
+            { "x": 0.24, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "b4",
+          "toWaypointId": "wp_b4",
+          "points": [
+            { "x": 0.44, "y": 0.38 },
+            { "x": 0.22, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_b2",
+          "toWaypointId": "wp_b4",
+          "points": [
+            { "x": 0.24, "y": 0.22 },
+            { "x": 0.22, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_b4",
+          "toNodeId": "gk1",
+          "points": [
+            { "x": 0.22, "y": 0.48 },
+            { "x": 0.08, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  }
+]

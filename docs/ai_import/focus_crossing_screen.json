@@ -1,0 +1,2382 @@
+[
+  {
+    "title": "Grundübung Sperre und Absetzen nach DHB-Methodik",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.hvsa.de/training/kleingruppe/grunduebung-sperre-absetzen",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Besetzt werden Rückraum Links (RL), Rückraum Rechts (RR) und der Kreisläufer (KM). Zunächst stehen zwei passive Abwehrspieler (Halb- und Mittelverteidiger) auf 6,5 Metern.",
+    "flow_description": "1. RR spielt den Ball sauber zu RL, der mit einer raumöffnenden Bewegung leicht nach außen anläuft.\n2. Im Moment des Richtungs- und Tempowechsels von RL zur Mitte (2. Schritt) stellt der Kreisläufer eine saubere Innensperre schräg hinter dem Halbverteidiger.\n3. RL zieht eng Schulter an Schulter an der Sperre vorbei Richtung Tor.\n4. Reagiert der Mittelverteidiger defensiv, wirft RL direkt; tritt der Mittelverteidiger aggressiv heraus, setzt sich KM in den freien Raum ab und erhält den Bodenpass zum Torwurf.",
+    "coaching_points": "- Raumöffnender Anlauf von RL (erst Tiefe und Breite holen, dann explosiv zur Mitte ziehen)\n- Kreisläufer muss stabil stehen, bevor der Verteidiger aufläuft (kein aktives Wegschieben oder Armeinsatz)\n- Enges Vorbeiziehen des Rückraumspielers an der Sperre, damit der Verteidiger nicht durchschlüpfen kann\n- Konsequentes Absetzen des Kreisläufers mit Blick zum Ball und anspielbereiter Zielhand",
+    "variations_text": "- Spiegelbildlicher Ablauf von links nach rechts (RL passt zu RR)\n- Steigerung von passiver über halboffensive zu voll aktiver 2-gegen-2-Abwehr\n- Nach dem Pass an den Kreis folgt ein direkter zweiter Ball von der anderen Seite",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "rr",
+          "type": "COACH_FEEDER",
+          "label": "RR",
+          "x": 0.7,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.52
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.26
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.34
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.52,
+          "y": 0.22
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rr",
+          "toNodeId": "rl",
+          "points": [
+            { "x": 0.7, "y": 0.5 },
+            { "x": 0.26, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "km",
+          "toNodeId": "d1",
+          "points": [
+            { "x": 0.44, "y": 0.26 },
+            { "x": 0.38, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.26, "y": 0.52 },
+            { "x": 0.42, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 4,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.38, "y": 0.28 },
+            { "x": 0.52, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 5,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.42, "y": 0.34 },
+            { "x": 0.52, "y": 0.22 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Timing-Drill „3 Pässe und Innensperre“ an zwei Turnmatten",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/training/kleingruppe/timing-drill-3-paesse-und-sperre",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Turnmatten liegen auf den Halbpositionen nahe der 9-Meter-Linie als räumliche Orientierung. Rückraum Links (RL) und Rückraum Rechts (RR) spielen zusammen mit einem zentralen Kreisläufer (KM).",
+    "flow_description": "1. RL und RR passen sich exakt dreimal den Ball zu und führen dabei jeweils dynamische Stoßbewegungen an der Außenseite der Matten aus.\n2. Nach dem dritten Pass täuscht der ballführende Rückraumspieler eine weitere Stoßbewegung nach außen an, zieht dann aber scharf in die Mitte.\n3. Exakt beim ersten Schritt der Außentäuschung setzt der Kreisläufer die Innensperre an der Innenkante der Matte.\n4. Der Rückraumspieler nutzt die Sperre für den Schlag- oder Sprungwurf; im nächsten Durchgang ersetzt ein Abwehrspieler die Matte.",
+    "coaching_points": "- Synchrones Timing: Sperre steht genau im Moment des Richtungswechsels, nicht drei Sekunden vorher\n- Außentäuschung muss glaubhaft sein, damit der Verteidiger im Spiel voll in die Sperre läuft\n- Sauberes, hartes Passspiel während der drei Vorpässe ohne Rhythmusverlust\n- Kreisläufer arbeitet auf den Fußballen, um blitzschnell in die Sperre einzudrehen",
+    "variations_text": "- Variable Passanzahl (2, 3 oder 4 Pässe) nach Zuruf des Trainers\n- Aktive Abwehrspieler anstelle der Turnmatten mit anschließendem Absetzen des Kreisläufers\n- Abschluss zwingend über einen Rückpass auf die andere Halbseite nach der Sperre",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "M1",
+          "x": 0.32,
+          "y": 0.34
+        },
+        {
+          "id": "m2",
+          "type": "EQUIPMENT_MAT",
+          "label": "M2",
+          "x": 0.68,
+          "y": 0.34
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.76,
+          "y": 0.54
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "wp_in",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.28
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toNodeId": "rr",
+          "points": [
+            { "x": 0.24, "y": 0.54 },
+            { "x": 0.76, "y": 0.54 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rr",
+          "toNodeId": "rl",
+          "points": [
+            { "x": 0.76, "y": 0.54 },
+            { "x": 0.24, "y": 0.54 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "m1",
+          "points": [
+            { "x": 0.5, "y": 0.28 },
+            { "x": 0.36, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 4,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_in",
+          "points": [
+            { "x": 0.24, "y": 0.54 },
+            { "x": 0.44, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 5,
+          "fromWaypointId": "wp_in",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.44, "y": 0.28 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Grundform Rückraum-Kreuzen mit Zug zum Tor (RM und RL)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball.guru/taktik/rueckraum-kreuzen-grundlagen-uebung",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "JUMP_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Angreifer stehen auf Rückraum Mitte (RM) und Rückraum Links (RL). Zwei Hütchen (später zwei Abwehrspieler) markieren den Halb- und Mittelverteidiger auf 7,5 Metern.",
+    "flow_description": "1. RM startet mit Ball druckvoll in Richtung Nahtstelle zwischen Halb- und Mittelverteidiger (echte Torgefahr ausstrahlen).\n2. RL löst sich rechtzeitig in die Tiefe und startet hinter dem Rücken von RM in vollem Tempo quer Richtung Mitte.\n3. Im Moment der Bindung des Halbverteidigers übergibt RM den Ball per kurzem Schiebepass (oder direkter Übergabe) in den Lauf von RL.\n4. RL zieht mit maximalem Tempo in die frei gewordene Mitte und schließt mit Sprung- oder Schlagwurf ab; RM zieht nach dem Kreuzen bis auf die Außen- bzw. Halbposition durch.",
+    "coaching_points": "- Kein flaches Querlaufen im Stand: Der ballführende Spieler muss tief in die Abwehr stoßen, um den Verteidiger zu binden\n- Der kreuzende Spieler (RL) beschleunigt erst kurz vor dem Übergabepunkt, nicht zu früh\n- Kurze, präzise Ballübergabe auf Brusthöhe in Laufrichtung\n- Nach dem Kreuzen sofort den Blick auf die Lücke im Zentrum richten",
+    "variations_text": "- Spiegelbildlich zwischen RM und Rückraum Rechts (RR)\n- Zwei halboffensive, später aktive Abwehrspieler verteidigen das Kreuzen (Entscheidung: Selbst gehen vs. Übergeben)\n- Gegenkreuz: RM bricht selbst durch, falls die Abwehr zu früh übergibt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.52
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.38
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.54 },
+            { "x": 0.34, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.52 },
+            { "x": 0.5, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.34, "y": 0.38 },
+            { "x": 0.5, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.5, "y": 0.34 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2 gegen 2 Entscheidungstraining: Sperre nutzen oder Absetzen",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.deinehandballuebung.de/2-gegen-2-entscheidungstraining-sperre-absetzen/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein Rückraumspieler und ein Kreisläufer spielen im echten 2 gegen 2 gegen zwei aktive Abwehrspieler (Halb- und Mittelblock). Ein Zuspieler startet die Aktion aus der Nebenposition.",
+    "flow_description": "1. Der Rückraumspieler erhält den Pass und greift seinen direkten Verteidiger mit einer Finte nach außen an.\n2. Der Kreisläufer stellt situativ eine Innensperre gegen den Halbverteidiger.\n3. Die beiden Verteidiger dürfen frei reagieren (Abwehr übergeben, Sperre hinterlaufen oder offensiv heraustreten).\n4. Der Angriff liest die Abwehrreaktion: Bleibt der Mittelblock tief -> Fernwurf/Durchbruch; tritt der Mittelblock heraus -> sofortiges Absetzen des Kreisläufers und Boden- oder Überkopfpass an den Kreis.",
+    "coaching_points": "- Rückraumspieler darf sich erst nach dem Lesen des Mittelblocks entscheiden (nicht blind werfen oder passen)\n- Kreisläufer hält die Sperre mindestens 1 Sekunde stabil, bevor er sich gezielt in die Tiefe absetzt\n- Passspiel an den Kreis variabel halten (Bodenpass bei hohen Armen, direkter Pass bei tiefer Abwehr)\n- Klare Kommunikation in der Abwehr zur Schulung der Gegenreaktion",
+    "variations_text": "- Zeitlimit von 8 Sekunden pro 2-gegen-2-Angriff\n- Kreisläufer darf frei zwischen Innen- und Außensperre wählen\n- Seitenwechsel nach jedem dritten Angriff",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.28
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.34
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.54,
+          "y": 0.2
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km",
+          "toNodeId": "d1",
+          "points": [
+            { "x": 0.44, "y": 0.28 },
+            { "x": 0.38, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.28, "y": 0.52 },
+            { "x": 0.44, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.38, "y": 0.28 },
+            { "x": 0.54, "y": 0.2 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.44, "y": 0.34 },
+            { "x": 0.54, "y": 0.2 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 5,
+          "fromWaypointId": "wp_km",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.54, "y": 0.2 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kleingruppe 3 gegen 3: Kreuzen mit anschließender Innensperre",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/training/kleingruppe/kreuzen-mit-anschliessender-sperre",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Rückraum Links (RL), Rückraum Mitte (RM) und Kreisläufer (KM) spielen im 3 gegen 3 gegen Halbrechts, Innenblock Rechts und Innenblock Links.",
+    "flow_description": "1. RM läuft mit Ball die linke Halbseite an und zieht den Halbverteidiger auf sich.\n2. RL kreuzt im hohen Tempo hinter RM in die Mitte und übernimmt den Ball im Lauf.\n3. Sobald RL den Ball übernimmt, setzt KM eine gezielte Innensperre gegen den rechten Innenblockspieler.\n4. RL nutzt die entstandene Gasse für den Durchbruch/Wurf oder bedient den sich absetzenden Kreisläufer im Rücken der Abwehr.",
+    "coaching_points": "- Durch das dynamische Kreuzen wird die Abwehr bereits in Bewegung versetzt, was die anschließende Sperre extrem effektiv macht\n- KM wartet den Kreuzungsimpuls ab und stellt erst dann die Sperre\n- RL greift konsequent die Nahtstelle an, statt zu weit außen zu werfen\n- RM hält nach dem Kreuzen die Breite auf links, um die Abwehr auseinanderzuziehen",
+    "variations_text": "- Zusätzlicher Rückraum Rechts (4 gegen 4) als weitere Anspielstation bei überhelfender Abwehr\n- RM selbst sperrt nach der Ballübergabe den Halbverteidiger weg (Rückraum-Sperre)\n- Nach jedem Angriff direkter Wechsel von Angriff und Abwehr",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.3,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.45,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.6,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.52
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.54,
+          "y": 0.28
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.38
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.52,
+          "y": 0.32
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.54 },
+            { "x": 0.34, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.52 },
+            { "x": 0.52, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.34, "y": 0.38 },
+            { "x": 0.52, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "d2",
+          "points": [
+            { "x": 0.54, "y": 0.28 },
+            { "x": 0.48, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.52, "y": 0.32 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kleingruppe 4 gegen 4: Kreuzen mit Expresspass und Folgesperre",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.tv/uebungen/kleingruppenspiel-kreuzen-und-expresspass",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Drei Rückraumspieler (RL, RM, RR) und ein Kreisläufer (KM) agieren gegen vier kompakte 6:0-Abwehrspieler (Halb- und Innenblock).",
+    "flow_description": "1. RL und RM starten eine druckvolle Kreuzbewegung auf der linken Seite, um die gesamte Abwehr nach links zu ziehen.\n2. Anstatt selbst in den engen Block zu laufen, spielt der kreuzende Spieler einen scharfen Expresspass (Überpielpass) direkt auf den weit anlaufenden RR.\n3. Zeitgleich verlagert der Kreisläufer aus der Mitte auf die rechte Seite und setzt eine Folgesperre gegen den nachschiebenden linken Halbverteidiger.\n4. RR nutzt die Sperre für den direkten Durchbruch oder spielt den absetzenden KM an.",
+    "coaching_points": "- Expresspass muss scharf, flach und ohne hohen Bogen gespielt werden, sonst kann die Abwehr verschieben\n- RR startet erst kurz vor dem Expresspass mit vollem Tempo in die Tiefe\n- KM liest den Seitenwechsel frühzeitig und arbeitet aktiv im Rücken der verschiebenden Abwehr\n- Klare Entscheidungsfindung im Überzahlraum auf der ballfernen Seite",
+    "variations_text": "- Spiegelbildlich von rechts nach links (Kreuzen RR/RM -> Expresspass auf RL)\n- Ein Außenspieler (RA) wird zusätzlich integriert, um das 5 gegen 5 auf der rechten Seite auszuspielen\n- Abwehr versucht, den Expresspass offensiv abzufangen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.28,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.42,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.56,
+          "y": 0.28
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.7,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.54
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.78,
+          "y": 0.52
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.26
+        },
+        {
+          "id": "wp_x",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.42
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.32
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_x",
+          "points": [
+            { "x": 0.24, "y": 0.52 },
+            { "x": 0.36, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_x",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.36, "y": 0.42 },
+            { "x": 0.64, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.78, "y": 0.52 },
+            { "x": 0.64, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "d4",
+          "points": [
+            { "x": 0.5, "y": 0.26 },
+            { "x": 0.66, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.64, "y": 0.32 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Übergang von Außen mit Kreuzbewegung und Zentrumssperre",
+    "default_duration_min": 16,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/training/angriff/uebergang-von-aussen-kreuzen-sperre",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_TEAM",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Angriff mit Linksaußen (LA), RL, RM, RR und KM gegen eine 5er- oder 6:0-Abwehrformation.",
+    "flow_description": "1. LA startet nach Pass von RL auf RM einen dynamischen Übergang (Einlaufen) in den Rückraum bzw. an den Kreis zwischen Halb- und Mittelverteidiger.\n2. RM und RL führen unmittelbar nach dem Übergang ein enges Kreuzen im Zentrum aus.\n3. Der eingelaufene LA (als zweiter Kreisläufer) und KM setzen eine abgestimmte Sperre am Innenblock.\n4. Der ballführende Rückraumspieler nutzt die entstandene Überzahl im Zentrum für den Durchbruch, den Fernwurf oder den Pass auf einen der beiden Kreisspieler.",
+    "coaching_points": "- Der Übergang von Außen muss mit hohem Tempo erfolgen, um die Abwehr zu Übergabeentscheidungen zu zwingen\n- Rückraumspieler halten die Abstände sauber, damit beim Übergang kein Stau entsteht\n- Der einlaufende Außen bindet aktiv seinen Verteidiger und setzt danach standfest die Sperre\n- Schnelles Lesen, ob die Abwehr einsinkt (Fernwurf) oder heraustritt (Kreispass)",
+    "variations_text": "- Übergang von Rechtsaußen (RA) mit Kreuzen RM/RR\n- Einlaufender Außen erhält direkt den Ball im Rückraum und kreuzt selbst mit RM\n- Kontinuum: Nach Torabschluss sofortiger Ballgewinn und neuer Aufbau in die Gegenrichtung",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.2,
+          "y": 0.22
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.36,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.52,
+          "y": 0.28
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.68,
+          "y": 0.28
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.1,
+          "y": 0.26
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.54
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.6,
+          "y": 0.26
+        },
+        {
+          "id": "wp_la",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.28
+        },
+        {
+          "id": "wp_x",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.36
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toNodeId": "rm",
+          "points": [
+            { "x": 0.28, "y": 0.52 },
+            { "x": 0.52, "y": 0.54 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "la",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.1, "y": 0.26 },
+            { "x": 0.44, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_la",
+          "toNodeId": "d3",
+          "points": [
+            { "x": 0.44, "y": 0.28 },
+            { "x": 0.49, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_x",
+          "points": [
+            { "x": 0.52, "y": 0.54 },
+            { "x": 0.42, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_x",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.42, "y": 0.36 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außensperre am Halbverteidiger für den Durchbruch nach außen",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/aussensperre-am-halbverteidiger-kleingruppe/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "FEINT_1V1",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf der linken Angriffsseite stehen RL, LA und KM gegen zwei Abwehrspieler (Außen- und Halbverteidiger). Ein Zuspieler startet auf RM.",
+    "flow_description": "1. RL erhält den Pass von RM und täuscht zunächst eine dynamische Stoßbewegung nach innen zur Mitte an.\n2. Dadurch zieht der Halbverteidiger leicht ins Zentrum; exakt in diesem Moment setzt der Kreisläufer eine Außensperre an der Außenseite des Halbverteidigers.\n3. RL wechselt explosiv die Richtung nach außen und bricht eng an der Außensperre vorbei in die Lücke zwischen Außen- und Halbverteidiger.\n4. Hilft der Außenverteidiger ein, folgt der Pass auf den freien LA; bleibt er bei LA, schließt RL selbst ab oder bedient den absetzenden KM.",
+    "coaching_points": "- Innentäuschung von RL ist der Schlüssel, um die Außensperre wirksam zu machen\n- Kreisläufer muss den Verteidiger schräg nach außen abriegeln, ohne sich zu bewegen\n- LA hält konsequent maximale Breite an der Seitenlinie, um den Außenverteidiger zu binden\n- Schnelle Entscheidung am Ende des Durchbruchs (Wurf, Pass LA oder Pass KM)",
+    "variations_text": "- Spiegelbildlich auf der rechten Angriffsseite (RR, RA, KM)\n- Einbau einer kurzen Kreuzbewegung zwischen RM und RL vor der Außensperre\n- Abwehrspieler auf Halb und Außen agieren voll aktiv",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.48,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.18,
+          "y": 0.22
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.36,
+          "y": 0.28
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.34,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.28,
+          "y": 0.28
+        },
+        {
+          "id": "wp_b",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.22
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km",
+          "toNodeId": "d2",
+          "points": [
+            { "x": 0.28, "y": 0.28 },
+            { "x": 0.32, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "FEINT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_b",
+          "points": [
+            { "x": 0.34, "y": 0.52 },
+            { "x": 0.24, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_b",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.24, "y": 0.22 },
+            { "x": 0.48, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Doppelsperre am 6-Meter-Kreis gegen kompakte 6:0-Abwehr",
+    "default_duration_min": 15,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/training/taktik/doppelsperre-gegen-6-0-abwehr",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_TEAM",
+        "DEFENSE_6_0",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Angriff im 6 gegen 6 mit einem Übergang eines Außenspielers an den Kreis (2 Kreisläufer: KM1 und KM2) gegen eine kompakte 6:0-Abwehr.",
+    "flow_description": "1. Nach einem Auftakt-Kreuzen zwischen RM und RL läuft ein Außenspieler als zweiter Kreisläufer an den 6-Meter-Kreis ein.\n2. KM1 und KM2 positionieren sich rechts und links neben dem zentralen Mittelblock (oder nebeneinander auf einer Seite) und stellen zeitgleich eine Doppelsperre gegen den Innenblock.\n3. Der ballführende Rückraumspieler (z. B. RL oder RR) zieht in den geschützten Wurfraum hinter der Doppelsperre und schließt aus dem freien Rückraum ab.\n4. Gelingt es einem Verteidiger, die Doppelsperre offensiv zu umlaufen, setzt sich der entsprechende Kreisläufer sofort ab und erhält den kurzen Pass.",
+    "coaching_points": "- Beide Kreisläufer müssen exakt synchron einrasten und ihre Position ohne Fouls halten\n- Rückraumschütze muss mit maximaler Dynamik und Sprunghöhe hinter der Doppelsperre abschließen\n- Klare Aufteilung: Welcher Kreisläufer setzt sich bei Heraustreten ab, welcher hält die Sperre?\n- Vorheriges Kreuzen bindet die Abwehr, damit sie die Doppelsperre nicht frühzeitig antizipiert",
+    "variations_text": "- Doppelsperre gezielt für einen Linkshänder auf Rückraum Rechts einstudieren\n- Nach der Doppelsperre folgt ein sofortiger Weiterpass auf die verwaiste Außenposition\n- Abwehr übt gezielt das offensive Heraustreten und Übernehmen gegen die Doppelsperre",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.34,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.48,
+          "y": 0.28
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.62,
+          "y": 0.28
+        },
+        {
+          "id": "km1",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM1",
+          "x": 0.42,
+          "y": 0.3
+        },
+        {
+          "id": "km2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM2",
+          "x": 0.56,
+          "y": 0.3
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.3,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.54,
+          "y": 0.54
+        },
+        {
+          "id": "wp_shot",
+          "type": "WAYPOINT",
+          "x": 0.48,
+          "y": 0.38
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km1",
+          "toNodeId": "d3",
+          "points": [
+            { "x": 0.42, "y": 0.3 },
+            { "x": 0.45, "y": 0.29 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km2",
+          "toNodeId": "d4",
+          "points": [
+            { "x": 0.56, "y": 0.3 },
+            { "x": 0.59, "y": 0.29 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_shot",
+          "points": [
+            { "x": 0.3, "y": 0.52 },
+            { "x": 0.48, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_shot",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.48, "y": 0.38 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kreuzen gegen offensive 3:2:1-Abwehr: Übergabe-Probleme erzwingen",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball.ch/training/taktik/kreuzen-gegen-offensive-abwehr",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "DEFENSE_3_2_1",
+        "FEINT_1V1"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Drei Rückraumspieler (RL, RM, RR) und ein Kreisläufer (KM) spielen im 4 gegen 4 gegen eine offensive 3:2:1-Teilformation (Spitze, zwei offensive Halbe, Hinten-Mitte).",
+    "flow_description": "1. RL dribbelt oder stößt weit außen gegen den offensiven Halbverteidiger an und bindet ihn auf Höhe der 10-Meter-Linie.\n2. RM startet ein enges Kreuzen vor oder hinter RL und übernimmt den Ball im hohen Tempo, während RL nach der Übergabe den offensiven Halbverteidiger kurz im Lauf blockiert (Rückraum-Sperre).\n3. Die Abwehrspitze und der Halbverteidiger müssen blitzschnell übergeben/übernehmen; entsteht eine Abstimmungslücke, bricht RM direkt ins Zentrum durch.\n4. Schließt Hinten-Mitte die Lücke, folgt der direkte Pass an den freien KM am 6-Meter-Kreis.",
+    "coaching_points": "- Gegen eine offensive Abwehr darf nicht zu nah an der 9-Meter-Linie gekreuzt werden (ausreichend Anlauftiefe auf 11-12 Metern wählen)\n- Saubere Ballübergabe im Rücken des blockenden Mitspielers, um Ballverluste durch herausgreifende Arme zu vermeiden\n- Nach dem Kreuzen sofort in die Tiefe zwischen Spitze und Halbverteidiger stoßen\n- Hohe Entscheidungsgeschwindigkeit bei Überzahl im Rücken der offensiven Reihe",
+    "variations_text": "- Doppelkreuz (erst RL/RM, dann direkt weiter RM/RR)\n- Einbindung beider Außenspieler im 6 gegen 6 gegen eine komplette 3:2:1-Abwehr\n- Abwehr erhält Sonderpunkte für jeden abgefangenen Pass beim Kreuzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d_sp",
+          "type": "DEFENSE_PLAYER",
+          "label": "SP",
+          "x": 0.5,
+          "y": 0.42
+        },
+        {
+          "id": "d_hl",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.3,
+          "y": 0.36
+        },
+        {
+          "id": "d_hr",
+          "type": "DEFENSE_PLAYER",
+          "label": "HR",
+          "x": 0.7,
+          "y": 0.36
+        },
+        {
+          "id": "d_hm",
+          "type": "DEFENSE_PLAYER",
+          "label": "HM",
+          "x": 0.5,
+          "y": 0.24
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.54,
+          "y": 0.26
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.26
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.26, "y": 0.58 },
+            { "x": 0.36, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "rm",
+          "points": [
+            { "x": 0.36, "y": 0.44 },
+            { "x": 0.38, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.62 },
+            { "x": 0.32, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rm",
+          "toNodeId": "km",
+          "points": [
+            { "x": 0.32, "y": 0.26 },
+            { "x": 0.54, "y": 0.26 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kontinuum-Übung: Rückraum-Kreuzen mit Sperre im Dauerfluss",
+    "default_duration_min": 15,
+    "min_players": 9,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/training/angriff/kontinuum-kreuzen-und-sperren",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Drei Rückraumreihen (RL, RM, RR) mit jeweils 2-3 Spielern sowie 2 Kreisläufer (im Wechsel) agieren gegen 3 aktive Abwehrspieler im Kontinuum.",
+    "flow_description": "1. RL, RM, RR und KM spielen ein Kreuzen mit anschließender Sperre (z. B. RM kreuzt mit RL -> KM sperrt den Mittelblock -> Torabschluss oder Pass an den Kreis).\n2. Unmittelbar nach dem Wurf verlassen die Werfer die Position, die nächste Rückraum-Dreiergruppe startet sofort mit einem neuen Ball von der anderen Seite (RM kreuzt mit RR).\n3. Die Abwehr bleibt jeweils für 4 Angriffe aktiv und muss ohne Pause auf wechselnde Kreuz- und Sperrrichtungen reagieren.\n4. Nach 4 Angriffen rotiert eine neue Abwehrformation hinein.",
+    "coaching_points": "- Hohe Wiederholungszahl sorgt für schnelle Automatisierung von Laufwegen und Timing\n- Die wartenden Spieler bereiten sich aktiv vor, sodass kein Leerlauf entsteht\n- Auch bei steigender Belastung sauber und ohne Schrittfehler kreuzen\n- Kreisläufer wechselt nach jedem Abschluss zügig auf die gegenüberliegende Sperrseite",
+    "variations_text": "- Pflichtaufgabe: Zwei Kreuzbewegungen hintereinander vor der Sperre\n- Wertung: Angriff sammelt Tore pro 4er-Serie, Abwehr sammelt Ballgewinne\n- Integration der beiden Außenpositionen im 6-gegen-6-Kontinuum",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.32,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.68,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.54,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.76,
+          "y": 0.54,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.56,
+          "y": 0.28
+        },
+        {
+          "id": "wp_x",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.4
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.48,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_x",
+          "points": [
+            { "x": 0.5, "y": 0.58 },
+            { "x": 0.64, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.76, "y": 0.54 },
+            { "x": 0.48, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_x",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.64, "y": 0.4 },
+            { "x": 0.48, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "d2",
+          "points": [
+            { "x": 0.56, "y": 0.28 },
+            { "x": 0.53, "y": 0.28 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außen-Rückraum-Kreuzen (Einlaufen mit Ballübergabe)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/kreuzen-aussen-und-rueckraum-kleingruppe/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Linksaußen (LA) und Rückraum Links (RL) spielen im 2 gegen 2 gegen den Außen- und Halbverteidiger. Ein Zuspieler startet auf Rückraum Mitte.",
+    "flow_description": "1. RL erhält den Pass von RM und greift druckvoll nach außen gegen den Halbverteidiger an.\n2. LA startet zeitgleich aus der Ecke schräg nach innen (hinter oder vor RL) zum Außen-Rückraum-Kreuzen.\n3. RL übergibt den Ball kurz an den mit Tempo einlaufenden LA und zieht selbst auf die Außenposition durch (oder sperrt den Außenverteidiger kurz im Lauf).\n4. LA stößt in die geöffnete Halb-Mitte-Gasse zum Sprungwurf oder spielt den Rückpass auf den nun freien RL auf Außen.",
+    "coaching_points": "- LA startet erst im Moment der Ballannahme von RL, um den Überraschungseffekt zu nutzen\n- RL bindet aktiv den Halbverteidiger nach außen, bevor er den Ball übergibt\n- Sauberes Timing verhindert Zusammenstöße und Schrittfehler\n- LA attackiert sofort das Tor, statt parallel zur 9-Meter-Linie quer zu laufen",
+    "variations_text": "- Spiegelbildlich auf der rechten Seite mit Rechtsaußen und Rückraum Rechts\n- Ergänzung um einen Kreisläufer (3 gegen 3), der nach dem Kreuzen eine Folgesperre setzt\n- Gegenbewegung: LA täuscht das Einlaufen an und bleibt doch auf Außen für den steilen Pass",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.18,
+          "y": 0.24
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.34,
+          "y": 0.28
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.28
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.32,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.22,
+          "y": 0.34
+        },
+        {
+          "id": "wp_la",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.32, "y": 0.5 },
+            { "x": 0.22, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "la",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.08, "y": 0.28 },
+            { "x": 0.38, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_la",
+          "points": [
+            { "x": 0.22, "y": 0.34 },
+            { "x": 0.38, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_la",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.38, "y": 0.34 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kleinspiel 3 gegen 3 mit Sperre-Absetzen-Pflicht",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.deinehandballuebung.de/3-gegen-3-sperre-absetzen-kleinfeld/",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf einer Hallenhälfte wird der Mittelkorridor (ca. 12 Meter breit) mit Hütchen markiert. Drei Angreifer (2 Rückraum + 1 Kreis) spielen 3 gegen 3 auf ein reguläres Tor mit Torhüter.",
+    "flow_description": "1. Die drei Angreifer starten an der Mittellinie bzw. auf 12 Metern gegen drei aktive Abwehrspieler.\n2. Vor dem ersten Torabschluss muss im Angriff mindestens eine klare Kreuzbewegung oder eine Kreisläufersperre ausgeführt werden.\n3. Nach erfolgreicher Sperre-Absetzen-Aktion oder einem Kreuzen mit Torabschluss erhält der Angriff 2 Punkte (reguläres Tor nach 1gg1 = 1 Punkt).\n4. Bei Ballverlust oder nach 3 Angriffen wechseln Angriff und Abwehr sofort die Rollen.",
+    "coaching_points": "- Durch den begrenzten Raum lernen alle Spieler (auch Rückraumspieler), sauber zu sperren und sich abzusetzen\n- Ständige Positionsrotation: Jeder Spieler übernimmt einmal die Kreisläuferrolle\n- Blickkontakt zwischen Ballführer und Sperrsteller vor jeder Aktion\n- Abwehr übt laute Kommunikation („Sperre links!“, „Wechseln!“)",
+    "variations_text": "- Ohne Prellen spielen, um das Zusammenspiel noch stärker zu fördern\n- Wechsel der Abwehrvorgabe: Erst defensiv (6:0), dann offensiv (Manndeckung)\n- 4 gegen 4 auf die gesamte Hallenbreite erweitern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.22,
+          "y": 0.45
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "H2",
+          "x": 0.78,
+          "y": 0.45
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.36,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.64,
+          "y": 0.28
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.34,
+          "y": 0.52,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.66,
+          "y": 0.52
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.44,
+          "y": 0.28
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.36
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "km",
+          "toNodeId": "d1",
+          "points": [
+            { "x": 0.44, "y": 0.28 },
+            { "x": 0.39, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.34, "y": 0.52 },
+            { "x": 0.46, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_a1",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.46, "y": 0.36 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kreuzen im Gegenstoß (2. Welle): Dynamisches Überlaufen",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/training/gegenstoss/kreuzen-in-der-zweiten-welle",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "FAST_BREAK_2ND_WAVE",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Gespielt wird über das ganze Feld (oder von der eigenen 9-Meter-Linie bis zum Gegentor). Drei Angreifer (RM, RL, KM) starten in die 2. Welle gegen zwei bis drei zurückeilende Abwehrspieler.",
+    "flow_description": "1. Der Torhüter eröffnet schnell auf RM, der mit hohem Tempo über die Mitte anläuft; RL sprintet auf der linken Bahn, KM auf der rechten Bahn mit.\n2. Auf Höhe der gegnerischen 12-Meter-Linie zieht RM leicht nach links und kreuzt dynamisch mit dem nach innen einschneidenden RL.\n3. Zeitgleich sprintet KM in die Tiefe an den 6-Meter-Kreis und sperrt den zentralen Rückzugsverteidiger weg.\n4. RL nutzt die hohe Geschwindigkeit aus dem Kreuzen für den direkten Durchbruch oder bedient den freien KM.",
+    "coaching_points": "- Kreuzbewegung in der 2. Welle darf das Tempo nicht abbremsen, sondern muss den Raumvorteil erhalten\n- Ballübergabe sicher und mit Vorwärtsimpuls ausführen\n- KM achtet auf die noch unsortierte Abwehr und setzt die Sperre im Rücken der zurückeilenden Verteidiger\n- Konsequenter Abschluss ohne unnötiges Abstoppen",
+    "variations_text": "- Überzahl 3 gegen 2, danach Steigerung auf Gleichzahl 3 gegen 3\n- Kreuzen nach rechts mit RR als spiegelbildliche Variante\n- Sofortiger Gegenkonter der Abwehr bei Ballgewinn",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.5,
+          "y": 0.92
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.5,
+          "y": 0.08
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.38,
+          "y": 0.24
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.58,
+          "y": 0.24
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.65,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.6
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.72,
+          "y": 0.58
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.36
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "wp_km",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.22
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.65 },
+            { "x": 0.36, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.6 },
+            { "x": 0.5, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.36, "y": 0.36 },
+            { "x": 0.5, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toWaypointId": "wp_km",
+          "points": [
+            { "x": 0.72, "y": 0.58 },
+            { "x": 0.56, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rl",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.5, "y": 0.28 },
+            { "x": 0.5, "y": 0.08 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 6 gegen 6: Bonus-Wertung für Kreuzen und Sperre-Absetzen",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball.ch/training/spielformen/zielspiel-kreuzen-und-sperren",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_TEAM",
+        "OFFENSE_GROUP",
+        "DEFENSE_6_0"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 auf dem Großfeld mit regulären Handballregeln und taktischer Sonderwertung für Kleingruppen-Kooperationen.",
+    "flow_description": "1. Beide Teams verteidigen zunächst in einer kompakten 6:0-Abwehr (in Halbzeit 2 Wechsel auf 5:1 oder 3:2:1).\n2. Ein reguläres Tor zählt 1 Punkt. Ein Tor, das unmittelbar aus einer sauberen Sperre-Absetzen-Handlung (durch Rückraum oder Kreis) oder einer Kreuzbewegung entsteht, zählt doppelt (2 Punkte).\n3. Die Trainer beobachten das Timing und frieren bei Bedarf 1-2 Situationen kurz ein („Freeze-Coaching“), um optimale Laufwege und Sperrwinkel zu zeigen.\n4. Spielzeit 2 x 8 Minuten.",
+    "coaching_points": "- Kreuzen und Sperren immer als Mittel zum Zweck (Raumgewinn und Gegnerbindung) einsetzen, nicht als Selbstzweck\n- Auch ballferne Spieler bleiben aktiv (Breite halten, Gegenbewegung vorbereiten)\n- Kreisläufer liest ständig die Rückraum-Auftakthandlungen und bietet situative Sperren an\n- Abwehr kommuniziert frühzeitig bei jeder Kreuz- und Sperrbewegung",
+    "variations_text": "- Pflichtaufgabe: Jeder Positionsangriff muss mindestens eine Sperre oder ein Kreuzen enthalten\n- 1-gegen-1-Gegenkreuz zählt ebenfalls doppelt, wenn der Abwehrspieler auf das Kreuzen spekuliert\n- Reduzierte Variante 5 gegen 5 auf einer Hallenhälfte bei kleinerer Kadergröße",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.18,
+          "y": 0.22
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.32,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.46,
+          "y": 0.28
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.58,
+          "y": 0.28
+        },
+        {
+          "id": "d5",
+          "type": "DEFENSE_PLAYER",
+          "label": "V5",
+          "x": 0.72,
+          "y": 0.28
+        },
+        {
+          "id": "d6",
+          "type": "DEFENSE_PLAYER",
+          "label": "V6",
+          "x": 0.84,
+          "y": 0.22
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.26
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.52
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.55,
+          "hasBall": true
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.74,
+          "y": 0.52
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.92,
+          "y": 0.26
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.52,
+          "y": 0.28
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.38
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.55 },
+            { "x": 0.34, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toNodeId": "rl",
+          "points": [
+            { "x": 0.34, "y": 0.38 },
+            { "x": 0.44, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "d3",
+          "points": [
+            { "x": 0.52, "y": 0.28 },
+            { "x": 0.48, "y": 0.28 }
+          ]
+        }
+      ]
+    }
+  }
+]

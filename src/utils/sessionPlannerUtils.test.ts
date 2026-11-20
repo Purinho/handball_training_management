@@ -5,9 +5,11 @@ import {
   convertQuickBlockToCatalogExercise,
   moveBlockInPhase,
   movePhaseInSession,
+  selectDefaultSession,
+  selectNextSessionAfterCompletion,
   toggleBlockParallelWithPrevious
 } from './sessionPlannerUtils';
-import type { SessionBlock, SessionPhase } from '../types/domain';
+import type { SessionBlock, SessionPhase, SessionStatus, TrainingSession } from '../types/domain';
 
 describe('sessionPlannerUtils', () => {
   it('creates a session bundle from a template with default phases and exercise blocks', () => {
@@ -154,5 +156,101 @@ describe('sessionPlannerUtils', () => {
     expect(moved).toHaveLength(2);
     expect(moved.find((p) => p.id === 'p2')?.sort_order).toBe(1);
     expect(moved.find((p) => p.id === 'p1')?.sort_order).toBe(2);
+  });
+
+  it('selects the next upcoming open session rather than the first or last', () => {
+    const makeSession = (
+      id: string,
+      session_date: string,
+      status: SessionStatus = 'PLANNED',
+      start_time = '18:30'
+    ): TrainingSession => ({
+      id,
+      team_id: 'team-mb',
+      session_date,
+      start_time,
+      end_time: '20:00',
+      planned_duration_min: 90,
+      title: `Training ${session_date}`,
+      custom_materials_override: [],
+      status,
+      updated_at: '2026-11-20T09:00:00.000Z'
+    });
+
+    const sessions = [
+      makeSession('s-17', '2026-11-17', 'PLANNED'),
+      makeSession('s-19', '2026-11-19', 'COMPLETED'),
+      makeSession('s-24', '2026-11-24', 'PLANNED'),
+      makeSession('s-26', '2026-11-26', 'PLANNED')
+    ];
+
+    // On 2026-11-20, should pick 2026-11-24 (next upcoming), not 2026-11-17 or 2026-11-26
+    expect(selectDefaultSession(sessions, '2026-11-20')?.id).toBe('s-24');
+
+    // If today (2026-11-20) has a READY session, pick today
+    const withToday = [...sessions, makeSession('s-20', '2026-11-20', 'READY')];
+    expect(selectDefaultSession(withToday, '2026-11-20')?.id).toBe('s-20');
+
+    // If today's session is COMPLETED and 24th is CANCELLED, pick 26th
+    const skipped = [
+      makeSession('s-17', '2026-11-17', 'COMPLETED'),
+      makeSession('s-20', '2026-11-20', 'COMPLETED'),
+      makeSession('s-24', '2026-11-24', 'CANCELLED'),
+      makeSession('s-26', '2026-11-26', 'PLANNED')
+    ];
+    expect(selectDefaultSession(skipped, '2026-11-20')?.id).toBe('s-26');
+
+    // If all sessions are completed in the past, fall back to the most recent one
+    const allCompleted = [
+      makeSession('s-10', '2026-11-10', 'COMPLETED'),
+      makeSession('s-17', '2026-11-17', 'COMPLETED')
+    ];
+    expect(selectDefaultSession(allCompleted, '2026-11-20')?.id).toBe('s-17');
+
+    expect(selectDefaultSession([], '2026-11-20')).toBeNull();
+  });
+
+  it('advances to the next open session in dropdown order when a session is completed', () => {
+    const makeSession = (
+      id: string,
+      session_date: string,
+      status: SessionStatus = 'PLANNED',
+      start_time = '18:30'
+    ): TrainingSession => ({
+      id,
+      team_id: 'team-mb',
+      session_date,
+      start_time,
+      end_time: '20:00',
+      planned_duration_min: 90,
+      title: `Training ${session_date}`,
+      custom_materials_override: [],
+      status,
+      updated_at: '2026-11-20T09:00:00.000Z'
+    });
+
+    const sessions = [
+      makeSession('s-17', '2026-11-17', 'COMPLETED'),
+      makeSession('s-20-a', '2026-11-20', 'READY', '17:00'),
+      makeSession('s-20-b', '2026-11-20', 'PLANNED', '19:00'),
+      makeSession('s-24', '2026-11-24', 'COMPLETED'),
+      makeSession('s-26', '2026-11-26', 'PLANNED')
+    ];
+
+    // Completing 20.11 17:00 advances to 20.11 19:00
+    expect(selectNextSessionAfterCompletion(sessions, 's-20-a', '2026-11-20')?.id).toBe('s-20-b');
+
+    // Completing 20.11 19:00 skips already-completed 24.11 and advances to 26.11
+    expect(selectNextSessionAfterCompletion(sessions, 's-20-b', '2026-11-20')?.id).toBe('s-26');
+
+    // Completing the last session (26.11) falls back to another remaining open session
+    expect(selectNextSessionAfterCompletion(sessions, 's-26', '2026-11-20')?.id).toBe('s-20-a');
+
+    // If no other non-completed session exists, returns null
+    const onlyOneOpen = [
+      makeSession('s-17', '2026-11-17', 'COMPLETED'),
+      makeSession('s-20', '2026-11-20', 'READY')
+    ];
+    expect(selectNextSessionAfterCompletion(onlyOneOpen, 's-20', '2026-11-20')).toBeNull();
   });
 });

@@ -1,0 +1,1194 @@
+[
+  {
+    "title": "Koordinationsleiter: Icky Shuffle mit anschließendem Pass-Catch",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.tv/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "FEINT_1V1",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 2
+      },
+      {
+        "type": "BALL",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Koordinationsleitern liegen parallel im Abstand von 5 Metern im Feld. Am Ende jeder Leiter steht in ca. 4 Metern Entfernung ein Zuspieler mit Handball.",
+    "flow_description": "1. Die Spieler durchlaufen die Koordinationsleiter im schnellen Icky-Shuffle-Rhythmus (zwei Schritte ins Fach, ein Schritt seitlich heraus, im Wechsel links/rechts).\n2. Unmittelbar nach dem letzten Fach erfolgt ein explosiver Antritt nach vorn.\n3. Der Zuspieler passt den Ball im Lauf zu; der Spieler fängt sauber in der Vorwärtsbewegung und spielt den Ball direkt zurück.\n4. Danach seitliches Auslaufen zur Startposition; alle 2 Minuten wechseln die Zuspieler.",
+    "coaching_points": "- Technik vor Tempo: Erst saubere Schrittfolge auf den Fußballen, dann Frequenz maximieren\n- Blick nach dem 3. Fach vom Boden lösen und Richtung Zuspieler richten\n- Aktiver Armschwung unterstützt die hohe Schrittfrequenz und Oberkörperstabilität",
+    "variations_text": "- Zuspiel erfolgt während des Durchlaufens der letzten 3 Fächer\n- Nach dem Fang sofort ein Richtungswechsel um ein Hütchen mit anschließendem Torwurf\n- Rückwärts-Icky-Shuffle für Fortgeschrittene",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.25, "y": 0.84, "isQueue": true, "queueCount": 4 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.75, "y": 0.84, "isQueue": true, "queueCount": 4 },
+        { "id": "c1", "type": "COACH_FEEDER", "label": "Z1", "x": 0.25, "y": 0.18, "hasBall": true },
+        { "id": "c2", "type": "COACH_FEEDER", "label": "Z2", "x": 0.75, "y": 0.18, "hasBall": true },
+        { "id": "w1", "type": "WAYPOINT", "label": "L1", "x": 0.25, "y": 0.50 },
+        { "id": "w2", "type": "WAYPOINT", "label": "L2", "x": 0.75, "y": 0.50 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [{ "x": 0.25, "y": 0.84 }, { "x": 0.25, "y": 0.36 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c1",
+          "toWaypointId": "w1",
+          "points": [{ "x": 0.25, "y": 0.18 }, { "x": 0.25, "y": 0.36 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [{ "x": 0.75, "y": 0.84 }, { "x": 0.75, "y": 0.36 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Koordinationsleiter: In-and-Out & Carioca für Abwehrbeinarbeit",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "FOOTWORK_DEFENSE",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Koordinationsleitern liegen längs in der Halle. Links und rechts am Ende jeder Leiter markiert ein Hütchen im Abstand von 3 Metern eine seitliche Abwehr-Sprintzone.",
+    "flow_description": "1. Durchgang 1 (In & Out): Spieler stehen seitlich zur Leiter, springen beidbeinig schnell ins Fach und wieder heraus und arbeiten sich Fach für Fach vorwärts.\n2. Durchgang 2 (Carioca): Seitliches Überkreuzen der Beine (abwechselnd vorn und hinten) mit tiefer Hüfte entlang der Leiter.\n3. Am Ende der Leiter gibt der Trainer ein Handzeichen (links/rechts), woraufhin der Spieler per defensivem Nachstellschritt zum angezeigten Hütchen sprintet.\n4. Lockeres Zurücktraben über die Außenbahn.",
+    "coaching_points": "- Tiefer Körperschwerpunkt in der Abwehrgrundstellung (Knie gebeugt, Gesäß tief)\n- Kurze, schnelle Bodenkontakte auf dem Vorfuß; Fersen bleiben in der Luft\n- Schultern beim Carioca parallel zur imaginären Torlinie halten, nur die Hüfte rotiert",
+    "variations_text": "- Zusätzlicher Prellball in der Hand während des Durchlaufens\n- Zwei Spieler starten gleichzeitig nebeneinander als Wettkampf\n- Am Ende der Leiter folgt ein Block-Sprung an einem aufgestellten Airbody",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.30, "y": 0.84, "isQueue": true, "queueCount": 4 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.70, "y": 0.84, "isQueue": true, "queueCount": 4 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "label": "L", "x": 0.14, "y": 0.24 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "label": "R", "x": 0.46, "y": 0.24 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "label": "L", "x": 0.54, "y": 0.24 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "label": "R", "x": 0.86, "y": 0.24 },
+        { "id": "tr", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.10 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d1",
+          "points": [{ "x": 0.30, "y": 0.84 }, { "x": 0.30, "y": 0.28 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "toNodeId": "c1",
+          "points": [{ "x": 0.30, "y": 0.28 }, { "x": 0.14, "y": 0.24 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Beinachsen-Stabilität: Einbeinige Seitwärtssprünge (Skater-Hops) mit Fixierung",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "FEINT_1V1",
+        "JUMP_SHOT",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "CONE",
+        "quantity": 12
+      },
+      {
+        "type": "BALL",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Jeweils 4 flache Hütchen werden im Abstand von ca. 1,20 Metern versetzt im Zickzack aufgestellt. Pro Bahn arbeiten 2–4 Spieler nacheinander.",
+    "flow_description": "1. Der Spieler springt kräftig vom linken Bein seitlich-diagonal nach rechts über das erste Hütchen und landet weich auf dem rechten Bein.\n2. Nach der Landung wird die Position exakt 2 Sekunden lang völlig stabil gehalten ('Einfrieren').\n3. Erst bei stabiler Beinachse erfolgt der nächste explosive Abdruck nach links zum nächsten Hütchen.\n4. Nach 4 Sprüngen lockeres Zurückgehen; insgesamt 3–4 Durchgänge pro Spieler.",
+    "coaching_points": "- Knie bleibt bei der Landung strikt über der Fußspitze (kein Einknicken nach innen / Valgus vermeiden!)\n- Weich über Vorfuß, Mittelfuß und Ferse abrollen und Hüfte leicht nach hinten schieben\n- Oberkörper aufrecht und Rumpf fest angespannt halten (Kreuzbandprävention)",
+    "variations_text": "- Während der 2-Sekunden-Fixierung fängt der Spieler einen Ball vom Partner und passt zurück\n- Landung auf einer Weichbodenmatte oder einem Balance-Pad zur Steigerung der Propriozeption\n- Ohne Pause direkt dynamisch durchspringen (reaktive Sprungkraft für Fortgeschrittene)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.25, "y": 0.85, "isQueue": true, "queueCount": 3 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.35, "y": 0.70 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.20, "y": 0.55 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "x": 0.35, "y": 0.40 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "x": 0.20, "y": 0.25 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.75, "y": 0.85, "isQueue": true, "queueCount": 3 },
+        { "id": "c5", "type": "EQUIPMENT_CONE", "x": 0.65, "y": 0.70 },
+        { "id": "c6", "type": "EQUIPMENT_CONE", "x": 0.80, "y": 0.55 },
+        { "id": "c7", "type": "EQUIPMENT_CONE", "x": 0.65, "y": 0.40 },
+        { "id": "c8", "type": "EQUIPMENT_CONE", "x": 0.80, "y": 0.25 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [
+            { "x": 0.25, "y": 0.85 },
+            { "x": 0.35, "y": 0.70 },
+            { "x": 0.20, "y": 0.55 },
+            { "x": 0.35, "y": 0.40 },
+            { "x": 0.20, "y": 0.25 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Handball-Athletikzirkel: 4-Säulen-Stationstraining (45/15 Sek.)",
+    "default_duration_min": 18,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball.ch/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "FOOTWORK_DEFENSE",
+        "JUMP_SHOT",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "In der Halle werden 4 Stationen im Kreis aufgebaut: Station 1 Koordinationsleiter, Station 2 Weichbodenmatten (Rumpfkraft), Station 3 Hütchen-Sprungparcours, Station 4 Pass-Station im Einbeinstand.",
+    "flow_description": "1. Die Mannschaft teilt sich gleichmäßig auf die 4 Stationen auf (2–4 Spieler pro Station).\n2. Intervallsteuerung per Timer oder Musik: 45 Sekunden intensive Belastung, 15 Sekunden Stationswechsel im Uhrzeigersinn.\n3. Station 1: Schnelle Schrittfolgen in der Leiter + Ballübergabe; Station 2: Plank mit Ball-Antippen im Wechsel; Station 3: Beid- und einbeinige Sprünge über Hütchen; Station 4: Beidhändiges schnelles Passen im Einbeinstand.\n4. Insgesamt 3 komplette Runden mit 2 Minuten Serienpause nach jeder Runde.",
+    "coaching_points": "- Bewegungsqualität geht auch bei einsetzender Ermüdung vor reiner Wiederholungszahl\n- Beim Plank kein Hohlkreuz bilden: Bauchnabel aktiv nach innen ziehen und Gesäß anspannen\n- Schneller, disziplinierter Stationswechsel innerhalb der 15 Sekunden",
+    "variations_text": "- Intervall auf 30 Sek. Belastung / 15 Sek. Pause für jüngere Altersklassen anpassen\n- Station 5 mit Kleinkasten (Aufsprünge / Box-Jumps) ergänzen\n- Partner-Wettkampf an jeder Station (z. B. maximale saubere Pässe in 45 Sekunden)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "s1", "type": "WAYPOINT", "label": "St1", "x": 0.25, "y": 0.25 },
+        { "id": "s2", "type": "EQUIPMENT_MAT", "label": "St2", "x": 0.75, "y": 0.25 },
+        { "id": "s3", "type": "EQUIPMENT_CONE", "label": "St3", "x": 0.75, "y": 0.75 },
+        { "id": "s4", "type": "OFFENSE_PLAYER", "label": "St4", "x": 0.25, "y": 0.75, "hasBall": true },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A", "x": 0.25, "y": 0.34 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "B", "x": 0.75, "y": 0.34 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "C", "x": 0.75, "y": 0.66 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromWaypointId": "s1",
+          "toNodeId": "s2",
+          "points": [{ "x": 0.25, "y": 0.25 }, { "x": 0.75, "y": 0.25 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "s2",
+          "toNodeId": "s3",
+          "points": [{ "x": 0.75, "y": 0.25 }, { "x": 0.75, "y": 0.75 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "s3",
+          "toNodeId": "s4",
+          "points": [{ "x": 0.75, "y": 0.75 }, { "x": 0.25, "y": 0.75 }]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 4,
+          "fromNodeId": "s4",
+          "toWaypointId": "s1",
+          "points": [{ "x": 0.25, "y": 0.75 }, { "x": 0.25, "y": 0.25 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Rumpfstabilisation im Partner-Plank mit Ballrollen",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.com/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "DEFENSE_INDIVIDUAL",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Jeweils zwei Spieler liegen sich im Abstand von ca. 2,5 Metern im hohen Liegestütz (oder Unterarmstütz) frontal gegenüber. Jedes Paar hat einen Handball.",
+    "flow_description": "1. Beide Spieler nehmen eine saubere, stabile Stützposition ein (Körper bildet eine gerade Linie von Kopf bis Ferse).\n2. Spieler A löst die rechte Hand und rollt bzw. stößt den Ball kontrolliert zu Spieler B.\n3. Spieler B stoppt den Ball mit der linken Hand und spielt ihn direkt zurück.\n4. 3 Sätze à 40 Sekunden Belastung mit 20 Sekunden Pause; dabei regelmäßig zwischen rechter und linker Hand wechseln.",
+    "coaching_points": "- Becken beim Lösen einer Hand absolut parallel zum Hallenboden halten (keine Ausweichrotation!)\n- Füße etwas breiter als schulterbreit aufstellen, um die Rotationsstabilität zu unterstützen\n- Gleichmäßig weiteratmen, keine Pressatmung",
+    "variations_text": "- Ausführung im Unterarmstütz (Plank) für höhere Rumpfspannung\n- Statt Rollen einen kurzen Bodenpass (Aufsetzer) spielen\n- Zwischen jedem Pass einen sauberen Liegestütz ausführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.30, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "B1", "x": 0.25, "y": 0.55 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.50, "y": 0.30, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "B2", "x": 0.50, "y": 0.55 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.75, "y": 0.30, "hasBall": true },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "B3", "x": 0.75, "y": 0.55 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.25, "y": 0.30 }, { "x": 0.25, "y": 0.55 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.50, "y": 0.30 }, { "x": 0.50, "y": 0.55 }]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a5",
+          "toNodeId": "a6",
+          "points": [{ "x": 0.75, "y": 0.30 }, { "x": 0.75, "y": 0.55 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Bilaterale Ballkoordination: Zwei-Ball-Prellen mit Zusatzaufgaben",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "WARMUP"
+      ],
+      "focus": [
+        "DRIBBLING",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Jeder Spieler erhält zwei Handbälle und bewegt sich frei in einem durch Hütchen begrenzten Feld (ca. eine Hallenhälfte).",
+    "flow_description": "1. Stufe 1: Gleichzeitiges Prellen beider Bälle im Gehen und leichten Traben.\n2. Stufe 2: Alternierendes Prellen (links/rechts im Wechsel) bei gleichzeitiger Bewegung durch die Halle.\n3. Stufe 3: Auf Zuruf des Trainers führen die Spieler Zusatzaufgaben aus (z. B. einen Ball hoch prellen, einen tief; beim Pfiff 360°-Drehung ohne Prellabbruch; Rückwärtslaufen).\n4. Stufe 4: Beim Begegnen mit einem Mitspieler wird ein Ball per Bodenpass getauscht, während der andere weitergeprellt wird.",
+    "coaching_points": "- Blick weg von den Bällen und in den Raum richten (periphere Wahrnehmung schulen)\n- Bälle aktiv aus dem Handgelenk und den Fingerkuppen drücken, nicht schlagen\n- Beide Hände gleichwertig trainieren, besonders die schwächere Hand bewusst fordern",
+    "variations_text": "- Einen Handball und einen kleineren Ball (z. B. Tennisball) kombinieren\n- Slalom um aufgestellte Hütchen mit zwei Bällen\n- Auf Kommando in die Kniebeuge gehen und weiterprellen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.24, "y": 0.42, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.52, "y": 0.36, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.74, "y": 0.48, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.38, "y": 0.68, "hasBall": true },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.66, "y": 0.72, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.24, "y": 0.42 }, { "x": 0.42, "y": 0.52 }]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.74, "y": 0.48 }, { "x": 0.58, "y": 0.60 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wurf-Athletik-Parcours mit dynamischen Sprüngen und Abschluss",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "SHOOTING",
+        "JUMP_SHOT",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 1
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      },
+      {
+        "type": "BALL",
+        "quantity": 10
+      }
+    ],
+    "setup_description": "Auf einer Hallenhälfte wird ein U-förmiger Parcours aufgebaut: Koordinationsleiter an der linken Seitenlinie, 2 kleine Kästen (oder Hürden) an der Mittellinie, 4 Slalom-Hütchen auf halbrechts. Ein Zuspieler steht auf Rückraum Mitte mit Bällen.",
+    "flow_description": "1. Der Spieler absolviert die Koordinationsleiter im schnellen Vorwärtslauf (Two Foot In).\n2. Anschließend folgen 2 explosive Strecksprünge über die kleinen Kästen (bzw. Auf- und Absprung) mit sauberer Landung.\n3. Danach durchläuft der Spieler im maximalen Tempo die 4 Slalom-Hütchen Richtung 9-Meter-Linie.\n4. Direkt nach dem letzten Hütchen erhält er vom Zuspieler den Pass und schließt trotz Vorermüdung mit einem sauberen Sprungwurf auf das Tor ab.",
+    "coaching_points": "- Trotz hoher Pulsfrequenz beim abschließenden Wurf auf saubere Wurfauslage, hohen Absprung und platzierten Abschluss achten\n- Reaktive Bodenkontakte bei den Sprüngen (kurz und explosiv)\n- Zuspieler passt exakt in den Laufweg nach dem letzten Hütchen",
+    "variations_text": "- Vor der Leiter 5 Burpees oder 8 Liegestütze einbauen\n- Abschluss als Schlagwurf aus dem Lauf statt Sprungwurf\n- Zwei parallele Parcours (links und rechts) für höhere Durchlaufzahl",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.16, "y": 0.82, "isQueue": true, "queueCount": 5 },
+        { "id": "w1", "type": "WAYPOINT", "label": "L", "x": 0.16, "y": 0.58 },
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "K1", "x": 0.38, "y": 0.72 },
+        { "id": "m2", "type": "EQUIPMENT_MAT", "label": "K2", "x": 0.56, "y": 0.72 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.76, "y": 0.66 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.70, "y": 0.54 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "x": 0.76, "y": 0.44 },
+        { "id": "tr", "type": "COACH_FEEDER", "label": "Z", "x": 0.48, "y": 0.50, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [
+            { "x": 0.16, "y": 0.82 },
+            { "x": 0.16, "y": 0.58 },
+            { "x": 0.38, "y": 0.72 },
+            { "x": 0.56, "y": 0.72 },
+            { "x": 0.76, "y": 0.66 },
+            { "x": 0.70, "y": 0.54 },
+            { "x": 0.76, "y": 0.44 },
+            { "x": 0.66, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "tr",
+          "points": [{ "x": 0.48, "y": 0.50 }, { "x": 0.66, "y": 0.32 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "toNodeId": "gk1",
+          "points": [{ "x": 0.66, "y": 0.32 }, { "x": 0.46, "y": 0.10 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Reaktions- und Antrittsschnelligkeit im Farbsprint-Viereck",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "FOOTWORK_DEFENSE",
+        "FEINT_1V1",
+        "FAST_BREAK_1ST_WAVE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "CONE",
+        "quantity": 12
+      }
+    ],
+    "setup_description": "Für je 3–4 Spieler wird ein Quadrat (6 x 6 m) mit 4 verschiedenfarbigen Hütchen (oder nummerierten Ecken 1–4) abgesteckt. Ein Spieler steht im Zentrum in aktiver Grundstellung, ein Partner gibt die Kommandos.",
+    "flow_description": "1. Der Spieler im Zentrum trippelt locker auf der Stelle (Skippings) in tiefer Abwehrposition.\n2. Der Kommandogeber ruft eine Farbe (oder zeigt sie per Handzeichen an).\n3. Der Spieler sprintet explosiv zum entsprechenden Hütchen, tippt es kurz an und bewegt sich rückwärts bzw. seitlich schnell wieder ins Zentrum.\n4. Pro Durchgang werden 6–8 Signale in Folge gegeben (ca. 15–20 Sek. maximale Intensität), danach Rollenwechsel (Verhältnis Belastung zu Pause ca. 1:3).",
+    "coaching_points": "- Erster Schritt zählt: Knie tief, Oberkörper leicht nach vorn neigen und explosiv abdrücken\n- Volle Erholung zwischen den Durchgängen einhalten, da echte Schnelligkeit nur ausgeruht trainiert wird\n- Visuelle Signale (Hütchen hochhalten) bevorzugen, da im Spiel primär optisch reagiert wird",
+    "variations_text": "- Inverse Regel: Bei 'Rot' muss das diagonal gegenüberliegende Hütchen angelaufen werden (kognitive Kopplung)\n- Mit Handball in der Hand prellend zum Hütchen sprinten\n- Zwei Spieler im direkten Duell gegeneinander",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.30, "y": 0.50 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "label": "1", "x": 0.14, "y": 0.30 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "label": "2", "x": 0.46, "y": 0.30 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "label": "3", "x": 0.14, "y": 0.70 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "label": "4", "x": 0.46, "y": 0.70 },
+        { "id": "tr", "type": "COACH_FEEDER", "label": "P1", "x": 0.30, "y": 0.14 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c2",
+          "points": [{ "x": 0.30, "y": 0.50 }, { "x": 0.46, "y": 0.30 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c2",
+          "toNodeId": "a1",
+          "points": [{ "x": 0.46, "y": 0.30 }, { "x": 0.30, "y": 0.50 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Propriozeption & Gleichgewicht: Passen auf der Weichbodenmatte",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.hvw-online.org/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "BALL",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei Weichbodenmatten liegen im Abstand von ca. 4 Metern parallel zueinander. Je 2–3 Spieler stehen im Einbeinstand auf einer Matte und passen sich gegenüberstehend Bälle zu.",
+    "flow_description": "1. Die Spieler stellen sich barfuß oder in Hallenschuhen auf das rechte Bein auf die Weichbodenmatte.\n2. Über 45 Sekunden werden schnelle, präzise Pässe (Brustpass, Schlagwurfpass, Bodenpass) mit dem Partner auf der gegenüberliegenden Matte gespielt.\n3. Nach 45 Sekunden erfolgt der Beinwechsel auf das linke Bein.\n4. Wer das Gleichgewicht verliert und den zweiten Fuß absetzen muss, macht 2 schnelle Kniebeugen auf der Matte und steigt sofort wieder ein.",
+    "coaching_points": "- Standbein leicht gebeugt halten, Fußgewölbe aktiv stabilisieren\n- Pässe bewusst leicht seitlich außerhalb der Körperachse spielen, um die Gleichgewichtsreaktion zu fordern\n- Rumpf aufrecht halten und nicht ins Hohlkreuz fallen",
+    "variations_text": "- Zusätzliche Aufgabe: Vor dem Zurückpassen den Ball einmal um die Hüfte kreisen\n- Partner wirft abwechselnd hoch, tief, links und rechts\n- Mit dem anderen Bein während des Passens kleine Kreise in der Luft zeichnen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "m1", "type": "EQUIPMENT_MAT", "label": "M1", "x": 0.30, "y": 0.50 },
+        { "id": "m2", "type": "EQUIPMENT_MAT", "label": "M2", "x": 0.70, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.30, "y": 0.38, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.30, "y": 0.62 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.70, "y": 0.38 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.70, "y": 0.62, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.30, "y": 0.38 }, { "x": 0.70, "y": 0.38 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a4",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.70, "y": 0.62 }, { "x": 0.30, "y": 0.62 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungkraft & Plyometrie: Kasten-Absprünge mit Reaktiv-Sprung",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 14,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei kleine Turnkästen (ca. 30–40 cm Höhe) stehen parallel mit ausreichend Auslauf. Direkt vor jedem Kasten liegt eine flache Markierung für den Absprungpunkt.",
+    "flow_description": "1. Der Spieler steht auf dem kleinen Kasten, tritt mit einem Fuß nach vorn ab und landet beidbeinig federnd auf dem Hallenboden (Drop Jump).\n2. Unmittelbar nach dem Bodenkontakt (möglichst kurze Kontaktzeit!) erfolgt ein maximaler Strecksprung senkrecht nach oben mit hochgestreckten Armen (Blockbewegung).\n3. Nach sauberer, gedämpfter Endlandung steigt der Spieler locker zurück und stellt sich hinten an.\n4. 3 Sätze à 6 Wiederholungen mit mindestens 90 Sekunden Satzpause.",
+    "coaching_points": "- Nur für gut aufgewärmte, athletisch ausgebildete Spieler ab B-Jugend geeignet\n- Minimaler Bodenkontakt beim Umschalten (wie auf eine heiße Herdplatte springen)\n- Knie bleiben bei beiden Landungen stabil in der Beinachse, kein tiefes Einsacken",
+    "variations_text": "- Nach dem Reaktiv-Sprung in der Luft einen zugeworfenen Ball fangen (Rebound-Training)\n- Einbeiniger Absprung nach dem Kasten in eine imitierte Sprungwurf-Bewegung\n- Beidbeiniger Aufsprung auf den Kasten (Box Jump) statt Drop Jump für Jüngere",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "b1", "type": "EQUIPMENT_MAT", "label": "K1", "x": 0.30, "y": 0.60 },
+        { "id": "b2", "type": "EQUIPMENT_MAT", "label": "K2", "x": 0.70, "y": 0.60 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.30, "y": 0.76, "isQueue": true, "queueCount": 4 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.70, "y": 0.76, "isQueue": true, "queueCount": 4 },
+        { "id": "w1", "type": "WAYPOINT", "label": "Spr", "x": 0.30, "y": 0.35 },
+        { "id": "w2", "type": "WAYPOINT", "label": "Spr", "x": 0.70, "y": 0.35 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b1",
+          "toWaypointId": "w1",
+          "points": [{ "x": 0.30, "y": 0.60 }, { "x": 0.30, "y": 0.35 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b2",
+          "toWaypointId": "w2",
+          "points": [{ "x": 0.70, "y": 0.60 }, { "x": 0.70, "y": 0.35 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Handball-Körperspannung: Partner-Schiebe- und Zug-Duelle",
+    "default_duration_min": 10,
+    "min_players": 6,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "DEFENSE_INDIVIDUAL",
+        "OFFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Jeweils zwei ungefähr gleich schwere Spieler stehen sich an einer Hallenlinie (z. B. Seitenlinie oder 9-Meter-Linie) gegenüber.",
+    "flow_description": "1. Übung 1 (Schulter-Schieben): Beide Spieler stützen ihre Hände gegeneinander (Schulterhöhe) und versuchen bei tiefer Hüfte, den Partner über eine 2 m entfernte Ziellinie zu schieben.\n2. Übung 2 (Knie-Ticken): Im engen 2x2-m-Feld versuchen beide Spieler in tiefer Abwehrstellung, die Knie des Partners anzutippen, ohne selbst berührt zu werden.\n3. Übung 3 (Ball-Eroberung): Beide greifen gleichzeitig denselben Handball und versuchen 15 Sekunden lang, ihn fair aus dem Griff des Partners zu drehen.\n4. Je Übung 3 Durchgänge à 20 Sekunden mit 30 Sekunden Pause.",
+    "coaching_points": "- Tiefer Körperschwerpunkt ist der Schlüssel: Wer tiefer steht, gewinnt das Duell\n- Gerader Rücken und feste Bauchspannung bei allen Schiebe- und Zugbelastungen\n- Faire, kontrollierte Zweikampfführung ohne Reißen an der Kleidung",
+    "variations_text": "- Im Vierfüßlerstand (Bärengang) Schulter-an-Schulter gegeneinander drücken\n- Ein Spieler versucht als 'Kreisläufer', eine markierte Zone 15 Sekunden lang gegen den Verteidiger zu behaupten\n- Partnerwechsel nach jeder Runde (Turnierform)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.25, "y": 0.45 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.25, "y": 0.55 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.50, "y": 0.45 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.50, "y": 0.55 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.75, "y": 0.45 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "B3", "x": 0.75, "y": 0.55 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "d1",
+          "points": [{ "x": 0.25, "y": 0.45 }, { "x": 0.25, "y": 0.55 }]
+        },
+        {
+          "id": "p2",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "d2",
+          "points": [{ "x": 0.50, "y": 0.45 }, { "x": 0.50, "y": 0.55 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Auge-Hand-Kopplung: Wand-Passen mit Zusatzball und Drehung",
+    "default_duration_min": 10,
+    "min_players": 2,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      }
+    ],
+    "setup_description": "Alle Spieler stehen im Abstand von 2 bis 3 Metern mit dem Gesicht zur freien Hallenwand. Jeder Spieler hat 2 Handbälle (oder 1 Handball + 1 kleineren Ball).",
+    "flow_description": "1. Aufgabe 1: Einen Ball im schnellen Rhythmus einhändig (erst rechts, dann links) gegen die Wand werfen und direkt fangen (je 30 Sek.).\n2. Aufgabe 2: Zwei Bälle abwechselnd (Jonglier-Rhythmus) gegen die Wand werfen und mit der jeweils selben Hand wieder auffangen.\n3. Aufgabe 3: Einen Ball hoch an die Wand werfen, eine schnelle 360°-Drehung um die eigene Längsachse ausführen und den Ball sicher fangen.\n4. Aufgabe 4: Einen Ball über Kreuz (mit rechts werfen, mit links fangen) während gleichzeitig leichte Skippings gelaufen werden.",
+    "coaching_points": "- Weiche, nachgebende Fangbewegung mit gespreizten Fingern\n- Hohe Konzentration auf das Timing zwischen Abwurf und Rückprall\n- Bei Fehlern sofort ruhig neu ansetzen; Frustrationstoleranz gehört zum Koordinationstraining",
+    "variations_text": "- Auf einem Bein stehend ausführen\n- Partner steht hinter dem Werfer und ruft eine Zahl (1–5), die der Werfer laut nennen muss\n- Mit beiden Bällen gleichzeitig (synchron) gegen die Wand werfen und überkreuz fangen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.20, "y": 0.35, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.40, "y": 0.35, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.60, "y": 0.35, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.80, "y": 0.35, "hasBall": true },
+        { "id": "w1", "type": "WAYPOINT", "label": "W", "x": 0.20, "y": 0.08 },
+        { "id": "w2", "type": "WAYPOINT", "label": "W", "x": 0.40, "y": 0.08 },
+        { "id": "w3", "type": "WAYPOINT", "label": "W", "x": 0.60, "y": 0.08 },
+        { "id": "w4", "type": "WAYPOINT", "label": "W", "x": 0.80, "y": 0.08 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [{ "x": 0.20, "y": 0.35 }, { "x": 0.20, "y": 0.08 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [{ "x": 0.40, "y": 0.35 }, { "x": 0.40, "y": 0.08 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Handballspezifische Schnelligkeitsausdauer: Linien-Pendelsprints mit Ball",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "FAST_BREAK_1ST_WAVE",
+        "RETREAT",
+        "DRIBBLING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Alle Spieler stehen an der Grundlinie, jeweils zwei Spieler teilen sich eine Bahn und einen Handball. Die Linien des Feldes dienen als Wendemarken (6 m, 9 m, Mittellinie, gegenüberliegende 9 m).",
+    "flow_description": "1. Spieler A startet auf Pfiff und sprintet bis zur 9-Meter-Linie, berührt sie mit der Hand und sprintet zurück zur Grundlinie.\n2. Direkt im Anschluss sprintet er zur Mittellinie und zurück, danach zur gegenüberliegenden 9-Meter-Linie und zurück (Shuttle-Run).\n3. Während des Sprints wird auf den Vorwärtsstrecken ein Handball sauber geprellt (auf den Rückwärtsstrecken Ball sicher in der Hand oder defensives Rückwärtslaufen).\n4. Übergabe des Balls an Partner B; 3 Durchgänge pro Spieler mit aktiver Erholung während der Partner läuft.",
+    "coaching_points": "- Sauberes Abbremsen und tiefes Wenden an jeder Linie (Körperschwerpunkt absenken)\n- Kein Schrittfehler beim Übergang vom Prellen zum Sprint oder bei der Ballübergabe\n- Maximale Intensität bis über die letzte Ziellinie durchziehen",
+    "variations_text": "- Staffellauf zweier Teams gegeneinander als Motivation\n- Am Ende des letzten Rücksprints erfolgt ein Pass zum Trainer und ein Gegenstoß-Abschluss aufs Tor\n- Ohne Ball mit defensiven Nachstellschritten auf den Rückwegen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.08, "y": 0.25, "hasBall": true, "isQueue": true, "queueCount": 2 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.08, "y": 0.50, "hasBall": true, "isQueue": true, "queueCount": 2 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.08, "y": 0.75, "hasBall": true, "isQueue": true, "queueCount": 2 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.28, "y": 0.25 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.50, "y": 0.25 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "x": 0.72, "y": 0.25 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c1",
+          "points": [{ "x": 0.08, "y": 0.25 }, { "x": 0.28, "y": 0.25 }]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "c2",
+          "points": [{ "x": 0.08, "y": 0.25 }, { "x": 0.50, "y": 0.25 }]
+        },
+        {
+          "id": "p3",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a1",
+          "toNodeId": "c3",
+          "points": [{ "x": 0.08, "y": 0.25 }, { "x": 0.72, "y": 0.25 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schulter-Prävention & Wurf-Stabilität: Ausfallschritt-Rotation mit Ball",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 18,
+    "goalkeepers": 0,
+    "source_url": "https://www.vbg.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "WARMUP"
+      ],
+      "focus": [
+        "SHOOTING",
+        "STANDING_THROW",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      }
+    ],
+    "setup_description": "Alle Spieler stehen mit ausreichend Abstand (ca. 2 m) an einer Seitenlinie mit je einem Handball (oder leichtem Medizinball ab B-Jugend).",
+    "flow_description": "1. Der Spieler macht einen kontrollierten, weiten Ausfallschritt nach vorn (vorderes Knie ca. 90°, hinteres Knie schwebt knapp über dem Boden).\n2. Mit gestreckten Armen vor dem Körper rotiert der Oberkörper kontrolliert zur Seite des vorderen Beins und zurück zur Mitte.\n3. Danach führt der Spieler den Ball über den Kopf in eine kontrollierte Wurfauslage und drückt sich dynamisch über das vordere Bein in den nächsten Ausfallschritt ab.\n4. Zwei Bahnen quer durch die Halle (ca. 20 m pro Bahn), dazwischen kurzes Auslockern.",
+    "coaching_points": "- Vorderes Knie bleibt stabil über dem Sprunggelenk und kippt nicht nach innen\n- Rotation kommt aus der Brustwirbelsäule, das Becken bleibt stabil nach vorn ausgerichtet\n- Schulterblätter beim Anheben des Balls bewusst nach hinten-unten fixieren",
+    "variations_text": "- Rückwärts-Ausfallschritte für veränderte Muskelansteuerung\n- Am tiefsten Punkt des Ausfallschritts einen kurzen Partnerpass spielen\n- Mit 2-kg-Medizinball (ab B-Jugend/Aktive) für höhere Kraftkomponente",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.14, "y": 0.25, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.14, "y": 0.45, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.14, "y": 0.65, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.14, "y": 0.85, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.14, "y": 0.25 }, { "x": 0.86, "y": 0.25 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.14, "y": 0.45 }, { "x": 0.86, "y": 0.45 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.14, "y": 0.65 }, { "x": 0.86, "y": 0.65 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Koordinations-Staffel: Einbein-Hopser, Slalom und Zielwurf",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.tv/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "DRIBBLING",
+        "SHOOTING",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 8
+      },
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "MINI_GOAL",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei identische Staffelbahnen nebeneinander: Startlinie -> Koordinationsleiter (5 m) -> 4 Slalom-Hütchen -> Wurfmarkierung vor einem Minitor (oder Hütchen-Ziel). Zwei Teams starten im Wettkampf.",
+    "flow_description": "1. Der erste Spieler jedes Teams durchspringt die Koordinationsleiter einbeinig (hin auf rechts, bei der nächsten Runde auf links).\n2. Direkt nach der Leiter nimmt er den bereitliegenden Handball auf und prellt im hohen Tempo im Slalom um die 4 Hütchen.\n3. An der Wurfmarkierung wirft er den Ball kontrolliert ins Minitor, holt den Ball, legt ihn zurück an das Ende der Leiter und sprintet zum Abklatschen zurück.\n4. Gewonnen hat das Team, das zuerst 2 komplette Durchgänge absolviert und die meisten Treffer erzielt hat.",
+    "coaching_points": "- Hoher Spaßfaktor durch Staffelcharakter, dennoch auf saubere einbeinige Sprunglandung achten\n- Beim Slalom-Prellen immer mit der hütchenfernen Hand prellen (Ball abschirmen)\n- Vor dem Wurf kurz abbremsen und gezielt werfen statt hektisch zu schleudern",
+    "variations_text": "- Rückweg im Rückwärtslauf oder Krebsgang\n- Statt Minitor muss ein auf einem Kasten liegender Ball heruntergeworfen werden\n- Bei Fehlwurf muss eine kurze Zusatzrunde um ein Hütchen gelaufen werden",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "T1", "x": 0.28, "y": 0.88, "isQueue": true, "queueCount": 5 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "T2", "x": 0.72, "y": 0.88, "isQueue": true, "queueCount": 5 },
+        { "id": "w1", "type": "WAYPOINT", "label": "L1", "x": 0.28, "y": 0.68 },
+        { "id": "w2", "type": "WAYPOINT", "label": "L2", "x": 0.72, "y": 0.68 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.28, "y": 0.48 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.28, "y": 0.34 },
+        { "id": "c3", "type": "EQUIPMENT_CONE", "x": 0.72, "y": 0.48 },
+        { "id": "c4", "type": "EQUIPMENT_CONE", "x": 0.72, "y": 0.34 },
+        { "id": "g1", "type": "EQUIPMENT_GOAL_TARGET", "label": "MT1", "x": 0.28, "y": 0.12 },
+        { "id": "g2", "type": "EQUIPMENT_GOAL_TARGET", "label": "MT2", "x": 0.72, "y": 0.12 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c2",
+          "points": [{ "x": 0.28, "y": 0.88 }, { "x": 0.28, "y": 0.68 }, { "x": 0.24, "y": 0.48 }, { "x": 0.32, "y": 0.34 }]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "toNodeId": "g1",
+          "points": [{ "x": 0.32, "y": 0.34 }, { "x": 0.28, "y": 0.12 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kognitive Handlungsschnelligkeit: Zahlen- und Richtungs-Prellen",
+    "default_duration_min": 10,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "WARMUP"
+      ],
+      "focus": [
+        "DRIBBLING",
+        "FEINT_1V1",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Jeder Spieler hat einen Handball und prellt frei in einer Hallenhälfte. Der Trainer steht gut sichtbar an der Mittellinie und hält verschiedenfarbige Leibchen oder zeigt Fingerzahlen.",
+    "flow_description": "1. Alle Spieler prellen im lockeren Lauftempo durch das Feld und behalten dabei stets den Trainer im peripheren Blickfeld.\n2. Zeigt der Trainer 1 Finger -> sofortiger Handwechsel beim Prellen; 2 Finger -> dynamische Körpertäuschung mit Tempowechsel; 3 Finger -> schneller Bodenkontakt mit der freien Hand; 4 Finger -> 360°-Drehung.\n3. Nach 3 Minuten werden die Signale kombiniert (z. B. Leibchenfarbe = Richtungssprint zur entsprechenden Hallenwand).\n4. Kurze Pausen nach jeweils 90 Sekunden hochkonzentrierter Arbeit.",
+    "coaching_points": "- Kopf bleibt permanent oben! Wer auf den Ball schaut, verpasst die visuellen Signale\n- Explosiver Antritt nach jeder Täuschung oder Richtungsänderung\n- Raumorientierung bewahren, um Zusammenstöße mit Mitspielern aktiv zu vermeiden",
+    "variations_text": "- Einfache Rechenaufgaben zurufen (gerades Ergebnis = rechts vorbeiziehen, ungerades = links)\n- Zwei Spieler ohne Ball agieren als Störer, die versuchen, Bälle wegzutippen\n- Abschluss auf Kommando: Alle Spieler sprinten zum nächsten freien Ball oder in eine markierte Zone",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "tr", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.88 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "S1", "x": 0.22, "y": 0.45, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "S2", "x": 0.48, "y": 0.40, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "S3", "x": 0.76, "y": 0.46, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "S4", "x": 0.35, "y": 0.65, "hasBall": true },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "S5", "x": 0.68, "y": 0.68, "hasBall": true }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.22, "y": 0.45 }, { "x": 0.34, "y": 0.52 }, { "x": 0.26, "y": 0.60 }]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.76, "y": 0.46 }, { "x": 0.62, "y": 0.54 }]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,1290 @@
+[
+  {
+    "title": "Zielspiel 6 gegen 6 mit Doppelpunkten nach Kreisläufer-Anspiel",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "CROSSING_SCREEN"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 plus Torhüter auf dem gesamten Handballfeld. Eine Mannschaft trägt Leibchen.",
+    "flow_description": "1. Gespielt wird nach regulären Handballregeln über das gesamte Spielfeld.\n2. Jedes reguläre Tor aus dem Rückraum oder von außen zählt 1 Punkt.\n3. Ein Tor nach direktem Anspiel an den Kreisläufer (oder nach einer erfolgreichen Sperre-Absetzen-Aktion) zählt doppelt (2 Punkte).\n4. Nach einem Torerfolg erfolgt ein schneller Anwurf, um direkt das Umschaltspiel einzubinden.",
+    "coaching_points": "- Rückraumspieler müssen tief auf die Nahtstellen stoßen, um Abwehrspieler zu binden und Passfenster zum Kreis zu öffnen\n- Kreisläufer arbeiten aktiv im Rücken der Abwehr und bieten eine klare Fanghand an\n- Abwehr kommuniziert frühzeitig bei Sperren und Übergaben am Kreis",
+    "variations_text": "- Bodenpass zum Kreisläufer als Pflichtbedingung für den Bonuspunkt\n- Auch ein erfolgreicher 7-Meter, der durch den Kreisläufer herausgeholt wird, zählt doppelt\n- Rückraumtore zählen erst, wenn zuvor mindestens ein Übergang oder eine Kreuzung stattgefunden hat",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.22, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.35, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "IL", "x": 0.45, "y": 0.30 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "IR", "x": 0.55, "y": 0.30 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.65, "y": 0.28 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.78, "y": 0.24 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.12, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.48 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.5, "y": 0.52, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.48 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.88, "y": 0.22 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.58, "y": 0.33 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.5, "y": 0.52 }, { "x": 0.48, "y": 0.39 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a6",
+          "points": [{ "x": 0.48, "y": 0.39 }, { "x": 0.58, "y": 0.33 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a6",
+          "toNodeId": "gk1",
+          "points": [{ "x": 0.58, "y": 0.33 }, { "x": 0.52, "y": 0.10 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Prellverbot-Zielspiel auf dem Großfeld",
+    "default_duration_min": 18,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 5 gegen 5 oder 6 gegen 6 mit Torhütern auf dem gesamten Handballfeld.",
+    "flow_description": "1. Beide Teams spielen Handball ohne jegliches Prellen.\n2. Jeder Spieler darf maximal 3 Schritte mit dem Ball machen und muss den Ball spätestens nach 3 Sekunden weiterspielen oder werfen.\n3. Verstöße gegen das Prellverbot führen sofort zu Ballbesitzwechsel (Freiwurf für den Gegner).\n4. Nach Ballgewinn soll der Gegenstoß ausschließlich über schnelle Passstafetten vorgetragen werden.",
+    "coaching_points": "- Ständige Laufbereitschaft ohne Ball, um dem Ballbesitzer mindestens zwei Passoptionen anzubieten\n- Ball in der Vorwärtsbewegung fangen, um die drei Schritte optimal für Raumgewinn zu nutzen\n- Blick frühzeitig heben und Passwege vor der Ballannahme scannen",
+    "variations_text": "- Maximal ein Prellen beim Tempogegenstoß erlauben\n- Direkte Rückpässe zum vorherigen Passgeber verbieten\n- Bei Zeitspiel nach 6 Pässen muss ein Abschluss erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.08, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.92, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.30, "y": 0.25, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.48, "y": 0.50 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.65, "y": 0.72 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.42, "y": 0.35 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.60, "y": 0.55 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.30, "y": 0.25 }, { "x": 0.48, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.48, "y": 0.50 }, { "x": 0.65, "y": 0.72 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "points": [{ "x": 0.65, "y": 0.72 }, { "x": 0.80, "y": 0.60 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel mit permanentem Überzahl-Joker (6+1 gegen 6)",
+    "default_duration_min": 20,
+    "min_players": 13,
+    "max_players": 15,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei 6er-Teams spielen gegeneinander auf dem Großfeld. Ein neutraler Spieler (Joker) trägt ein andersfarbiges Leibchen und spielt immer für die ballbesitzende Mannschaft.",
+    "flow_description": "1. Die angreifende Mannschaft befindet sich durch den Joker permanent im 7-gegen-6-Überzahlspiel.\n2. Ziel des Angriffs ist es, die Überzahl konsequent bis auf die freie Außen- oder Kreisposition durchzuspielen.\n3. Bei Ballverlust oder Torerfolg wechselt der Joker sofort die Spielrichtung und unterstützt das neue Angriffsteam.\n4. Alle 5 Minuten wird der Joker gewechselt, damit alle Spieler diese Schlüsselrolle erleben.",
+    "coaching_points": "- Angriff muss breit stehen und durch schnelles Weiterspielen die Abwehr zum Verschieben zwingen\n- Keine überhasteten Abschlüsse aus dem Rückraum, wenn auf der ballfernen Seite eine freie Wurfchance wartet\n- Abwehr übt das kontrollierte Verschieben in Unterzahl und das Abdrängen auf ungünstige Wurfwinkel",
+    "variations_text": "- Der Joker darf selbst keine Tore werfen, sondern nur vorbereiten\n- Der Joker darf nur als zweiter Kreisläufer agieren (Training 7-gegen-6-Taktik)\n- Reduzierte Variante im 4+1 gegen 4 auf verkürztem Feld",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.24, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.36, "y": 0.29 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.46, "y": 0.31 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.56, "y": 0.31 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "V5", "x": 0.67, "y": 0.28 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "V6", "x": 0.78, "y": 0.23 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.10, "y": 0.20 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.48, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.48 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.90, "y": 0.20 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.42, "y": 0.34 },
+        { "id": "joker", "type": "OFFENSE_PLAYER", "label": "J", "x": 0.62, "y": 0.35 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.26, "y": 0.48 }, { "x": 0.50, "y": 0.52 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.74, "y": 0.48 }]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a4",
+          "toNodeId": "a5",
+          "points": [{ "x": 0.74, "y": 0.48 }, { "x": 0.90, "y": 0.20 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Umschalt-Zielspiel mit Pendelspieler (4 gegen 3 + 1)",
+    "default_duration_min": 18,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_1ST_WAVE",
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 3
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf dem Großfeld stehen sich zwei 4er-Teams gegenüber. An den Seitenlinien auf Höhe der Mittellinie markieren Hütchen die Wartezone für je einen Pendelspieler pro Team.",
+    "flow_description": "1. Team A greift im 4 gegen 3 gegen Team B an; der 4. Spieler von Team B wartet an der Mittellinie.\n2. Sobald Team B den Ball gewinnt (Torhüterparade, Steal oder Torerfolg), startet der wartende Spieler sofort in die 1. Welle.\n3. Gleichzeitig muss ein Spieler von Team A (der Werfer oder der ballfernste Spieler) erst die Mittellinie berühren, bevor er zurücklaufen darf.\n4. Dadurch entsteht im Gegenzug sofort wieder ein schnelles 4 gegen 3 für Team B.",
+    "coaching_points": "- Nach Ballgewinn sofort Kopf hoch und den startenden Mitspieler mit einem präzisen langen Pass bedienen\n- In der 2. Welle gezielt die Überzahl mit hohem Tempo ausspielen\n- Im Rückzug sofort den gefährlichsten zentralen Raum schließen und lautstark zuordnen",
+    "variations_text": "- Bei jedem Tor aus der 1. oder 2. Welle innerhalb von 6 Sekunden gibt es 2 Punkte\n- Zwei Bälle beim Torhüter deponieren, damit nach Fehlwurf keine Sekunde verloren geht\n- Erweiterung auf 5 gegen 4 + 1 Pendelspieler",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.08, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.92, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.28, "y": 0.25 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.34, "y": 0.50, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.28, "y": 0.75 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.22, "y": 0.50 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.20, "y": 0.32 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.20, "y": 0.50 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.20, "y": 0.68 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "P", "x": 0.50, "y": 0.14 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.50, "y": 0.08 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d4",
+          "points": [{ "x": 0.50, "y": 0.14 }, { "x": 0.80, "y": 0.30 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "gk1",
+          "toNodeId": "d4",
+          "points": [{ "x": 0.08, "y": 0.50 }, { "x": 0.78, "y": 0.30 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Einläufer-Zielspiel mit Pflicht-Auslösehandlung",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "DEFENSE_6_0"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "6 gegen 6 plus Torhüter auf dem Großfeld. Die Abwehr agiert zunächst in einer kompakten 6:0-Formation.",
+    "flow_description": "1. Im Positionsangriff darf ein Torwurf erst erfolgen, nachdem ein Außenspieler als zweiter Kreisläufer eingelaufen ist (Übergang).\n2. Durch das Einlaufen entsteht ein 4-gegen-6- bzw. 3-gegen-4-Überzahlspiel im Rückraum oder eine 2-Kreisläufer-Formation.\n3. Erzielt der eingelaufene Außenspieler selbst oder der Rückraumspieler direkt im Anschluss an den Übergang ein Tor, zählt es 2 Punkte.\n4. Nach Ballgewinn darf die Abwehr frei in den Gegenstoß umschalten.",
+    "coaching_points": "- Timing des Einläufers: Erst starten, wenn der Ball auf der gegenüberliegenden Seite in Bewegung ist\n- Rückraumspieler ziehen die Abwehr breit und nutzen das kurze Abstimmungschaos bei der Übergabe\n- Abwehr muss lautstark rufen ('Übergang!') und sauber übergeben bzw. übernehmen",
+    "variations_text": "- Abwehr wechselt nach 10 Minuten auf eine offensive 5:1-Deckung\n- Übergang muss zwingend mit einer Kreuzung im Rückraum gekoppelt werden\n- Bei Zeitspiel (Handzeichen Trainer) entfällt die Pflichtbedingung",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.22, "y": 0.23 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.34, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.45, "y": 0.30 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.55, "y": 0.30 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "V5", "x": 0.66, "y": 0.28 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "V6", "x": 0.78, "y": 0.23 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.12, "y": 0.20 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.48 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.48 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.88, "y": 0.20 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.60, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.12, "y": 0.20 }, { "x": 0.38, "y": 0.33 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.28, "y": 0.48 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.28, "y": 0.48 }, { "x": 0.26, "y": 0.32 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Parteiball-Zielspiel mit 6-Pass-Freigabe",
+    "default_duration_min": 15,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_TEAM",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen auf dem gesamten Feld mit Torhütern. Es wird zunächst eine offensive Manndeckung oder 3:2:1-Abwehr gespielt.",
+    "flow_description": "1. Die ballbesitzende Mannschaft muss zunächst 6 erfolgreiche Pässe in Folge spielen und laut mitzählen.\n2. Erst nach dem 6. Pass ist das gegnerische Tor zum Abschluss freigegeben.\n3. Gelingt der Abwehr zuvor ein Ballgewinn, beginnt der Zähler für das neue Team wieder bei null.\n4. Nach einem Torerfolg wechselt der Ballbesitz sofort an der Grundlinie bzw. per Anwurf.",
+    "coaching_points": "- Geduld im Aufbauspiel entwickeln und keine Risikopässe unter Druck erzwingen\n- Nach dem 6. Pass sofort das Tempo anziehen und konsequent die Tiefe zum Tor suchen\n- Abwehr versucht gezielt Passwege zuzustellen und Druck auf den Ballbesitzer auszuüben",
+    "variations_text": "- Passanzahl auf 4 reduzieren (schnelleres Spiel) oder auf 8 erhöhen\n- Mindestens ein Pass muss im gegnerischen 9-Meter-Raum gefangen werden\n- Prellen erst nach Freigabe des Tores erlauben",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.08, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.92, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.35, "y": 0.30, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.50, "y": 0.70 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.68, "y": 0.35 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.76, "y": 0.65 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.40, "y": 0.34 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.54, "y": 0.64 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.40 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.78, "y": 0.60 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.35, "y": 0.30 }, { "x": 0.50, "y": 0.70 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.50, "y": 0.70 }, { "x": 0.68, "y": 0.35 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toNodeId": "gk2",
+          "points": [{ "x": 0.68, "y": 0.35 }, { "x": 0.90, "y": 0.48 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Abwehr-Zielspiel: Ballgewinn zählt wie ein Tor",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "DEFENSE_6_0",
+        "DEFENSE_3_2_1",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 mit Torhütern auf dem Großfeld. Der Trainer legt vorab das Abwehrsystem fest (z. B. 3:2:1 oder offensive 5:1).",
+    "flow_description": "1. Es wird ein reguläres Handballspiel über 2 x 10 Minuten ausgetragen.\n2. Neben regulären Toren (1 Punkt) erhält die abwehrende Mannschaft jeweils 1 Punkt für: einen abgefangenen Pass (Steal), einen geblockten Wurf im Verbund oder das Erzwingen eines Stürmerfouls / technischen Fehlers.\n3. Gelingt nach einem solchen Ballgewinn zudem ein direktes Gegenstoßtor, gibt es insgesamt 3 Punkte.\n4. Der Trainer zählt die Abwehrpunkte laut mit, um die defensive Intensität hochzuhalten.",
+    "coaching_points": "- Aktiv gegen den Ball arbeiten, Passwege antizipieren und stets auf den Fußballen stehen\n- Bei Würfen aus dem Rückraum konsequent im Verbund mit dem Torhüter blocken (kurze Ecke schließen)\n- Laute, permanente Kommunikation über Einläufer, Sperren und Ballseite",
+    "variations_text": "- Bei 2-Minuten-Strafen oder unnötigen 7-Metern gibt es 1 Minuspunkt für die Abwehr\n- Halbzeit 1 in 6:0-Abwehr, Halbzeit 2 in offensiver 5:1- oder 3:2:1-Abwehr\n- Torwartparaden nach sauberem Block zählen ebenfalls 1 Bonuspunkt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.22, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.34, "y": 0.36 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "VM", "x": 0.50, "y": 0.44 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.28 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.66, "y": 0.36 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.78, "y": 0.24 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.54, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.58 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.54 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.28, "y": 0.54 }, { "x": 0.50, "y": 0.58 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "d3",
+          "points": [{ "x": 0.50, "y": 0.44 }, { "x": 0.40, "y": 0.55 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 5 gegen 5 auf zwei gegenüberliegende Tore im verkürzten Feld",
+    "default_duration_min": 16,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "OFFENSE_INDIVIDUAL",
+        "DEFENSE_INDIVIDUAL",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Das Spielfeld wird durch Hütchen um ca. 6 bis 8 Meter verkürzt (oder quer in der Dreifeldhalle gespielt). Zwei 5er-Teams spielen mit Torhütern gegeneinander.",
+    "flow_description": "1. Durch die reduzierte Spielerzahl (5 gegen 5) entstehen große 1-gegen-1-Räume auf dem gesamten Feld.\n2. Gespielt wird in einer offensiven Manndeckung oder 3:2-Abwehr.\n3. Jeder erfolgreiche Durchbruch im 1 gegen 1 mit anschließendem Torabschluss bringt einen Extrapunkt.\n4. Schnelle Wechsel (fliegend) sorgen für hohes Spieltempo.",
+    "coaching_points": "- Räume breit ziehen, damit jeder Angreifer Platz für seine individuelle 1-gegen-1-Aktion hat\n- Nach gewonnenem 1-gegen-1-Duell die aushelfende Abwehr wahrnehmen und den freien Mitspieler anspielen\n- In der Abwehr rechtzeitig aushelfen und nach dem Pass sofort wieder zum eigenen Gegenspieler zurückfinden",
+    "variations_text": "- Spielform 4 gegen 4 für noch mehr Ballkontakte pro Spieler\n- Torabschlüsse aus dem Rückraum (hinter 9 m) sind verboten, um Durchbrüche zu erzwingen\n- Nach jedem Tor bleibt der Ball beim Torhüter des kassierenden Teams für schnellen Anwurf",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.12, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.88, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.62, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.56, "y": 0.50, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.62, "y": 0.78 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.74, "y": 0.42 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.70, "y": 0.26 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.66, "y": 0.50 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.74 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.76, "y": 0.45 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "FEINT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.56, "y": 0.50 }, { "x": 0.66, "y": 0.60 }, { "x": 0.76, "y": 0.56 }]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "gk2",
+          "points": [{ "x": 0.76, "y": 0.56 }, { "x": 0.88, "y": 0.52 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Crunch-Time-Zielspiel: Letzte 5 Minuten simulieren",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_5_1",
+        "DEFENSE_6_0",
+        "RETREAT"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei voll besetzte Mannschaften (6 gegen 6 plus Torhüter) stehen auf dem Großfeld. Die Hallenuhr wird auf 5:00 Minuten gestellt; Team A startet mit einem Rückstand (z. B. 24:26) und Ballbesitz.",
+    "flow_description": "1. Der Trainer gibt ein realistisches Endspielszenario vor (z. B. -2 Tore Rückstand, noch 5 Minuten, jede Mannschaft hat noch 1 Auszeit).\n2. Beide Teams müssen eigenständig taktische Lösungen wählen (z. B. 7. Feldspieler, offensive Manndeckung, Zeit herunterspielen).\n3. Nach Ablauf der 5 Minuten erfolgt eine kurze Auswertung (2 Minuten), danach werden die Rollen getauscht und eine zweite Crunch-Time gespielt.\n4. Wer das jeweilige Szenario gewinnt (Team A dreht das Spiel / Team B verteidigt die Führung), gewinnt den Durchgang.",
+    "coaching_points": "- Ruhe bewahren unter Zeitdruck: Klare Ansage der Spielzüge vor dem Angriff\n- Führende Mannschaft spielt geduldig bis zum sicheren Abschluss und vermeidet technische Fehler\n- Zurückliegende Mannschaft erhöht gezielt den Defensivdruck (z. B. offensive 5:1 oder offene Manndeckung)",
+    "variations_text": "- Szenario mit 2-Minuten-Unterzahl für das führende Team starten\n- Nur 2:30 Minuten Restspielzeit bei -1 Tor Rückstand\n- Ohne Trainer-Coaching während der 5 Minuten: Die Spielmacher übernehmen die komplette Steuerung",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.22, "y": 0.23 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.35, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "HM", "x": 0.50, "y": 0.29 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.65, "y": 0.28 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.78, "y": 0.23 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "V", "x": 0.50, "y": 0.45 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.12, "y": 0.20 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.52 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.58, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.52 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.88, "y": 0.20 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.44, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.50, "y": 0.58 }, { "x": 0.72, "y": 0.52 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a6",
+          "points": [{ "x": 0.44, "y": 0.34 }, { "x": 0.60, "y": 0.34 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wettkampf-Zielspiel: Rückraum-Kreuzungen als Torbedingung",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "OFFENSE_TEAM",
+        "JUMP_SHOT"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "6 gegen 6 plus Torhüter auf dem gesamten Spielfeld. Beide Teams spielen gegen eine 6:0- oder 5:1-Abwehr.",
+    "flow_description": "1. Im gebundenen Positionsangriff muss vor jedem Torabschluss mindestens eine dynamische Kreuzung (z. B. RM mit RL oder RR mit RA) erfolgen.\n2. Der einlaufende Spieler greift zuerst mit hohem Druck die Nahtstelle an, bevor er den Ball sauber in die Kreuzung ablegt.\n3. Gelingt im direkten Anschluss an die Kreuzung (innerhalb von 2 Pässen) ein Tor, zählt es 2 Punkte.\n4. Gegenstöße bleiben frei und zählen regulär 1 Punkt.",
+    "coaching_points": "- Tiefe vor Breite: Der erste Angreifer muss Torgefahr ausstrahlen, damit die Abwehr überhaupt verschiebt\n- Ballübergabe sauber und geschützt auf Hüft- bis Brusthöhe (kein zu früher Pass)\n- Nachfolgender Spieler startet mit Maximalgeschwindigkeit in die entstandene Schnittstelle",
+    "variations_text": "- Pflicht-Kreuzung zwischen Außen- und Halbspieler\n- Doppelkreuzung (z. B. RL kreuzt mit RM, RM kreuzt weiter mit RR) bringt 3 Punkte\n- Bei Fehlpass in der Kreuzung sofortiger Konter der Abwehr",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.34, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "IL", "x": 0.45, "y": 0.30 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "IR", "x": 0.55, "y": 0.30 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.66, "y": 0.28 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.50 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.50 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.58, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.36, "y": 0.39 }, { "x": 0.28, "y": 0.44 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.28, "y": 0.50 }, { "x": 0.42, "y": 0.46 }, { "x": 0.48, "y": 0.34 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a1",
+          "toNodeId": "gk1",
+          "points": [{ "x": 0.48, "y": 0.34 }, { "x": 0.46, "y": 0.10 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außen-Bonus-Zielspiel: Breite nutzen und Abräumen",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "SHOOTING",
+        "JUMP_SHOT",
+        "LOB_SPIN_SHOT"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 plus Torhüter auf dem Großfeld. Der Schwerpunkt liegt auf dem konsequenten Abräumen bis auf die Außenpositionen.",
+    "flow_description": "1. Gespielt wird reguläres Handball 6 gegen 6.\n2. Jedes Tor von den Außenpositionen (LA oder RA) zählt doppelt (2 Punkte).\n3. Wird der Ball zuvor über mindestens 3 Stationen ohne Prellen von einer Feldseite auf die andere verlagert, zählt das Außentor sogar 3 Punkte.\n4. Außenspieler dürfen bei Ballbesitz des eigenen Teams nicht frühzeitig einlaufen, sondern halten maximale Breite an der Eckfahne.",
+    "coaching_points": "- Außenspieler stehen ganz breit an der Seitenlinie und starten erst im Moment des Passes zum Halbspieler\n- Halbspieler ziehen entschlossen auf die Halb-Außen-Nahtstelle, um den Außenverteidiger zu binden\n- Hoher Absprung in den Kreis und variabler Abschluss (langes Eck, kurzes Eck, Heber oder Dreher)",
+    "variations_text": "- Außenspieler müssen gezielt mit Heber oder Dreher abschließen für den 3-Punkte-Bonus\n- Bei Fehlwurf von außen erhält der Torhüter 1 Extrapunkt für sein Team\n- Rückraumwürfe zählen erst, wenn zuvor mindestens ein Außenspieler einmal angespielt wurde",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "AL", "x": 0.22, "y": 0.23 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "HL", "x": 0.35, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "IL", "x": 0.45, "y": 0.30 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "IR", "x": 0.56, "y": 0.30 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "HR", "x": 0.68, "y": 0.27 },
+        { "id": "d6", "type": "DEFENSE_PLAYER", "label": "AR", "x": 0.78, "y": 0.22 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.48, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.50 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.46 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.92, "y": 0.18 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.26, "y": 0.48 }, { "x": 0.50, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.50, "y": 0.50 }, { "x": 0.74, "y": 0.46 }]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.74, "y": 0.46 }, { "x": 0.92, "y": 0.18 }]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromNodeId": "a4",
+          "toNodeId": "gk1",
+          "points": [{ "x": 0.92, "y": 0.18 }, { "x": 0.54, "y": 0.08 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kontinuierliches Wellen-Zielspiel (3 Teams im Wechsel)",
+    "default_duration_min": 20,
+    "min_players": 15,
+    "max_players": 21,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_TEAM",
+        "DEFENSE_6_0"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 12
+      }
+    ],
+    "setup_description": "Bei großer Trainingsgruppe werden drei Mannschaften à 5–6 Feldspieler gebildet (verschiedene Leibchenfarben). Team A verteidigt an Tor 1, Team B greift an, Team C wartet an der Mittellinie mit Ball.",
+    "flow_description": "1. Team B greift im 6 gegen 6 auf Tor 1 gegen Team A an.\n2. Sobald der Angriff abgeschlossen ist (Tor, Parade, technischer Fehler), sprintet Team B sofort zurück in die Abwehr Richtung Tor 2.\n3. Im gleichen Moment startet das wartende Team C von der Mittellinie in der 2. Welle gegen das zurücklaufende Team B auf Tor 2.\n4. Team A joggt zur Mittellinie, nimmt sich einen neuen Ball und startet nach Abschluss von Team C sofort gegen Team C auf Tor 1.",
+    "coaching_points": "- Höchste Umschaltgeschwindigkeit nach dem eigenen Angriff: Sofortiger Sprint in die Rückwärtsbewegung\n- Startendes Team nutzt die unsortierte Abwehr konsequent mit hohem Druck in der 2. Welle aus\n- Klare Zuordnung in der neu formierten Abwehr durch laute Kommunikation",
+    "variations_text": "- Maximal 12 Sekunden Angriffszeit pro Welle (Shotclock durch Trainer)\n- Team C startet bereits, sobald der Wurf von Team B die Hand verlässt\n- Punktetabelle über 3 Runden: Tor = 1 Punkt, schneller Gegenstoß = 2 Punkte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.08, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.92, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "C1", "x": 0.52, "y": 0.25 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "C2", "x": 0.52, "y": 0.50, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "C3", "x": 0.52, "y": 0.75 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.42, "y": 0.30 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.44, "y": 0.55 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "B3", "x": 0.42, "y": 0.75 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "points": [{ "x": 0.52, "y": 0.50 }, { "x": 0.74, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "d2",
+          "points": [{ "x": 0.44, "y": 0.55 }, { "x": 0.78, "y": 0.52 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 2-Tore-Handball mit Minitor-Option (Tiefenspiel)",
+    "default_duration_min": 16,
+    "min_players": 10,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "DEFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "MINI_GOAL",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf dem Großfeld stehen die regulären Handballtore mit Torhütern. Zusätzlich wird auf jeder Spielfeldhälfte an einer Außenposition (ca. 7 m von der Grundlinie entfernt) ein Minitor aufgestellt.",
+    "flow_description": "1. Zwei Teams spielen 5 gegen 5 oder 6 gegen 6 gegeneinander.\n2. Das angreifende Team hat stets zwei Abschlussmöglichkeiten: Ein regulärer Treffer ins große Tor (1 Punkt) oder ein kontrollierter Wurf ins Minitor auf der Außenbahn (2 Punkte).\n3. Die Abwehr muss nun sowohl das Zentrum als auch die breite Außenbahn sichern.\n4. Nach jedem Tor wechselt der Ballbesitz regulär.",
+    "coaching_points": "- Angreifer beobachten das Verschieben der Abwehr: Zieht sie ins Zentrum, sofort auf das Minitor verlagern\n- Schnelle Seitenwechsel über den Mittelmann ohne überflüssiges Prellen\n- Abwehrspieler behalten periphere Wahrnehmung für den ballfernen Außenspieler",
+    "variations_text": "- Treffer ins Minitor zählen nur nach direktem Pass (ohne Zwischenschritt)\n- Minitore stehen beidseitig an den 9-Meter-Schnittpunkten (4 Minitore gesamt)\n- Nach 8 Minuten Seitenwechsel der Minitore",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "mg1", "type": "EQUIPMENT_GOAL_TARGET", "label": "MT", "x": 0.88, "y": 0.16 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.48, "y": 0.30 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.62, "y": 0.28 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.30, "y": 0.48, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.82, "y": 0.34 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.30, "y": 0.48 }, { "x": 0.50, "y": 0.52 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.82, "y": 0.34 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toNodeId": "mg1",
+          "points": [{ "x": 0.82, "y": 0.34 }, { "x": 0.88, "y": 0.16 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 6 gegen 6 mit 20-Sekunden-Angriffsuhr",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "FAST_BREAK_2ND_WAVE",
+        "SHOOTING",
+        "DEFENSE_6_0"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 plus Torhüter auf dem Großfeld. Der Trainer oder ein verletzter Spieler stoppt pro Angriff exakt 20 Sekunden.",
+    "flow_description": "1. Sobald eine Mannschaft in Ballbesitz kommt (Anwurf, Parade oder Ballgewinn), startet die 20-Sekunden-Uhr.\n2. Innerhalb dieser 20 Sekunden muss ein Torwurf erfolgen; erfolgt kein Wurf, pfeift der Trainer ab und der Ball wechselt sofort.\n3. Nach einem Freiwurf innerhalb der letzten 5 Sekunden bleiben minimal 5 Sekunden Restzeit.\n4. Durch den permanenten Zeitdruck werden hohes Tempospiel und zügige Entscheidungsfindung erzwungen.",
+    "coaching_points": "- Sofort nach dem Anwurf oder Ballgewinn Druck auf die Abwehr aufbauen, keine 'Verschnaufpausen' im Spielaufbau\n- Auslösehandlungen frühzeitig auf dem Weg zur Mittellinie ansagen\n- Abwehr lernt, in den letzten 5 Sekunden der Angriffsuhr kompakt zu bleiben und keine unnötigen Fouls zu begehen",
+    "variations_text": "- Zeitlimit auf 15 Sekunden verkürzen für maximales Tempospiel\n- Bei Zeitüberschreitung erhält die Abwehr direkt 1 Punkt\n- Pflicht: Mindestens 1x pro Angriff muss ein Spieler den 9-Meter-Raum attackieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.08, "y": 0.5 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.92, "y": 0.5 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.50, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.54, "y": 0.24 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.54, "y": 0.76 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.74, "y": 0.35 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.74, "y": 0.50 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.74, "y": 0.65 },
+        { "id": "c1", "type": "COACH_FEEDER", "label": "TR", "x": 0.50, "y": 0.08 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "points": [{ "x": 0.50, "y": 0.50 }, { "x": 0.66, "y": 0.50 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.66, "y": 0.50 }, { "x": 0.70, "y": 0.28 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wettkampf-Zielspiel Feldspieler gegen Torhüter (Positions-Challenge)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "SHOOTING",
+        "GOALKEEPER_TECHNIQUE",
+        "JUMP_SHOT",
+        "LOB_SPIN_SHOT"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "TARGET_CORNER",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Alle Feldspieler treten als Team gegen die Torhüter auf einem Halbfeld an. Die Feldspieler verteilen sich auf alle Angriffspositionen (LA, RL, RM, RR, RA, KM), ein Ballwagen steht im Rückraum.",
+    "flow_description": "1. Die Feldspieler greifen nacheinander im schnellen Rhythmus (mit kurzem Zuspiel und passivem Block/Abwehrspieler) auf das Tor an.\n2. Jede Position hat eine klare Zielvorgabe (z. B. Rückraum = Sprungwurf über Block, Außen = variabler Wurf, Kreis = Wurf nach Drehung).\n3. Jeder Treffer bringt 1 Punkt für die Feldspieler; jede Parade bringt 1 Punkt, ein Wurf neben/über das Tor sogar 2 Punkte für die Torhüter.\n4. Gespielt wird bis 15 Punkte (oder 3 Durchgänge pro Spieler); das verlierende Team absolviert eine kleine Athletik-Aufgabe.",
+    "coaching_points": "- Wettkampfdruck bewusst nutzen: Vor dem Wurf den Torhüter ausgucken und nicht blind werfen\n- Saubere Anlauf- und Absprungtechnik auch bei hoher Wurffrequenz beibehalten\n- Torhüter arbeiten aktiv am Stellungsspiel und halten bei Außenwürfen lange die kurze Ecke",
+    "variations_text": "- Treffer in die markierten Wurfecken (Target Corner) zählen doppelt\n- Zwei aktive Abwehrspieler im Zentrum als Block- und Störpaar integrieren\n- Auf Zeit spielen: Wie viele Tore schaffen die Feldspieler in 4 Minuten?",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.14, "y": 0.22, "isQueue": true, "queueCount": 2 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.50, "hasBall": true, "isQueue": true, "queueCount": 3 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.54 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.50, "isQueue": true, "queueCount": 3 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.86, "y": 0.22, "isQueue": true, "queueCount": 2 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "B1", "x": 0.44, "y": 0.30 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "B2", "x": 0.56, "y": 0.30 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.28, "y": 0.50 }, { "x": 0.50, "y": 0.54 }]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.50, "y": 0.54 }, { "x": 0.72, "y": 0.50 }]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a4",
+          "toNodeId": "gk1",
+          "points": [{ "x": 0.72, "y": 0.50 }, { "x": 0.46, "y": 0.10 }]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielspiel 6 gegen 6 mit Positionsrotation nach jedem Tor",
+    "default_duration_min": 20,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "OFFENSE_INDIVIDUAL",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 7
+      }
+    ],
+    "setup_description": "Zwei Mannschaften spielen 6 gegen 6 plus Torhüter auf dem Großfeld. Alle Feldspieler starten auf einer regulären Angriffsposition (LA, RL, RM, RR, RA, KM).",
+    "flow_description": "1. Beide Teams spielen reguläres Handball auf dem Großfeld.\n2. Nach jedem erzielten Tor rotiert die gesamte erfolgreiche Mannschaft im Uhrzeigersinn um eine Position weiter (LA -> RL -> RM -> RR -> RA -> KM -> LA).\n3. Dadurch muss jeder Spieler flexibel im Rückraum, auf Außen und am Kreis agieren.\n4. Wer alle 6 Positionen erfolgreich durchlaufen hat (6 Tore), erhält 2 Bonuspunkte.",
+    "coaching_points": "- Vielseitige Ausbildung fördern: Jeder Spieler lernt die Laufwege und Aufgaben aller Positionen kennen\n- Rasche Orientierung nach der Rotation beim sofortigen Rückzug in die Abwehr\n- Kreativität auf ungewohnten Positionen ausdrücklich loben und ermutigen",
+    "variations_text": "- Rotation erfolgt alle 3 Minuten statt nach jedem Tor\n- Auch die Abwehrpositionen rotieren strikt mit\n- Torwart nimmt an der Rotation teil (im Jugendbereich zur Förderung der Vielseitigkeit)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.5, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.12, "y": 0.22 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.48 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.54, "hasBall": true },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.48 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.88, "y": 0.22 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.50, "y": 0.33 }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [{ "x": 0.12, "y": 0.22 }, { "x": 0.28, "y": 0.48 }]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [{ "x": 0.28, "y": 0.48 }, { "x": 0.50, "y": 0.54 }]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [{ "x": 0.50, "y": 0.54 }, { "x": 0.72, "y": 0.48 }]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a4",
+          "toNodeId": "a5",
+          "points": [{ "x": 0.72, "y": 0.48 }, { "x": 0.88, "y": 0.22 }]
+        }
+      ]
+    }
+  }
+]

@@ -227,7 +227,10 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  function navigateToTab(nextTab: NavTab) {
+  function navigateToTab(nextTab: NavTab, options?: { keepFocusedSession?: boolean }) {
+    if (!options?.keepFocusedSession) {
+      setFocusedSessionId(undefined);
+    }
     if (nextTab === activeTab) return;
     if (nextTab !== 'EXERCISES') {
       setMobileDetailOpen(false);
@@ -930,7 +933,7 @@ export function App() {
                   uiFeatures.hallLiveMode
                     ? (sessionId) => {
                         setFocusedSessionId(sessionId);
-                        navigateToTab('HALL_LIVE');
+                        navigateToTab('HALL_LIVE', { keepFocusedSession: true });
                       }
                     : undefined
                 }
@@ -1633,11 +1636,11 @@ export function App() {
               templates={templates}
               onOpenSessionInEditor={(sessionId) => {
                 setFocusedSessionId(sessionId);
-                navigateToTab('DASHBOARD');
+                navigateToTab('DASHBOARD', { keepFocusedSession: true });
               }}
               onStartHallMode={(sessionId) => {
                 setFocusedSessionId(sessionId);
-                navigateToTab('HALL_LIVE');
+                navigateToTab('HALL_LIVE', { keepFocusedSession: true });
               }}
             />
           )}

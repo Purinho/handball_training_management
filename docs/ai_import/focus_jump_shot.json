@@ -1,0 +1,2564 @@
+[
+  {
+    "title": "3-Schritt-Rhythmus-Schule über Hütchen und Matten",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/te-295-den-schrittrhythmus-fuer-den-sprungwurf-erlernen/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf der linken und rechten Rückraumseite werden jeweils drei Hütchen im 3-Schritt-Abstand (links – rechts – links für Rechtshänder, spiegelverkehrt für Linkshänder) vor der 9-Meter-Linie ausgelegt. Direkt hinter dem letzten Hütchen liegt eine Weichboden- oder Turnmatte als Landezone.",
+    "flow_description": "1. Die Spieler stellen sich mit Ball in zwei Reihen im Rückraum auf.\n2. Auf Kommando starten sie zunächst langsam, sprechen den Rhythmus laut mit (Rechts – Links – Hopp bzw. 1 – 2 – Hoch) und setzen die Füße exakt neben die Hütchen.\n3. Am letzten Hütchen erfolgt der explosive einbeinige Absprung vom Gegenbein der Wurfhand mit angezogenem Schwungbein.\n4. Der Wurf erfolgt am höchsten Punkt auf das Tor, die Landung abgefederte auf der Matte.",
+    "coaching_points": "- Absprung immer vom Gegenbein zur Wurfhand (Rechtshänder springen links ab)\n- Schwungbeinknie aktiv und explosiv nach oben ziehen\n- Wurfarm bereits während des letzten Schrittes nach hinten oben in die Bogenspannung führen\n- Ruhige, beidbeinige oder stabile einbeinige Landung zur Gelenkschonung",
+    "variations_text": "- Erste Durchgänge komplett ohne Ball als reine Rhythmus- und Sprungübung\n- Ball erst beim ersten Schritt vom Trainer oder Zuspieler zugespielt bekommen\n- Hütchenabstände variieren (kurz-kurz-lang), um den dynamischen Auftaktschritt zu schulen\n- Abschluss gezielt in eine vorgegebene untere Torecke",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.68,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "1",
+          "x": 0.27,
+          "y": 0.56
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "2",
+          "x": 0.3,
+          "y": 0.48
+        },
+        {
+          "id": "c3",
+          "type": "EQUIPMENT_CONE",
+          "label": "3",
+          "x": 0.33,
+          "y": 0.4
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.37,
+          "y": 0.32
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ziel",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c3",
+          "points": [
+            {
+              "x": 0.24,
+              "y": 0.68
+            },
+            {
+              "x": 0.33,
+              "y": 0.4
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c3",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.33,
+              "y": 0.4
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kastentreppen-Sprungwurf mit hohem Durchfluss",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.ph-noe.ac.at/handball-sprungwurf-methodik",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Ein flaches Sprungkastenteil (Kastentreppe) wird im 45-Grad-Winkel auf der 9-Meter-Linie positioniert, davor liegt eine Turnmatte als sichere Absprung- und Landezone. Die Werfer starten mit eigenem Ball aus ca. 13 Metern.",
+    "flow_description": "1. Der erste Spieler läuft im kurzen 3-Schritt-Rhythmus auf die Matte zu.\n2. Er springt vor dem Kasten explosiv nach oben ab, bildet in der Luft eine deutliche Bogenspannung und schließt per Sprungwurf über den schrägen Kasten ab.\n3. Nach der stabilen Landung auf beiden Beinen weicht der Werfer direkt über die Außenbahn zurück zur Schlange aus.\n4. Sobald die Matte frei ist, startet nahtlos der nächste Spieler.",
+    "coaching_points": "- Durch den Kasten vor dem Absprung entsteht automatisch ein vertikaler Höhenimpuls\n- Blick bleibt während der gesamten Flugphase auf das Tor gerichtet\n- Oberkörper in der Luft leicht zur Wurfhandseite aufdrehen und beim Abwurf explosiv nach vorne schließen\n- Sicherheitsabstand zum Vordermann einhalten",
+    "variations_text": "- Kastenhöhe durch Aufsetzen eines zweiten Kastenteils leicht erhöhen\n- Zuspiel durch einen Anspieler auf Rückraum-Mitte statt eigenem Anprellen\n- Torhüter hält bestimmte Ecken offen, die der Werfer im Flug erkennen muss",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.72,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 8
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.5,
+          "y": 0.46
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Kasten",
+          "x": 0.5,
+          "y": 0.36
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.16,
+          "y": 0.48
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ecke",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "m1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.72
+            },
+            {
+              "x": 0.5,
+              "y": 0.46
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "m1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.46
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "m1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.46
+            },
+            {
+              "x": 0.16,
+              "y": 0.48
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Zielsektoren-Sprungwurf mit Trainer-Kommando im Flug",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/wurfgenauigkeit-sprungwurf-zielsektoren/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "TARGET_CORNER",
+        "quantity": 4
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Im Tor werden vier Zielsektoren (Ecken oben/unten) markiert. Auf ca. 8 Metern stehen zwei Airbodies oder passive Blockspieler als gedehnter Block. Der Trainer steht seitlich hinter dem Tor oder neben dem 6-Meter-Raum mit klarer Sicht zu den Rückraumschützen.",
+    "flow_description": "1. Rückraumspieler starten auf RL und RR aus 11–12 Metern Entfernung mit einem Zuspiel von Rückraum-Mitte.\n2. Der Schütze läuft dynamisch auf den Block zu und springt zum hohen Sprungwurf ab.\n3. Erst unmittelbar vor oder während des Absprungs ruft der Trainer den Zielsektor aus (z. B. 'Oben links!' oder 'Unten rechts!').\n4. Der Schütze reagiert in der Flugphase und platziert den Ball präzise in den angesagten Sektor.",
+    "coaching_points": "- Lange Flugphase nutzen, um die Entscheidung ruhig in der Luft zu treffen\n- Handgelenk erst im letzten Moment für die Richtungsvorgabe abklappen\n- Nicht aus dem Gleichgewicht bringen lassen, wenn der Sektor erst spät angesagt wird\n- Körperspannung bis zum Ballabwurf hochhalten",
+    "variations_text": "- Optische Signale statt akustischer Zurufe (Trainer hebt farbige Hütchen für bestimmte Ecken)\n- Aktiver Torhüter, der das Signal des Trainers nicht kennt\n- Wettkampfmodus: Jeder Treffer im angesagten Sektor gibt 2 Punkte, ein normales Tor 1 Punkt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "coach1",
+          "type": "COACH_FEEDER",
+          "label": "T",
+          "x": 0.72,
+          "y": 0.14
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.66,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.38,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.46,
+          "y": 0.32
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "OL",
+          "x": 0.44,
+          "y": 0.05
+        },
+        {
+          "id": "t2",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "OR",
+          "x": 0.56,
+          "y": 0.05
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.24,
+              "y": 0.66
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t2",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.56,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf über den Zweierblock aus dem Rückraum",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/rueckraum-sprungwurf-gegen-block/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "DEFENSE_GROUP"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei aktive Blockspieler stehen auf der 7–8-Meter-Linie im Mittelblock. Auf RL, RM und RR stehen Rückraumspieler; ein Ballwagen steht bei RM. Der Block deckt gezielt eine vorgegebene Ecke (z. B. kurzes Eck) ab.",
+    "flow_description": "1. RM spielt einen flachen Pass in den Lauf von RL oder RR.\n2. Der Rückraumschütze nimmt maximal drei Schritte Anlauf und springt mit maximaler Höhe vor dem Block ab.\n3. Die beiden Blockspieler schieben rechtzeitig zusammen und stellen einen geschlossenen Zweierblock auf das kurze Eck.\n4. Der Schütze muss hoch über den Block hinweg oder mit leichtem seitlichen Herauslehnen am Block vorbei ins lange Eck abschließen.\n5. Nach jeweils 6 Würfen wechseln Blockspieler und Schützen.",
+    "coaching_points": "- Vertikaler Absprung statt flachem Weitsprung in den Block hinein\n- Hoher Abwurfpunkt mit voll gestrecktem Wurfarm über Kopfhöhe\n- Block-Torwart-Absprache lesen: Kurze Ecke vom Block abgedeckt -> langes Eck oder Aufsetzer wählen\n- Aktiver Armzug ohne Ausweichbewegung nach hinten",
+    "variations_text": "- Blockspieler dürfen frei wählen, ob sie langes oder kurzes Eck zumachen\n- Ein dritter Verteidiger stört kurz vor dem Absprung seitlich\n- Schütze muss nach dem Wurf sofort rückwärts auf die eigene 6m-Linie sprinten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "IL",
+          "x": 0.42,
+          "y": 0.29
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "IR",
+          "x": 0.5,
+          "y": 0.29
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.66,
+          "hasBall": true
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Lang",
+          "x": 0.56,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.66
+            },
+            {
+              "x": 0.42,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.64
+            },
+            {
+              "x": 0.42,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.44
+            },
+            {
+              "x": 0.56,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Außensprungwurf in die Weite mit Winkelvergrößerung",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.knsu.de/sportspiele/handball/sprungwurf-aussen",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf beiden Außenpositionen (LA und RA) werden Hütchen zur Markierung der Absprungzone an der 6-Meter-Linie aufgestellt. Innerhalb des 6-Meter-Kreises liegen flache Markierungen oder Matten, um die maximale Sprungweite Richtung Tormitte zu visualisieren. Zuspieler stehen auf RL und RR.",
+    "flow_description": "1. Der Außenspieler startet im weiten Bogen von der Seitenauslinie und erhält ein präzises Zuspiel vom Halbspieler in den Lauf.\n2. Mit einem dynamischen Absprung an der 6-Meter-Linie springt der Außenspieler weit in Richtung Torraum-Mitte ab, um den Wurfwinkel maximal zu öffnen.\n3. In der Luft zieht der Spieler den Oberkörper Richtung Tormitte, beobachtet den Torhüter und schließt erst kurz vor dem höchsten bzw. weitesten Punkt ab.\n4. Wechsel zwischen linker und rechter Seite im fließenden Rhythmus.",
+    "coaching_points": "- Absprung weit parallel zur Torauslinie Richtung Tormitte, nicht direkt auf den Torwart zu\n- Lange Flugzeit ausnutzen und den Torwart erst zu einer Bewegung zwingen\n- Schulterachse im Flug weit öffnen (Wurfhand möglichst weit Richtung Tormitte bringen)\n- Kontrollierte Landung im Kreis ohne Verletzungsrisiko",
+    "variations_text": "- Absprung erst nach einer kurzen Einlauf-Finte gegen einen passiven Außenverteidiger\n- Vorgabe der Wurfart: 1. Durchgang langes Eck hoch, 2. Durchgang kurzes Eck Aufsetzer, 3. Durchgang frei\n- Ball erst in der Luft fangen und sofort werfen (Kempa-Vorform)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.45,
+          "y": 0.08
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.08,
+          "y": 0.24,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.48,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Absprung",
+          "x": 0.16,
+          "y": 0.18
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.3,
+          "y": 0.14
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Lang",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "c1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.48
+            },
+            {
+              "x": 0.16,
+              "y": 0.18
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.08,
+              "y": 0.24
+            },
+            {
+              "x": 0.16,
+              "y": 0.18
+            },
+            {
+              "x": 0.3,
+              "y": 0.14
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.3,
+              "y": 0.14
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Wurfserie Rückraum-Außen-Kombination (Höhe & Weite)",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/wurfserie-rueckraum-und-aussen-sprungwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GOALKEEPER_WARMUP"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Besetzt werden Rückraum-Links (RL), Linksaußen (LA) und ein Ballverteiler auf Rückraum-Mitte (RM) mit Ballwagen. Ein Hütchen markiert die Nahtstelle auf 9 Metern. Nach 8 Minuten wird auf die rechte Angriffsseite (RR/RA) gewechselt.",
+    "flow_description": "1. RM passt den Ball in den Lauf des anlaufenden RL.\n2. RL stößt dynamisch Richtung Nahtstelle und schließt per hohem Sprungwurf (Sprung in die Höhe) aus ca. 9–10 Metern ab.\n3. Unmittelbar nach dem Rückraumwurf startet LA von der Ecke Richtung 6-Meter-Linie.\n4. RM nimmt sofort den nächsten Ball aus dem Wagen und passt scharf nach außen zu LA, der per weitem Sprungwurf (Sprung in die Weite) abschließt.\n5. RL läuft nach seinem Wurf auf die LA-Position, LA stellt sich bei RL an.",
+    "coaching_points": "- Bewusster Kontrast zwischen Vertikalsprung im Rückraum und Weitsprung von Außen\n- Hohes Tempo in der Ballfolge, damit auch der Torhüter gefordert wird\n- Saubere, präzise Zuspiele von RM genau in den Lauf der Werfer\n- Nach dem Wurf zügig den Wurfbereich räumen",
+    "variations_text": "- Zeitdruck: Beide Würfe müssen innerhalb von 6 Sekunden abgeschlossen sein\n- Ein passiver Abwehrspieler steht als Orientierungspunkt zwischen Halb und Außen\n- RL kreuzt erst mit RM, bevor der hohe Sprungwurf erfolgt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.54,
+          "y": 0.62,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.66,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.09,
+          "y": 0.28,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.2,
+          "y": 0.16
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.5,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.62
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.66
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.62
+            },
+            {
+              "x": 0.2,
+              "y": 0.16
+            }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.09,
+              "y": 0.28
+            },
+            {
+              "x": 0.2,
+              "y": 0.16
+            }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.2,
+              "y": 0.16
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf aus der zweiten Reihe nach Rückraum-Kreuzen",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/te-202-grundlagen-des-sprungwurfs/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Rückraumreihen auf RM und RL (später RR) agieren gegen zwei halbpaktive Abwehrspieler (Halb- und Mittelblock). Die Angreifer starten ca. 13 Meter vor dem Tor.",
+    "flow_description": "1. RM startet mit Ball tief in Richtung Abwehrspieler, um diesen zu binden.\n2. RL läuft im steilen Bogen hinter RM herum (Kreuzung) und zieht mit hohem Tempo in Richtung der entstehenden Lücke.\n3. RM legt den Ball kurz vor dem Abwehrkontakt sauber in den Lauf von RL ab.\n4. RL nutzt die entstandene Lücke für einen explosiven, tiefen Sprungwurf aus ca. 8–9 Metern.\n5. Nach dem Abschluss tauschen RM und RL die Startpositionen.",
+    "coaching_points": "- Tiefes Stoßen von RM vor der Kreuzung ist zwingend, um den Verteidiger zu binden\n- RL startet nicht zu früh, um den Ball im vollen Vorwärtslauf annehmen zu können\n- Dynamischer 3-Schritt-Absprung direkt in Richtung Tor, nicht quer zur Abwehr\n- Kopf hoch bei der Ballannahme, um die Blockreaktion zu sehen",
+    "variations_text": "- Abwehrspieler wechseln aktiv die Zuordnung; RL muss entscheiden, ob er wirft oder auf den nachziehenden RM zurückpasst\n- Integration eines Kreisläufers als zusätzliche Anspieloption\n- Kreuzen auf der rechten Seite (RM mit RR) für Linkshänder",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.34,
+          "y": 0.32
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "IL",
+          "x": 0.48,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.64,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.48
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.52,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.64
+            },
+            {
+              "x": 0.4,
+              "y": 0.48
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.24,
+              "y": 0.64
+            },
+            {
+              "x": 0.44,
+              "y": 0.54
+            },
+            {
+              "x": 0.52,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.4,
+              "y": 0.48
+            },
+            {
+              "x": 0.52,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.42
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf unter Körperkontakt (Rumpfstabilität in der Luft)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/sprungwurf-unter-koerperkontakt/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Vor der 6-Meter-Linie stehen zwei Verteidiger mit einem leichten Kontaktpolster oder offenen Händen auf der Halbposition. Hinter der Absprungzone liegen flache Matten für den Fall einer aus dem Gleichgewicht gebrachten Landung. Anspieler steht auf RM.",
+    "flow_description": "1. Der Rückraumspieler erhält auf RL das Zuspiel von RM und greift mit Tempo die 6-Meter-Lücke an.\n2. Beim Absprung zum Sprungwurf gibt der Verteidiger einen fairen, aber spürbaren seitlichen Impuls an die Hüfte oder die freie Schulter des Werfers.\n3. Der Werfer stabilisiert in der Luft über maximale Rumpfspannung seine Körperachse, hält den Wurfarm oben und schließt kontrolliert auf das Tor ab.\n4. Nach jedem Durchgang wird die Seite des Kontakts gewechselt.",
+    "coaching_points": "- Rumpfmuskulatur (Core) schon vor dem Absprung aktiv anspannen\n- Blick trotz Körperkontakt ruhig auf Torwart und Ziel halten\n- Wurfarm nicht wegziehen lassen, sondern stabil durchziehen\n- Faire Kontaktgebung durch den Verteidiger (kein Stoßen in den Rücken oder Griff in den Wurfarm!)",
+    "variations_text": "- Kontakt erfolgt wahlweise von links oder von rechts ohne Vorankündigung\n- Vor dem Sprungwurf muss der Angreifer zuerst eine 1-gegen-1-Körpertäuschung gegen ein Hütchen ausführen\n- Abschluss muss zwingend als Aufsetzer erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.6,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.54,
+          "y": 0.56,
+          "hasBall": true
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.34
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "Matte",
+          "x": 0.42,
+          "y": 0.24
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.34
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.56
+            },
+            {
+              "x": 0.4,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.6
+            },
+            {
+              "x": 0.4,
+              "y": 0.34
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.4,
+              "y": 0.34
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Prell-Rhythmus-Sprungwurf aus dem Tempodribbling",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.die-schnelle-sportstunde.de/handball-sprungwurf-uebungen/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "DRIBBLING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei Slalom- oder Tempodribbling-Bahnen starten an der Mittellinie und führen über je drei Hütchen bis zur 9-Meter-Linie. Jeder Spieler hat einen Ball.",
+    "flow_description": "1. Die Spieler dribbeln mit hohem Tempo von der Mittellinie durch den Hütchenparcours in Richtung Tor.\n2. Am letzten Hütchen (ca. 11–12 Meter vor dem Tor) nehmen sie den Ball exakt auf Schritt 1 mit beiden Händen auf.\n3. Ohne Tempoverlust folgen Schritt 2 und der explosive Absprung auf Schritt 3 zum Sprungwurf auf das Tor.\n4. Nach dem Wurf holen die Spieler ihren Ball ab und laufen außen zurück zur Mittellinie.",
+    "coaching_points": "- Flüssiger Übergang vom Prellen in den 3-Schritt-Rhythmus ohne Abbremsen\n- Blick beim Dribbling bereits nach vorne zum Torhüter richten\n- Ball sicher mit beiden Händen aufnehmen, bevor der Wurfarm ausholt\n- Kein Schrittfehler (maximal drei Schritte nach dem letzten Prellen)",
+    "variations_text": "- Mit der schwachen Hand dribbeln und vor dem Absprung auf die Wurfhand wechseln\n- Zwei Teams treten im Staffelwettkampf gegeneinander an (jedes Tor zählt 1 Punkt)\n- Letztes Hütchen als Körpertäuschungs-Punkt nutzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.3,
+          "y": 0.88,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.34,
+          "y": 0.72
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "H2",
+          "x": 0.28,
+          "y": 0.58
+        },
+        {
+          "id": "c3",
+          "type": "EQUIPMENT_CONE",
+          "label": "H3",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.3
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "c3",
+          "points": [
+            {
+              "x": 0.3,
+              "y": 0.88
+            },
+            {
+              "x": 0.34,
+              "y": 0.72
+            },
+            {
+              "x": 0.28,
+              "y": 0.58
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "c3",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.42,
+              "y": 0.3
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.3
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Entscheidungs-Sprungwurf im 2 gegen 1 (Rückraum & Außen)",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/entscheidungstraining-sprungwurf-2gegen1/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "OFFENSE_GROUP",
+        "SHOOTING",
+        "PASSING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf einer Hallenseite (z. B. links) agieren ein Rückraumspieler (RL) und ein Außenspieler (LA) gegen einen aktiven Abwehrspieler auf der Halb-/Außenposition. Ein Zuspieler steht auf RM.",
+    "flow_description": "1. RM passt den Ball in den Lauf von RL, der sofort torgefährlich Richtung 7-Meter-Raum anläuft.\n2. Der Abwehrspieler muss sich frei entscheiden: Tritt er offensiv gegen RL heraus oder bleibt er defensiv Richtung LA?\n3. Bleibt der Verteidiger passiv oder orientiert sich nach außen, schließt RL konsequent per Sprungwurf aus dem Rückraum ab.\n4. Tritt der Verteidiger auf RL heraus, bindet RL ihn und spielt den Ball im richtigen Timing weiter zu LA, der per Außensprungwurf abschließt.",
+    "coaching_points": "- RL muss immer echte Torgefahr ausstrahlen (Körperrichtung zum Tor, nicht seitlich abdrehen)\n- Entscheidung erst treffen, wenn der Verteidiger eindeutig reagiert hat\n- Pass zu LA flach und druckvoll spielen, damit LA vollen Absprungschwung hat\n- Beide Abschlüsse müssen technisch saubere Sprungwürfe sein",
+    "variations_text": "- Nach 8 Minuten Wechsel auf die rechte Seite (RR und RA)\n- Abwehrspieler startet erst nach einem kurzen Sprint um ein Hütchen am 6-Meter-Kreis\n- Wettkampf: Angriff sammelt Punkte für Tore, Abwehr für Ballgewinne und Fehlwürfe",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.26,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.62,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.09,
+          "y": 0.26,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.42
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.18,
+          "y": 0.16
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.52,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.6
+            },
+            {
+              "x": 0.32,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.62
+            },
+            {
+              "x": 0.32,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.32,
+              "y": 0.42
+            },
+            {
+              "x": 0.52,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.32,
+              "y": 0.42
+            },
+            {
+              "x": 0.18,
+              "y": 0.16
+            }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.18,
+              "y": 0.16
+            },
+            {
+              "x": 0.52,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf mit variierender Wurfarmführung (Verzögerung)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/te-629-grundlagentraining-schlagwurf-und-sprungwurf-mit-variierender-wurfarmfuehrung/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Airbodies stehen auf der 8-Meter-Linie im Rückraum-Links- und Rückraum-Rechts-Bereich. Die Schützen stehen mit Ballwagen zentral auf RM oder auf beiden Halbpositionen.",
+    "flow_description": "1. Der Schütze läuft auf den Airbody zu und springt dynamisch zum Sprungwurf ab.\n2. Im ersten Block (5 Min.) schließt der Spieler bewusst verzögert erst in der leichten Abwärtsbewegung ab, um den Torhüter aus dem Timing zu bringen.\n3. Im zweiten Block (5 Min.) neigt der Schütze den Oberkörper in der Luft seitlich am Airbody vorbei (abgeknickter Wurfarm), um am Block vorbei zu werfen.\n4. Im dritten Block (5 Min.) kombiniert der Schütze frei zwischen hohem, verzögertem und abgeknicktem Sprungwurf.",
+    "coaching_points": "- Gleiche Anlauf- und Absprungbewegung bei allen Varianten, damit der Torwart nichts vorab lesen kann\n- Beim verzögerten Wurf die Körperspannung in der Luft aktiv halten (Hang-Time nutzen)\n- Beim seitlichen Abknicken das Handgelenk sauber in Wurfrichtung führen\n- Blickkontakt zum Torhüter beibehalten",
+    "variations_text": "- Statt Airbodies agieren echte Blockspieler, die hochspringen\n- Vorgabe, dass der Ball erst kurz vor dem Bodenkontakt die Hand verlassen darf\n- Kombination mit einem direkten Aufsetzer ins kurze Eck",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.3,
+          "y": 0.66,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.7,
+          "y": 0.66,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Airbody",
+          "x": 0.36,
+          "y": 0.35
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "Airbody",
+          "x": 0.64,
+          "y": 0.35
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ecke",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.3,
+              "y": 0.66
+            },
+            {
+              "x": 0.34,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.44
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf-Serie mit schnellem Umschalten in die Abwehr",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/te-714-schlagwuerfe-sprungwuerfe-und-kleingruppenspiel-mit-schnellem-umschalten/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "RETREAT",
+        "SHOOTING",
+        "DEFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei Gruppen stehen sich in einer Hallenhälfte gegenüber: Gruppe A greift im 3-gegen-2 an, Gruppe B wartet an der Mittellinie für den sofortigen Gegenstoß bzw. die nächste Angriffswelle.",
+    "flow_description": "1. Gruppe A spielt im Rückraum (RL, RM, RR) schnell durch und sucht innerhalb von 6 Sekunden einen dynamischen Sprungwurf-Abschluss aus 9 Metern.\n2. Unmittelbar nach dem Torabschluss (egal ob Tor oder Parade) müssen die drei Werfer sofort rückwärts auf die eigene 6-Meter-Linie umschalten.\n3. Gleichzeitig starten drei neue Spieler von der Mittellinie mit einem neuen Ball zum sofortigen Angriff.\n4. Nur Tore aus einem sauberen Sprungwurf zählen doppelt.",
+    "coaching_points": "- Nach der Landung des Sprungwurfs sofortige Orientierung und schnelles Umschalten ohne stehen zu bleiben\n- Saubere Sprungwurftechnik auch unter leichter Vorermüdung beibehalten\n- Klare Kommunikation beim Übernehmen der Gegenspieler im Rückzug\n- Hohes Tempo in der Passfolge vor dem Abschluss",
+    "variations_text": "- Bei Fehlwurf oder Torwartparade muss der Schütze zuerst noch die 6-Meter-Linie antippen, bevor er verteidigen darf\n- Spiel auf das gesamte Feld mit echter 1. und 2. Welle\n- Ein zusätzlicher Kreisläufer wird integriert",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.38,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.62,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.25,
+          "y": 0.56
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.75,
+          "y": 0.56
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.5,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.6
+            },
+            {
+              "x": 0.32,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.56
+            },
+            {
+              "x": 0.32,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.32,
+              "y": 0.42
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tempogegenstoß-Sprungwurf in die Weite (1. Welle)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/de/service/trainingshilfen/sprungwurf-tempogegenstoss/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "WARMUP"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "FAST_BREAK_1ST_WAVE",
+        "CATCHING",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Gespielt wird auf dem ganzen Feld. Ein Torhüter steht im eigenen Tor mit Ballwagen, der zweite Torhüter im gegenüberliegenden Tor. Die Feldspieler starten auf beiden Außenbahnen an der eigenen 9-Meter-Linie.",
+    "flow_description": "1. Der erste Spieler sprintet auf ein Signal des eigenen Torhüters im maximalen Tempo über die Außenbahn Richtung gegnerisches Tor.\n2. Nach einem kurzen Blickkontakt über die Schulter spielt der Torhüter einen langen, flugstabilen Gegenstoßpass in den Lauf.\n3. Der Angreifer fängt den Ball sicher im vollen Lauf, setzt maximal ein Prellen und nutzt den 3-Schritt-Rhythmus für einen weiten Sprungwurf tief in den 6-Meter-Raum.\n4. Abschluss erfolgt ruhig am herausstürzenden Torwart vorbei.",
+    "coaching_points": "- Blick über die Innenschulter zum Torhüter, ohne das Sprinttempo zu drosseln\n- Absprung kurz vor der 6-Meter-Linie weit nach vorne, um dem Torwart die Reaktionszeit zu nehmen\n- Oberkörper in der Luft stabil halten und Wurftäuschung andeuten, wenn der Torwart früh herauskommt\n- Sicherer Abschluss geht vor unnötigem Trickwurf",
+    "variations_text": "- Ein verfolgender Abwehrspieler startet mit 2 Metern Rückstand, um Zeitdruck zu erzeugen\n- Pass erfolgt indirekt über einen Mittelspieler (2. Welle)\n- Abschluss muss im oberen oder unteren Eck nach Zuruf des Torhüters erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.22,
+          "y": 0.22,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.62,
+          "y": 0.32
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.8,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.95,
+          "y": 0.5
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.22,
+              "y": 0.22
+            },
+            {
+              "x": 0.62,
+              "y": 0.32
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "gk1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.08,
+              "y": 0.5
+            },
+            {
+              "x": 0.62,
+              "y": 0.32
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.62,
+              "y": 0.32
+            },
+            {
+              "x": 0.8,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.8,
+              "y": 0.44
+            },
+            {
+              "x": 0.95,
+              "y": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Koordinationsleiter-Anlauf mit explosivem Sprungwurf",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.mobilesport.ch/handball/sprungwurf-koordination/",
+    "categories": {
+      "phases": [
+        "ATHLETICS_COORDINATION",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "COORDINATION_LADDER",
+        "quantity": 2
+      },
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Zwei Koordinationsleitern liegen leicht schräg Richtung Tor auf der RL- und RR-Position und enden ca. 11 Meter vor dem Tor. Ein Zuspieler mit Ballwagen steht zentral auf Rückraum-Mitte.",
+    "flow_description": "1. Die Spieler durchlaufen die Koordinationsleiter mit schnellen, hochfrequenten Schritten (z. B. 2 Kontakte pro Feld oder Icky-Shuffle).\n2. Direkt beim Verlassen der Leiter erhalten sie einen scharfen Pass vom Zuspieler auf RM.\n3. Ohne Zwischenstopp setzen die Spieler sofort den explosiven 3-Schritt-Anlauf an und schließen per hohem Sprungwurf von der 9-Meter-Linie ab.\n4. Nach dem Wurf wechseln die Spieler auf die jeweils andere Leiter.",
+    "coaching_points": "- Hohe Fußfrequenz in der Leiter auf dem Vorfuß, sofortiger Rhythmuswechsel in lange, explosive Anlaufschritte\n- Hände schon beim Verlassen der Leiter fangbereit nach vorne nehmen\n- Explosiver Abdruck aus dem Sprunggelenk beim Absprung\n- Saubere Bogenspannung trotz vorangegangener Koordinationsaufgabe",
+    "variations_text": "- Einbeinige Sprünge (Hopser) durch die Leiter zur Reaktivkraftschulung\n- Rückwärts durch die Leiter laufen, umdrehen, Ball fangen und direkt werfen\n- Ein passiver Blockspieler steht auf 8 Metern vor dem Tor",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.22,
+          "y": 0.78,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Leiter",
+          "x": 0.28,
+          "y": 0.62
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.22,
+              "y": 0.78
+            },
+            {
+              "x": 0.28,
+              "y": 0.62
+            },
+            {
+              "x": 0.36,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.36,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.42
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "1-gegen-1-Durchbruch mit Sprungwurf auf 6 Meter",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.knsu.de/sportspiele/handball/sprungwurf-durchbruch",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "FEINT_1V1",
+        "OFFENSE_INDIVIDUAL",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf RL und RR wird je ein Korridor mit Hütchen abgesteckt. In jedem Korridor steht ein aktiver Abwehrspieler auf ca. 7–8 Metern. Zuspieler steht auf RM.",
+    "flow_description": "1. Der Angreifer erhält auf RL das Zuspiel von RM und greift den Abwehrspieler mit hoher Geschwindigkeit an.\n2. Mit einer deutlichen Körpertäuschung (z. B. Überzieher oder Nullschritt-Finte) überwindet der Angreifer den Verteidiger.\n3. Nach dem Durchbruch nutzt der Angreifer den freien Raum bis zur 6-Meter-Linie für einen dynamischen Sprungwurf in die Weite.\n4. Abschluss platziert am Torhüter vorbei; nach 5 Aktionen wechseln Angreifer und Verteidiger.",
+    "coaching_points": "- Nach erfolgreicher Täuschung sofort vertikal Richtung Tor beschleunigen, nicht seitlich abdrängen lassen\n- Absprung möglichst dicht an der 6-Meter-Linie, um den Torwart unter Druck zu setzen\n- Ball beim Durchbruch eng am Körper schützen, dann explosiv in die Wurfauslage führen\n- Ruhiger Blick auf den Torwart vor dem Abwurf",
+    "variations_text": "- Verteidiger darf nur mit einem Arm hinter dem Rücken verteidigen (Fokus auf Beinarbeit)\n- Ein zweiter Verteidiger kommt nach 2 Sekunden zur Hilfe\n- Pflicht: Täuschung über die schwache Seite (gegen die Wurfhand)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.38
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.48
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.26
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.6
+            },
+            {
+              "x": 0.32,
+              "y": 0.48
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "FEINT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.32,
+              "y": 0.48
+            },
+            {
+              "x": 0.26,
+              "y": 0.4
+            },
+            {
+              "x": 0.42,
+              "y": 0.26
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.26
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sprungwurf-Biathlon (Präzision unter Belastung)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/sprungwurf-biathlon-wettkampf/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "JUMP_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      },
+      {
+        "type": "TARGET_CORNER",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Teams starten an der Mittellinie. Vor dem Tor sind zwei Wurfbahnen (RL und RR) markiert; im Tor hängen zwei Zielziele in den oberen Ecken (oder der Torwart agiert normal). Auf der Seite wird eine kleine Strafrunde mit Hütchen abgesteckt.",
+    "flow_description": "1. Auf Startsignal sprintet der erste Spieler jedes Teams mit Ball von der Mittellinie bis zur 9-Meter-Linie.\n2. Dort führt er einen technisch sauberen Sprungwurf auf das Tor bzw. das Ziel aus.\n3. Trifft der Spieler, sprintet er direkt zurück zur Mittellinie und schlägt den nächsten Mitspieler ab.\n4. Bei einem Fehlwurf muss er zuerst die kurze Strafrunde an der Seitenlinie laufen, bevor er übergibt.\n5. Das Team, das zuerst eine festgelegte Trefferzahl (z. B. 12 Tore) erreicht, gewinnt.",
+    "coaching_points": "- Trotz Wettkampfdruck auf sauberen 3-Schritt-Anlauf und korrektes Absprungbein achten\n- Kurz vor dem Absprung die Atmung und den Fokus kontrollieren (Präzision schlägt Hektik)\n- Hoher Ellbogen und sauberer Armzug auch bei erhöhtem Puls\n- Faire Übergabe an der Mittellinie",
+    "variations_text": "- Strafrunde durch 5 Burpees oder 10 Skippings ersetzen\n- Abschluss muss abwechselnd von Rückraum und Außen per Sprungwurf erfolgen\n- Zwei Torhüter wechseln sich nach jeweils 4 Würfen ab",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "Team A",
+          "x": 0.28,
+          "y": 0.88,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "Team B",
+          "x": 0.72,
+          "y": 0.88,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.42
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.66,
+          "y": 0.42
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Strafe",
+          "x": 0.1,
+          "y": 0.55
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Z1",
+          "x": 0.44,
+          "y": 0.05
+        },
+        {
+          "id": "t2",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Z2",
+          "x": 0.56,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.88
+            },
+            {
+              "x": 0.34,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.42
+            },
+            {
+              "x": 0.44,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.72,
+              "y": 0.88
+            },
+            {
+              "x": 0.66,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w2",
+          "toNodeId": "t2",
+          "points": [
+            {
+              "x": 0.66,
+              "y": 0.42
+            },
+            {
+              "x": 0.56,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

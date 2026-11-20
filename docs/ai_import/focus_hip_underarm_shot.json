@@ -1,0 +1,2314 @@
+[
+  {
+    "title": "Wurflimbo unter der Stange auf Hüfthöhe",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/hueftwurf-wurflimbo-unterarmwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 1
+      }
+    ],
+    "setup_description": "Zwei Abwehrspieler positionieren sich ca. 8 Meter vor dem Tor im Abstand von einem Meter und halten gemeinsam eine Gymnastikstange (oder ein Springseil) waagerecht auf Hüfthöhe. Ein Zuspieler steht mit Ballwagen auf der Halbposition; die Angreifer starten auf 12–14 Metern.",
+    "flow_description": "1. Der Angreifer startet aus dem Rückraum, passt den Ball zum Zuspieler und läuft frontal auf die Limbostange der beiden Abwehrspieler zu.\n2. Etwa drei Schritte vor der Stange erhält er das Zuspiel im Lauf zurück.\n3. Er senkt den Körperschwerpunkt tief ab und schließt per dynamischem Hüft- bzw. Unterarmwurf unter der Stange hindurch auf das Tor ab.\n4. Nach jeweils 5 Würfen wechseln die beiden Stangenhalter mit den Werfern.",
+    "coaching_points": "- Die Stange erzwingt die tiefe Armführung und verhindert das Ausweichen in einen normalen Schlagwurf\n- Kraft entsteht explosiv aus dem Unterarmzug und dem schnellen Abklappen des Handgelenks\n- Tief in die Knie gehen und stabilen Ausfallschritt setzen\n- Blick bleibt unter der Stange hindurch auf dem Torhüter",
+    "variations_text": "- Stangenhöhe stufenweise etwas tiefer halten (bis Oberschenkelhöhe)\n- Vor dem Unterarmwurf kurz einen hohen Schlagwurf über der Stange antäuschen\n- Zuspiel abwechselnd von der linken und der rechten Halbposition",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.44,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.56,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.72,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.56
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Flach",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.72
+            },
+            {
+              "x": 0.24,
+              "y": 0.56
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.72
+            },
+            {
+              "x": 0.5,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.24,
+              "y": 0.56
+            },
+            {
+              "x": 0.5,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.44
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Hüftwurf um den Turnkasten herumziehen",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/hueftwurf-um-den-gegner-herumziehen/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Ein oder zwei Turnkästen stehen auf ca. 8 Metern so, dass ihre Außenkante bündig mit dem jeweiligen Torpfosten abschließt. Rechtshänder üben rechts am linken Kasten vorbei, Linkshänder links am rechten Kasten vorbei.",
+    "flow_description": "1. Der Rückraumspieler läuft auf den Turnkasten zu und erhält im Lauf das Zuspiel von RM.\n2. Der Körper des Schützen bleibt verdeckt hinter dem Kasten, während das vordere Bein seitlich am Kasten vorbeisetzt.\n3. Mit einer peitschenartigen Unterarmbewegung zieht der Spieler den Ball seitlich eng um die Kastenkante herum in die extremen Torecken.\n4. Sowohl das kurze als auch das lange Eck werden gezielt angesteuert.",
+    "coaching_points": "- Körper bleibt hinter dem Kasten versteckt – nur der Unterarm schwingt um das Hindernis herum\n- Seitlicher Ausfallschritt gibt die nötige Reichweite und Balance\n- Handgelenk dreht den Ball gezielt in die gewünschte Ecke\n- Wurfhöhe variabel von kniehoch bis hüfthoch einsetzen",
+    "variations_text": "- Zielvorgabe durch den Trainer: abwechselnd flach ins kurze Eck und halbhoch ins lange Eck\n- Kasten durch einen passiven Blockspieler mit hochgehaltenen Armen ersetzen\n- Nach dem Hüftwurf sofort zum Rebound nachsetzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.36,
+          "y": 0.66,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.64,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Kasten",
+          "x": 0.42,
+          "y": 0.35
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Lang",
+          "x": 0.56,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.64,
+              "y": 0.6
+            },
+            {
+              "x": 0.4,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.66
+            },
+            {
+              "x": 0.4,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.4,
+              "y": 0.42
+            },
+            {
+              "x": 0.48,
+              "y": 0.32
+            },
+            {
+              "x": 0.56,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Isolierter Unterarmzug im Paar mit kleinen Bällen",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.yoursportplanner.com/handball-hueftwurf-partneruebung/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Zwei Spieler stehen sich im Abstand von 5–6 Metern gegenüber. Zur besseren Kontrolle und Handgelenksbeweglichkeit wird anfangs mit einem kleinen Ball (oder Softball/Tennisball), später mit dem regulären Handball gearbeitet.",
+    "flow_description": "1. Spieler A geht in eine tiefe, breite Ausfallschritt-Position und legt den Oberarm locker seitlich am Rumpf an.\n2. Ohne die Schulter hochzuziehen, beschleunigt Spieler A den Ball rein aus dem Unterarm und dem schnellen Handgelenks-Snap flach in Richtung Hüfthöhe von Spieler B.\n3. Spieler B fängt den Ball und spielt ihn ebenfalls per flachem Unterarmwurf zurück.\n4. Nach 3 Minuten Wechsel auf den regulären Handball und Vergrößerung des Abstands auf 8 Meter.",
+    "coaching_points": "- Oberarm bleibt ruhig und tief auf Hüft-/Rippenhöhe\n- Maximale Peitschenbewegung aus Ellenbogen und Handgelenk\n- Tiefen Körperschwerpunkt während der gesamten Serie halten\n- Flache, schnurgerade Flugbahn ohne hohen Bogen",
+    "variations_text": "- Ein dritter Spieler steht seitlich neben dem Werfer und hält leicht die Schulter fest, um die Isolation zu verstärken\n- Pässe als scharfe, flache Aufsetzer spielen\n- Aus der langsamen Seitwärtsbewegung (Shuffling) heraus werfen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.25,
+          "y": 0.35,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.75,
+          "y": 0.35
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.25,
+          "y": 0.65,
+          "hasBall": true
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.75,
+          "y": 0.65
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.35
+            },
+            {
+              "x": 0.75,
+              "y": 0.35
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.65
+            },
+            {
+              "x": 0.75,
+              "y": 0.65
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Sitz-Test auf dem Turnkasten (Unterarmpeitsche ohne Ausholen)",
+    "default_duration_min": 12,
+    "min_players": 4,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://handballtraining.de/hueftwurf-technik-sitzuebung/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "VAULTING_BOX",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei kleine Turnkästen (2-teilig) stehen auf der 8-Meter-Linie. Direkt seitlich vor der Wurfhandseite jedes Kastens steht ein Hütchen oder eine Stange als simulierte Hüfte eines Verteidigers.",
+    "flow_description": "1. Der Werfer setzt sich stabil auf die vordere Kante des Turnkastens und erhält einen Ball vom Zuspieler.\n2. Da die Beine fixiert sind und keine große Ausholbewegung nach oben möglich ist, führt der Spieler den Ball seitlich auf Hüfthöhe eng an der Stange vorbei.\n3. Mit einer schnellen, peitschenartigen Rotation des Unterarms und leichtem Seitwärtsneigen des Oberkörpers wird der Ball scharf ins Tor geschossen.\n4. Jeder Spieler absolviert 6 Würfe in Folge, dann folgt der nächste Spieler.",
+    "coaching_points": "- Oberkörper bleibt möglichst stabil und kippt nur leicht kontrolliert zur Gegenseite\n- Saubere Rotation aus dem Unterarm und aktives Nachdrücken der Finger\n- Kein Ausholen über Schulterhöhe\n- Blick fixiert das untere oder halbhohe Toreck",
+    "variations_text": "- Aus dem Sitzen direkt nach dem Wurf aufstehen und einen zweiten Ball im tiefen Stand werfen\n- Torhüter versucht, die flachen Würfe mit dem Fuß abzuwehren\n- Zielhütchen im Tor gezielt abschießen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "W1",
+          "x": 0.36,
+          "y": 0.42,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "W2",
+          "x": 0.64,
+          "y": 0.42,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Hindernis",
+          "x": 0.4,
+          "y": 0.35
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "Hindernis",
+          "x": 0.6,
+          "y": 0.35
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.5,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.42
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.64,
+              "y": 0.42
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Hüftwurf-Täuschung mit seitlichem Ausfallschritt gegen aktiven Block",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/hueftwurf-taeuschung-gegen-block/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "FEINT_1V1",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein halbpaktiver bis aktiver Abwehrspieler steht auf 8–9 Metern auf der Halbposition. Die Rückraumangreifer starten auf RL (später RR) und erhalten Zuspiele von RM.",
+    "flow_description": "1. Der Angreifer läuft mit Druck auf den Verteidiger zu und setzt eine deutliche Schlag- bzw. Überwurf-Täuschung an (Wurfarm hoch, Oberkörper aufrecht).\n2. Der Abwehrspieler reagiert auf die Täuschung, nimmt beide Arme hoch und geht in die Blockstellung.\n3. Exakt in diesem Moment senkt der Angreifer explosiv den Körperschwerpunkt, setzt einen weiten Ausfallschritt seitlich an der Hüfte des Verteidigers vorbei und zieht den Unterarmwurf ansatzlos durch.\n4. Nach 5 Aktionen wechseln Angreifer und Verteidiger.",
+    "coaching_points": "- Die Täuschung nach oben muss absolut glaubwürdig sein, damit der Block wirklich hochgeht\n- Explosiver Wechsel von 'hoch' (Täuschung) auf 'tief' (Ausfallschritt & Unterarmzug)\n- Richtigen Abstand zum Verteidiger halten, um ein Stürmerfoul zu vermeiden\n- Ball am Verteidiger vorbeischieben und sofort ins Eck zirkeln",
+    "variations_text": "- Verteidiger darf frei entscheiden, ob er hochblockt (Lösung: Hüftwurf) oder tief stehen bleibt (Lösung: hoher Wurf oder Durchbruch)\n- Zweiter Verteidiger steht daneben, sodass durch die Nahtstelle geworfen werden muss\n- Abschluss zwingend ins lange untere Eck",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.56,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.45
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.38
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ecke",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.56,
+              "y": 0.6
+            },
+            {
+              "x": 0.36,
+              "y": 0.45
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "FEINT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.45
+            },
+            {
+              "x": 0.44,
+              "y": 0.38
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.44,
+              "y": 0.38
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Bodennahe Unterarmwürfe unter dem tiefen Seil",
+    "default_duration_min": 13,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/hueftwurf-wurfhöhe-regulieren-seil/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwischen zwei Airbodies oder Stangen wird auf der 7-Meter-Linie ein elastisches Seil in ca. 80–90 cm Höhe (Knie- bis Oberschenkelhöhe) gespannt. Die Werfer starten zentral und auf den Halbpositionen.",
+    "flow_description": "1. Der Spieler läuft dynamisch an, erhält den Pass von der Seite und geht kurz vor der 9-Meter-Linie in einen extrem tiefen Ausfallschritt.\n2. Ziel ist es, den Ball per Unterarmwurf extrem bodennah unter dem gespannten Seil hindurch ins Tor zu schießen.\n3. Das Seil darf weder berührt noch überworfen werden.\n4. Nach jedem Wurf wechseln die Spieler auf die andere Seite.",
+    "coaching_points": "- Durch die niedrige Seilhöhe lernen die Spieler, den Ball extrem flach über den Hallenboden zu ziehen\n- Handgelenk bleibt parallel zum Boden, damit der Ball nicht nach oben abhebt\n- Hinteres Knie darf sich fast dem Hallenboden nähern\n- Hohe Wurfgeschwindigkeit trotz tiefer Position durch dynamischen Unterarmzug",
+    "variations_text": "- Zielhütchen in den unteren Torecken aufstellen und gezielt abräumen\n- Zwei Seile hintereinander im Abstand von 2 Metern spannen (flacher Wurftunnel)\n- Abschluss als ganz flacher Aufsetzer direkt hinter dem Seil",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.68,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "Stange",
+          "x": 0.4,
+          "y": 0.32
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "Stange",
+          "x": 0.6,
+          "y": 0.32
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Unten",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.68
+            },
+            {
+              "x": 0.5,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.44
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "DHB-Handlungskette: 1-gegen-1 mit Überwurf-Finte und Unterarmwurf",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/handlungskette-unterarmwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "FEINT_1V1",
+        "OFFENSE_INDIVIDUAL",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf RL und RR ist je ein 1-gegen-1-Sektor mit Hütchen markiert. Ein Abwehrspieler verteidigt auf ca. 8 Metern; ein Zuspieler steht zentral auf RM.",
+    "flow_description": "1. Der Rückraumspieler erhält im Lauf das Zuspiel von RM und bindet den Verteidiger durch einen dynamischen Schritt zur Mitte.\n2. Mit einem deutlichen Antäuschen eines oberen Wurfs lockt er die Arme des Verteidigers nach oben.\n3. Sofort folgt ein tiefer seitlicher Ausfallschritt in die freie Lücke und der schnelle, verdeckte Unterarmwurf am Verteidiger vorbei.\n4. Nach dem Abschluss wird zwischen linker und rechter Seite gewechselt.",
+    "coaching_points": "- Handlungskette fließend verbinden: Fangen -> Binden -> Antäuschen -> Ausfallschritt -> Unterarmwurf\n- Keine Pause zwischen Täuschung und tiefem Ausfallschritt\n- Körperneigung zur Gegenseite maximiert den Wurfweg am Verteidiger vorbei\n- Ruhige Augen auf dem Torhüter behalten",
+    "variations_text": "- Verteidiger darf auch seitlich verschieben; Angreifer entscheidet zwischen Durchbruch und Unterarmwurf\n- Ein Kreisläufer steht als Passoption bereit, falls ein zweiter Verteidiger hilft\n- Pflicht: Abschluss in die vom Trainer vorab angesagte Ecke",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.46
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.42,
+          "y": 0.38
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.52,
+              "y": 0.6
+            },
+            {
+              "x": 0.34,
+              "y": 0.46
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "FEINT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.46
+            },
+            {
+              "x": 0.42,
+              "y": 0.38
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.38
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Verdeckter Hüftwurf nach Rückraum-Kreuzen",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/hueftwurf-nach-rueckraum-kreuzen/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Abwehrspieler verteidigen im Mittel- und Halbblock auf 7–8 Metern. Zwei Rückraumreihen starten auf RL und RM.",
+    "flow_description": "1. RL läuft mit Ball tief in Richtung Innenblock und zieht die Aufmerksamkeit der Verteidigung auf sich.\n2. RM kreuzt mit hohem Tempo hinter RL und übernimmt die kurze Ballablage.\n3. Da der Mittelblock nach der Kreuzung hoch steht, um einen Sprungwurf zu blocken, bleibt RM tief am Boden.\n4. Ohne Zwischenschritt zieht RM den Ball aus der Bewegung per verdecktem Hüftwurf unter oder seitlich an den Blockarmen vorbei aufs Tor.",
+    "coaching_points": "- Durch das Kreuzen entsteht ein ideales Sichthindernis für den Torhüter\n- RM fängt den Ball bereits in leicht abgesenkter Körperhaltung\n- Schnelle, ansatzlose Ausführung, bevor der Block neu ordnen kann\n- Klare Rollenverteilung und Positionswechsel nach jedem Durchgang",
+    "variations_text": "- Kreuzen auf der rechten Seite (RR und RM)\n- Abwehr darf offensiv gegen das Kreuzen heraustreten (Lösung: kurzer Weiterpass oder Durchbruch)\n- Tore durch Hüftwurf zählen im 3-gegen-3-Anschlussspiel doppelt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "IL",
+          "x": 0.42,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "IR",
+          "x": 0.56,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.62,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.54,
+          "y": 0.64,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.46
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.4
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.62
+            },
+            {
+              "x": 0.46,
+              "y": 0.46
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.64
+            },
+            {
+              "x": 0.46,
+              "y": 0.52
+            },
+            {
+              "x": 0.38,
+              "y": 0.4
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.46,
+              "y": 0.46
+            },
+            {
+              "x": 0.38,
+              "y": 0.4
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.38,
+              "y": 0.4
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Knieender Unterarmwurf gegen die Wand (Handgelenk-Snap)",
+    "default_duration_min": 10,
+    "min_players": 4,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.erima.de/magazin/handball-hueftwurf-lernen",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 16
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Jeder Spieler kniet im Einbeinkniestand (Gegenbein aufgestellt, Wurfhand-Knie auf einer dünnen Matte) ca. 3–4 Meter vor einer Hallenwand. Jeder Spieler hat einen Ball.",
+    "flow_description": "1. Aus dem stabilen Einbeinkniestand führt der Spieler den Ball seitlich knapp über dem Boden zurück.\n2. Durch kraftvolle Rumpfspannung und eine schnelle Peitschenbewegung des Unterarms schlägt er den Ball flach gegen das untere Drittel der Hallenwand.\n3. Der Ball wird direkt wieder gefangen und sofort erneut geschlagen.\n4. Pro Serie 12 Wiederholungen, danach kurzer Wechsel des Standbeins oder kurze Lockerung.",
+    "coaching_points": "- Durch das Knien wird die Beinbewegung ausgeschaltet und der Fokus liegt zu 100 % auf Unterarmzug und Handgelenk-Snap\n- Oberkörper bleibt aufrecht und rotiert sauber aus der Brustwirbelsäule\n- Ball trifft die Wand immer unterhalb von 1 Meter Höhe\n- Finger klappen beim Abwurf aktiv nach innen/vorne ab",
+    "variations_text": "- Abstand zur Wand auf 5 Meter vergrößern\n- Mit dem Ball gezielt kleine Klebeband-Ziele an der Wand treffen\n- Mit beiden Armen abwechselnd werfen (Koordinationsschulung)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.25,
+          "y": 0.45,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.5,
+          "y": 0.45,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.75,
+          "y": 0.45,
+          "hasBall": true
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Wand",
+          "x": 0.25,
+          "y": 0.14
+        },
+        {
+          "id": "t2",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Wand",
+          "x": 0.5,
+          "y": 0.14
+        },
+        {
+          "id": "t3",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Wand",
+          "x": 0.75,
+          "y": 0.14
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.25,
+              "y": 0.45
+            },
+            {
+              "x": 0.25,
+              "y": 0.14
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "t2",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.45
+            },
+            {
+              "x": 0.5,
+              "y": 0.14
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "t3",
+          "points": [
+            {
+              "x": 0.75,
+              "y": 0.45
+            },
+            {
+              "x": 0.75,
+              "y": 0.14
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Hüftwurf im 2 gegen 2 nach Kreisläufer-Sperre",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/2gegen2-sperre-und-hueftwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Im zentralen Sektor agieren ein Rückraumspieler (RM/RL) und ein Kreisläufer gegen zwei Abwehrspieler am 6-Meter-Kreis. Zuspieler steht auf der Außen- oder Halbposition.",
+    "flow_description": "1. Der Kreisläufer setzt eine klare seitliche Sperre gegen den Innenverteidiger.\n2. Der Rückraumspieler nutzt die Sperre eng mit Tempo, sodass der zweite Verteidiger zum Helfen hochtreten muss.\n3. Sobald der helfende Verteidiger die Arme zum Block hochnimmt, nutzt der Rückraumspieler den Schutz der Sperre für einen ansatzlosen, tiefen Hüftwurf am Verteidiger vorbei.\n4. Bleibt der Verteidiger tief am Kreisläufer, kann alternativ ein Pass zum sich absetzenden KM erfolgen.",
+    "coaching_points": "- Eng an der Schulter des Kreisläufers vorbeiziehen, um die Sperre optimal als Sichtschutz zu nutzen\n- Tiefen Körperschwerpunkt beim Passieren der Sperre sofort für den Unterarmwurf nutzen\n- Kreisläufer hält die Sperre regelkonform stabil\n- Torwart wird durch die Spielertraube maximal überrascht",
+    "variations_text": "- Nur Tore durch Hüftwurf zählen doppelt\n- Verteidiger dürfen das Sperre-Absetzen aktiv übergeben/übernehmen\n- Erweiterung auf 3 gegen 3 mit zweitem Rückraumspieler",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "IL",
+          "x": 0.42,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "IR",
+          "x": 0.56,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.46,
+          "y": 0.34
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.54,
+          "y": 0.4
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SCREEN_BLOCK_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toNodeId": "d1",
+          "points": [
+            {
+              "x": 0.46,
+              "y": 0.34
+            },
+            {
+              "x": 0.43,
+              "y": 0.31
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.48,
+              "y": 0.6
+            },
+            {
+              "x": 0.54,
+              "y": 0.4
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.54,
+              "y": 0.4
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Reaktions-Hüftwurf: Block hoch oder Block tief?",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/de/service/trainingshilfen/entscheidungstraining-hueftwurf/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "STANDING_THROW",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Ein Blockspieler steht auf 8 Metern auf RL oder RR. Er gibt dem anlaufenden Werfer erst im letzten Moment ein klares optisches Signal durch seine Armhaltung (Arme hoch = Block oben, Arme tief/seitlich = Block unten).",
+    "flow_description": "1. Der Rückraumspieler erhält im Anlauf das Zuspiel von RM und fixiert den Blockspieler.\n2. Reißt der Blockspieler beide Arme hoch, senkt der Schütze sofort den Schwerpunkt und schließt per schnellem Hüftwurf unten bzw. seitlich vorbei ab.\n3. Bleiben die Arme des Blockspielers tief, zieht der Schütze stattdessen einen hohen Schlagwurf über den Verteidiger hinweg.\n4. Nach jeweils 6 Würfen wechseln Blockspieler und Werfer.",
+    "coaching_points": "- Blick bleibt offen beim Blockspieler, nicht nach unten auf den Ball schauen\n- Schnelle Entscheidung ohne Verlust des Anlaufrhythmus\n- Saubere technische Differenzierung zwischen tiefem Unterarmwurf und hohem Kernwurf\n- Blockspieler wechselt das Signal unvorhersehbar",
+    "variations_text": "- Signal erst geben, wenn der Werfer den zweiten Schritt seines 3-Schritt-Anlaufs setzt\n- Blockspieler darf einseitig blocken (linker Arm hoch -> rechts vorbei, rechter Arm hoch -> links vorbei)\n- Punktewertung gegen den Torhüter",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "Block",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.66,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.56,
+          "y": 0.6,
+          "hasBall": true
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.56,
+              "y": 0.6
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.28,
+              "y": 0.66
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schräger Durchbruch mit eingedrehtem Unterarmwurf",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/eingedrehter-unterarmwurf-durchbruch/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "FEINT_1V1",
+        "OFFENSE_INDIVIDUAL",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf der rechten Rückraumseite (für Linkshänder) und der linken Rückraumseite (für Rechtshänder) steht ein halbpaktiver Verteidiger auf 8 Metern. Ziel ist der enge schräge Durchbruch zur Wurfhandseite mit eingedrehtem Unterarmwurf.",
+    "flow_description": "1. Der Angreifer greift schräg in Richtung Wurfhandseite am Verteidiger vorbei an.\n2. Kurz vor dem Körperkontakt hält der Angreifer den nötigen Sicherheitsabstand (kein Stopfoul) und schiebt den Wurfarm tief und weit nach vorne-innen am Verteidiger vorbei.\n3. Durch das aktive Eindrehen des Unterarms und Handgelenks wird der Ball an der Hüfte des Verteidigers vorbei scharf ins lange oder kurze Eck geschlenzt.\n4. Wechsel zwischen beiden Rückraumseiten.",
+    "coaching_points": "- Wurfarm weit am Verteidiger vorbeischieben, damit dieser ihn nicht regelkonform blocken kann\n- Korrekten Abstand zum Körper des Verteidigers einhalten, um Stürmerfouls zu vermeiden\n- Schnelle Beinarbeit im schrägen Antritt (erster Schritt explosiv zur Seite)\n- Überraschungseffekt durch extrem flachen, schnellen Abwurf",
+    "variations_text": "- Wenn der Verteidiger den Weg außen komplett zumacht, erfolgt ein harter Richtungswechsel nach innen\n- Zweiter Verteidiger rückt von der Mitte aus zu Hilfe\n- Abschluss als überraschender flacher Aufsetzer",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.64,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.72,
+          "y": 0.62,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.38
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Ecke",
+          "x": 0.45,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.72,
+              "y": 0.62
+            },
+            {
+              "x": 0.56,
+              "y": 0.38
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.56,
+              "y": 0.38
+            },
+            {
+              "x": 0.45,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Hüftwurf-Zielwerfen durch Hütchentore am 6-Meter-Kreis",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.mobilesport.ch/handball/hueftwurf-zielwerfen/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Auf der 6-Meter-Linie werden drei schmale Hütchentore (ca. 1,2 Meter breit) links, mittig und rechts aufgebaut. Die Werfer starten mit Ball auf der 11-Meter-Linie.",
+    "flow_description": "1. Der Spieler läuft bis zur 9-Meter-Linie an, geht tief in die Knie und versucht, den Ball per flachem Hüftwurf sauber durch das mittlere oder äußere Hütchentor hindurch ins Tor zu schießen.\n2. Nur flache Würfe (maximal kniehoch durch das Hütchentor) zählen als gültiger Treffer.\n3. Trifft der Ball ins Tor, ohne ein Hütchen umzuwerfen, gibt es 2 Punkte.\n4. Zwei Teams treten gegeneinander an: Wer sammelt in 5 Minuten mehr Punkte?",
+    "coaching_points": "- Hütchentore geben direktes visuelles Feedback über die seitliche Präzision des Unterarmwurfs\n- Ruhiger, kontrollierter Ausfallschritt vor der 9-Meter-Linie\n- Sauberes Nachführen der Wurfhand in Richtung des Zieltores\n- Kein blindes Draufbolzen – Präzision steht an erster Stelle",
+    "variations_text": "- Hütchentore schmaler stellen (auf 80 cm Breite)\n- Trainer ruft erst beim Anlauf die Nummer des Hütchentors (1, 2 oder 3) aus\n- Mit Torhüter, der versucht, die flachen Bälle abzuwehren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "W1",
+          "x": 0.34,
+          "y": 0.66,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "W2",
+          "x": 0.66,
+          "y": 0.66,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "T1",
+          "x": 0.38,
+          "y": 0.28
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "T2",
+          "x": 0.46,
+          "y": 0.28
+        },
+        {
+          "id": "c3",
+          "type": "EQUIPMENT_CONE",
+          "label": "T3",
+          "x": 0.54,
+          "y": 0.28
+        },
+        {
+          "id": "c4",
+          "type": "EQUIPMENT_CONE",
+          "label": "T4",
+          "x": 0.62,
+          "y": 0.28
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.46,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.66
+            },
+            {
+              "x": 0.4,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.4,
+              "y": 0.44
+            },
+            {
+              "x": 0.46,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Freiwurf-Hüftwurf unter der hochspringenden Mauer hindurch",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/freiwurf-hueftwurf-unter-mauer/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "DEFENSE_GROUP"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Drei Abwehrspieler stellen eine Freiwurfmauer auf 6 Metern. Der Werfer steht mit festem Standbein direkt an der 9-Meter-Linie.",
+    "flow_description": "1. Der Schütze täuscht einen harten, hohen direkten Freiwurf an, um die gesamte Dreiermauer zum geschlossenen Hochspringen zu verleiten.\n2. Sobald die Mauer abhebt, geht der Werfer mit dem Spielbein in einen tiefen Ausfallschritt (Standbein bleibt am Boden!).\n3. Mit einer explosiven Unterarmbewegung zieht er den Hüftwurf extrem flach unter den Füßen bzw. Knien der springenden Mauer hindurch aufs Tor.\n4. Nach 3 Versuchen rotieren Mauer und Werfer.",
+    "coaching_points": "- Regelkonformität beachten: Standbein bleibt dauerhaft am Boden, nicht übertreten\n- Timing ist entscheidend: Abwurf exakt in dem Moment, in dem die Mauer in der Luft ist\n- Extrem flache Flugbahn knapp über dem Hallenboden\n- Überraschungsmoment gegenüber dem Torwart nutzen, der hinter der Mauer schlecht sieht",
+    "variations_text": "- Mauer darf frei entscheiden, ob sie hochspringt oder stehen bleibt (Werfer muss blitzschnell reagieren)\n- Variante mit kurzem Ableger auf einen Mitspieler, der direkt per Hüftwurf abzieht\n- Wettkampf: Jeder Treffer unter der Mauer durch zählt 2 Punkte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "M1",
+          "x": 0.44,
+          "y": 0.28
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "M2",
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "M3",
+          "x": 0.56,
+          "y": 0.28
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "FW",
+          "x": 0.5,
+          "y": 0.44,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Flach",
+          "x": 0.54,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.44
+            },
+            {
+              "x": 0.54,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Kleingruppenspiel 4 gegen 4 mit Hüftwurf-Bonus",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/kleingruppenspiel-hueftwurf-bonus/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "OFFENSE_GROUP",
+        "SHOOTING",
+        "DEFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Gespielt wird 4 gegen 4 (3 Rückraumspieler + 1 Kreisläufer) auf ein Tor in einer Hallenhälfte. Die Abwehr deckt kompakt in einer 4:0-Grundordnung am Kreis.",
+    "flow_description": "1. Der Angriff spielt regulär im 4 gegen 4 und versucht, durch Druck, Kreuzen oder 1-gegen-1-Aktionen freie Wurfsituationen herauszuspielen.\n2. Sonderregel: Jedes reguläre Tor zählt 1 Punkt; jedes Tor, das durch einen technisch sauberen Hüft- oder Unterarmwurf aus dem Rückraum erzielt wird, zählt 3 Punkte.\n3. Nach 6 Angriffen (oder 4 Minuten) wechseln Angriff und Abwehr die Aufgaben.\n4. Welches Team erzielt am Ende der Spielzeit die meisten Punkte?",
+    "coaching_points": "- Durch die Bonusregel suchen die Rückraumspieler aktiv nach tiefen Lücken und Block-Täuschungen\n- Hüftwürfe nur aus sinnvollen Spielsituationen erzwingen (keine unvorbereiteten Notwürfe)\n- Hohe Ballzirkulation bindet die Abwehr und öffnet seitliche Wurffenster\n- Abwehr lernt gleichzeitig, auf tiefe Würfe wachsam zu reagieren",
+    "variations_text": "- Kein Prellen im Rückraum erlaubt (erhöht das Passtempo)\n- Nach einem Fehlwurf gibt es sofortigen Ballbesitzwechsel auf das zweite Tor\n- Erweiterung auf 6 gegen 6 mit gleicher Hüftwurf-Bonusregel",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.3,
+          "y": 0.3
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.44,
+          "y": 0.28
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.56,
+          "y": 0.28
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.7,
+          "y": 0.3
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.54
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.58,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.74,
+          "y": 0.54
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.5,
+          "y": 0.32
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.34,
+          "y": 0.42
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "3 Pkt",
+          "x": 0.55,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 0.58
+            },
+            {
+              "x": 0.34,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.54
+            },
+            {
+              "x": 0.34,
+              "y": 0.42
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.34,
+              "y": 0.42
+            },
+            {
+              "x": 0.55,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Doppel-Abschluss: Hüftwurf aus dem Rückraum und Nachwurf",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://handballtraining.de/doppelabschluss-hueftwurf-serie/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GOALKEEPER_WARMUP"
+      ],
+      "focus": [
+        "HIP_UNDERARM_SHOT",
+        "SHOOTING",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL_CART",
+        "quantity": 1
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Airbodies stehen auf 8 Metern auf RL und RR. Der Trainer oder ein Zuspieler steht mit Ballwagen zentral auf RM. Die Schützen stellen sich auf RL an.",
+    "flow_description": "1. Der Schütze startet auf RL, bekommt den ersten Ball von RM und zieht einen tiefen Hüftwurf rechts am linken Airbody vorbei auf das Tor.\n2. Sofort nach dem ersten Wurf sprintet der Schütze bogenförmig über die Mitte auf die rechte Rückraumseite.\n3. Dort erhält er sofort einen zweiten Ball von RM und schließt links am rechten Airbody vorbei per Unterarmwurf ab.\n4. Nach dem Doppel-Abschluss stellt sich der Spieler wieder an und der nächste startet.",
+    "coaching_points": "- Schnelles Umschalten zwischen zwei verschiedenen Wurfwinkeln\n- Auch beim zweiten Wurf unter leichter Ermüdung tief in die Knie gehen\n- Sauberes Vorbeiziehen des Unterarms an beiden Seiten der Hindernisse\n- Hoher Rhythmus fordert gleichzeitig die Beinarbeit des Torhüters",
+    "variations_text": "- Erster Wurf flach ins kurze Eck, zweiter Wurf halbhoch ins lange Eck\n- Dritter Ball erfolgt als sofortiger Gegenstoßpass vom Torwart\n- Airbodies durch zwei passive Verteidiger ersetzen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.07
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.66,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "coach1",
+          "type": "COACH_FEEDER",
+          "label": "T",
+          "x": 0.5,
+          "y": 0.62,
+          "hasBall": true
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "A1",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "A2",
+          "x": 0.64,
+          "y": 0.34
+        },
+        {
+          "id": "w1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "w2",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.44
+        },
+        {
+          "id": "t1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "Tor",
+          "x": 0.5,
+          "y": 0.05
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "w1",
+          "points": [
+            {
+              "x": 0.26,
+              "y": 0.66
+            },
+            {
+              "x": 0.36,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "w1",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "w1",
+          "toWaypointId": "w2",
+          "points": [
+            {
+              "x": 0.36,
+              "y": 0.44
+            },
+            {
+              "x": 0.5,
+              "y": 0.52
+            },
+            {
+              "x": 0.64,
+              "y": 0.44
+            }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "w2",
+          "toNodeId": "t1",
+          "points": [
+            {
+              "x": 0.64,
+              "y": 0.44
+            },
+            {
+              "x": 0.5,
+              "y": 0.05
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

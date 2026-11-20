@@ -1,0 +1,1951 @@
+[
+  {
+    "title": "6 gegen 6 mit Mini-Toren an der Mittellinie (Rückzug unter Zeitdruck)",
+    "default_duration_min": 16,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/abwehr/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "FAST_BREAK_1ST_WAVE",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "MINI_GOAL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Gespielt wird 6 gegen 6 auf einer Hallenhälfte mit einem regulären Tor und Torwart. An der Mittellinie stehen links und rechts zwei Mini-Tore (alternativ mit Hütchen markiert).",
+    "flow_description": "1. Team A spielt einen regulären Positionsangriff gegen die Abwehr von Team B auf das große Tor.\n2. Sobald Team B den Ball erobert (Ballgewinn, Torwartparade oder auch nach einem Gegentor), schaltet Team B blitzschnell auf Gegenstoß Richtung Mittellinie um.\n3. Team A muss sofort mental umschalten, ohne Jubel oder Frust in den Vollsprint-Rückzug gehen und beide Mini-Tore an der Mittellinie verteidigen.\n4. Team B hat maximal 8 Sekunden Zeit, um in eines der Mini-Tore zu treffen; verteidigt Team A erfolgreich, erhält Team A einen Abwehrpunkt.",
+    "coaching_points": "- Kein Jubel nach einem Tor und kein Ärger nach einem Fehlwurf – sofortiger Umschaltreflex\n- Lautstarke Kommunikation im Rückzug („Ich hab Mitte!“, „Links frei!“)\n- Passwege zu den Außenbahnen frühzeitig schließen",
+    "variations_text": "- Zeitfenster für den Konter von 8 auf 6 Sekunden verkürzen\n- Nur Treffer nach mindestens einem Querpass in die Mini-Tore werten",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1,
+          "hasBall": true
+        },
+        {
+          "id": "mg1",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "MT1",
+          "x": 0.2,
+          "y": 0.92
+        },
+        {
+          "id": "mg2",
+          "type": "EQUIPMENT_GOAL_TARGET",
+          "label": "MT2",
+          "x": 0.8,
+          "y": 0.92
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.24,
+          "y": 0.34
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.5,
+          "y": 0.32
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.76,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.3,
+          "y": 0.44
+        },
+        {
+          "id": "a2",
+          "type": "DEFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.52,
+          "y": 0.46
+        },
+        {
+          "id": "a3",
+          "type": "DEFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.72,
+          "y": 0.44
+        },
+        {
+          "id": "wp_b1",
+          "type": "WAYPOINT",
+          "x": 0.22,
+          "y": 0.74
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.78
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b1",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.24, "y": 0.34 },
+            { "x": 0.22, "y": 0.74 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.5, "y": 0.1 },
+            { "x": 0.22, "y": 0.74 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.3, "y": 0.44 },
+            { "x": 0.26, "y": 0.78 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_b1",
+          "toNodeId": "mg1",
+          "points": [
+            { "x": 0.22, "y": 0.74 },
+            { "x": 0.2, "y": 0.92 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Tempowechsel-Wettkampf: Langen Torwartpass im Rückzug abfangen",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/abwehr/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_INDIVIDUAL",
+        "FAST_BREAK_1ST_WAVE",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Teams stehen jeweils an den Außenpositionen mit Bällen. Vor beiden Toren steht je eine Pylone auf der 6m-Linie in Pfostenhöhe. Beide Tore sind mit Torhütern besetzt.",
+    "flow_description": "1. Ein Spieler von Team A startet einen Tempogegenstoß ohne direkte Abwehr und schließt auf Tor 2 ab.\n2. Gleichzeitig mit dem Absprung des Werfers rollt der erste Spieler von Team B auf der gegenüberliegenden Seite einen Ball zum eigenen Torwart (TW2) und startet sofort in den Gegenstoß.\n3. TW2 nimmt den eingerollten Ball auf und wirft einen langen Gegenstoßpass nach vorn auf den startenden Spieler von Team B.\n4. Der Werfer von Team A schaltet sofort nach der Landung um, sprintet im vollen Tempo zurück und versucht, den langen Pass abzufangen oder den Konterläufer fair am Torwurf zu hindern.",
+    "coaching_points": "- Nach der Landung sofort explodieren und über die Schulter Blickkontakt zum abwerfenden Torwart halten\n- Nicht blind geradeaus rennen, sondern die Passlinie zwischen Torwart und Konterläufer schließen\n- Bei Ballgewinn sofort selbst wieder den Gegenstoß einleiten",
+    "variations_text": "- Als 2 gegen 2 Wettkampf durchführen: Zwei Werfer schalten gegen zwei startende Konterläufer um\n- Teamwertung einführen: 2 Punkte für abgefangenen Pass, 1 Punkt für verhindertes Tor",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.78,
+          "y": 0.34
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.64,
+          "y": 0.78
+        },
+        {
+          "id": "wp_b1",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.66
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.62
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "b1",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.64, "y": 0.78 },
+            { "x": 0.26, "y": 0.66 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk2",
+          "toWaypointId": "wp_b1",
+          "points": [
+            { "x": 0.92, "y": 0.5 },
+            { "x": 0.26, "y": 0.66 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.78, "y": 0.34 },
+            { "x": 0.32, "y": 0.62 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "1 gegen 1 Aufholjagd – Werfer schaltet sofort in den Rückzug um",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Schlangen starten auf Höhe der 9m-Linie vor Tor 2. Spieler A hat einen Ball, Spieler B steht ohne Ball an der Seitenlinie auf Höhe der 9m-Linie. Beide Tore sind besetzt.",
+    "flow_description": "1. Spieler A wirft aus dem Rückraum auf Tor 2.\n2. Im Moment des Ballverlassens der Hand sprintet Spieler B Richtung Tor 1 los und erhält sofort einen langen Pass von TW2.\n3. Spieler A muss unmittelbar nach seinem Wurf abbremsen, wenden und Spieler B im Vollsprint einholen.\n4. Gelingt es Spieler A, rechtzeitig vor Spieler B zu kommen (Körper vor Ball), verteidigt er im 1 gegen 1 vor Tor 1.",
+    "coaching_points": "- Nach dem Wurf nicht dem eigenen Ball hinterherschauen, sondern sofort Blick zum startenden Gegenspieler\n- Sauberes, faires Verteidigen ohne Ziehen oder Stoßen von hinten (kein unnötiges Foul)\n- Konterläufer nach außen in den spitzen Winkel abdrängen",
+    "variations_text": "- Spieler B muss vor dem Loslaufen erst eine Bodenberührung machen, um den Vorsprung zu reduzieren\n- Spieler A wirft von der Außenposition und hat so einen längeren Rückweg",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A",
+          "x": 0.72,
+          "y": 0.44,
+          "hasBall": true
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B",
+          "x": 0.72,
+          "y": 0.82
+        },
+        {
+          "id": "wp_b",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.58
+        },
+        {
+          "id": "wp_a",
+          "type": "WAYPOINT",
+          "x": 0.2,
+          "y": 0.54
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.72, "y": 0.44 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "b1",
+          "toWaypointId": "wp_b",
+          "points": [
+            { "x": 0.72, "y": 0.82 },
+            { "x": 0.24, "y": 0.58 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "gk2",
+          "toWaypointId": "wp_b",
+          "points": [
+            { "x": 0.92, "y": 0.5 },
+            { "x": 0.24, "y": 0.58 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a",
+          "points": [
+            { "x": 0.72, "y": 0.44 },
+            { "x": 0.2, "y": 0.54 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Ballorientiertes Rückwärtslaufen mit Blick zum Passgeber (2 gegen 2)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/de/service/trainer/trainercenter/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei Angreifer (A1, A2) starten an der eigenen 6m-Linie mit Ball beim Torwart. Zwei Verteidiger (V1, V2) starten auf Höhe der gegnerischen 9m-Linie und müssen im Rückwärts-/Seitwärtslauf zurückverteidigen.",
+    "flow_description": "1. TW1 passt auf A1, der zusammen mit A2 den schnellen Gegenstoß über das gesamte Feld startet.\n2. V1 und V2 sprinten seitlich-rückwärts mit offenem Oberkörper (Blick gleichzeitig auf Ball und Gegenspieler) Richtung eigenes Tor zurück.\n3. V1 verzögert den ballführenden A1 durch aktives Anlaufen und lenkt ihn Richtung Seitenlinie, während V2 die tiefe Passlinie zu A2 abdeckt.\n4. Ziel der Abwehr ist es, keinen freien Wurf vor der 6m-Linie zuzulassen und die Angreifer in den stehenden Zweikampf zu zwingen.",
+    "coaching_points": "- Nie mit dem Rücken zum Ball zurücklaufen – stets halboffene Körperhaltung einnehmen\n- Der ballnahe Verteidiger stört den Ballvortrag, der ballferne sichert die Tiefe\n- Klare Absprache bei Kreuzbewegungen der Angreifer",
+    "variations_text": "- Angreifer dürfen erst ab der Mittellinie prellen\n- Bei einem abgefangenen Pass oder Ballgewinn tauschen die Rollen sofort",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.22,
+          "y": 0.34
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.22,
+          "y": 0.68
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.36,
+          "y": 0.38
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.36,
+          "y": 0.64
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.72,
+          "y": 0.3
+        },
+        {
+          "id": "wp_v1",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.36
+        },
+        {
+          "id": "wp_v2",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.58
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "gk1",
+          "toNodeId": "a1",
+          "points": [
+            { "x": 0.08, "y": 0.5 },
+            { "x": 0.22, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "DRIBBLE_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.22, "y": 0.34 },
+            { "x": 0.72, "y": 0.3 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "v1",
+          "toWaypointId": "wp_v1",
+          "points": [
+            { "x": 0.36, "y": 0.38 },
+            { "x": 0.78, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "v2",
+          "toWaypointId": "wp_v2",
+          "points": [
+            { "x": 0.36, "y": 0.64 },
+            { "x": 0.78, "y": 0.58 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Rückzug in Unterzahl: 2 gegen 3 Gegenstoß verzögern und lenken",
+    "default_duration_min": 15,
+    "min_players": 5,
+    "max_players": 15,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-one.com/2-welle-handball/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Halbfeld-Aufbau. Drei Angreifer starten an der Mittellinie in der 2. Welle. Zwei Verteidiger starten auf Höhe der 11m-Linie in einer gestaffelten Position (V1 vorn, V2 hinten).",
+    "flow_description": "1. Die drei Angreifer starten den Gegenstoß mit hohem Tempo Richtung Tor.\n2. V1 attackiert offensiv den zentralen Ballführer, um den Rhythmus zu brechen, und zieht sich nach dem ersten Pass sofort Richtung 6m-Raum zurück.\n3. V2 deckt den gefährlichsten zentralen Raum vor dem Tor ab und lässt bewusst den Pass auf die äußerste Position (spitzer Winkel) zu, um dem Torwart eine klare Wurfsituation zu geben.\n4. Ein dritter Verteidiger startet nach 3 Sekunden von der Mittellinie nach, um die Verzögerung zu belohnen.",
+    "coaching_points": "- Zentrum vor Außen schützen: Lieber einen Wurf vom spitzen Winkel als einen freien Durchbruch durch die Mitte zulassen\n- Durch angetäuschte Ausfallschritte den Ballführer zum Abstoppen oder zu einem zusätzlichen Pass zwingen\n- Aktiv mit dem Torwart kommunizieren, welche Ecke gedeckt wird",
+    "variations_text": "- Als 3 gegen 4 Unterzahl-Rückzug spielen\n- Wertung: Wenn die Abwehr den Abschluss länger als 5 Sekunden verzögert, erhält sie 1 Punkt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.5,
+          "y": 0.44
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.26
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.16,
+          "y": 0.82
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.84,
+          "y": 0.82
+        },
+        {
+          "id": "wp_v1",
+          "type": "WAYPOINT",
+          "x": 0.4,
+          "y": 0.3
+        },
+        {
+          "id": "wp_v2",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.24
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v1",
+          "toWaypointId": "wp_v1",
+          "points": [
+            { "x": 0.5, "y": 0.44 },
+            { "x": 0.4, "y": 0.3 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v2",
+          "toWaypointId": "wp_v2",
+          "points": [
+            { "x": 0.5, "y": 0.26 },
+            { "x": 0.64, "y": 0.24 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Umschalten nach Fehlwurf: Hütchen-Berührung und Sprint in die 6m-Ordnung",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/abwehr/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_INDIVIDUAL",
+        "SHOOTING",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf einer Hallenhälfte werden zwei Hütchen links und rechts an der 9m-Linie sowie zwei Hütchen an der Mittellinie aufgestellt. Die Rückraumspieler starten mit Ball auf RM, zwei Anspieler stehen auf den Halbpositionen.",
+    "flow_description": "1. Der Rückraumspieler spielt einen Doppelpass mit dem Halbspieler und wirft aus 9m auf das Tor.\n2. Unmittelbar nach dem Wurf ruft der Trainer das Ergebnis bzw. ein Signal: Bei einem Tor sprintet der Werfer im Rückzug um das rechte Hütchen, bei einem Fehlwurf um das linke Hütchen Richtung Mittellinie.\n3. Nach dem Umlaufen des Hütchens dreht sich der Spieler sofort in Abwehrgrundstellung und verteidigt im 1 gegen 1 gegen den nächsten anlaufenden Angreifer.\n4. Anschließend reiht er sich wieder hinten an.",
+    "coaching_points": "- Mentale Reaktionsschnelligkeit: Sofort auf den Wurfausgang reagieren, ohne stehen zu bleiben\n- Kurze, schnelle Bodenkontakte beim Richtungswechsel um das Hütchen\n- Tiefer Körperschwerpunkt in der anschließenden Abwehrposition",
+    "variations_text": "- Zusätzliche Koordinationsleiter auf dem Rückweg einbauen\n- Zwei Spieler werfen kurz nacheinander und organisieren sofort gemeinsam eine 2er-Abwehr",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.54,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.26,
+          "y": 0.52
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.2,
+          "y": 0.82
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "H2",
+          "x": 0.8,
+          "y": 0.82
+        },
+        {
+          "id": "wp_ret",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.78
+        },
+        {
+          "id": "wp_def",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "SHOT_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.5, "y": 0.54 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_ret",
+          "points": [
+            { "x": 0.5, "y": 0.54 },
+            { "x": 0.26, "y": 0.78 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_ret",
+          "toWaypointId": "wp_def",
+          "points": [
+            { "x": 0.26, "y": 0.78 },
+            { "x": 0.46, "y": 0.34 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Rückzugsverhalten gegen die Schnelle Mitte (4 gegen 4)",
+    "default_duration_min": 15,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "FAST_BREAK_2ND_WAVE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Ganzes Spielfeld. Vier Angreifer (Team A) stehen kurz vor dem Torabschluss auf Tor 2, vier Verteidiger (Team B) sind bereit für die Schnelle Mitte. An der Mittellinie liegt ein Ersatzball.",
+    "flow_description": "1. Team A schließt per Wurf auf Tor 2 ab – unabhängig vom Treffer pfeift der Trainer sofort die Schnelle Mitte für Team B an.\n2. Ein Spieler von Team A (der dem Zentrum am nächsten steht) sprintet sofort auf die 3m-Distanz vor den Anwurfspieler von Team B, um den direkten Passweg zu stören (ohne Regelverstoß).\n3. Die anderen drei Spieler von Team A sprinten im Vollsprint Richtung eigene 6m-Linie, orientieren sich zentral und nehmen die gefährlichsten einlaufenden Gegenspieler auf.\n4. Gelingt es Team A, Team B in den stehenden Positionsangriff zu zwingen, gewinnt Team A den Durchgang.",
+    "coaching_points": "- Anwurfstörer muss 3 Meter Abstand einhalten, aber durch aktive Armarbeit den schnellen ersten Pass verzögern\n- Zentrale Achse zuerst schließen, dann nach außen auffächern\n- Kein Spieler verlässt sich auf feste Positionszuordnungen – zunächst den nächsten freien Gegner aufnehmen",
+    "variations_text": "- Auf 6 gegen 6 erweitern\n- Nach erfolgreichem Stoppen der Schnellen Mitte wird noch 15 Sekunden regulär weiterverteidigt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.5,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.56,
+          "y": 0.24
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.56,
+          "y": 0.76
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.42,
+          "y": 0.5
+        },
+        {
+          "id": "a2",
+          "type": "DEFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.62,
+          "y": 0.34
+        },
+        {
+          "id": "a3",
+          "type": "DEFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.62,
+          "y": 0.66
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.36
+        },
+        {
+          "id": "wp_a3",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.64
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.62, "y": 0.34 },
+            { "x": 0.26, "y": 0.36 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "wp_a3",
+          "points": [
+            { "x": 0.62, "y": 0.66 },
+            { "x": 0.26, "y": 0.64 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Körper vor Ball – 3 gegen 3 Umschaltspiel mit Zuordnungsruf",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 15,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb.de/de/service/trainer/trainercenter/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Drei Angreifer (Team A) und drei Verteidiger (Team B) starten im freien Raum um die Mittellinie. Jeder Spieler von Team B merkt sich zunächst keinen festen Gegenspieler.",
+    "flow_description": "1. Der Trainer wirft den Ball hoch in den Mittelkreis; Team A sichert den Ball und greift sofort Richtung Tor 2 an.\n2. Team B schaltet sofort in den Rückzug um; jeder Verteidiger ruft laut den Namen oder die Position des Gegners, den er übernimmt („Ich hab Mitte!“, „Ich hab Links!“).\n3. Die Verteidiger müssen ihre Körperposition zwischen Ball/Gegner und eigenem Tor herstellen, bevor die Angreifer die 9m-Linie erreichen.\n4. Wird ein Angreifer im Rückzug ohne Zuordnung übersehen, erhält der Angriff einen Bonuspunkt.",
+    "coaching_points": "- Laute, eindeutige Kommunikation löst Unordnung im Rückzug am schnellsten auf\n- Erst die Mitte besetzen, dann nach außen übergeben\n- Blickkontakt zwischen den Verteidigern beim Kreuzen der Angreifer halten",
+    "variations_text": "- Mannschaften starten mit geschlossenen Augen oder in Bauchlage an der Mittellinie\n- Auf 4 gegen 4 erweitern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.24,
+          "y": 0.84
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.5,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.76,
+          "y": 0.84
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.72
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.54,
+          "y": 0.74
+        },
+        {
+          "id": "v3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.7,
+          "y": 0.72
+        },
+        {
+          "id": "wp_v1",
+          "type": "WAYPOINT",
+          "x": 0.28,
+          "y": 0.34
+        },
+        {
+          "id": "wp_v2",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.32
+        },
+        {
+          "id": "wp_v3",
+          "type": "WAYPOINT",
+          "x": 0.72,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v1",
+          "toWaypointId": "wp_v1",
+          "points": [
+            { "x": 0.34, "y": 0.72 },
+            { "x": 0.28, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v2",
+          "toWaypointId": "wp_v2",
+          "points": [
+            { "x": 0.54, "y": 0.74 },
+            { "x": 0.5, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v3",
+          "toWaypointId": "wp_v3",
+          "points": [
+            { "x": 0.7, "y": 0.72 },
+            { "x": 0.72, "y": 0.34 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Übergang von der 1. Welle zur geordneten Abwehr (4 gegen 3 auf Halbfeld)",
+    "default_duration_min": 15,
+    "min_players": 7,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "DEFENSE_6_0"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Vier Angreifer starten an der Mittellinie gegen zunächst drei Verteidiger (V1, V2, V3), die auf Höhe 9m bis 11m stehen. Ein vierter Verteidiger (V4) startet nach einem Hütchensprint an der Seitenlinie verspätet nach.",
+    "flow_description": "1. Die vier Angreifer starten sofort die 2. Welle Richtung Tor.\n2. V1, V2 und V3 ziehen sich kompakt vor das Tor zurück, schließen die zentralen Nahtstellen und verzögern den Angriff durch gemeinsames Verschieben.\n3. Sobald V4 von der Seitenlinie einläuft, ruft er „Bin da!“ und übernimmt sofort die freie Außen- oder Halbposition.\n4. Die Abwehr formiert sich nahtlos in eine geschlossene 4er-Kette und verteidigt bis zum Abschluss oder Zeitspiel.",
+    "coaching_points": "- Nachrückender Verteidiger muss sofort laut kommunizieren, von welcher Seite er hilft\n- Die ersten drei Verteidiger dürfen sich nicht auseinanderziehen lassen\n- Sauberes Übergeben beim Einlaufen des vierten Verteidigers",
+    "variations_text": "- V4 startet mal von links, mal von rechts, damit die Abwehr flexibel reagieren muss\n- Auf 5 gegen 4 mit einem nachrückenden fünften Verteidiger erweitern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.34,
+          "y": 0.36
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "v3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.66,
+          "y": 0.36
+        },
+        {
+          "id": "v4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.9,
+          "y": 0.72
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.16,
+          "y": 0.8
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.4,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.64,
+          "y": 0.86
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "A4",
+          "x": 0.86,
+          "y": 0.8
+        },
+        {
+          "id": "wp_v4",
+          "type": "WAYPOINT",
+          "x": 0.8,
+          "y": 0.32
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v4",
+          "toWaypointId": "wp_v4",
+          "points": [
+            { "x": 0.9, "y": 0.72 },
+            { "x": 0.8, "y": 0.32 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Störspieler gegen den Torwart-Abwurf (Gegenstoß frühzeitig ersticken)",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://deinehandballuebung.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_INDIVIDUAL",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Ganzes Spielfeld. Ein Kreisläufer (oder Nahwerfer) steht an der gegnerischen 6m-Linie, zwei Konterläufer starten links und rechts an der 9m-Linie, zwei weitere Verteidiger starten im Rückraum.",
+    "flow_description": "1. Der Angreifer am Kreis schließt ab (oder spielt den Ball absichtlich in die Hände von TW2).\n2. Sofort nach Ballkontakt des Torwarts bleibt der Werfer aktiv an der 6m-Linie (ohne den Kreis zu betreten!), macht sich groß und stört durch Beinarbeit und hohe Arme gezielt das Sichtfeld und den direkten Abwurf von TW2.\n3. Gleichzeitig sprinten die beiden Rückraumspieler zurück und nehmen die startenden Konterläufer auf.\n4. Sobald TW2 den Ball abgespielt hat, sprintet auch der Störspieler voll zurück in den eigenen Abwehrverbund.",
+    "coaching_points": "- Regelkonform stören: Torraumlinie nicht übertreten, aber direkt davor die Passwinkel schließen\n- Bereits 1–2 Sekunden Verzögerung beim Torwartabwurf reichen oft, um die 1. Welle komplett zu unterbinden\n- Nach dem Abwurf sofort umschalten und nicht vorne stehen bleiben",
+    "variations_text": "- Torwart darf maximal 3 Sekunden halten, sonst zählt es als Punkt für die Abwehr\n- Störspieler darf nach dem Abwurf auch aktiv auf den Mittelpass lauern",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "v_st",
+          "type": "DEFENSE_PLAYER",
+          "label": "ST",
+          "x": 0.82,
+          "y": 0.5
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.66,
+          "y": 0.3
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.66,
+          "y": 0.7
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.74,
+          "y": 0.18
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.74,
+          "y": 0.82
+        },
+        {
+          "id": "wp_v1",
+          "type": "WAYPOINT",
+          "x": 0.3,
+          "y": 0.28
+        },
+        {
+          "id": "wp_v2",
+          "type": "WAYPOINT",
+          "x": 0.3,
+          "y": 0.72
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v1",
+          "toWaypointId": "wp_v1",
+          "points": [
+            { "x": 0.66, "y": 0.3 },
+            { "x": 0.3, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v2",
+          "toWaypointId": "wp_v2",
+          "points": [
+            { "x": 0.66, "y": 0.7 },
+            { "x": 0.3, "y": 0.72 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Koordinativer Richtungswechsel & Rückzugs-Sprint auf optisches Signal",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/abwehr/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "RETREAT",
+        "FOOTWORK_DEFENSE",
+        "PASSING_CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Auf einer Hallenhälfte stehen drei Hütchen an der 9m-Linie (links, Mitte, rechts) und drei Hütchen an der Mittellinie. Die Spieler stehen paarweise mit einem Ball im Rückraum, der Trainer steht mit farbigen Hütchen oder Handzeichen am Tor.",
+    "flow_description": "1. Das Spielerpaar passt sich den Ball im Vorwärtslauf Richtung 9m-Linie zu.\n2. Kurz vor dem Abschluss zeigt der Trainer ein optisches Signal (z. B. Arm links/rechts hoch oder farbige Karte).\n3. Auf das Signal legt der Ballbesitzer den Ball sofort ab (simulierter Ballverlust), beide Spieler drehen explosionsartig um und sprinten im Rückzug um die angezeigten Hütchen an der Mittellinie.\n4. An der Mittellinie nehmen beide sofort eine saubere Abwehrgrundstellung ein und verschieben drei Schritte seitwärts.",
+    "coaching_points": "- Kopf beim Passen oben halten, um das optische Signal ohne Verzögerung zu erkennen\n- Explosiver erster Antritt nach der Drehung (tiefer Schwerpunkt)\n- Sauberes Abbremsen vor der Abwehrgrundstellung ohne Überkreuzen der Beine",
+    "variations_text": "- Akustische Signale (Pfiff = Rückzug links, Doppelpfiff = Rückzug rechts)\n- Nach dem Rückzugssprint folgt direkt ein reales 2 gegen 2 gegen das nächste Paar",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "coach",
+          "type": "COACH_FEEDER",
+          "label": "TR",
+          "x": 0.5,
+          "y": 0.14
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "S1",
+          "x": 0.36,
+          "y": 0.72,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "S2",
+          "x": 0.64,
+          "y": 0.72
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.24,
+          "y": 0.88
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "H2",
+          "x": 0.76,
+          "y": 0.88
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.44
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.44
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            { "x": 0.36, "y": 0.72 },
+            { "x": 0.36, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.64, "y": 0.72 },
+            { "x": 0.64, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toNodeId": "c1",
+          "points": [
+            { "x": 0.36, "y": 0.44 },
+            { "x": 0.24, "y": 0.88 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp2",
+          "toNodeId": "c2",
+          "points": [
+            { "x": 0.64, "y": 0.44 },
+            { "x": 0.76, "y": 0.88 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "5 gegen 5 Rückzugs-Spiel mit Sonderpunkten für abgefangene Konter",
+    "default_duration_min": 18,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.trainingsworld.com/sportarten/handball/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "FAST_BREAK_2ND_WAVE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 5
+      }
+    ],
+    "setup_description": "Zwei Fünferteams spielen auf dem gesamten Handballfeld mit Torhütern. Der Trainer stoppt die Umschaltzeiten und führt sichtbar Punkte für das Rückzugsverhalten.",
+    "flow_description": "1. Reguläres 5 gegen 5 über das gesamte Spielfeld.\n2. Schafft es die verteidigende Mannschaft nach einem eigenen Ballverlust oder Fehlwurf, den gegnerischen Gegenstoß (1. und 2. Welle) komplett abzustoppen und einen Ballgewinn zu erzielen, erhält sie 2 Sonderpunkte.\n3. Gelingt dem Gegner dagegen ein Tor in der 1. oder 2. Welle innerhalb von 7 Sekunden, zählt dieses Tor doppelt.\n4. Nach 8 Minuten werden kurze taktische Korrekturen besprochen und eine zweite Runde gespielt.",
+    "coaching_points": "- Hohe Motivation für kompromisslose Rückzugsarbeit durch das Punktesystem\n- Alle fünf Spieler sprinten geschlossen zurück – kein Abschalten auf den Außenpositionen\n- Aktiv Passwege zustellen und den Ballführer frühzeitig festmachen",
+    "variations_text": "- Bei jedem Ballverlust im Angriff muss der Verursacher laut „Ball weg!“ rufen\n- Im 6 gegen 6 mit offensiver 3:2:1-Grundordnung im Rückzug spielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.68,
+          "y": 0.22
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.64,
+          "y": 0.5
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.68,
+          "y": 0.78
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.56,
+          "y": 0.3
+        },
+        {
+          "id": "a2",
+          "type": "DEFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.54,
+          "y": 0.52
+        },
+        {
+          "id": "a3",
+          "type": "DEFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.56,
+          "y": 0.72
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.32
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.5
+        },
+        {
+          "id": "wp_a3",
+          "type": "WAYPOINT",
+          "x": 0.26,
+          "y": 0.68
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.56, "y": 0.3 },
+            { "x": 0.26, "y": 0.32 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.54, "y": 0.52 },
+            { "x": 0.24, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "wp_a3",
+          "points": [
+            { "x": 0.56, "y": 0.72 },
+            { "x": 0.26, "y": 0.68 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Abwehr-Sortierung aus dem Chaos: 6 gegen 6 nach Ballverlust im Positionsangriff",
+    "default_duration_min": 16,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.handball-uebungen.de/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "TARGET_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_6_0",
+        "DEFENSE_5_1",
+        "DEFENSE_GROUP"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei Mannschaften stehen im 6 gegen 6. Team A greift auf Tor 2 an, wobei die Angreifer bewusst Positionen wechseln (Kreuzen, Einlaufen), sodass beim Ballverlust keine Standard-Abwehrordnung besteht.",
+    "flow_description": "1. Team A spielt im Positionsangriff mit vielen Positionswechseln gegen Team B.\n2. Zu einem beliebigen Zeitpunkt pfeift der Trainer „Ballverlust!“ – der aktuelle Ballführer legt den Ball sofort auf den Boden und Team B startet den Gegenstoß Richtung Tor 1.\n3. Team A sprintet sofort zurück und muss sich zunächst unabhängig von den Stammpositionen im Zentrum und auf den Halbpositionen sortieren.\n4. Erst wenn der Angriff von Team B gestoppt ist, dürfen die Spieler von Team A bei Ballferne wieder auf ihre Stamm-Abwehrpositionen zurückwechseln.",
+    "coaching_points": "- Schnelles Einschätzen der Situation: Wer zuerst hinten ist, sichert zuerst das Zentrum (Innenblock)\n- Kein unnötiges Kreuzen im eigenen Rückzugsraum, solange der Gegner Tempo macht\n- Klare Übergabesignale beim späteren Zurücktauschen auf die Stammposition",
+    "variations_text": "- Einen Spieler von Team A kurz vor dem Pfiff zum Wechsel an die Auswechselbank schicken (Rückzug in Unterzahl mit Abwehr-Angriff-Wechsel)\n- Zielformation im Rückzug vorgeben (z. B. 5:1-Abwehr statt 6:0)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk1",
+          "type": "GOALKEEPER",
+          "label": "TW1",
+          "x": 0.08,
+          "y": 0.5
+        },
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "b1",
+          "type": "OFFENSE_PLAYER",
+          "label": "B1",
+          "x": 0.66,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "b2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B2",
+          "x": 0.6,
+          "y": 0.2
+        },
+        {
+          "id": "b3",
+          "type": "OFFENSE_PLAYER",
+          "label": "B3",
+          "x": 0.6,
+          "y": 0.8
+        },
+        {
+          "id": "a1",
+          "type": "DEFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.72,
+          "y": 0.36
+        },
+        {
+          "id": "a2",
+          "type": "DEFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.7,
+          "y": 0.64
+        },
+        {
+          "id": "a3",
+          "type": "DEFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.58,
+          "y": 0.44
+        },
+        {
+          "id": "wp_a3",
+          "type": "WAYPOINT",
+          "x": 0.22,
+          "y": 0.46
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.3
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.66
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "wp_a3",
+          "points": [
+            { "x": 0.58, "y": 0.44 },
+            { "x": 0.22, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.72, "y": 0.36 },
+            { "x": 0.24, "y": 0.3 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.7, "y": 0.64 },
+            { "x": 0.24, "y": 0.66 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Abwehr-Angriff-Wechsel im Rückzug organisieren (3 gegen 3 mit Wechselbank)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/abwehr/rueckzugsverhalten/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "RETREAT",
+        "DEFENSE_GROUP",
+        "DEFENSE_6_0"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Halbfeld-Aufbau mit markiertem Wechselraum an der Seitenlinie (zwei Hütchen an der Mittellinie). Drei Angreifer starten an der Mittellinie gegen zwei Verteidiger auf 9m; ein Abwehrspezialist wartet im Wechselraum auf das Abschlagen seines Mitspielers.",
+    "flow_description": "1. Ein offensiver Spieler sprintet nach dem simulierten Wurf im Vollsprint Richtung Wechselraum, während seine beiden Mitspieler den Gegenstoß im Zentrum verzögern.\n2. Sobald der Spieler die Wechsellinie übertritt, startet der frische Abwehrspezialist blitzschnell in den Abwehrverbund.\n3. Der einwechselnde Spieler ruft sofort seine Position an und füllt die offene Lücke in der Abwehrkette.\n4. Ziel ist es, den Wechsel fehlerfrei (kein Wechselfehler!) und ohne Gegentor in der 2. Welle abzuschließen.",
+    "coaching_points": "- Diszipliniertes Einhalten der Wechselzone verhindert unnötige 2-Minuten-Strafen\n- Höchstes Sprinttempo bis zur Seitenlinie – kein Auslaufen vor dem Wechsel\n- Die beiden verbleibenden Verteidiger müssen konsequent das Zentrum schließen, bis der Wechsel vollzogen ist",
+    "variations_text": "- Doppelwechsel (zwei Spieler wechseln gleichzeitig im Rückzug)\n- Auf das ganze Spielfeld im 6 gegen 6 übertragen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "v1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.4,
+          "y": 0.34
+        },
+        {
+          "id": "v2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.6,
+          "y": 0.34
+        },
+        {
+          "id": "v_in",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.06,
+          "y": 0.78
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.24,
+          "y": 0.84
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.5,
+          "y": 0.86,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.76,
+          "y": 0.84
+        },
+        {
+          "id": "wp_vin",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "v_in",
+          "toWaypointId": "wp_vin",
+          "points": [
+            { "x": 0.06, "y": 0.78 },
+            { "x": 0.24, "y": 0.34 }
+          ]
+        }
+      ]
+    }
+  }
+]

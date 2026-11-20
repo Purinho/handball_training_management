@@ -1,0 +1,2405 @@
+[
+  {
+    "title": "Parallelstoßen im Rückraum-Dreieck mit Druckpass",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 15,
+    "goalkeepers": 1,
+    "source_url": "https://deinehandballuebung.de/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "OFFENSE_GROUP"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Die Spieler verteilen sich auf die drei Rückraumpositionen (RL, RM, RR) auf etwa 11–12m. Drei Hütchen markieren auf der 9m-Linie die Stoßziele zwischen den gedachten Abwehrspielern.",
+    "flow_description": "1. RL startet mit Ball eine explosive Stoßbewegung (2–3 Schritte) direkt auf das linke Hütchen zu, um Tiefe und Torgefahr auszustrahlen.\n2. Kurz vor dem Hütchen spielt RL einen scharfen, flachen Druckpass in den Lauf des parallel anlaufenden RM.\n3. RM nimmt den Ball in der Vorwärtsbewegung an, stößt steil auf das mittlere Hütchen zu und leitet per Druckpass auf RR weiter.\n4. RR vollendet das Parallelstoßen mit einem Sprungwurf auf das Tor oder spielt das Kontinuum zurück nach links.",
+    "coaching_points": "- Fangen erfolgt erst in der Vorwärtsbewegung (kein Stehenbleiben vor der Ballannahme)\n- Torgefährliche Körperhaltung beim Stoßen: Blick zum Tor, Wurfarm leicht angehoben\n- Pass kurz vor dem letzten Schritt sauber in Hüft- bis Brusthöhe vor den Körper des Mitspielers spielen",
+    "variations_text": "- Zweiten Ball zeitversetzt ins Kontinuum einwerfen\n- Passgeber muss nach dem Pass eine Farbe oder Zahl rufen, die der Empfänger im Stoßen wiederholt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "c1",
+          "type": "EQUIPMENT_CONE",
+          "label": "H1",
+          "x": 0.3,
+          "y": 0.42
+        },
+        {
+          "id": "c2",
+          "type": "EQUIPMENT_CONE",
+          "label": "H2",
+          "x": 0.5,
+          "y": 0.44
+        },
+        {
+          "id": "c3",
+          "type": "EQUIPMENT_CONE",
+          "label": "H3",
+          "x": 0.7,
+          "y": 0.42
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.72,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.74,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.76,
+          "y": 0.72,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.3,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.7,
+          "y": 0.48
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.72 },
+            { "x": 0.3, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.74 },
+            { "x": 0.5, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.3, "y": 0.48 },
+            { "x": 0.5, "y": 0.5 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.76, "y": 0.72 },
+            { "x": 0.7, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.5, "y": 0.5 },
+            { "x": 0.7, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.7, "y": 0.48 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Stoßen und Rückstoßen über den Mittelmann mit Hindernis-Stangen",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/passen-und-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "OFFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Auf den Halbpositionen (ca. 9m) stehen zwei Stangen oder Airbodys als Abwehrsimulation. Auf RM steht ein fester Zuspieler (oder Trainer), auf RL und RR stehen die Spieler mit Bällen.",
+    "flow_description": "1. RL startet eine dynamische Stoßbewegung mit Ball auf die linke Stange zu, täuscht den Durchbruch an und spielt im Lauf einen präzisen Pass auf RM.\n2. Unmittelbar nach dem Abspiel stößt RL explosiv 3–4 schnelle Schritte rückwärts (Rückstoßen) hinter die 11m-Linie zurück.\n3. Sobald RL wieder Tiefe aufgebaut hat, startet er sofort erneut nach vorn, fängt den Rückpass von RM im vollen Lauf und umläuft die Stange zum Torabschluss (oder spielt weiter zu RR).\n4. Nach jedem Durchgang wird flüssig die Position gewechselt.",
+    "coaching_points": "- Schneller Rhythmuswechsel zwischen Vorwärtsstoßen, Abspiel und explosivem Rückstoßen\n- Beim Rückstoßen immer den Blick zum Ball behalten (nicht umdrehen)\n- Tiefenaufbau ist entscheidend, um beim zweiten Anlauf echtes Tempo zu entwickeln",
+    "variations_text": "- Nach dem Rückstoßen einen zweiten schnellen Doppelpass vor dem Abschluss fordern\n- Zuspieler auf RM variiert die Passart (Druckpass, Bodenpass, hoher Pass)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "p1_obs",
+          "type": "DEFENSE_PLAYER",
+          "label": "ST1",
+          "x": 0.3,
+          "y": 0.42
+        },
+        {
+          "id": "p2_obs",
+          "type": "DEFENSE_PLAYER",
+          "label": "ST2",
+          "x": 0.7,
+          "y": 0.42
+        },
+        {
+          "id": "rm",
+          "type": "COACH_FEEDER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.56
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.72,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "wp_sto",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rueck",
+          "type": "WAYPOINT",
+          "x": 0.24,
+          "y": 0.7
+        },
+        {
+          "id": "wp_end",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_sto",
+          "points": [
+            { "x": 0.24, "y": 0.72 },
+            { "x": 0.32, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromWaypointId": "wp_sto",
+          "toNodeId": "rm",
+          "points": [
+            { "x": 0.32, "y": 0.48 },
+            { "x": 0.5, "y": 0.56 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_sto",
+          "toWaypointId": "wp_rueck",
+          "points": [
+            { "x": 0.32, "y": 0.48 },
+            { "x": 0.24, "y": 0.7 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rueck",
+          "toWaypointId": "wp_end",
+          "points": [
+            { "x": 0.24, "y": 0.7 },
+            { "x": 0.38, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_end",
+          "points": [
+            { "x": 0.5, "y": 0.56 },
+            { "x": 0.38, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_end",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.38, "y": 0.34 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Stoßen mit Entscheidung: Durchbruch oder Pass im 3 gegen 2",
+    "default_duration_min": 15,
+    "min_players": 5,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/passen-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "FEINT_1V1",
+        "PASSING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Drei Angreifer (RL, RM, RR) spielen gegen zwei aktive Verteidiger (HL, HM) auf eine Torhälfte. Ein Torwart steht im Tor.",
+    "flow_description": "1. RL startet mit einer energischen Stoßbewegung in die Nahtstelle zwischen HL und HM.\n2. RL liest sofort die Reaktion der Abwehr: Bleibt die Lücke offen, bricht RL selbst zum Torwurf durch.\n3. Schieben HL und HM die Lücke zu, spielt RL im letzten Moment (ohne stockendes Prellen!) den präzisen Weiterpass auf RM.\n4. RM stößt sofort in die nächste Lücke und entscheidet erneut zwischen eigenem Abschluss und Pass auf den völlig freien RR.",
+    "coaching_points": "- Drei-Wege-Entscheidung im Stoß: Selbst werfen – Abkappen/Rückstoßen – Weiterpassen\n- Erst wenn der Abwehrspieler wirklich gebunden ist, darf der Pass erfolgen\n- Kein Prellen in der Stoßbewegung zulassen, um die Passgeschwindigkeit hochzuhalten",
+    "variations_text": "- Einen Kreisläufer hinzunehmen (4 gegen 3) für zusätzliche Bodenpass-Optionen\n- Verteidiger dürfen nach dem ersten Pass aktiv Passwege antizipieren",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.36,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "HM",
+          "x": 0.58,
+          "y": 0.34
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.68,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.5,
+          "y": 0.72
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.78,
+          "y": 0.68
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.36,
+          "y": 0.46
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.54,
+          "y": 0.46
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.74,
+          "y": 0.38
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.68 },
+            { "x": 0.36, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.5, "y": 0.72 },
+            { "x": 0.54, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.36, "y": 0.46 },
+            { "x": 0.54, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.78, "y": 0.68 },
+            { "x": 0.74, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.54, "y": 0.46 },
+            { "x": 0.74, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.74, "y": 0.38 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Passkontinuum mit zwei Bällen und kognitiver Farbansage",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.trainingsworld.com/sportarten/handball/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Vier Hütchen in verschiedenen Farben bilden ein Quadrat (ca. 10x10m) in der Hallenhälfte. Die Spieler verteilen sich gleichmäßig an die vier Ecken, zwei gegenüberliegende Ecken starten mit je einem Ball.",
+    "flow_description": "1. Beide Ballbesitzer stoßen gleichzeitig 2–3 Schritte Richtung Quadratmitte an, spielen einen scharfen Pass zur nächsten Ecke im Uhrzeigersinn und folgen ihrem eigenen Pass.\n2. Während des Passes ruft der Passgeber laut eine Hütchenfarbe oder zeigt eine Zahl mit den Fingern.\n3. Auf Pfiff des Trainers wechselt die Passrichtung sofort gegen den Uhrzeigersinn.\n4. Ziel ist es, 60 Sekunden lang ohne einzigen Fangfehler ein hohes Passtempo zu halten.",
+    "coaching_points": "- Beide Hände beim Fangen trichterförmig vor dem Körper öffnen (weiches Nachgeben)\n- Blick frühzeitig vom eigenen Ball lösen, um den zweiten Ball und die Mitspieler im Blick zu behalten\n- Kurze, aktive Fußarbeit an der Ecke – nie auf den Fersen stehen",
+    "variations_text": "- Bei bestimmten Farbansagen (z. B. „Rot!“) muss ein Bodenpass statt eines Druckpasses gespielt werden\n- Dritten Ball hinzunehmen für maximale Handlungsschnelligkeit",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "E1",
+          "x": 0.22,
+          "y": 0.22,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "E2",
+          "x": 0.78,
+          "y": 0.22,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "E3",
+          "x": 0.78,
+          "y": 0.78,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 3
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "E4",
+          "x": 0.22,
+          "y": 0.78,
+          "isQueue": true,
+          "queueCount": 3
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            { "x": 0.22, "y": 0.22 },
+            { "x": 0.78, "y": 0.22 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [
+            { "x": 0.78, "y": 0.78 },
+            { "x": 0.22, "y": 0.78 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            { "x": 0.22, "y": 0.26 },
+            { "x": 0.74, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a3",
+          "toNodeId": "a4",
+          "points": [
+            { "x": 0.78, "y": 0.74 },
+            { "x": 0.26, "y": 0.74 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Torwart-Einwerfen kombiniert mit Parallelstoß und Pass im Lauf",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/passen-und-fangen/",
+    "categories": {
+      "phases": [
+        "GOALKEEPER_WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "SHOOTING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 12
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Schlangen starten auf RL und RM hinter zwei markierten Hütchen auf 12m. Jeder Spieler der linken Schlange hat einen Ball. Ein Torwart steht im Tor.",
+    "flow_description": "1. RL startet mit einer dynamischen Stoßbewegung in die Tiefe Richtung 9m-Linie.\n2. Parallel dazu startet RM leicht zeitversetzt im vollen Lauf Richtung Tor.\n3. RL passt den Ball auf Höhe 9m präzise im Lauf quer zu RM, der ohne Abbremsen fängt, eine kurze Stoßbewegung anschließt und den abgesprochenen Einwurf (z. B. halbhoch links/rechts) auf den Torwart wirft.\n4. Danach tauschen beide Spieler die Reihen (RL geht zu RM, RM geht zu RL).",
+    "coaching_points": "- Verbindung aus realistischem Parallelstoß und sauberem Torwart-Einwerfen spart Trainingszeit\n- Pass muss so getimt sein, dass RM genau in seinen Dreischritt-Anlauf hineinfängt\n- Nach 5 Minuten Wechsel auf die rechte Seite (RR auf RM)",
+    "variations_text": "- Doppelpass zwischen RL und RM vor dem Torabschluss\n- Mit drei Reihen (RL, RM, RR) und zwei Pässen vor dem Wurf durchführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.74,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.54,
+          "y": 0.74,
+          "isQueue": true,
+          "queueCount": 5
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.3,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.52,
+          "y": 0.42
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.28, "y": 0.74 },
+            { "x": 0.3, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.54, "y": 0.74 },
+            { "x": 0.52, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.3, "y": 0.48 },
+            { "x": 0.52, "y": 0.42 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.52, "y": 0.42 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Schräges Anstoßen in die Nahtstelle mit Handwechsel vor dem Abspiel",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/passen-und-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "OFFENSE_INDIVIDUAL",
+        "FEINT_1V1"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "POLE_AIRBODY",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Zwei Airbodys (oder passive Abwehrspieler) stehen auf 7–8m. Die Spieler besetzen RL, RM und RA. Fokus liegt auf dem sauberen Handwechsel (Schlagwurfpass vs. schneller Pass mit der schwachen Hand) im Parallelstoß.",
+    "flow_description": "1. RL startet mit Ball, stößt schräg nach innen auf den Mittelblock zu und bindet diesen aktiv.\n2. Statt den Körper weit aufzudrehen, wechselt RL den Ball flüssig auf die zum Mitspieler gewandte Hand (oder spielt einen kurzen Druckpass aus dem Handgelenk) auf RM.\n3. RM nimmt den Ball im vollen Lauf an, stößt schräg nach rechts in die Nahtstelle und bedient RA auf der Außenbahn.\n4. RA schließt ab und die Positionen rotieren im Uhrzeigersinn.",
+    "coaching_points": "- Durch schräges Anlaufen auf die Nahtstelle werden automatisch zwei Abwehrspieler beschäftigt\n- Kurze, verdeckte Pässe mit beiden Händen reduzieren die Reaktionszeit der Abwehr\n- Hohe Körperspannung beim Handwechsel, damit der Ball sicher geführt wird",
+    "variations_text": "- Spiegelverkehrt von rechts nach links (RR -> RM -> LA)\n- Pass mit der schwachen Hand über kurze Distanz verpflichtend machen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.42,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.64,
+          "y": 0.34
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.22,
+          "y": 0.68,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.72
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.88,
+          "y": 0.46
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.46
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.6,
+          "y": 0.44
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.82,
+          "y": 0.24
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.22, "y": 0.68 },
+            { "x": 0.38, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.48, "y": 0.72 },
+            { "x": 0.6, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.38, "y": 0.46 },
+            { "x": 0.6, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.88, "y": 0.46 },
+            { "x": 0.82, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.6, "y": 0.44 },
+            { "x": 0.82, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.82, "y": 0.24 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Bodenpass- und Druckpass-Schulung unter aktivem Stördruck (Kreisanspiel)",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/passen-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE",
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Dreiergruppen auf 9m (Rückraumspieler mit Ball), 7m (aktiver Stör-Verteidiger) und 6m (Kreisläufer). Ein Torwart steht im Tor.",
+    "flow_description": "1. Der Rückraumspieler stößt dynamisch auf den Verteidiger zu und täuscht zunächst einen hohen Wurf an, damit der Verteidiger die Arme hebt.\n2. Sobald die Arme des Verteidigers oben sind, zieht der Angreifer den Ball blitzschnell nach unten und spielt einen scharfen Bodenpass an der Hüfte des Verteidigers vorbei in die Zielhand des Kreisläufers.\n3. Bleibt der Verteidiger tief, folgt der hohe Druckpass über oder seitlich am Verteidiger vorbei.\n4. Der Kreisläufer fängt den Ball sicher gegen leichten Druck und schließt ab.",
+    "coaching_points": "- Aufsetzpunkt beim Bodenpass etwa 2/3 der Distanz zum Empfänger wählen (nicht zu kurz vor den eigenen Füßen)\n- Durch eine echte Wurftäuschung erst die Passlücke öffnen\n- Kreisläufer bietet aktiv eine klare, freie Hand auf der verteidigerabgewandten Seite an",
+    "variations_text": "- Als 2 gegen 2 (Rückraum + Kreisläufer gegen zwei Verteidiger) ausspielen\n- Störspieler darf den Pass aktiv abfangen und erhält dafür einen Punkt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.46,
+          "y": 0.36
+        },
+        {
+          "id": "km",
+          "type": "OFFENSE_PLAYER",
+          "label": "KM",
+          "x": 0.56,
+          "y": 0.26
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.44,
+          "y": 0.66,
+          "hasBall": true
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.44,
+          "y": 0.46
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.44, "y": 0.66 },
+            { "x": 0.44, "y": 0.46 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rm",
+          "toNodeId": "km",
+          "points": [
+            { "x": 0.44, "y": 0.46 },
+            { "x": 0.56, "y": 0.26 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "km",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.56, "y": 0.26 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Achter-Passlauf im Kleingruppen-Kontinuum über das ganze Feld",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 15,
+    "goalkeepers": 2,
+    "source_url": "https://www.knsu.de/individualsportarten-und-sportspiele/handball/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "FAST_BREAK_2ND_WAVE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Dreiergruppen starten an der eigenen 6m-Linie (Links, Mitte mit Ball, Rechts) über das gesamte Spielfeld Richtung gegenüberliegendes Tor.",
+    "flow_description": "1. Der Mittelspieler passt auf den rechten Mitspieler und läuft sofort im Bogen hinter ihm herum (Achterlauf) auf die rechte Außenbahn.\n2. Der rechte Spieler stößt mit Ball nach innen, passt auf den links startenden Mitspieler und läuft hinter diesem herum.\n3. So flechten sich die drei Spieler ohne Prellen in einer flüssigen Achterbewegung über das gesamte Spielfeld nach vorn.\n4. An der gegnerischen 9m-Linie schließt der letzte Ballbesitzer per Sprungwurf ab.",
+    "coaching_points": "- Nach dem Pass sofort beschleunigen und konsequent hinter dem Passempfänger kreuzen\n- Kurze, weiche Pässe in die Vorwärtsbewegung ohne Schrittfehler\n- Abstand zueinander so wählen, dass kein Gedränge in der Mitte entsteht",
+    "variations_text": "- Rückweg direkt im Anschluss als normales Parallelstoßen ohne Kreuzen\n- Zeitmessung: Welches Trio schafft das gesamte Feld fehlerfrei am schnellsten?",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "gk2",
+          "type": "GOALKEEPER",
+          "label": "TW2",
+          "x": 0.92,
+          "y": 0.5
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "S1",
+          "x": 0.2,
+          "y": 0.24
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "S2",
+          "x": 0.2,
+          "y": 0.5,
+          "hasBall": true
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "S3",
+          "x": 0.2,
+          "y": 0.76
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.45,
+          "y": 0.66
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.66,
+          "y": 0.34
+        },
+        {
+          "id": "wp3",
+          "type": "WAYPOINT",
+          "x": 0.78,
+          "y": 0.52
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "wp1",
+          "points": [
+            { "x": 0.2, "y": 0.76 },
+            { "x": 0.45, "y": 0.66 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp1",
+          "points": [
+            { "x": 0.2, "y": 0.5 },
+            { "x": 0.45, "y": 0.66 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.2, "y": 0.24 },
+            { "x": 0.66, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.45, "y": 0.66 },
+            { "x": 0.66, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp2",
+          "toWaypointId": "wp3",
+          "points": [
+            { "x": 0.66, "y": 0.34 },
+            { "x": 0.78, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp3",
+          "toNodeId": "gk2",
+          "points": [
+            { "x": 0.78, "y": 0.52 },
+            { "x": 0.92, "y": 0.5 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Überbrückungspass (Skip-Pass) nach tiefem Stoßen im 4 gegen 3",
+    "default_duration_min": 15,
+    "min_players": 7,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/passen-und-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "OFFENSE_GROUP",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Vier Angreifer (RL, RM, RR, RA) greifen gegen drei Verteidiger (HL, HM, HR) auf eine Hallenhälfte an. Der Fokus liegt auf dem präzisen Überspringen einer Position (Überbrückungspass) nach tiefem Stoßen.",
+    "flow_description": "1. RL stößt extrem tief zwischen HL und HM hinein und zwingt die gesamte Dreierabwehr zum Einrücken nach links.\n2. Statt den kurzen Pass auf RM zu spielen, erkennt RL das weite Einrücken von HR und spielt einen scharfen, flachen Überbrückungspass direkt über RM hinweg auf den anlaufenden RR oder RA.\n3. RR/RA fängt den langen Querpass in voller Vorwärtsbewegung und nutzt den riesigen Raum für den freien Abschluss.\n4. Rücken die Verteidiger nicht ein, folgt der direkte Durchbruch oder kurze Pass auf RM.",
+    "coaching_points": "- Überbrückungspass muss scharf und flach (keine Bogenlampe!) gespielt werden, damit die Abwehr ihn nicht abfangen kann\n- Empfänger auf der ballfernen Seite muss bereit sein und rechtzeitig Breite halten\n- Tiefes Stoßen mit echtem Zug zum Tor ist Voraussetzung für das Einrücken der Abwehr",
+    "variations_text": "- Spiegelverkehrt über RR mit Überbrückungspass auf RL oder LA\n- Als 5 gegen 4 mit beiden Außenspielern ausspielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "HL",
+          "x": 0.34,
+          "y": 0.34
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "HM",
+          "x": 0.48,
+          "y": 0.34
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "HR",
+          "x": 0.62,
+          "y": 0.34
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.24,
+          "y": 0.68,
+          "hasBall": true
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.48,
+          "y": 0.7
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.74,
+          "y": 0.66
+        },
+        {
+          "id": "ra",
+          "type": "OFFENSE_PLAYER",
+          "label": "RA",
+          "x": 0.9,
+          "y": 0.44
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.38,
+          "y": 0.44
+        },
+        {
+          "id": "wp_ra",
+          "type": "WAYPOINT",
+          "x": 0.84,
+          "y": 0.24
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.24, "y": 0.68 },
+            { "x": 0.38, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "ra",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.9, "y": 0.44 },
+            { "x": 0.84, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_ra",
+          "points": [
+            { "x": 0.38, "y": 0.44 },
+            { "x": 0.84, "y": 0.24 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_ra",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.84, "y": 0.24 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Fang- und Passsicherheit im Vollsprint: Sternpass mit Zusatzaufgabe",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.mobilesport.ch/handball/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "ATHLETICS_COORDINATION"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "CONE",
+        "quantity": 5
+      }
+    ],
+    "setup_description": "Fünf Hütchen werden als großer Stern (Fünfeck mit ca. 12m Durchmesser) im freien Feld aufgebaut. Die Spieler verteilen sich gleichmäßig an den fünf Spitzen, eine Spitze startet mit Ball.",
+    "flow_description": "1. Spieler 1 passt quer durch den Stern zu Spieler 3 (übernächste Position) und sprintet seinem eigenen Pass hinterher.\n2. Spieler 3 läuft dem Pass dynamisch 2 Schritte entgegen, fängt den Ball in der Bewegung und passt sofort weiter zu Spieler 5.\n3. Nach dem Pass führt jeder Spieler auf dem Weg zur neuen Position eine kurze Zusatzaufgabe aus (z. B. 360°-Drehung oder einmal Bodenberührung).\n4. Sobald der Ablauf sicher läuft, wird ein zweiter Ball ins Spiel gebracht.",
+    "coaching_points": "- Durch das Kreuzen im Zentrum entsteht realistischer Verkehr – Blick oben halten und Kollisionen vermeiden\n- Dem Pass aktiv entgegengehen, nicht statisch am Hütchen warten\n- Saubere, präzise Pässe auf Brusthöhe",
+    "variations_text": "- Pass mit der schwachen Hand ausführen\n- Richtungswechsel auf Trainersignal (Pfiff)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "s1",
+          "type": "OFFENSE_PLAYER",
+          "label": "1",
+          "x": 0.5,
+          "y": 0.14,
+          "hasBall": true
+        },
+        {
+          "id": "s2",
+          "type": "OFFENSE_PLAYER",
+          "label": "2",
+          "x": 0.84,
+          "y": 0.4
+        },
+        {
+          "id": "s3",
+          "type": "OFFENSE_PLAYER",
+          "label": "3",
+          "x": 0.72,
+          "y": 0.82
+        },
+        {
+          "id": "s4",
+          "type": "OFFENSE_PLAYER",
+          "label": "4",
+          "x": 0.28,
+          "y": 0.82
+        },
+        {
+          "id": "s5",
+          "type": "OFFENSE_PLAYER",
+          "label": "5",
+          "x": 0.16,
+          "y": 0.4
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "s1",
+          "toNodeId": "s3",
+          "points": [
+            { "x": 0.5, "y": 0.14 },
+            { "x": 0.72, "y": 0.82 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "s3",
+          "toNodeId": "s5",
+          "points": [
+            { "x": 0.72, "y": 0.82 },
+            { "x": 0.16, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "s5",
+          "toNodeId": "s2",
+          "points": [
+            { "x": 0.16, "y": 0.4 },
+            { "x": 0.84, "y": 0.4 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 4,
+          "fromNodeId": "s2",
+          "toNodeId": "s4",
+          "points": [
+            { "x": 0.84, "y": 0.4 },
+            { "x": 0.28, "y": 0.82 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "2 gegen 1 Gabel-Entscheidung nach dynamischer Stoßbewegung",
+    "default_duration_min": 14,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/passen-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "OFFENSE_GROUP",
+        "FEINT_1V1",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Hütchen markieren einen ca. 6m breiten Korridor zwischen 9m- und 6m-Linie. Ein Verteidiger steht zentral im Korridor. Zwei Angreifer (A1 mit Ball, A2 ohne Ball) starten auf 12m.",
+    "flow_description": "1. A1 stößt mit maximalem Tempo direkt auf den Verteidiger zu, um ihn festzubinden.\n2. A2 läuft parallel in dem freien Korridor mit und hält mindestens 3 Meter Abstand zu A1.\n3. Tritt der Verteidiger auf A1 heraus, passt A1 im letzten Moment sauber in den Lauf von A2 (freier Torabschluss).\n4. Zieht sich der Verteidiger Richtung A2 zurück, nutzt A1 die freie Bahn und schließt selbst ab.",
+    "coaching_points": "- Klassische „Gabel“-Situation: Immer direkt auf den Verteidiger stoßen, nicht von ihm weglaufen\n- A2 darf nicht zu früh einlaufen, sondern muss das Timing an A1 anpassen\n- Kein unnötiges Prellen – 3 Schritte nach Ballannahme reichen völlig aus",
+    "variations_text": "- Auf der linken und rechten Seite im Wechsel durchführen\n- Startpass kommt von einem Zuspieler an der Seitenlinie, sodass A1 den Ball erst im Anlauf fängt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.36,
+          "y": 0.72,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.66,
+          "y": 0.72
+        },
+        {
+          "id": "wp_a1",
+          "type": "WAYPOINT",
+          "x": 0.46,
+          "y": 0.44
+        },
+        {
+          "id": "wp_a2",
+          "type": "WAYPOINT",
+          "x": 0.64,
+          "y": 0.34
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a1",
+          "points": [
+            { "x": 0.36, "y": 0.72 },
+            { "x": 0.46, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.66, "y": 0.72 },
+            { "x": 0.64, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_a1",
+          "toWaypointId": "wp_a2",
+          "points": [
+            { "x": 0.46, "y": 0.44 },
+            { "x": 0.64, "y": 0.34 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "SHOT_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_a2",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.64, "y": 0.34 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Einhand-Fangen und sofortiges Weiterleiten im kurzen Passdreieck",
+    "default_duration_min": 10,
+    "min_players": 6,
+    "max_players": 15,
+    "goalkeepers": 0,
+    "source_url": "https://www.dhb.de/de/service/trainer/trainercenter/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "CATCHING",
+        "PASSING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Dreiergruppen bilden jeweils ein enges Dreieck mit ca. 5–6 Metern Seitenlänge im freien Feld. Jede Gruppe hat einen Ball (später zwei Bälle).",
+    "flow_description": "1. Spieler A passt scharf auf die rechte Seite von Spieler B, der den Ball kontrolliert einhändig (mit weichem Abfedern im Handgelenk) fängt und sofort die zweite Hand zur Sicherung heranführt.\n2. Ohne Verzögerung spielt Spieler B einen kurzen, flachen Pass zu Spieler C.\n3. Nach 1 Minute erfolgt der Wechsel auf die schwache Hand (Fangen und Passen über links).\n4. Steigerung: Nach jedem Pass tauschen die Spieler im Uhrzeigersinn die Ecken.",
+    "coaching_points": "- Weiches Nachgeben im Arm und Handgelenk verhindert das Abprallen des Balls beim Einhand-Fangen\n- Finger weit spreizen und den Ball aktiv „saugen“\n- Hohe Konzentration auf schnelle Ballverarbeitung (unter 1 Sekunde Ballkontaktzeit)",
+    "variations_text": "- Bodenpässe in die Ecken einstreuen\n- In der Bewegung (seitliches Verschieben als Dreieck durch die Halle) durchführen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FREE_SPACE",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A",
+          "x": 0.5,
+          "y": 0.24,
+          "hasBall": true
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "B",
+          "x": 0.72,
+          "y": 0.68
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "C",
+          "x": 0.28,
+          "y": 0.68
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toNodeId": "a2",
+          "points": [
+            { "x": 0.5, "y": 0.24 },
+            { "x": 0.72, "y": 0.68 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "a2",
+          "toNodeId": "a3",
+          "points": [
+            { "x": 0.72, "y": 0.68 },
+            { "x": 0.28, "y": 0.68 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "a3",
+          "toNodeId": "a1",
+          "points": [
+            { "x": 0.28, "y": 0.68 },
+            { "x": 0.5, "y": 0.24 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Pass- und Stoß-Staffette mit Matten-Umrundung und Zielpass",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://www.handballtraining.de/passen-und-fangen/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "SMALL_GAME"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "MINIS",
+        "F_YOUTH",
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "SOFT_MAT",
+        "quantity": 2
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Teams stehen an der Grundlinie jeweils in zwei parallelen Reihen (Abstand ca. 5m). An der Mittellinie liegt für jedes Team eine Weichbodenmatte als Wendemarke.",
+    "flow_description": "1. Auf Startsignal laufen die ersten beiden Spieler jedes Teams parallel los und passen sich den Ball im Laufen ohne Prellen zu.\n2. An der Weichbodenmatte umlaufen beide die Matte im Stoß-Rhythmus (Pass über die Matte hinweg).\n3. Auf dem Rückweg erhöhen sie das Passtempo und spielen den letzten Zielpass direkt in die Hände des nächsten wartenden Paares an der Grundlinie.\n4. Welches Team absolviert alle Durchgänge am schnellsten ohne fallengelassenen Ball?",
+    "coaching_points": "- Hohe Motivation durch den Staffelcharakter bei gleichzeitigem Fokus auf sauberes Fangen im Lauf\n- Kein Prellen erlaubt: Nur echte Laufpässe vor den Körper des Partners\n- Fällt der Ball herunter, muss an der Stelle wieder aufgenommen werden",
+    "variations_text": "- Hinweg nur Druckpässe, Rückweg nur Bodenpässe\n- Überkreuz-Laufen (Achterbewegung) nach jedem zweiten Pass",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.14,
+          "y": 0.3,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.14,
+          "y": 0.7,
+          "isQueue": true,
+          "queueCount": 4
+        },
+        {
+          "id": "m1",
+          "type": "EQUIPMENT_MAT",
+          "label": "M",
+          "x": 0.56,
+          "y": 0.5
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.28
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.72
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            { "x": 0.14, "y": 0.3 },
+            { "x": 0.56, "y": 0.28 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a2",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.14, "y": 0.7 },
+            { "x": 0.56, "y": 0.72 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.56, "y": 0.28 },
+            { "x": 0.56, "y": 0.72 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Spielform „10 Pässe im Stoßrhythmus“ ohne Prellen (5 gegen 5)",
+    "default_duration_min": 14,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 0,
+    "source_url": "https://deinehandballuebung.de/",
+    "categories": {
+      "phases": [
+        "SMALL_GAME",
+        "WARMUP"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "OFFENSE_TEAM",
+        "DEFENSE_INDIVIDUAL"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 2
+      },
+      {
+        "type": "BIBS",
+        "quantity": 5
+      }
+    ],
+    "setup_description": "Zwei Fünferteams spielen auf einer Hallenhälfte (oder im abgesteckten 20x15m-Feld) in enger Manndeckung gegeneinander.",
+    "flow_description": "1. Team A startet in Ballbesitz und versucht, 10 aufeinanderfolgende Pässe ohne Ballverlust zu spielen.\n2. Prellen ist komplett verboten; jeder Ballbesitzer hat maximal 3 Schritte und 3 Sekunden Zeit, um eine aktive Stoßbewegung in den freien Raum zu machen und weiterzupassen.\n3. Jeder gelungene Pass wird laut mitgezählt – ein direkter Rückpass zum vorherigen Passgeber zählt nicht.\n4. Erobert Team B den Ball (abgefangen, herausgespielt oder Regelverstoß), wechselt das Angriffsrecht sofort.",
+    "coaching_points": "- Ständiges, aktives Freilaufen in die offenen Passfenster (V-Lauf, Antritt aus dem Stand)\n- Blickkontakt und klare Handzeichen zum Ballbesitzer\n- Ball unter Druck sicher am Körper schützen und über Täuschungen Passwege öffnen",
+    "variations_text": "- Nach 5 gelungenen Pässen darf ein Punkt durch Ablegen des Balls auf einer Grundlinie oder in einer Endzone erzielt werden\n- Nur Pässe mit der schwachen Hand oder Bodenpässe zählen doppelt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "A1",
+          "x": 0.24,
+          "y": 0.34,
+          "hasBall": true
+        },
+        {
+          "id": "d1",
+          "type": "DEFENSE_PLAYER",
+          "label": "V1",
+          "x": 0.28,
+          "y": 0.38
+        },
+        {
+          "id": "a2",
+          "type": "OFFENSE_PLAYER",
+          "label": "A2",
+          "x": 0.68,
+          "y": 0.32
+        },
+        {
+          "id": "d2",
+          "type": "DEFENSE_PLAYER",
+          "label": "V2",
+          "x": 0.62,
+          "y": 0.36
+        },
+        {
+          "id": "a3",
+          "type": "OFFENSE_PLAYER",
+          "label": "A3",
+          "x": 0.5,
+          "y": 0.58
+        },
+        {
+          "id": "d3",
+          "type": "DEFENSE_PLAYER",
+          "label": "V3",
+          "x": 0.46,
+          "y": 0.54
+        },
+        {
+          "id": "a4",
+          "type": "OFFENSE_PLAYER",
+          "label": "A4",
+          "x": 0.26,
+          "y": 0.72
+        },
+        {
+          "id": "d4",
+          "type": "DEFENSE_PLAYER",
+          "label": "V4",
+          "x": 0.3,
+          "y": 0.68
+        },
+        {
+          "id": "a5",
+          "type": "OFFENSE_PLAYER",
+          "label": "A5",
+          "x": 0.76,
+          "y": 0.7
+        },
+        {
+          "id": "d5",
+          "type": "DEFENSE_PLAYER",
+          "label": "V5",
+          "x": 0.72,
+          "y": 0.66
+        },
+        {
+          "id": "wp_a3",
+          "type": "WAYPOINT",
+          "x": 0.54,
+          "y": 0.44
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a3",
+          "toWaypointId": "wp_a3",
+          "points": [
+            { "x": 0.5, "y": 0.58 },
+            { "x": 0.54, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp_a3",
+          "points": [
+            { "x": 0.24, "y": 0.34 },
+            { "x": 0.54, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_a3",
+          "toNodeId": "a2",
+          "points": [
+            { "x": 0.54, "y": 0.44 },
+            { "x": 0.68, "y": 0.32 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Stoßbewegung mit Gegenstoßen auf beiden Halbpositionen (4er-Passfluss)",
+    "default_duration_min": 14,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/passen-fangen/",
+    "categories": {
+      "phases": [
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "OFFENSE_GROUP"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 8
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Vier Angriffspositionen (LA, RL, RM, RR) sind besetzt. Vier Hütchen auf 9m markieren die Nahtstellen. Gespielt wird zunächst ohne Abwehr zur Automatisierung von Stoßen und Gegenstoßen.",
+    "flow_description": "1. LA eröffnet auf RL, der in die Nahtstelle zwischen Außen- und Halbverteidiger stößt und den Ball sauber zu RM weiterspielt.\n2. RM stößt nach rechts an, bricht die Bewegung mit einem scharfen Richtungswechsel ab (Gegenstoßen) und passt zurück in die linke Nahtstelle auf den erneut anlaufenden RL.\n3. RL übernimmt das Tempo im Rückstoß und verlagert den Ball mit Druckpass über RM auf RR.\n4. RR schließt per Sprungwurf ab; danach startet der nächste Durchgang von der rechten Seite.",
+    "coaching_points": "- Gegenstoßen erzeugt enorme Unruhe in der Abwehr-Verschiebebewegung\n- Klarer Tempowechsel zwischen langsamer Tiefengewinnung und explosivem Antritt in die Nahtstelle\n- Saubere Ballannahme in Laufrichtung ohne Schrittfehler beim Richtungswechsel",
+    "variations_text": "- Zwei passive bis halbaktive Innenblocker auf 7m ergänzen\n- Abschluss wahlweise über den einlaufenden LA/RA",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "la",
+          "type": "OFFENSE_PLAYER",
+          "label": "LA",
+          "x": 0.1,
+          "y": 0.44,
+          "hasBall": true
+        },
+        {
+          "id": "rl",
+          "type": "OFFENSE_PLAYER",
+          "label": "RL",
+          "x": 0.28,
+          "y": 0.72
+        },
+        {
+          "id": "rm",
+          "type": "OFFENSE_PLAYER",
+          "label": "RM",
+          "x": 0.52,
+          "y": 0.74
+        },
+        {
+          "id": "rr",
+          "type": "OFFENSE_PLAYER",
+          "label": "RR",
+          "x": 0.76,
+          "y": 0.7
+        },
+        {
+          "id": "wp_rl",
+          "type": "WAYPOINT",
+          "x": 0.32,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rm",
+          "type": "WAYPOINT",
+          "x": 0.56,
+          "y": 0.48
+        },
+        {
+          "id": "wp_rr",
+          "type": "WAYPOINT",
+          "x": 0.72,
+          "y": 0.44
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "rl",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.28, "y": 0.72 },
+            { "x": 0.32, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "la",
+          "toWaypointId": "wp_rl",
+          "points": [
+            { "x": 0.1, "y": 0.44 },
+            { "x": 0.32, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromNodeId": "rm",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.52, "y": 0.74 },
+            { "x": 0.56, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp_rl",
+          "toWaypointId": "wp_rm",
+          "points": [
+            { "x": 0.32, "y": 0.48 },
+            { "x": 0.56, "y": 0.48 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromNodeId": "rr",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.76, "y": 0.7 },
+            { "x": 0.72, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "PASS_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp_rm",
+          "toWaypointId": "wp_rr",
+          "points": [
+            { "x": 0.56, "y": 0.48 },
+            { "x": 0.72, "y": 0.44 }
+          ]
+        },
+        {
+          "id": "p7",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp_rr",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.72, "y": 0.44 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "title": "Doppelpass-Gasse im Vollsprint mit anschließendem Torabschluss",
+    "default_duration_min": 12,
+    "min_players": 6,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.trainingsworld.com/sportarten/handball/",
+    "categories": {
+      "phases": [
+        "WARMUP",
+        "GROUND_EXERCISE"
+      ],
+      "focus": [
+        "PASSING_CATCHING",
+        "PASSING",
+        "CATCHING",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 10
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Vier Zuspieler stehen links und rechts an den Seitenlinien (je zwei auf Höhe 14m und 10m) als Passgasse. Die Läufer starten mit Ball an der Mittellinie Richtung Tor.",
+    "flow_description": "1. Der Läufer sprintet zentral in die Gasse, spielt einen scharfen Pass zum ersten linken Zuspieler und erhält den Ball sofort in den Lauf zurück.\n2. Ohne das Tempo zu drosseln folgt sofort der nächste Doppelpass mit dem ersten rechten Zuspieler.\n3. Nach dem zweiten Doppelpass auf Höhe 10m nimmt der Läufer den Ball im Dreischritt-Rhythmus mit und schließt per Sprungwurf auf das Tor ab.\n4. Alle 2 Minuten wechseln die Zuspieler an den Seitenlinien.",
+    "coaching_points": "- Schnelle Kopf- und Rumpfrotation zwischen den linken und rechten Doppelpässen\n- Zuspieler müssen die Rückpässe exakt vor den laufenden Spieler dosieren\n- Flüssiges Durchlaufen ohne Abstoppen trainiert die Ballannahme unter hohem Tempo",
+    "variations_text": "- Zuspieler werfen abwechselnd Bodenpässe und hohe Pässe zurück\n- Einen Störspieler auf 9m platzieren, der nach dem letzten Doppelpass zum Block heraustritt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        {
+          "id": "gk",
+          "type": "GOALKEEPER",
+          "label": "TW",
+          "x": 0.5,
+          "y": 0.1
+        },
+        {
+          "id": "z1",
+          "type": "COACH_FEEDER",
+          "label": "Z1",
+          "x": 0.2,
+          "y": 0.68
+        },
+        {
+          "id": "z2",
+          "type": "COACH_FEEDER",
+          "label": "Z2",
+          "x": 0.8,
+          "y": 0.52
+        },
+        {
+          "id": "a1",
+          "type": "OFFENSE_PLAYER",
+          "label": "S1",
+          "x": 0.5,
+          "y": 0.88,
+          "hasBall": true,
+          "isQueue": true,
+          "queueCount": 6
+        },
+        {
+          "id": "wp1",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.68
+        },
+        {
+          "id": "wp2",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.52
+        },
+        {
+          "id": "wp3",
+          "type": "WAYPOINT",
+          "x": 0.5,
+          "y": 0.38
+        }
+      ],
+      "paths": [
+        {
+          "id": "p1",
+          "type": "RUN_PATH",
+          "stepNumber": 1,
+          "fromNodeId": "a1",
+          "toWaypointId": "wp1",
+          "points": [
+            { "x": 0.5, "y": 0.88 },
+            { "x": 0.5, "y": 0.68 }
+          ]
+        },
+        {
+          "id": "p2",
+          "type": "PASS_PATH",
+          "stepNumber": 1,
+          "fromWaypointId": "wp1",
+          "toNodeId": "z1",
+          "points": [
+            { "x": 0.5, "y": 0.68 },
+            { "x": 0.2, "y": 0.68 }
+          ]
+        },
+        {
+          "id": "p3",
+          "type": "RUN_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp1",
+          "toWaypointId": "wp2",
+          "points": [
+            { "x": 0.5, "y": 0.68 },
+            { "x": 0.5, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p4",
+          "type": "PASS_PATH",
+          "stepNumber": 2,
+          "fromWaypointId": "wp2",
+          "toNodeId": "z2",
+          "points": [
+            { "x": 0.5, "y": 0.52 },
+            { "x": 0.8, "y": 0.52 }
+          ]
+        },
+        {
+          "id": "p5",
+          "type": "RUN_PATH",
+          "stepNumber": 3,
+          "fromWaypointId": "wp2",
+          "toWaypointId": "wp3",
+          "points": [
+            { "x": 0.5, "y": 0.52 },
+            { "x": 0.5, "y": 0.38 }
+          ]
+        },
+        {
+          "id": "p6",
+          "type": "SHOT_PATH",
+          "stepNumber": 4,
+          "fromWaypointId": "wp3",
+          "toNodeId": "gk",
+          "points": [
+            { "x": 0.5, "y": 0.38 },
+            { "x": 0.5, "y": 0.1 }
+          ]
+        }
+      ]
+    }
+  }
+]

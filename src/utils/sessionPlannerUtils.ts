@@ -17,6 +17,84 @@ export interface SessionBundle {
   blocks: SessionBlock[];
 }
 
+export function getLocalDateIso(now: Date = new Date()): string {
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function sortSessionsChronologically(sessions: TrainingSession[]): TrainingSession[] {
+  return sessions
+    .slice()
+    .sort(
+      (a, b) =>
+        a.session_date.localeCompare(b.session_date) ||
+        a.start_time.localeCompare(b.start_time) ||
+        a.id.localeCompare(b.id)
+    );
+}
+
+/**
+ * Selects the default session to display when entering the training editor or hall mode:
+ * 1. Earliest upcoming open (not COMPLETED / not CANCELLED) session on or after todayIso.
+ * 2. If none, most recent open (not COMPLETED / not CANCELLED) session in the past.
+ * 3. If all sessions are COMPLETED/CANCELLED, earliest upcoming session on or after todayIso,
+ *    or else the most recent session overall.
+ */
+export function selectDefaultSession(
+  sessions: TrainingSession[],
+  todayIso: string = getLocalDateIso()
+): TrainingSession | null {
+  if (sessions.length === 0) return null;
+  const sorted = sortSessionsChronologically(sessions);
+
+  const isOpen = (s: TrainingSession) => s.status !== 'COMPLETED' && s.status !== 'CANCELLED';
+
+  const nextUpcomingOpen = sorted.find((s) => s.session_date >= todayIso && isOpen(s));
+  if (nextUpcomingOpen) return nextUpcomingOpen;
+
+  const pastOpen = sorted.filter((s) => isOpen(s));
+  if (pastOpen.length > 0) return pastOpen[pastOpen.length - 1];
+
+  const nextUpcomingAny = sorted.find((s) => s.session_date >= todayIso);
+  if (nextUpcomingAny) return nextUpcomingAny;
+
+  return sorted[sorted.length - 1];
+}
+
+/**
+ * Selects the next session in dropdown order after a session is marked COMPLETED:
+ * 1. First open (not COMPLETED / not CANCELLED) session appearing after completedSessionId.
+ * 2. Otherwise, first non-COMPLETED session appearing after completedSessionId.
+ * 3. Otherwise, falls back to selectDefaultSession on all other non-COMPLETED sessions.
+ * Returns null if no other non-COMPLETED session exists.
+ */
+export function selectNextSessionAfterCompletion(
+  sessions: TrainingSession[],
+  completedSessionId: string,
+  todayIso: string = getLocalDateIso()
+): TrainingSession | null {
+  const sorted = sortSessionsChronologically(sessions);
+  const currentIdx = sorted.findIndex((s) => s.id === completedSessionId);
+
+  if (currentIdx !== -1) {
+    const afterCurrent = sorted.slice(currentIdx + 1);
+    const nextOpen = afterCurrent.find(
+      (s) => s.status !== 'COMPLETED' && s.status !== 'CANCELLED'
+    );
+    if (nextOpen) return nextOpen;
+
+    const nextNonCompleted = afterCurrent.find((s) => s.status !== 'COMPLETED');
+    if (nextNonCompleted) return nextNonCompleted;
+  }
+
+  const remainingNonCompleted = sorted.filter(
+    (s) => s.id !== completedSessionId && s.status !== 'COMPLETED'
+  );
+  return selectDefaultSession(remainingNonCompleted, todayIso);
+}
+
 /**
  * Creates a new TrainingSession + Phases + Default Blocks from a SessionTemplate.
  */

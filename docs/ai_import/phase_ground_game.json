@@ -1,0 +1,815 @@
+[
+  {
+    "title": "Grundspiel 2 gegen 2 im Sektor (Rückraum + Kreisläufer)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/grundspiele/2-gegen-2-rueckraum-kreislaeufer/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "CROSSING_SCREEN",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Mit Hütchen wird ein ca. 8 Meter breiter Spielsektor (Halblinks/Mitte) abgegrenzt. Ein Rückraumspieler und ein Kreisläufer spielen gegen zwei Abwehrspieler und einen Torhüter; weitere Paare warten außerhalb.",
+    "flow_description": "1. Das Angriffspaar startet nach einem kurzen Auftaktpass (z. B. mit einem neutralen Anspieler oder Trainer) in das freie 2 gegen 2 im Sektor.\n2. Der Angriff nutzt 1-gegen-1-Durchbrüche sowie Sperren und Absetzen am Kreis, um zum Torerfolg zu kommen.\n3. Die beiden Verteidiger müssen sich laut absprechen (Übergabe/Übernahme) und Durchbrüche sowie Kreisanspiele unterbinden.\n4. Nach jedem Torabschluss oder Ballverlust wechselt das nächste Paar hinein; nach 5 Minuten erfolgt der Seitenwechsel auf Halbrechts.",
+    "coaching_points": "- Rückraumspieler greift gezielt die Lücke an und liest die Reaktion des zweiten Verteidigers\n- Kreisläufer bewegt sich aktiv im Rücken der Abwehr und bietet ständig eine Anspieloption\n- In der Abwehr klare, rechtzeitige Übergabe-Kommandos statt zu spätem Hinterherlaufen",
+    "variations_text": "- Ein Tor nach erfolgreicher Sperre/Absetzen zählt doppelt\n- Maximal 15 Sekunden Angriffszeit pro Ballbesitz\n- Nach 3 Angriffen tauschen Angreifer und Verteidiger die Rollen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "c1", "type": "EQUIPMENT_CONE", "x": 0.22, "y": 0.42 },
+        { "id": "c2", "type": "EQUIPMENT_CONE", "x": 0.62, "y": 0.42 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.50, "y": 0.26 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.34, "y": 0.48, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.46, "y": 0.24 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.40, "y": 0.34 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.54, "y": 0.22 },
+        { "id": "t1", "type": "EQUIPMENT_GOAL_TARGET", "x": 0.50, "y": 0.05 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.34, "y": 0.48 }, { "x": 0.40, "y": 0.34 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a2", "toWaypointId": "w2", "points": [{ "x": 0.46, "y": 0.24 }, { "x": 0.54, "y": 0.22 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 2, "fromWaypointId": "w1", "toWaypointId": "w2", "points": [{ "x": 0.40, "y": 0.34 }, { "x": 0.54, "y": 0.22 }] },
+        { "id": "p4", "type": "SHOT_PATH", "stepNumber": 3, "fromWaypointId": "w2", "toNodeId": "t1", "points": [{ "x": 0.54, "y": 0.22 }, { "x": 0.50, "y": 0.05 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 2 gegen 2 auf Außen und Halb (Parallelstoß & Einläufer)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/grundspiele/2-gegen-2-aussen-halb",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "FEINT_1V1",
+        "SHOOTING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 3
+      }
+    ],
+    "setup_description": "Der Spielsektor umfasst die linke Angriffsseite (LA + RL) gegen Außen- und Halbverteidiger. Ein neutraler Anspieler auf RM eröffnet jeden Angriff.",
+    "flow_description": "1. RM passt den Ball auf den anlaufenden RL, der sofort das 2 gegen 2 gemeinsam mit LA eröffnet.\n2. RL greift druckvoll zwischen Halb- und Außenverteidiger an; LA hält zunächst maximale Breite an der Seitenlinie.\n3. Je nach Abwehrverhalten spielt RL den Ball im Parallelstoß nach außen auf LA, bricht selbst durch oder nutzt das Einlaufen von LA an den Kreis.\n4. Nach dem Abschluss wird gewechselt; nach der Hälfte der Zeit wird auf die rechte Seite (RR + RA) verlagert.",
+    "coaching_points": "- Außenspieler bleibt so lange breit, bis der Außenverteidiger einrückt (kein zu frühes Einlaufen)\n- Halbspieler zwingt den Außenverteidiger durch tiefes Stoßen zu einer klaren Entscheidung\n- Abwehr verhindert leichte Durchbrüche über die Nahtstelle und sichert den Außenwinkel",
+    "variations_text": "- RM darf als einmalige Rückpass-Station genutzt werden\n- Ein Tor nach erfolgreichem Einläufer zählt doppelt\n- Freiwürfe werden direkt weitergespielt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.46, "y": 0.08 },
+        { "id": "f1", "type": "COACH_FEEDER", "label": "RM", "x": 0.50, "y": 0.46, "hasBall": true },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.50 },
+        { "id": "la", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.08, "y": 0.28 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.18, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.34, "y": 0.28 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.24, "y": 0.34 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.18, "y": 0.14 },
+        { "id": "t1", "type": "EQUIPMENT_GOAL_TARGET", "x": 0.50, "y": 0.05 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "f1", "toWaypointId": "w1", "points": [{ "x": 0.50, "y": 0.46 }, { "x": 0.24, "y": 0.34 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "rl", "toWaypointId": "w1", "points": [{ "x": 0.28, "y": 0.50 }, { "x": 0.24, "y": 0.34 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 2, "fromWaypointId": "w1", "toNodeId": "la", "points": [{ "x": 0.24, "y": 0.34 }, { "x": 0.08, "y": 0.28 }] },
+        { "id": "p4", "type": "RUN_PATH", "stepNumber": 3, "fromNodeId": "la", "toWaypointId": "w2", "points": [{ "x": 0.08, "y": 0.28 }, { "x": 0.18, "y": 0.14 }] },
+        { "id": "p5", "type": "SHOT_PATH", "stepNumber": 4, "fromWaypointId": "w2", "toNodeId": "t1", "points": [{ "x": 0.18, "y": 0.14 }, { "x": 0.50, "y": 0.05 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 3 gegen 3 im Positionsangriff (Breite & Tiefe)",
+    "default_duration_min": 16,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb-trainercenter.de/grundspiele/3-gegen-3-positionsangriff",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "PASSING_CATCHING",
+        "FEINT_1V1",
+        "SHOOTING"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Drei Angreifer (RL, RM, RR – oder zwei Rückraumspieler + ein Kreisläufer) spielen auf einer Hallenhälfte gegen drei Abwehrspieler und einen Torhüter.",
+    "flow_description": "1. Der Angriff eröffnet das 3 gegen 3 über die gesamte Breite des Rückraums.\n2. Ziel ist es, durch Stoßen auf die Nahtstellen, Parallelstoß, Kreuzen oder gezieltes Einlaufen an den Kreis klare Torchancen herauszuspielen.\n3. Die Abwehr deckt offensiv mannbezogen oder in einer kompakten 3:0-Linie am 7-Meter-Raum und muss konsequent verschieben.\n4. Jede Dreiergruppe hat 4 zusammenhängende Angriffe (oder 2 Minuten Spielzeit), danach wechseln Angriff, Abwehr und Pausenteam.",
+    "coaching_points": "- Räume in Breite und Tiefe nutzen (Dreieckskonstellation stets aufrechterhalten)\n- Nach jedem eigenen Pass sofort wieder Bewegung ohne Ball (Einlaufen oder Tiefe holen)\n- Abwehr unterstützt den geschlagenen Mitspieler aktiv durch rechtzeitiges Helfen",
+    "variations_text": "- Maximal 1x Prellen pro Ballbesitz erlauben\n- Bei Ballgewinn der Abwehr gibt es 1 Zusatzpunkt (schnelles Umschalten bis zur Mittellinie)\n- Ein Angreifer muss nach jedem Pass an den Kreis einlaufen (ständige Positionsrotation)",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.48, "hasBall": true },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52 },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.48 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.30, "y": 0.30 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.50, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.30 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.36, "y": 0.36 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.62, "y": 0.32 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "rl", "toWaypointId": "w1", "points": [{ "x": 0.24, "y": 0.48 }, { "x": 0.36, "y": 0.36 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromWaypointId": "w1", "toNodeId": "rm", "points": [{ "x": 0.36, "y": 0.36 }, { "x": 0.50, "y": 0.52 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "rm", "toWaypointId": "w2", "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.62, "y": 0.32 }] },
+        { "id": "p4", "type": "RUN_PATH", "stepNumber": 3, "fromNodeId": "rr", "toWaypointId": "w2", "points": [{ "x": 0.76, "y": 0.48 }, { "x": 0.62, "y": 0.32 }] }
+      ]
+    }
+  },
+  {
+    "title": "2-mal 3 gegen 3 (Zonen-Handball nach DHB)",
+    "default_duration_min": 18,
+    "min_players": 12,
+    "max_players": 16,
+    "goalkeepers": 2,
+    "source_url": "https://www.dhb-trainercenter.de/grundspiele/zweimal-3-gegen-3",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_INDIVIDUAL",
+        "PASSING_CATCHING",
+        "FEINT_1V1"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 1
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Das Spielfeld wird an der Mittellinie in eine Angriffs- und eine Abwehrhälfte geteilt. Jede Mannschaft stellt 3 Spieler in die eigene Abwehrhälfte und 3 Spieler in die gegnerische Hälfte sowie einen Torhüter.",
+    "flow_description": "1. Nach Torwart-Abwurf oder Ballgewinn spielen die 3 Verteidiger im eigenen Feld gegen die 3 gegnerischen Angreifer den Ball heraus.\n2. Kein Feldspieler darf die Mittellinie übertreten; der Ball muss per Pass über die Mittellinie zu den eigenen 3 Angreifern transportiert werden.\n3. In der Angriffshälfte spielen die 3 Angreifer sofort ein freies 3 gegen 3 zum Torabschluss.\n4. Alle 4 Minuten tauschen die Angriffs- und Abwehrtrios beider Teams ihre Spielhälften.",
+    "coaching_points": "- In der Abwehrhälfte konsequente, ballorientierte Manndeckung spielen\n- Angreifer bieten sich bereits kurz vor dem Ballgewinn in der gegnerischen Hälfte anspielbereit an\n- Viele Ballkontakte und klare 1-gegen-1-Aktionen im offenen Raum nutzen",
+    "variations_text": "- Nach einem Pass über die Mittellinie darf ein Abwehrspieler als 4. Angreifer mit aufrücken (4 gegen 3)\n- Nach Torerfolg schneller Anwurf durch den Torwart\n- Ohne Prellen in der eigenen Abwehrhälfte spielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.07, "y": 0.50 },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.93, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.28, "y": 0.30, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.34, "y": 0.70 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.42, "y": 0.50 },
+        { "id": "a4", "type": "OFFENSE_PLAYER", "label": "A4", "x": 0.62, "y": 0.28 },
+        { "id": "a5", "type": "OFFENSE_PLAYER", "label": "A5", "x": 0.68, "y": 0.52 },
+        { "id": "a6", "type": "OFFENSE_PLAYER", "label": "A6", "x": 0.64, "y": 0.74 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.74, "y": 0.32 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V5", "x": 0.78, "y": 0.50 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V6", "x": 0.74, "y": 0.68 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "a1", "toNodeId": "a4", "points": [{ "x": 0.28, "y": 0.30 }, { "x": 0.62, "y": 0.28 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a4", "toNodeId": "a5", "points": [{ "x": 0.62, "y": 0.28 }, { "x": 0.68, "y": 0.52 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 3 gegen 2 mit Nachsetzen (Überzahlspiel)",
+    "default_duration_min": 15,
+    "min_players": 7,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/grundspiele/3-gegen-2-mit-nachsetzen",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "PASSING_CATCHING",
+        "RETREAT"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "CONE",
+        "quantity": 2
+      }
+    ],
+    "setup_description": "Drei Angreifer starten an der Mittellinie (RL, RM, RR). Zwei Verteidiger warten auf 8 Metern, ein dritter Verteidiger startet zeitverzögert an einem Hütchen an der Seitenlinie (Mittellinie).",
+    "flow_description": "1. Sobald der Ball die Mittellinie überquert, greifen die 3 Angreifer im hohen Tempo in Überzahl (3 gegen 2) auf das Tor an.\n2. Gleichzeitig sprintet der dritte Verteidiger vom Seitenlinien-Hütchen zurück in die Abwehr, um wieder Gleichzahl (3 gegen 3) herzustellen.\n3. Der Angriff muss die zeitlich begrenzte Überzahl durch schnelles Stoßen und präzise Druckpässe sofort ausnutzen.\n4. Die zwei startenden Verteidiger verzögern geschickt den Angriff, bis der nachsetzende Mitspieler eingreift.",
+    "coaching_points": "- Im Angriff keine Zeit durch unnötiges Prellen verschenken – sofort Breite aufbauen\n- Verteidiger im Unterzahl-Duell decken zuerst die Mitte ab und lenken den Ball nach außen\n- Nachsetzender Verteidiger sprintet auf direktem Weg zur freien Nahtstelle",
+    "variations_text": "- Startabstand des nachsetzenden Verteidigers variieren (näher = höherer Zeitdruck)\n- Ein Angreifer läuft direkt an den Kreis ein, um den Innenblock zu binden\n- Nach Ballgewinn direkter Konter bis zur Mittellinie für 2 Punkte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.68 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.72, "hasBall": true },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.68 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.38, "y": 0.30 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.62, "y": 0.30 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.90, "y": 0.70 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.50, "y": 0.42 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.74, "y": 0.34 },
+        { "id": "w3", "type": "WAYPOINT", "x": 0.72, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.50, "y": 0.72 }, { "x": 0.50, "y": 0.42 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "d3", "toWaypointId": "w3", "points": [{ "x": 0.90, "y": 0.70 }, { "x": 0.72, "y": 0.28 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 2, "fromWaypointId": "w1", "toWaypointId": "w2", "points": [{ "x": 0.50, "y": 0.42 }, { "x": 0.74, "y": 0.34 }] },
+        { "id": "p4", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a3", "toWaypointId": "w2", "points": [{ "x": 0.76, "y": 0.68 }, { "x": 0.74, "y": 0.34 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 4 gegen 4 gegen kompakte 4:0-Abwehr",
+    "default_duration_min": 18,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb.de/grundspiele/4-gegen-4-kompakte-abwehr",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_6_0",
+        "DEFENSE_GROUP",
+        "SHOOTING",
+        "CROSSING_SCREEN"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Vier Angreifer (RL, RM, RR + KM) spielen auf einer Hallenhälfte gegen eine kompakte 4:0-Abwehrformation zwischen 6- und 9-Meter-Linie sowie einen Torhüter.",
+    "flow_description": "1. Der Angriff spielt das freie 4 gegen 4 im Zentrum (ohne Außenpositionen) und versucht durch druckvolles Stoßen, Kreuzen oder Kreisanspiele Lücken zu reißen.\n2. Die Abwehr agiert kompakt im 4:0-Verband, schiebt im Block zur Ballseite und hält den Kontakt zum Kreisläufer.\n3. Nach 5 aufeinanderfolgenden Angriffen (oder 3 Minuten) wechseln Angriff und Abwehr die Rollen.\n4. Tore aus dem Rückraum und nach Kreisanspiel werden gleichwertig gezählt.",
+    "coaching_points": "- Rückraumspieler halten ausreichend Tiefe (10–11 m), um mit Tempo auf die Nahtstellen zu stoßen\n- Kreisläufer wechselt geschickt die Positionen zwischen Innenblock und Halbverteidigern\n- Abwehr blockt Rückraumwürfe geschlossen ab und übernimmt den Kreisläufer lückenlos",
+    "variations_text": "- Abwehr spielt eine offensive 3:1-Formation (vorgezogener Spitzenverteidiger)\n- Tore nach einem Kreuzen im Rückraum zählen doppelt\n- Zeitspiel-Regel: Abschluss muss spätestens nach 6 Pässen erfolgen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.48, "hasBall": true },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52 },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.48 },
+        { "id": "km", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.56, "y": 0.24 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.28, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.44, "y": 0.26 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.58, "y": 0.26 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.72, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "rl", "toNodeId": "rm", "points": [{ "x": 0.24, "y": 0.48 }, { "x": 0.50, "y": 0.52 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "rm", "toNodeId": "rr", "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.76, "y": 0.48 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 4 gegen 4 mit Schwerpunkt Sperren und Absetzen",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/grundspiele/4-gegen-4-sperren-absetzen",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "CROSSING_SCREEN",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "FALLING_SHOT"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "4 Angreifer (RL, RM, RR, KM) agieren gegen 4 Abwehrspieler und einen Torhüter auf einer Hallenhälfte.",
+    "flow_description": "1. Der Angriff muss in jedem Spielzug mindestens eine klare Sperre des Kreisläufers an einem Innen- oder Halbverteidiger einbauen.\n2. Nach der Sperre entscheidet der ballführende Rückraumspieler situativ: Durchbruch, Rückraumwurf über die Sperre, Anspiel an den absetzenden Kreisläufer oder Weiterpass auf den freien Nebenmann.\n3. Ein Tor nach direktem Kreisanspiel aus dem Absetzen zählt 2 Punkte, jedes andere Tor 1 Punkt.\n4. Nach 6 Angriffen wechseln Angriff und Abwehr die Rollen.",
+    "coaching_points": "- Rückraumspieler warten nicht statisch auf die Sperre, sondern bringen die Abwehr vorher durch Passspiel in Bewegung\n- Kreisläufer löst sich erst nach klarem Kontakt und bietet sich explosiv im freien Raum an\n- Abwehr kommuniziert frühzeitig (Sperre links/rechts!) und verhindert das leichte Durchbrechen",
+    "variations_text": "- Auch ein Rückraumspieler darf spontan an den Kreis einlaufen und eine Sperre stellen\n- Abwehr darf bei Ballgewinn per Gegenstoß auf ein gegenüberliegendes Minitor kontern\n- Nur Bodenpässe an den Kreisläufer sind erlaubt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.48 },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52, "hasBall": true },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.74, "y": 0.48 },
+        { "id": "km", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.42, "y": 0.25 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.30, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.46, "y": 0.26 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.58, "y": 0.26 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.72, "y": 0.28 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.48, "y": 0.34 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.38, "y": 0.20 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "SCREEN_BLOCK_PATH", "stepNumber": 1, "fromNodeId": "km", "toNodeId": "d2", "points": [{ "x": 0.42, "y": 0.25 }, { "x": 0.46, "y": 0.26 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "rm", "toWaypointId": "w1", "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.48, "y": 0.34 }] },
+        { "id": "p3", "type": "RUN_PATH", "stepNumber": 3, "fromNodeId": "km", "toWaypointId": "w2", "points": [{ "x": 0.42, "y": 0.25 }, { "x": 0.38, "y": 0.20 }] },
+        { "id": "p4", "type": "PASS_PATH", "stepNumber": 3, "fromWaypointId": "w1", "toWaypointId": "w2", "points": [{ "x": 0.48, "y": 0.34 }, { "x": 0.38, "y": 0.20 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 3 gegen 3 mit offensiver Manndeckung",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb-trainercenter.de/grundspiele/3-gegen-3-offensive-manndeckung",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_INDIVIDUAL",
+        "OFFENSE_INDIVIDUAL",
+        "FEINT_1V1",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "E_YOUTH",
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Drei Angreifer spielen auf einer Hallenhälfte gegen drei Verteidiger in strikter, ballorientierter Manndeckung (bis zur Mittellinie) sowie einen Torhüter.",
+    "flow_description": "1. Der Angriff startet an der Mittellinie gegen drei eng deckende Verteidiger.\n2. Die Angreifer müssen sich durch schnelle Richtungswechsel (V-Lauf), Give-and-Go und 1-gegen-1-Täuschungen vom direkten Gegenspieler lösen.\n3. Die Verteidiger versuchen, Passwege zu antizipieren und den Ball sauber abzufangen oder den Angreifer aus dem Gefahrenbereich zu drängen.\n4. Jeder Ballgewinn der Abwehr zählt wie ein Tor; nach 2 Minuten wechseln die Teams.",
+    "coaching_points": "- Angreifer ohne Ball stehen niemals still, sondern attackieren ständig den Rücken ihres Verteidigers\n- Verteidiger stehen im Dreieck (Ball – Gegenspieler – eigenes Tor) und verlieren keinen aus den Augen\n- Konsequentes Freilaufen nach dem Pass (Pass-and-Go)",
+    "variations_text": "- Prellen komplett verbieten, um das Freilaufverhalten extrem zu fordern\n- Maximal 3 Kontakte pro Spieler vor dem Pass\n- Bei Ballverlust sofortiges Umschalten in die Gegenrichtung bis zur Mittellinie",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "A1", "x": 0.28, "y": 0.58, "hasBall": true },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "A2", "x": 0.54, "y": 0.44 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "A3", "x": 0.74, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.30, "y": 0.50 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.52, "y": 0.38 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.70, "y": 0.44 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.60, "y": 0.24 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "RUN_PATH", "stepNumber": 1, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.54, "y": 0.44 }, { "x": 0.60, "y": 0.24 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "a1", "toWaypointId": "w1", "points": [{ "x": 0.28, "y": 0.58 }, { "x": 0.60, "y": 0.24 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 4 gegen 3 im Halbfeld (Weiterspielen auf Außen)",
+    "default_duration_min": 15,
+    "min_players": 7,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/grundspiele/4-gegen-3-weiterspielen-aussen",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "PASSING_CATCHING",
+        "SHOOTING",
+        "DEFENSE_GROUP"
+      ],
+      "level": "BASIC",
+      "age_groups": [
+        "D_YOUTH",
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Vier Angreifer (LA, RL, RM, RR oder RL, RM, RR, RA) spielen gegen drei Verteidiger (Halb, Mitte, Halb) und einen Torhüter.",
+    "flow_description": "1. Der Angriff eröffnet von der geschlossenen Seite und verschiebt die 3er-Abwehr durch konsequentes Stoßen auf die Nahtstellen.\n2. Ziel ist es, die Überzahl sauber bis auf den freien Außenspieler durchzuspielen, ohne einen Pass zu überspringen.\n3. Rückt der äußere Verteidiger nicht ein, nutzt der Halbspieler selbst die große Lücke zum Durchbruch.\n4. Die Abwehr verschiebt geschlossen im Block und versucht, den Ball durch kluges Antizipieren abzufangen.",
+    "coaching_points": "- Jeder Angreifer bindet vor dem Pass aktiv seinen Gegenspieler durch echten Zug zum Tor\n- Schnelle, flache Weiterpässe ohne unnötige Verzögerung (Überzahl ausspielen)\n- Außenspieler bleibt breit an der Linie und springt weit in den Kreis ab",
+    "variations_text": "- Beide Außen besetzen (5 gegen 4 mit Kreisläufer oder ohne)\n- Abschluss muss innerhalb von 5 Pässen erfolgen\n- Verteidiger bekommen 2 Punkte für jeden abgefangenen Pass",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.24, "y": 0.48, "hasBall": true },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.48, "y": 0.52 },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.48 },
+        { "id": "ra", "type": "OFFENSE_PLAYER", "label": "RA", "x": 0.92, "y": 0.28 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.50, "y": 0.26 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.66, "y": 0.28 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.80, "y": 0.14 },
+        { "id": "t1", "type": "EQUIPMENT_GOAL_TARGET", "x": 0.50, "y": 0.05 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "rl", "toNodeId": "rm", "points": [{ "x": 0.24, "y": 0.48 }, { "x": 0.48, "y": 0.52 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "rm", "toNodeId": "rr", "points": [{ "x": 0.48, "y": 0.52 }, { "x": 0.72, "y": 0.48 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "rr", "toNodeId": "ra", "points": [{ "x": 0.72, "y": 0.48 }, { "x": 0.92, "y": 0.28 }] },
+        { "id": "p4", "type": "RUN_PATH", "stepNumber": 4, "fromNodeId": "ra", "toWaypointId": "w1", "points": [{ "x": 0.92, "y": 0.28 }, { "x": 0.80, "y": 0.14 }] },
+        { "id": "p5", "type": "SHOT_PATH", "stepNumber": 5, "fromWaypointId": "w1", "toNodeId": "t1", "points": [{ "x": 0.80, "y": 0.14 }, { "x": 0.50, "y": 0.05 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 2 gegen 2 + neutraler Anspieler (Übergabe/Übernahme)",
+    "default_duration_min": 15,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 1,
+    "source_url": "https://www.handball-uebungen.de/grundspiele/2-gegen-2-uebergabe-uebernahme/",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "DEFENSE_GROUP",
+        "OFFENSE_GROUP",
+        "CROSSING_SCREEN",
+        "FOOTWORK_DEFENSE"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 6
+      },
+      {
+        "type": "BIBS",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Zwei Angreifer (z. B. RL und RM) spielen gegen zwei Abwehrspieler und einen Torhüter. Ein neutraler Anspieler steht auf RR als sichere Passstation bereit.",
+    "flow_description": "1. Der neutrale Anspieler eröffnet den Angriff auf einen der beiden Rückraumspieler.\n2. Die beiden Angreifer lösen durch häufiges Kreuzen, Positionswechsel und 1-gegen-1-Aktionen gezielt Übergabe-Situationen in der Abwehr aus.\n3. Der neutrale Anspieler darf jederzeit angespielt werden, um den Angriff neu anzusetzen, darf aber selbst nicht aufs Tor werfen.\n4. Die Abwehr trainiert das saubere Übergeben und Übernehmen bei jeder Kreuzbewegung.",
+    "coaching_points": "- Abwehrspieler sprechen sich lautstark ab, wer übernimmt und wer tief absichert\n- Beim Kreuzen der Angreifer nicht am Gegenspieler hängen bleiben, sondern rechtzeitig die Ebene wechseln\n- Angreifer nutzen zögerliches Übergeben der Abwehr sofort für den Durchbruch oder Wurf",
+    "variations_text": "- Nach jedem Pass zum neutralen Anspieler müssen die beiden Angreifer die Positionen tauschen\n- Der neutrale Anspieler darf nach dem dritten Pass selbst abschließen, wenn er frei steht\n- Abwechselnd auf der linken und rechten Hallenseite spielen",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "f1", "type": "COACH_FEEDER", "label": "RR", "x": 0.76, "y": 0.48, "hasBall": true },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.26, "y": 0.48 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.52 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.34, "y": 0.28 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.50, "y": 0.26 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.38, "y": 0.36 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.50, "y": 0.34 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "f1", "toNodeId": "a2", "points": [{ "x": 0.76, "y": 0.48 }, { "x": 0.50, "y": 0.52 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.50, "y": 0.52 }, { "x": 0.38, "y": 0.36 }] },
+        { "id": "p3", "type": "RUN_PATH", "stepNumber": 3, "fromNodeId": "a1", "toWaypointId": "w2", "points": [{ "x": 0.26, "y": 0.48 }, { "x": 0.50, "y": 0.34 }] },
+        { "id": "p4", "type": "PASS_PATH", "stepNumber": 3, "fromWaypointId": "w1", "toWaypointId": "w2", "points": [{ "x": 0.38, "y": 0.36 }, { "x": 0.50, "y": 0.34 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 3 gegen 3: Zweite Welle nach Torwart-Abwurf",
+    "default_duration_min": 18,
+    "min_players": 6,
+    "max_players": 14,
+    "goalkeepers": 2,
+    "source_url": "https://www.handballtraining.de/grundspiele/3-gegen-3-zweite-welle",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "FAST_BREAK_2ND_WAVE",
+        "RETREAT",
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 6
+      }
+    ],
+    "setup_description": "Zwei Dreierteams spielen über das gesamte Feld mit zwei Torhütern. Team A beginnt im Angriff vor Tor 1, Team B verteidigt zunächst.",
+    "flow_description": "1. Team A schließt einen Angriff vor Tor 1 ab.\n2. Sofort nach Torerfolg oder Parade eröffnet Torhüter 1 das Spiel per schnellem Abwurf für die 2. Welle von Team B.\n3. Alle drei Spieler von Team B sprinten in klaren Laufbahnen (links, Mitte, rechts) über das Feld und greifen die sich formierende Abwehr von Team A im hohen Tempo an.\n4. Gelingt der Abschluss innerhalb von 8 Sekunden, zählt das Tor doppelt; danach startet sofort der Gegenangriff von Team A.",
+    "coaching_points": "- Nach Ballbesitzwechsel sofort die drei vertikalen Bahnen besetzen (keine Haufenbildung in der Mitte)\n- Ballführer in der Mitte hält das Tempo hoch und zwingt die Rückzugsabwehr zu frühen Entscheidungen\n- Abwehr orientiert sich im Rückzug zuerst zentral und schiebt erst dann auf die Außenbahnen",
+    "variations_text": "- Erweiterung auf 4 gegen 4 (inkl. zentral mitlaufendem Kreisläufer)\n- Bei Fehlwurf oder technischem Fehler gibt es sofortigen Ballbesitzwechsel ohne Unterbrechung\n- Maximal 1x Prellen pro Spieler in der gegnerischen Hälfte",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "FULL_COURT",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW1", "x": 0.07, "y": 0.50, "hasBall": true },
+        { "id": "gk2", "type": "GOALKEEPER", "label": "TW2", "x": 0.93, "y": 0.50 },
+        { "id": "a1", "type": "OFFENSE_PLAYER", "label": "B1", "x": 0.24, "y": 0.26 },
+        { "id": "a2", "type": "OFFENSE_PLAYER", "label": "B2", "x": 0.22, "y": 0.50 },
+        { "id": "a3", "type": "OFFENSE_PLAYER", "label": "B3", "x": 0.24, "y": 0.74 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "A1", "x": 0.44, "y": 0.34 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "A2", "x": 0.42, "y": 0.52 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "A3", "x": 0.44, "y": 0.68 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.68, "y": 0.50 },
+        { "id": "w2", "type": "WAYPOINT", "x": 0.76, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "gk1", "toNodeId": "a2", "points": [{ "x": 0.07, "y": 0.50 }, { "x": 0.22, "y": 0.50 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a2", "toWaypointId": "w1", "points": [{ "x": 0.22, "y": 0.50 }, { "x": 0.68, "y": 0.50 }] },
+        { "id": "p3", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "a1", "toWaypointId": "w2", "points": [{ "x": 0.24, "y": 0.26 }, { "x": 0.76, "y": 0.28 }] },
+        { "id": "p4", "type": "PASS_PATH", "stepNumber": 3, "fromWaypointId": "w1", "toWaypointId": "w2", "points": [{ "x": 0.68, "y": 0.50 }, { "x": 0.76, "y": 0.28 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 4 gegen 4 mit Einläufer von Außen",
+    "default_duration_min": 16,
+    "min_players": 8,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.handballtraining.de/grundspiele/4-gegen-4-einlaeufer-aussen",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_GROUP",
+        "DEFENSE_GROUP",
+        "CROSSING_SCREEN",
+        "PASSING_CATCHING"
+      ],
+      "level": "ADVANCED",
+      "age_groups": [
+        "C_YOUTH",
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 8
+      }
+    ],
+    "setup_description": "Vier Angreifer (LA, RL, RM, RR) starten ohne festen Kreisläufer gegen vier Abwehrspieler und einen Torhüter auf einer Hallenhälfte.",
+    "flow_description": "1. Der Angriff eröffnet das 4 gegen 4 im Rückraum mit breiter Besetzung auf LA.\n2. Auf ein Auslösezeichen (z. B. Pass von RL auf RM) läuft LA im Rücken des Halbverteidigers an den 6-Meter-Kreis ein und agiert ab diesem Moment als aktiver Kreisläufer.\n3. Der Rückraum nutzt die Unordnung in der Abwehr für ein direktes Kreisanspiel, eine Sperre oder einen Durchbruch auf der geöffneten linken Seite.\n4. Nach 5 Angriffen wird die Seite gewechselt (Einläufer von RA) und die Rollen zwischen Angriff und Abwehr getauscht.",
+    "coaching_points": "- Einläufer startet erst im Moment des Passes (nicht zu früh), um seinen Verteidiger im Rücken zu überraschen\n- Abwehr kommuniziert sofort (Einläufer!) und übergibt sauber an den Innenblock\n- Rückraumspieler behalten Übersicht, ob der Einläufer direkt anspielbar ist oder ein Rückraumwurf offensteht",
+    "variations_text": "- Beide Außen (LA und RA) besetzen für ein 5 gegen 5 mit flexiblem Einläufer\n- Einläufer darf nur zwischen Innenblock und Halbverteidiger sperren\n- Tor des Einläufers zählt doppelt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "la", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.08, "y": 0.28 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.48, "hasBall": true },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.52, "y": 0.52 },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.76, "y": 0.48 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.18, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.36, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.52, "y": 0.26 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.70, "y": 0.28 },
+        { "id": "w1", "type": "WAYPOINT", "x": 0.44, "y": 0.22 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "rl", "toNodeId": "rm", "points": [{ "x": 0.28, "y": 0.48 }, { "x": 0.52, "y": 0.52 }] },
+        { "id": "p2", "type": "RUN_PATH", "stepNumber": 2, "fromNodeId": "la", "toWaypointId": "w1", "points": [{ "x": 0.08, "y": 0.28 }, { "x": 0.44, "y": 0.22 }] },
+        { "id": "p3", "type": "PASS_PATH", "stepNumber": 3, "fromNodeId": "rm", "toWaypointId": "w1", "points": [{ "x": 0.52, "y": 0.52 }, { "x": 0.44, "y": 0.22 }] }
+      ]
+    }
+  },
+  {
+    "title": "Grundspiel 5 gegen 5 auf engem Raum (Entscheidungstraining)",
+    "default_duration_min": 18,
+    "min_players": 10,
+    "max_players": 16,
+    "goalkeepers": 1,
+    "source_url": "https://www.dhb-trainercenter.de/grundspiele/5-gegen-5-entscheidungstraining",
+    "categories": {
+      "phases": [
+        "GROUND_GAME"
+      ],
+      "focus": [
+        "OFFENSE_TEAM",
+        "DEFENSE_6_0",
+        "DEFENSE_5_1",
+        "PASSING_CATCHING",
+        "SHOOTING"
+      ],
+      "level": "PERFORMANCE",
+      "age_groups": [
+        "B_YOUTH",
+        "A_YOUTH",
+        "ADULTS"
+      ]
+    },
+    "materials": [
+      {
+        "type": "BALL",
+        "quantity": 4
+      },
+      {
+        "type": "BIBS",
+        "quantity": 10
+      },
+      {
+        "type": "CONE",
+        "quantity": 4
+      }
+    ],
+    "setup_description": "Auf einer Hallenhälfte wird die Breite an beiden Seiten um je 2 Meter mit Hütchen verengt. 5 Angreifer (z. B. RL, RM, RR, KM + 1 Außen) spielen gegen 5 Abwehrspieler (4:1 oder 5:0) und einen Torhüter.",
+    "flow_description": "1. Der Angriff spielt im 5 gegen 5 auf dem verengten Feld, wodurch der Zeit- und Raumdruck in jedem Duell steigt.\n2. Die Abwehr wechselt nach Vorgabe des Trainers zwischen einer kompakten 5:0- und einer offensiven 4:1-Formation.\n3. Der Angriff muss die jeweilige Abwehrformation blitzschnell erkennen und die passende Lösung wählen (Einläufer gegen 4:1, Rückraumwurf/Sperre gegen 5:0).\n4. Nach 6 Minuten Spielzeit wechseln Angriff und Abwehr die Rollen.",
+    "coaching_points": "- Hohe Passgenauigkeit und Handlungsschnelligkeit unter engem Raum- und Gegnerdruck\n- Konsequentes Lesen der Abwehrformation vor der Auslösehandlung\n- Kompakte Beinarbeit und klare Absprachen im Abwehrverband",
+    "variations_text": "- Maximal 20 Sekunden Angriffszeit pro Ballbesitz\n- Bei Ballverlust darf die Abwehr sofort auf zwei Minitore an der Mittellinie kontern\n- Kein Prellen im Rückraum erlaubt",
+    "tactic_board_data": {
+      "version": 1,
+      "courtTemplate": "HALF_COURT_VERTICAL",
+      "nodes": [
+        { "id": "gk1", "type": "GOALKEEPER", "label": "TW", "x": 0.50, "y": 0.08 },
+        { "id": "la", "type": "OFFENSE_PLAYER", "label": "LA", "x": 0.14, "y": 0.28 },
+        { "id": "rl", "type": "OFFENSE_PLAYER", "label": "RL", "x": 0.28, "y": 0.48, "hasBall": true },
+        { "id": "rm", "type": "OFFENSE_PLAYER", "label": "RM", "x": 0.50, "y": 0.54 },
+        { "id": "rr", "type": "OFFENSE_PLAYER", "label": "RR", "x": 0.72, "y": 0.48 },
+        { "id": "km", "type": "OFFENSE_PLAYER", "label": "KM", "x": 0.58, "y": 0.24 },
+        { "id": "d1", "type": "DEFENSE_PLAYER", "label": "V1", "x": 0.22, "y": 0.24 },
+        { "id": "d2", "type": "DEFENSE_PLAYER", "label": "V2", "x": 0.38, "y": 0.28 },
+        { "id": "d3", "type": "DEFENSE_PLAYER", "label": "V3", "x": 0.50, "y": 0.36 },
+        { "id": "d4", "type": "DEFENSE_PLAYER", "label": "V4", "x": 0.60, "y": 0.26 },
+        { "id": "d5", "type": "DEFENSE_PLAYER", "label": "V5", "x": 0.74, "y": 0.28 }
+      ],
+      "paths": [
+        { "id": "p1", "type": "PASS_PATH", "stepNumber": 1, "fromNodeId": "rl", "toNodeId": "rm", "points": [{ "x": 0.28, "y": 0.48 }, { "x": 0.50, "y": 0.54 }] },
+        { "id": "p2", "type": "PASS_PATH", "stepNumber": 2, "fromNodeId": "rm", "toNodeId": "rr", "points": [{ "x": 0.50, "y": 0.54 }, { "x": 0.72, "y": 0.48 }] }
+      ]
+    }
+  }
+]
