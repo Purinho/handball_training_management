@@ -186,10 +186,11 @@ export function App() {
       setAuthUserEmail(user?.email ?? null);
       setAuthUserId(user?.id ?? null);
       if (user) {
-        void syncWithSupabaseCloud().then((res) => {
+        void syncWithSupabaseCloud().then(async (res) => {
           const noClub = res.mode === 'NO_CLUB';
           setNeedsClubOnboarding(noClub);
           if (noClub) {
+            await seedInitialDataIfEmpty();
             setShowAuthModal(true);
           }
         });
@@ -312,6 +313,42 @@ export function App() {
       ),
     [allMembers, authUserId]
   );
+
+  const isCurrentClubAdmin = useMemo(() => {
+    // Local / demo mode: the device owner acts as club admin
+    if (!isSupabaseConfigured() || !authUserId) return true;
+    return members.some((m) => m.user_id === authUserId && m.club_role === 'CLUB_ADMIN');
+  }, [members, authUserId]);
+
+  const clubTeamIds = useMemo(() => new Set(teams.map((t) => t.id)), [teams]);
+  const clubExercises = useMemo(
+    () =>
+      activeClub
+        ? allExercises.filter((e) => e.club_id === activeClub.id && e.visibility !== 'PUBLIC')
+        : [],
+    [allExercises, activeClub]
+  );
+  const clubSessions = useMemo(
+    () => sessions.filter((s) => clubTeamIds.has(s.team_id)),
+    [sessions, clubTeamIds]
+  );
+  const clubPlans = useMemo(
+    () => multiWeekPlans.filter((p) => clubTeamIds.has(p.team_id)),
+    [multiWeekPlans, clubTeamIds]
+  );
+  const clubPlanIds = useMemo(() => new Set(clubPlans.map((p) => p.id)), [clubPlans]);
+  const clubPlanWeeks = useMemo(
+    () => planWeeks.filter((pw) => clubPlanIds.has(pw.multi_week_plan_id)),
+    [planWeeks, clubPlanIds]
+  );
+
+  function handleClubResetCompleted(summaryMessage: string) {
+    setSelectedExerciseId(null);
+    setFocusedSessionId(undefined);
+    setMobileDetailOpen(false);
+    setSyncStatusBanner(summaryMessage);
+    setTimeout(() => setSyncStatusBanner(null), 6000);
+  }
 
   const activeTeam = useMemo(
     () => teams.find((t) => t.id === activeTeamId) ?? teams[0],
@@ -481,6 +518,7 @@ export function App() {
     } else if (res.mode === 'AUTH_REQUIRED') {
       setShowAuthModal(true);
     } else if (res.mode === 'NO_CLUB') {
+      await seedInitialDataIfEmpty();
       setNeedsClubOnboarding(true);
       setShowAuthModal(true);
     } else if (res.errorMessage) {
@@ -527,6 +565,14 @@ export function App() {
             teamMembers={teamMembers}
             activeTeamId=""
             onSelectTeam={(id) => setActiveTeamId(id)}
+            isClubAdmin={isCurrentClubAdmin}
+            authUserId={authUserId}
+            clubExercises={clubExercises}
+            clubSessions={clubSessions}
+            clubPlans={clubPlans}
+            clubPlanWeeks={clubPlanWeeks}
+            onDownloadBackup={handleDownloadBackupJson}
+            onResetCompleted={handleClubResetCompleted}
           />
         </div>
       </div>
@@ -1654,6 +1700,14 @@ export function App() {
               teamMembers={teamMembers}
               activeTeamId={activeTeam.id}
               onSelectTeam={setActiveTeamId}
+              isClubAdmin={isCurrentClubAdmin}
+              authUserId={authUserId}
+              clubExercises={clubExercises}
+              clubSessions={clubSessions}
+              clubPlans={clubPlans}
+              clubPlanWeeks={clubPlanWeeks}
+              onDownloadBackup={handleDownloadBackupJson}
+              onResetCompleted={handleClubResetCompleted}
             />
           )}
         </main>

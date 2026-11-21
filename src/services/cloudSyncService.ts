@@ -1,3 +1,4 @@
+import type { Table } from 'dexie';
 import { db } from '../db/database';
 import { getSupabaseClient, isSupabaseConfigured } from './supabaseClient';
 import type {
@@ -357,6 +358,21 @@ function mergeByUpdatedAt<T extends { id: string; updated_at?: string }>(
 }
 
 /**
+ * Returns IDs of local rows that no longer exist remotely (deleted on the server,
+ * e.g. by another coach or a Vereins-Reset) and have no pending local changes.
+ */
+export function findDeletedLocalIds<T extends { id: string }>(
+  localRows: T[],
+  remoteRows: T[],
+  pendingIds: Set<string>
+): string[] {
+  const remoteIds = new Set(remoteRows.map((r) => r.id));
+  return localRows
+    .filter((local) => !remoteIds.has(local.id) && !pendingIds.has(local.id))
+    .map((local) => local.id);
+}
+
+/**
  * Performs a full bidirectional sync:
  * 1. Pushes pending local outbox changes to Supabase.
  * 2. Pulls the user's club data from Supabase into local IndexedDB (Last-Write-Wins).
@@ -396,6 +412,11 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
   }
 
   if (!myMemberships || myMemberships.length === 0) {
+    // Membership removed (e.g. via Vereins-Reset): drop stale cached cloud club data
+    const demoClubPresent = await db.clubs.get('club-sgh-1');
+    if (!demoClubPresent && (await db.clubs.count()) > 0) {
+      await clearAllLocalDatabaseTables();
+    }
     return {
       mode: 'NO_CLUB',
       pushedCount: pushResult.flushedCount,
@@ -423,6 +444,12 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
     supabase.from('session_templates').select('*').in('club_id', clubIds)
   ]);
 
+  const pullErrors: string[] = [];
+  const collectPullError = (res: { error: { message: string } | null }) => {
+    if (res.error) pullErrors.push(res.error.message);
+  };
+  [clubsRes, membersRes, teamsRes, exercisesRes, templatesRes].forEach(collectPullError);
+
   const remoteClubs = (clubsRes.data ?? []) as Club[];
   const remoteMembers = (membersRes.data ?? []) as ClubMember[];
   const remoteTeams = (teamsRes.data ?? []) as Team[];
@@ -441,6 +468,7 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
       supabase.from('multi_week_plans').select('*').in('team_id', teamIds),
       supabase.from('training_sessions').select('*').in('team_id', teamIds)
     ]);
+    [tmRes, plansRes, sessionsRes].forEach(collectPullError);
     remoteTeamMembers = (tmRes.data ?? []) as TeamMember[];
     remotePlans = (plansRes.data ?? []) as MultiWeekPlan[];
     remoteSessions = (sessionsRes.data ?? []) as TrainingSession[];
@@ -453,6 +481,7 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
       .from('plan_weeks')
       .select('*')
       .in('multi_week_plan_id', planIds);
+    collectPullError(pwRes);
     remotePlanWeeks = (pwRes.data ?? []) as PlanWeek[];
   }
 
@@ -464,6 +493,7 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
       supabase.from('session_phases').select('*').in('training_session_id', sessionIds),
       supabase.from('session_notes').select('*').in('training_session_id', sessionIds)
     ]);
+    [phasesRes, notesRes].forEach(collectPullError);
     remotePhases = (phasesRes.data ?? []) as SessionPhase[];
     remoteNotes = (notesRes.data ?? []) as SessionNote[];
   }
@@ -475,7 +505,18 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
       .from('session_blocks')
       .select('*')
       .in('session_phase_id', phaseIds);
+    collectPullError(blocksRes);
     remoteBlocks = (blocksRes.data ?? []) as SessionBlock[];
+  }
+
+  // Never merge/prune on partial data
+  if (pullErrors.length > 0) {
+    return {
+      mode: 'CLOUD',
+      pushedCount: pushResult.flushedCount,
+      pulledCount: 0,
+      errorMessage: pullErrors[0]
+    };
   }
 
   // 4. Merge into local IndexedDB while respecting any still-pending local edits
@@ -512,7 +553,8 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
         localSessions,
         localPhases,
         localBlocks,
-        localNotes
+        localNotes,
+        localTeamMembers
       ] = await Promise.all([
         db.clubs.toArray(),
         db.clubMembers.toArray(),
@@ -524,8 +566,35 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
         db.trainingSessions.toArray(),
         db.sessionPhases.toArray(),
         db.sessionBlocks.toArray(),
-        db.sessionNotes.toArray()
+        db.sessionNotes.toArray(),
+        db.teamMembers.toArray()
       ]);
+
+      // Prune rows deleted on the server (other coaches, Vereins-Reset, ...)
+      let prunedCount = 0;
+      async function prune<T extends { id: string }>(
+        table: Table<T, string>,
+        localRows: T[],
+        remoteRows: T[]
+      ) {
+        const ids = findDeletedLocalIds(localRows, remoteRows, pendingIds);
+        if (ids.length) {
+          await table.bulkDelete(ids);
+          prunedCount += ids.length;
+        }
+      }
+      await prune(db.sessionNotes, localNotes, remoteNotes);
+      await prune(db.sessionBlocks, localBlocks, remoteBlocks);
+      await prune(db.sessionPhases, localPhases, remotePhases);
+      await prune(db.trainingSessions, localSessions, remoteSessions);
+      await prune(db.planWeeks, localPlanWeeks, remotePlanWeeks);
+      await prune(db.multiWeekPlans, localPlans, remotePlans);
+      await prune(db.sessionTemplates, localTemplates, remoteTemplates);
+      await prune(db.exercises, localExercises, remoteExercises);
+      await prune(db.teamMembers, localTeamMembers, remoteTeamMembers);
+      await prune(db.teams, localTeams, remoteTeams);
+      await prune(db.clubMembers, localMembers, remoteMembers);
+      await prune(db.clubs, localClubs, remoteClubs);
 
       const clubsToPut = mergeByUpdatedAt(localClubs, remoteClubs, pendingIds);
       const membersToPut = mergeByUpdatedAt(localMembers, remoteMembers, pendingIds);
@@ -565,7 +634,8 @@ export async function syncWithSupabaseCloud(): Promise<CloudSyncResult> {
         sessionsToPut.length +
         phasesToPut.length +
         blocksToPut.length +
-        notesToPut.length;
+        notesToPut.length +
+        prunedCount;
     }
   );
 

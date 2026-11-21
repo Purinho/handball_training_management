@@ -18,13 +18,18 @@ import type {
   Club,
   ClubMember,
   ClubRole,
+  Exercise,
+  MultiWeekPlan,
+  PlanWeek,
   Team,
   TeamMember,
   TeamRole,
-  TeamScheduleSlot
+  TeamScheduleSlot,
+  TrainingSession
 } from '../types/domain';
 import { WEEKDAY_OPTIONS } from '../constants/handballLabels';
 import { generateSecureInviteCode } from '../utils/securityUtils';
+import { ClubResetSection } from './ClubResetSection';
 
 interface ClubTeamManagerProps {
   club: Club;
@@ -33,6 +38,14 @@ interface ClubTeamManagerProps {
   teamMembers: TeamMember[];
   activeTeamId: string;
   onSelectTeam: (teamId: string) => void;
+  isClubAdmin: boolean;
+  authUserId: string | null;
+  clubExercises: Exercise[];
+  clubSessions: TrainingSession[];
+  clubPlans: MultiWeekPlan[];
+  clubPlanWeeks: PlanWeek[];
+  onDownloadBackup?: () => Promise<void> | void;
+  onResetCompleted?: (summaryMessage: string) => void;
 }
 
 export function ClubTeamManager({
@@ -41,7 +54,15 @@ export function ClubTeamManager({
   members,
   teamMembers,
   activeTeamId,
-  onSelectTeam
+  onSelectTeam,
+  isClubAdmin,
+  authUserId,
+  clubExercises,
+  clubSessions,
+  clubPlans,
+  clubPlanWeeks,
+  onDownloadBackup,
+  onResetCompleted
 }: ClubTeamManagerProps) {
   const [clubName, setClubName] = useState(club.name);
   const [clubSavedBanner, setClubSavedBanner] = useState(false);
@@ -830,6 +851,22 @@ export function ClubTeamManager({
           </section>
         </div>
       </div>
+
+      {/* Admin-Funktion: Vereins-Reset (nur für Vereins-Admins) */}
+      {isClubAdmin && (
+        <ClubResetSection
+          club={club}
+          teams={teams}
+          members={members}
+          exercises={clubExercises}
+          sessions={clubSessions}
+          plans={clubPlans}
+          planWeeks={clubPlanWeeks}
+          authUserId={authUserId}
+          onDownloadBackup={onDownloadBackup}
+          onResetCompleted={onResetCompleted}
+        />
+      )}
     </div>
   );
 }
